@@ -26,4 +26,5 @@ for i in data:
 time_str = f'{time[0]}:{time[1]}:{time[2]}'
 
 print(time_str)
+print("Текст скопирован")
 copy(time_str)
