@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'Chalet';
+    src: url('FONTS/16762.woff');
+}
+body{
+    font-family: 'Chalet';
+    background-color: #111;
+    margin: 0;
+    color: #eee;
+}
+summary {
+    cursor: pointer;
+}
+h2{
+    margin: 0px;
+    padding: 20px;
+    font-size: 40px;
+    font-weight: 400;
+    color: #0B79D0;
+}
+a{
+    color: inherit;
+}
+body::-webkit-scrollbar{
+    display: none;
+}
+img{
+    display: block;
+}
+ul{
+    margin: 0 0 0 17px;
+    padding: 0;
+}
+li{
+    cursor: default;
+}
+details>ul{
+    margin: 16px 0px;
+    padding-left: 40px;
+}
+details>ul>li{
+    padding: 0;
+}
+  
+
+
+
+.content{
+    margin: auto;
+    width: 900px;
+    background-color: #202020;
+}
+.header{
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #333;
+}
+
+.games{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+    border-bottom: 2px solid #333;
+    /* align-items: flex-end; */
+
+}
+.game{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 280px;
+    justify-content: space-between;
+}
+.game-img{
+    width: 280px;
+}
+.game-name{
+    margin-top: 10px;
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.game-list{
+    padding: 20px;
+}
+#a-game{
+    border-top: 5px solid var(--a_game_color);
+    border-bottom: 5px solid var(--a_game_color);
+}
+#a-game-name{
+    color: var(--a_game_color);
+}
+#b-game{
+    border-top: 5px solid var(--b_game_color);
+    border-bottom: 5px solid var(--b_game_color);
+}
+#b-game-name{
+    color: var(--b_game_color);
+}
+
+
+.complete{
+    color: #11C46F;
+}
+.complete::after{
+    content: url('img/complete.png');
+    margin-left: 5px;
+}
+
+.inProcess::after{
+    content: url('img/wantToPlay.png');
+    margin-left: 5px;
+}
+
+.bad{
+    color: #EE204D;
+    text-decoration: line-through;
+}
