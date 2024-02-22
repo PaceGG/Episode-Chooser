@@ -294,27 +294,16 @@ def sr_db_clear():
     with open(dir, 'w') as f:
         f.write('')
 
-
-
-def time_convert(game_time):
-    if len(game_time) == 1:
-        print(f'Time: {game_time[0]}')
-    elif len(game_time) > 1:
-        print('Time:')
-        print(*game_time,sep='\n')
-
 def run_game(x):
     # os.system(f'"{"D:/Program Files/obs-studio/bin/64bit/obs64.exe"}"')
     if x == first_game_name:
         print(first_game_name)
         send_image(bot_token, chat_id, first_game_icon, first_game_caption)
-        time_convert(first_game_time)
         addEp(first_folder_name)
         os.system(f'"{first_game_path}"')
     if x == second_game_name:
         print(second_game_name)
         send_image(bot_token, chat_id, second_game_icon, second_game_caption)
-        time_convert(second_game_time)
         addEp(second_folder_name)
         os.system(f'"{second_game_path}"')
     if x == 'SR':
@@ -328,6 +317,7 @@ def run_game(x):
 def run_random_game():
     if first_episodes == 0 and second_episodes == 0:
         sr_db_clear()
+        sr_db_edit()
         if earlier == second_game_name:
             run_game(first_game_name)
         if earlier == first_game_name:
@@ -337,9 +327,6 @@ def run_random_game():
         run_game(today)
     else:
         run_game('SR')
-        
-def print_game_list():
-    print(game_list)
 
 def print_game_list_newFormat():
     global game_list
@@ -368,8 +355,6 @@ setEngLayout()
 if run_flag == 1:
     run_random_game()
 else:
-    # print(f'SnowRunner будет после {sr_date}.')
-
     games_for_sr_counter = 5 - games_for_sr_counter
         
     if games_for_sr_counter == 1:
@@ -379,14 +364,10 @@ else:
     else:
         ep_prefix = 'й'
     
-    # print(games_for_sr_counter)
-    
-    
     if games_for_sr_counter > 0:
         print(f"До SnowRunner'a ещё {games_for_sr_counter} сери{ep_prefix}")
     else:
         print(f'Сегодня SnowRunner')
         
     # print(today)
-    # print_game_list()
     print_game_list_newFormat()
