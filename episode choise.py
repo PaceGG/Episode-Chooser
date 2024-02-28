@@ -28,12 +28,12 @@ chat_id = '-1002035302407'
 # DATA
 
 # Официальные назцания игр
-first_game_name = 'Bully Scholarship Edition'
+first_game_name = 'Prototype'
 second_game_name = 'Fallout 3'
 third_game_name = 'SnowRunner'
 
 # название ярлыков
-first_game_ico = "Bully"
+first_game_ico = "????"
 second_game_ico = 'Fallout3'
 
 # Пути к файлам видео
