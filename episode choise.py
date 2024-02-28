@@ -33,7 +33,7 @@ second_game_name = 'Fallout 3'
 third_game_name = 'SnowRunner'
 
 # название ярлыков
-first_game_ico = "????"
+first_game_ico = "prototypef"
 second_game_ico = 'Fallout3'
 
 # Пути к файлам видео
@@ -150,27 +150,23 @@ games_for_sr_counter = len(times)
 
 # earlier & start_from
     
-def count_earlier_jpg_files(first_dir, second_dir):
-    first_dir_creation_time = getctime(first_dir)
-    second_dir_creation_time = getctime(second_dir)
-
-    if first_dir_creation_time < second_dir_creation_time:
-        earlier_dir = first_dir
-        later_dir = second_dir
-    else:
-        earlier_dir = second_dir
-        later_dir = first_dir
-
-    earlier_jpg_files_count = sum(1 for root, dirs, files in os.walk(earlier_dir) for file in files if file.lower().endswith('.jpg') and getctime(join(root, file)) < getctime(later_dir))
-
-    return earlier_jpg_files_count
-
-start_from = count_earlier_jpg_files(first_folder_name, second_folder_name)
-
 if first_date > second_date:
     earlier = second_game_name
+    later = first_game_name
 else:
     earlier = first_game_name
+    later = second_game_name
+
+if first_episodes == 0 or second_episodes == 0:
+    with open('start_from.txt', 'w') as start_from:
+        if first_episodes == 0:
+            start_from.write(str(second_episodes))
+        if second_episodes == 0:
+            start_from.write(str(first_episodes))
+
+with open('start_from.txt', 'r') as file:
+    start_from = int(file.readline())
+
 
 if earlier == first_game_name:
     first_episodes -= start_from
@@ -300,17 +296,17 @@ def run_game(x):
         print(first_game_name)
         send_image(bot_token, chat_id, first_game_icon, first_game_caption)
         addEp(first_folder_name)
-        os.system(f'"{first_game_path}"')
+        # os.system(f'"{first_game_path}"')
     if x == second_game_name:
         print(second_game_name)
         send_image(bot_token, chat_id, second_game_icon, second_game_caption)
         addEp(second_folder_name)
-        os.system(f'"{second_game_path}"')
+        # os.system(f'"{second_game_path}"')
     if x == 'SR':
         print(third_game_name)
         send_image(bot_token, chat_id, third_game_icon, third_game_caption)
         addEp(third_folder_name)
-        os.system(f'"{third_game_path}"')
+        # os.system(f'"{third_game_path}"')
     sr_db_edit()
         
 
@@ -348,7 +344,7 @@ def print_game_list_newFormat():
     
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 1
+run_flag = 0
 
 setEngLayout()
 
