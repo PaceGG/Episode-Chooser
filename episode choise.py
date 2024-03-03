@@ -296,24 +296,23 @@ def run_game(x):
         print(first_game_name)
         send_image(bot_token, chat_id, first_game_icon, first_game_caption)
         addEp(first_folder_name)
-        # os.system(f'"{first_game_path}"')
+        os.system(f'"{first_game_path}"')
     if x == second_game_name:
         print(second_game_name)
         send_image(bot_token, chat_id, second_game_icon, second_game_caption)
         addEp(second_folder_name)
-        # os.system(f'"{second_game_path}"')
+        os.system(f'"{second_game_path}"')
     if x == 'SR':
         print(third_game_name)
         send_image(bot_token, chat_id, third_game_icon, third_game_caption)
         addEp(third_folder_name)
-        # os.system(f'"{third_game_path}"')
+        os.system(f'"{third_game_path}"')
     sr_db_edit()
         
 
 def run_random_game():
     if first_episodes == 0 and second_episodes == 0:
         sr_db_clear()
-        sr_db_edit()
         if earlier == second_game_name:
             run_game(first_game_name)
         if earlier == first_game_name:
@@ -344,7 +343,7 @@ def print_game_list_newFormat():
     
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 0
+run_flag = 1
 
 setEngLayout()
 
