@@ -1,135 +1,135 @@
-body{
-    background-color: #111;
-    margin: 0 120px;
+body {
+  background-color: #111;
+  margin: 0 120px;
 }
-img{
-    display: block;
+img {
+  display: block;
 }
-li{
-    list-style-type: disc;
+li {
+  list-style-type: disc;
 }
-a{
-    color: inherit;
-}
-
-.header{
-    border-bottom: 2px solid #333;
-}
-h1{
-    margin: 0;
-    color: #0B79D0;
-    font-weight: 400;
-    text-align: center;
-    padding: 20px;
-    font-size: 40px;
-    background-color: #222;
+a {
+  color: inherit;
 }
 
-.content{
-    display: flex;
-    height: 805px;
-    background-color: #222;
+.header {
+  border-bottom: 2px solid #333;
+}
+h1 {
+  margin: 0;
+  color: #0b79d0;
+  font-weight: 400;
+  text-align: center;
+  padding: 20px;
+  font-size: 40px;
+  background-color: #222;
 }
 
-.now_playing{
-    width: 65%;
-    border-right: 1px solid #333;
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-evenly;
-}
-.game_imgs{
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-}
-.game_img>img{
-    width: 380px;
-}
-.now_playing{
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-}
-.game_names{
-    display: flex;
-    justify-content: space-evenly;
-}
-.game_name{
-    width: 380px;
+.content {
+  display: flex;
+  height: 805px;
+  background-color: #222;
 }
 
-.game_a{
-    color: var(--a_game_color);
+.now_playing {
+  width: 65%;
+  border-right: 1px solid #333;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
 }
-.game_b{
-    color: var(--b_game_color);
+.game_imgs {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
 }
-
-.game_a>img{
-    border-top: 5px solid var(--a_game_color);
-    border-bottom: 5px solid var(--a_game_color);
+.game_img > img {
+  width: 380px;
 }
-.game_b>img{
-    border-top: 5px solid var(--b_game_color);
-    border-bottom: 5px solid var(--b_game_color);
+.now_playing {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 }
-.game_name{
-    padding-top: 10px;
-    padding-bottom: 20px;
-    font-size: 35px;
-    text-align: center;
+.game_names {
+  display: flex;
+  justify-content: space-evenly;
 }
-
-.game_list{
-    width: 35%;
-    border-left: 1px solid #333;
-    padding-right: 18px;
-    color: #eee;
-    overflow-y: scroll;
-}
-.game_list::-webkit-scrollbar{
-    background-color: #222;
-    width: 10px;
-}
-.game_list::-webkit-scrollbar-button{
-    display: none;
-}
-.game_list::-webkit-scrollbar-thumb{
-    background-color: #444;
+.game_name {
+  width: 380px;
 }
 
-details{
-    margin: 0 -18px;
+.game_a {
+  color: var(--a_game_color);
 }
-summary{
-    cursor: pointer;
-}
-
-.complete{
-    color: #11C46F;
-}
-.complete::after{
-    content: url('../img/complete.png');
-    margin-left: 5px;
+.game_b {
+  color: var(--b_game_color);
 }
 
-.inProcess{
-    color: #0B79D0;
-    font-weight: 800;
+.game_a > img {
+  border-top: 5px solid var(--a_game_color);
+  border-bottom: 5px solid var(--a_game_color);
 }
-.inProcess::after{
-    content: url('../img/wantToPlay.png');
-    margin-left: 5px;
+.game_b > img {
+  border-top: 5px solid var(--b_game_color);
+  border-bottom: 5px solid var(--b_game_color);
+}
+.game_name {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  font-size: 35px;
+  text-align: center;
 }
 
-.bad{
-    color: #EE204D;
-    text-decoration: line-through;
+.game_list {
+  width: 35%;
+  border-left: 1px solid #333;
+  padding-right: 18px;
+  color: #eee;
+  overflow-y: scroll;
+}
+.game_list::-webkit-scrollbar {
+  background-color: #222;
+  width: 10px;
+}
+.game_list::-webkit-scrollbar-button {
+  display: none;
+}
+.game_list::-webkit-scrollbar-thumb {
+  background-color: #444;
 }
 
-.wait{
-    color: rgb(235, 235, 99);
+details {
+  margin: 0 -18px;
+}
+summary {
+  cursor: pointer;
+}
+
+.complete {
+  color: #11c46f;
+}
+.complete::after {
+  content: url("../img/complete.png");
+  margin-left: 5px;
+}
+
+.inProcess {
+  color: #0b79d0;
+  font-weight: 800;
+}
+.inProcess::after {
+  content: url("../img/wantToPlay.png");
+  margin-left: 5px;
+}
+
+.bad {
+  color: #ee204d;
+  text-decoration: line-through;
+}
+
+.wait {
+  color: rgb(235, 235, 99);
 }
 
 /* .action{
@@ -160,21 +160,19 @@ summary{
     text-align: center;
 } */
 
-
-
-.action{
-    width: 120px;
-    position: absolute;
-    left: 0;
-    top: 17px;
-    margin-left: 28px;
+.action {
+  width: 120px;
+  position: absolute;
+  left: 0;
+  top: 17px;
+  margin-left: 28px;
 }
-.button>a>img{
-    width: 50%;
-    margin-bottom: 10px;
+.button > a > img {
+  width: 50%;
+  margin-bottom: 10px;
 }
-#channel{
-    border-radius: 50%;
-    width: 70%;
-    margin-left: -12px;
+#channel {
+  border-radius: 50%;
+  width: 70%;
+  margin-left: -12px;
 }
