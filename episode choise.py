@@ -7,7 +7,6 @@ from datetime import datetime
 import win32api
 import win32gui
 import requests
-import subprocess
 
 
 # Переключение раскладки клавиатуры на английскую
@@ -30,12 +29,16 @@ chat_id = '-1002035302407'
 
 # Официальные назцания игр
 first_game_name = 'Prototype 2'
-second_game_name = 'Fallout 3'
+second_game_name = 'Saints Row'
 third_game_name = 'SnowRunner'
 
 # название ярлыков
 first_game_ico = "Prototype 2"
-second_game_ico = 'Fallout3'
+second_game_ico = 'SaintsRow_Vulkan'
+
+# create files:
+# icon.png in icons_new folder
+# episodes log.txt in previews folder
 
 # Пути к файлам видео
 first_game_video = first_game_name
@@ -44,15 +47,9 @@ first_game_video_extra = ""
 second_game_video = second_game_name
 second_game_video_extra = ""
 
-# create files:
-# icon.png in icons_new folder
-# episodes log.txt in previews folder
 
 
 # Programm
-
-
-
 # Путри к играм
 first_game_path = 'C:/Users/yura3/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/' + first_game_ico + '.lnk'
 second_game_path = 'C:/Users/yura3/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/' + second_game_ico + ".lnk"
@@ -300,17 +297,17 @@ def run_game(x):
         print(first_game_name)
         send_image(bot_token, chat_id, first_game_icon, first_game_caption)
         addEp(first_folder_name)
-        os.startfile(f'"{first_game_path}"')
+        os.startfile(first_game_path)
     if x == second_game_name:
         print(second_game_name)
         send_image(bot_token, chat_id, second_game_icon, second_game_caption)
         addEp(second_folder_name)
-        os.startfile(f'"{second_game_path}"')
+        os.startfile(second_game_path)
     if x == 'SR':
         print(third_game_name)
         send_image(bot_token, chat_id, third_game_icon, third_game_caption)
         addEp(third_folder_name)
-        os.startfile(f'"{third_game_path}"')
+        os.startfile(third_game_path)
     sr_db_edit()
         
 

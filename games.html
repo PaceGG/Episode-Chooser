@@ -14,13 +14,13 @@
             --b_game_color: #1cfe8b;
         }
         .complete{
-            display: none;
+            /* display: none; */
         }
         .bad{
-            display: none;
+            /* display: none; */
         }
         .wait{
-            display: none;
+            /* display: none; */
         }
     </style>
 </head>
@@ -156,9 +156,9 @@
                         <li>Life Is Strange: True Colors</li>
                     </ul>
                 </details>
-                <details open><summary class="inProcess">Protorype</summary>
+                <details><summary class="inProcess">Protorype</summary>
                     <ul>
-                        <li class="complete"><a href="https://www.youtube.com/playlist?list=PLGMWcW1DV32Fr5u8pm0SKioHZdPKXzClC" target="_blank">Prototype</a> - 14 (xx:xx:xx)</li>
+                        <li class="complete"><a href="https://www.youtube.com/playlist?list=PLGMWcW1DV32Fr5u8pm0SKioHZdPKXzClC" target="_blank">Prototype</a> - 14 (13:11:58)</li>
                         <li class="inProcess">Prototype 2</li>
                     </ul>
                 </details>
@@ -179,12 +179,12 @@
                     </ul>
                 </details>
                 <li class="bad"><a href="https://www.youtube.com/playlist?list=PLGMWcW1DV32FB4QvRdG7Q95G3Rbim_ccS" target="_blank">Death Stranding</a></li>
-                <details open><summary class="inProcess">Fallout</summary>
+                <details><summary class="">Fallout</summary>
                     <ul>
                         <li>Fallout 4: Vault 13 (Fallout 1 Remake)</li>
                         <li>Fallout 4: Project Arroyo (Fallout 2 Remake)</li>
                         <!-- <li class="">Fallout 4: Capital Wasteland (Fallout 3 Remake)</li> -->
-                        <li class="inProcess">Fallout 3</li>
+                        <li class="complete"><a href="https://www.youtube.com/playlist?list=PLGMWcW1DV32F1Kx_nMF6a7zlLfRRZ7v8C" target="_blank">Fallout 3</a> - 16/43 (xx:xx:xx)</li>
                         <li>Fallout 3: New York</li>
                         <li>Fallout 4: New Vegas (Fallout: New Vegas Remake)</li>
                         <li class="complete"><a href="https://www.youtube.com/watch?v=aNlD7Xe5hvw&list=PLGMWcW1DV32EnK3PHzgKLbYoEnjhu4oX4" target="_blank">Fallout 4</a> - 21/57 (48:58:16)</li>
@@ -261,4 +261,17 @@
         <div class="button"><a href="https://thelastgame.ru/" target="_blank"><img src="img/the last game.png" alt=""></a></div>
         <div class="button"><a href="https://itorrents-igruha.org/" target="_blank"><img src="img/igruha.jpg" alt="" style="border-radius: 50%;"></a></div>
     </div>
+
+    <script>
+        window.onload = function() {
+            var detailsElements = document.querySelectorAll("details");
+        
+            detailsElements.forEach(function(details) {
+                var summary = details.querySelector("summary.inProcess");
+                if (summary) {
+                    details.open = true;
+                }
+            });
+        };
+        </script>
 </body>
