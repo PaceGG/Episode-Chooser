@@ -74,3 +74,4 @@ add_info = f' - {true_eps}/{all_eps} ({global_hours}:{global_minutes}:{global_se
 
 print(add_info)
 copy(add_info)
+print("Текст скопирован")
