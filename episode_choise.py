@@ -93,8 +93,14 @@ third_game_last_ep, third_game_last_ep_real = get_last_episode(third_folder_name
 
 
 # Telegram captions
-first_game_caption = f"{first_game_name} № {first_game_last_ep_real+1}-{first_game_last_ep_real+3}:\n• \n• \n• "
-second_game_caption = f"{second_game_name} № {second_game_last_ep_real+1}-{second_game_last_ep_real+3}:\n• \n• \n• "
+first_game_extra_caption = "Chris"
+second_game_extra_caption = ""
+
+if first_game_extra_caption != "": first_game_extra_caption = ": "+first_game_extra_caption
+if second_game_extra_caption != "": second_game_extra_caption = ": "+second_game_extra_caption
+
+first_game_caption = f"{first_game_name+first_game_extra_caption} № {first_game_last_ep_real+1}-{first_game_last_ep_real+3}:\n• \n• \n• "
+second_game_caption = f"{second_game_name+second_game_extra_caption} № {second_game_last_ep_real+1}-{second_game_last_ep_real+3}:\n• \n• \n• "
 third_game_caption = f"{third_game_name} № {third_game_last_ep_real+1}:\n• "
 
     
@@ -343,7 +349,7 @@ def print_game_list_newFormat():
     
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 1
+run_flag = 0
 
 setEngLayout()
 
