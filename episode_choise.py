@@ -93,7 +93,7 @@ third_game_last_ep, third_game_last_ep_real = get_last_episode(third_folder_name
 
 
 # Telegram captions
-first_game_extra_caption = "Chris"
+first_game_extra_caption = "Крис"
 second_game_extra_caption = ""
 
 if first_game_extra_caption != "": first_game_extra_caption = ": "+first_game_extra_caption
@@ -349,7 +349,7 @@ def print_game_list_newFormat():
     
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 0
+run_flag = 1
 
 setEngLayout()
 
