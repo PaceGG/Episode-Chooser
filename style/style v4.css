@@ -1,6 +1,12 @@
+@font-face {
+  font-family: "Chalet";
+  src: url(16762.woff);
+}
+
 body {
   background-color: var(--bgcolog);
   margin: 0;
+  font-family: "Chalet", Arial, sans-serif;
 }
 img {
   display: block;

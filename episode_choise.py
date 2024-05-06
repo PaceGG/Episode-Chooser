@@ -28,16 +28,17 @@ chat_id = '-1002035302407'
 # DATA
 
 # Официальные назцания игр
-first_game_name = 'Resident Evil 6'
+first_game_name = 'Resident Evil 7'
 second_game_name = 'Saints Row'
 third_game_name = 'SnowRunner'
 
-# название ярлыков
-first_game_ico = "BH6"
+# Название ярлыков
+first_game_ico = "re7"
 second_game_ico = 'SaintsRow_Vulkan'
 
 # create files:
 # icon.png in icons_new folder
+# run mkdir.py
 
 # Пути к файлам видео
 first_game_video = first_game_name
@@ -93,7 +94,7 @@ third_game_last_ep, third_game_last_ep_real = get_last_episode(third_folder_name
 
 
 # Telegram captions
-first_game_extra_caption = "Крис"
+first_game_extra_caption = ""
 second_game_extra_caption = ""
 
 if first_game_extra_caption != "": first_game_extra_caption = ": "+first_game_extra_caption

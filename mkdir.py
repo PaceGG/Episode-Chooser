@@ -12,9 +12,10 @@ def create_game_structure(game_name, base_directory):
     
 
 # Название игры
-game_name = "Resident Evil 6"
+game_name = "Resident Evil 7"
 
 
 
 base_directory = "D:/Program Files/Shadow Play"
 create_game_structure(game_name, base_directory)
+print("Директории созданы")
