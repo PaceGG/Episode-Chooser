@@ -140,3 +140,36 @@ window.onload = function () {
 document.getElementById("menuButton").addEventListener("click", function () {
   document.getElementById("menu").classList.toggle("open");
 });
+
+// inProcess для summary
+document.addEventListener("DOMContentLoaded", function () {
+  var allDetails = document.querySelectorAll("details");
+  allDetails.forEach(function (detailsC) {
+    var summaryC = detailsC.querySelector("summary");
+    var inProcessItemC = detailsC.querySelector("ul .inProcess");
+
+    if (inProcessItemC) {
+      summaryC.classList.add("inProcess");
+    }
+  });
+});
+
+// complete для summary
+document.addEventListener("DOMContentLoaded", function () {
+  var allDetails = document.querySelectorAll("details");
+  allDetails.forEach(function (details) {
+    var summary = details.querySelector("summary");
+    var allLiItems = details.querySelectorAll("ul li");
+    var allComplete = true;
+
+    allLiItems.forEach(function (li) {
+      if (!li.classList.contains("complete") && !li.classList.contains("bad")) {
+        allComplete = false;
+      }
+    });
+
+    if (allComplete) {
+      summary.classList.add("complete");
+    }
+  });
+});

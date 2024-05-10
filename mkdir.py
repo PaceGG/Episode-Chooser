@@ -12,7 +12,7 @@ def create_game_structure(game_name, base_directory):
     
 
 # Название игры
-game_name = "Resident Evil 7"
+game_name = "S.T.A.L.K.E.R. Lost Alpha DC"
 
 
 
