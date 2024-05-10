@@ -154,6 +154,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// счетчик complete
+var completeCount = document.getElementsByClassName("complete").length;
+var countContainer = document.querySelector(".complete_count");
+countContainer.textContent = completeCount;
+
 // complete для summary
 document.addEventListener("DOMContentLoaded", function () {
   var allDetails = document.querySelectorAll("details");
