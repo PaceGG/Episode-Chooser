@@ -347,16 +347,7 @@ def print_game_list_newFormat():
         print(f'{second_game_name}: {second_game_count}')
         return 0
 
-    
-    
-# 1 для запуска игры, 0 для вывода списка игр
-run_flag = 1
-
-setEngLayout()
-
-if run_flag == 1:
-    run_random_game()
-else:
+def print_info():
     games_for_sr_counter = 5 - games_for_sr_counter
         
     if games_for_sr_counter == 1:
@@ -373,3 +364,12 @@ else:
         
     # print(today)
     print_game_list_newFormat()
+    
+# 1 для запуска игры, 0 для вывода списка игр
+run_flag = 0
+
+setEngLayout()
+
+print_info()
+if run_flag:
+    run_random_game()
