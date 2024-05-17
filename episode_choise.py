@@ -348,6 +348,8 @@ def print_game_list_newFormat():
         return 0
 
 def print_info():
+    global games_for_sr_counter
+
     games_for_sr_counter = 5 - games_for_sr_counter
         
     if games_for_sr_counter == 1:
