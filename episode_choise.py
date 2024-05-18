@@ -28,16 +28,16 @@ chat_id = '-1002035302407'
 # DATA
 
 # Официальные назцания игр
-first_game_name = 'Resident Evil 7'
+first_game_name = 'Resident Evil Village'
 second_game_name = 'S.T.A.L.K.E.R. Lost Alpha DC'
 third_game_name = 'SnowRunner'
 
 # Название ярлыков
-first_game_ico = "re7"
+first_game_ico = "re8"
 second_game_ico = 'Lost Alpha Configurator'
 
 # create files:
-# icon.png in icons_new folder
+# ng.png in icons_new folder
 # run mkdir.py
 
 # Пути к файлам видео
