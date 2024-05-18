@@ -372,8 +372,8 @@ run_flag = 1
 
 setEngLayout()
 
-print_info()
 if run_flag:
+    run_random_game()
     for i in range(10):
         print()
-    run_random_game()
+print_info()
