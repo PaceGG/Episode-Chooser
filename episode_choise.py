@@ -29,16 +29,20 @@ chat_id = '-1002035302407'
 
 # Официальные назцания игр
 first_game_name = 'Resident Evil Village'
-second_game_name = 'S.T.A.L.K.E.R. Lost Alpha DC'
+second_game_name = 'S.T.A.L.K.E.R. Lost Alpha Enhanced Edition'
 third_game_name = 'SnowRunner'
 
 # Название ярлыков
 first_game_ico = "re8"
-second_game_ico = 'Lost Alpha Configurator'
+second_game_ico = 'Lost Alpha Enhanced Edition'
 
 # create files:
 # ng.png in icons_new folder
 # run mkdir.py
+
+# Telegram captions
+first_game_extra_caption = "Shadows of Rose"
+second_game_extra_caption = ""
 
 # Пути к файлам видео
 first_game_video = first_game_name
@@ -91,11 +95,6 @@ second_game_last_ep, second_game_last_ep_real = get_last_episode(second_folder_n
 third_game_last_ep, third_game_last_ep_real = get_last_episode(third_folder_name)
 
 
-
-
-# Telegram captions
-first_game_extra_caption = ""
-second_game_extra_caption = ""
 
 if first_game_extra_caption != "": first_game_extra_caption = ": "+first_game_extra_caption
 if second_game_extra_caption != "": second_game_extra_caption = ": "+second_game_extra_caption
@@ -350,17 +349,17 @@ def print_game_list_newFormat():
 def print_info():
     global games_for_sr_counter
 
-    games_for_sr_counter = 5 - games_for_sr_counter
+    games_to_sr_counter = 5 - games_for_sr_counter
         
-    if games_for_sr_counter == 1:
+    if games_to_sr_counter == 1:
         ep_prefix = 'я'
-    elif 1 < games_for_sr_counter < 5:
+    elif 1 < games_to_sr_counter < 5:
         ep_prefix = 'и'
     else:
         ep_prefix = 'й'
     
-    if games_for_sr_counter > 0:
-        print(f"До SnowRunner'a ещё {games_for_sr_counter} сери{ep_prefix}")
+    if games_to_sr_counter > 0:
+        print(f"До SnowRunner'a ещё {games_to_sr_counter} сери{ep_prefix}")
     else:
         print(f'Сегодня SnowRunner')
         
@@ -372,8 +371,10 @@ run_flag = 1
 
 setEngLayout()
 
-if run_flag:
-    run_random_game()
-    for i in range(10):
-        print()
 print_info()
+for i in range(10):
+    print()
+
+if run_flag:
+    confirm = input()
+    run_random_game()
