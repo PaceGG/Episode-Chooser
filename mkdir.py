@@ -25,7 +25,7 @@ def icon_rename(game_name):
     
 
 # Название игры
-game_name = "S.T.A.L.K.E.R. Lost Alpha Enhanced Edition"
+game_name = "SOMA"
 
 
 icon_rename(game_name)

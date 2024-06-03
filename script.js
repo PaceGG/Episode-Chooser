@@ -178,3 +178,23 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// ссылки без target blank
+const links = document.querySelectorAll("a");
+const linksWithoutTargetBlank = Array.from(links).filter(
+  (link) => link.target !== "_blank"
+);
+const textContentWithoutTargetBlank = linksWithoutTargetBlank.map(
+  (link) => link.textContent
+);
+
+if (textContentWithoutTargetBlank.length > 0) {
+  console.log(textContentWithoutTargetBlank);
+  throw new Error(
+    `Найдены ссылки без target="_blank":\n ${textContentWithoutTargetBlank.join(
+      "\n "
+    )}`
+  );
+} else {
+  console.log('Ссылок без target="blank" нет!');
+}

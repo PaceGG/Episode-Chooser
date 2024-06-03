@@ -28,20 +28,20 @@ chat_id = '-1002035302407'
 # DATA
 
 # Официальные назцания игр
-first_game_name = 'Resident Evil Village'
-second_game_name = 'S.T.A.L.K.E.R. Lost Alpha Enhanced Edition'
+first_game_name = 'SOMA'
+second_game_name = 'S.T.A.L.K.E.R. Lost Alpha DC'
 third_game_name = 'SnowRunner'
 
 # Название ярлыков
-first_game_ico = "re8"
-second_game_ico = 'Lost Alpha Enhanced Edition'
+first_game_ico = "Soma"
+second_game_ico = 'ladc'
 
 # create files:
 # ng.png in icons_new folder
 # run mkdir.py
 
 # Telegram captions
-first_game_extra_caption = "Shadows of Rose"
+first_game_extra_caption = ""
 second_game_extra_caption = ""
 
 # Пути к файлам видео
@@ -55,8 +55,8 @@ second_game_video_extra = ""
 
 # Programm
 # Путри к играм
-first_game_path = 'C:/Users/yura3/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/' + first_game_ico + '.lnk'
-second_game_path = 'C:/Users/yura3/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/' + second_game_ico + ".lnk"
+first_game_path = 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\' + first_game_ico + '.lnk'
+second_game_path = 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\' + second_game_ico + ".lnk"
 third_game_path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 
 # Пути к файлам видео
