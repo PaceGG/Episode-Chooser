@@ -1,52 +1,47 @@
 from collections import Counter
 
 game_mapping = {
-    'c': 'Cyberpunk',
-    'g': 'Grand Theft Auto Online',
-    's': 'SnowRunner',
-    'f': 'Fallout 3',
-    'b': 'Bully',
-    'p': 'Prototype',
-    'l': 'Life Is Strange: True Colors',
-    'R': 'RAGE 2',
-    't': 'Terraria: Calamity'
-    # Добавьте остальные игры и их буквы здесь
+    'Sw' : "Saints Row",
+    'Re6' : "Resident Evil 6",
+    'Re7': "Resident Evil 7",
+    'Re8' : "Resident Evil Village",
+    'Sr' : "Snow Runner",
+    "St" : "S.T.A.L.K.E.R. Lost Alpha DC"
 }
 
-# Открываем файл для чтения
 with open("games.txt", "r") as file:
-    # Инициализируем пустой массив month
     month = []
-
-    # Инициализируем временный массив для хранения дней недели
     week_days = []
-
-    # Счетчик для контроля количества дней в неделе
     day_counter = 0
-
-    # Читаем каждую строку из файла
     for line in file:
-        # Удаляем символы новой строки и лишние пробелы
         line = line.strip()
-
-        # Если строка не пустая, разбиваем её на отдельные игры и добавляем их в день месяца
-        if line:
-            day_games = [game for game in line]
-        else:
-            # Если строка пустая, значит в этот день не было игр
-            day_games = []
-
-        # Добавляем день месяца в временный массив дней недели
+        day_games = []
+        i = 0
+        while i < len(line):
+            if line[i].isupper() and i + 1 < len(line) and line[i + 1].islower():
+                game = line[i:i+2]
+                i += 2
+                while i < len(line) and line[i].isdigit():
+                    game += line[i]
+                    i += 1
+                day_games.append(game)
+            else:
+                game = line[i]
+                i += 1
+                while i < len(line) and line[i].isdigit():
+                    game += line[i]
+                    i += 1
+                day_games.append(game)
         week_days.append(day_games)
         day_counter += 1
-
-        # Если набралось 7 дней, создаем новую неделю и сбрасываем счетчик
         if day_counter == 7:
             month.append(week_days)
             week_days = []
             day_counter = 0
 
-# Проходим по каждому элементу массива month и заменяем букву на название игры
+    if week_days:
+        month.append(week_days)
+
 for week in month:
     for day in week:
         for i, game in enumerate(day):
@@ -72,18 +67,15 @@ print(f"Самая короткая неделя: {min_games_week_index + 1} | {
 print('-'*20)
 
 # 3. Количество различных игр и их количество
-# Собираем все игры в список
 all_games = [game for week in month for day in week for game in day]
 
-# Подсчитываем количество каждой игры
 game_counter = Counter(all_games)
 
 print("Количество различных игр:", len(game_counter))
-# for game, count in game_counter.items():
-#     print(f"{game}: {count}")
+for game, count in sorted(game_counter.items()):
+    print(f"{game}: {count}")
 print('-'*20)
 
-# Количество дней с одной, двумя и тремя играми
 games_per_day_counter = Counter(len(day) for week in month for day in week)
 days_with_one_game = games_per_day_counter[1]
 days_with_two_games = games_per_day_counter[2]
