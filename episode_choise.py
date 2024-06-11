@@ -1,5 +1,4 @@
 from random import randint
-# from os import *
 import os
 from os.path import *
 from time import *
@@ -28,12 +27,12 @@ chat_id = '-1002035302407'
 # DATA
 
 # Официальные назцания игр
-first_game_name = 'SOMA'
+first_game_name = 'Outer Wilds'
 second_game_name = 'S.T.A.L.K.E.R. Lost Alpha DC'
 third_game_name = 'SnowRunner'
 
 # Название ярлыков
-first_game_ico = "Soma"
+first_game_ico = "OuterWilds"
 second_game_ico = 'ladc'
 
 # create files:
@@ -65,9 +64,9 @@ second_folder_name = "D:/Program Files/Shadow Play/" + second_game_video + "/pre
 third_folder_name = 'D:/Program Files/Shadow Play/SnowRunner/previews/'
 
 # Пути к иконкам игр
-first_game_icon = f"D:\Program Files\HTML\Games\icons_new\{first_game_name}.png"
-second_game_icon = f"D:\Program Files\HTML\Games\icons_new\{second_game_name}.png"
-third_game_icon = f"D:\Program Files\HTML\Games\icons_new\{third_game_name}.png"
+first_game_icon = f"D:\\Program Files\\HTML\\Games\\icons_new\\{first_game_name}.png"
+second_game_icon = f"D:\\Program Files\\HTML\\Games\\icons_new\\{second_game_name}.png"
+third_game_icon = f"D:\\Program Files\\HTML\\Games\\icons_new\\{third_game_name}.png"
 
 
 # Номер последней серии

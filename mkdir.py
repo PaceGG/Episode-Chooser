@@ -25,7 +25,7 @@ def icon_rename(game_name):
     
 
 # Название игры
-game_name = "SOMA"
+game_name = "Outer Wilds"
 
 
 icon_rename(game_name)
