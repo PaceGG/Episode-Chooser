@@ -54,7 +54,8 @@ second_game_video_extra = ""
 
 # Programm
 # Путри к играм
-first_game_path = 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\' + first_game_ico + '.lnk'
+# first_game_path = 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\' + first_game_ico + '.lnk'
+first_game_path = 'C:\\Users\\yura3\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\OuterWilds.lnk'
 second_game_path = 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\' + second_game_ico + ".lnk"
 third_game_path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 
