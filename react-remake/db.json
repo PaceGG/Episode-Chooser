@@ -1,3 +1,43 @@
 {
-  "games": []
+  "games": [
+    {
+      "id": "bfeb",
+      "mainName": "ГэТэА",
+      "additionalGames": [
+        "гта1",
+        "гта2",
+        "гта вай сити",
+        "гта санан дрес"
+      ]
+    },
+    {
+      "id": "afab",
+      "mainName": "мафия",
+      "additionalGames": [
+        "мафия зэ сити оф лост хевен"
+      ]
+    },
+    {
+      "id": "496a",
+      "mainName": "оутир вилидс",
+      "additionalGames": []
+    },
+    {
+      "id": "d429",
+      "mainName": "",
+      "additionalGames": [
+        ""
+      ]
+    },
+    {
+      "id": "7736",
+      "mainName": "1",
+      "additionalGames": [
+        "2",
+        "5",
+        "6",
+        "7"
+      ]
+    }
+  ]
 }

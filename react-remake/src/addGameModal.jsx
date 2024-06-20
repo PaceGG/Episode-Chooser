@@ -16,6 +16,7 @@ const AddGameModal = ({ setModalVisible, updateGameData }) => {
 
   const removeInput = (id) => {
     setInput((prevInputs) => prevInputs.filter((input) => input.id !== id));
+    inputRefs.current.splice(inputRefs.length, 1);
   };
 
   const handleInputChange = (id, newValue) => {
@@ -60,7 +61,10 @@ const AddGameModal = ({ setModalVisible, updateGameData }) => {
   };
 
   useEffect(() => {
-    if (inputRefs.current.length > 0) {
+    if (
+      inputRefs.current.length > 0 &&
+      inputRefs.current[inputRefs.current.length - 1]
+    ) {
       inputRefs.current[inputRefs.current.length - 1].focus();
     }
   }, [inputs]);
