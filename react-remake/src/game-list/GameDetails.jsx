@@ -13,20 +13,41 @@ const GameDetails = ({
   const [selectedGameID, setSelectedGameID] = useState(null);
   const [selectedGameName, setSelectedGameName] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(0);
 
-  const handleRightClick = (e, gameName, gameID) => {
+  const handleRightClick = (e, gameName, gameID, gameTime) => {
     e.preventDefault(); // Prevent default context menu
     setSelectedGameID(gameID);
     setSelectedGameName(gameName);
-    setSelectedStatus(null);
+
+    if (gameData.additionalGames.length === 0) {
+      setSelectedStatus(gameData.mainStatus);
+    } else {
+      setSelectedStatus(
+        gameData.additionalGames.find((game) => game.name === gameName).status
+      );
+    }
     setModalVisible(true);
-    console.log(
-      additionalGames.map((game) => game.time).reduce((a, b) => a + b, 0)
-    );
+    setSelectedTime(gameTime);
   };
 
   const handleRadioChange = (e) => {
     setSelectedStatus(e.target.value);
+  };
+
+  const pad = (num) => {
+    return num < 10 ? "0" + num : num;
+  };
+  const convertTime = (selectedTime) => {
+    const hours = Math.floor(selectedTime / 3600);
+    const minutes = Math.floor((selectedTime % 3600) / 60);
+    const seconds = selectedTime % 60;
+
+    const formatedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    return formatedTime;
+  };
+  const handleInputChange = (e) => {
+    setSelectedTime(e.target.value);
   };
 
   const handleSaveChanges = async () => {
@@ -38,7 +59,7 @@ const GameDetails = ({
 
       const updateAdditionalGames = game.additionalGames.map((game) =>
         game.name === selectedGameName
-          ? { ...game, status: selectedStatus }
+          ? { ...game, status: selectedStatus, time: parseInt(selectedTime) }
           : game
       );
 
@@ -67,7 +88,9 @@ const GameDetails = ({
 
   const renderMainGame = () => (
     <li
-      onContextMenu={(e) => handleRightClick(e, gameData.mainName, gameData.id)}
+      onContextMenu={(e) =>
+        handleRightClick(e, gameData.mainName, gameData.id, gameData.mainTime)
+      }
       className={
         selectedGameName === gameData.mainName && selectedStatus
           ? selectedStatus
@@ -83,15 +106,21 @@ const GameDetails = ({
       <summary>
         {mainGameName} - (
         {gameData.mainTime === 0
-          ? gameData.mainTime
-          : additionalGames.map((game) => game.time).reduce((a, b) => a + b, 0)}
+          ? ""
+          : convertTime(
+              additionalGames
+                .map((game) => game.time)
+                .reduce((a, b) => a + b, 0)
+            )}
         )
       </summary>
       <ul>
         {additionalGames.map((game, index) => (
           <li
             key={index}
-            onContextMenu={(e) => handleRightClick(e, game.name, gameData.id)}
+            onContextMenu={(e) =>
+              handleRightClick(e, game.name, gameData.id, game.time)
+            }
             className={
               selectedGameName === game.name && selectedStatus
                 ? selectedStatus
@@ -99,7 +128,7 @@ const GameDetails = ({
             }
           >
             {game.name}
-            {game.time > 0 ? ` (${game.time})` : ""}
+            {game.time > 0 ? ` (${convertTime(game.time)})` : ""}
           </li>
         ))}
       </ul>
@@ -114,7 +143,7 @@ const GameDetails = ({
       {modalVisible && (
         <div className="modal">
           <h2>{selectedGameName}</h2>
-          <div className="modal-content">
+          <div className="modal-content selectStatus">
             <label>
               <input
                 type="radio"
@@ -147,6 +176,14 @@ const GameDetails = ({
             </label>
             <button onClick={handleSaveChanges}>Сохранить</button>
             <button onClick={cancelChanges}>Отмена</button>
+          </div>
+          <div className="modal-content selectTime">
+            <input
+              type="text"
+              name="time"
+              value={selectedTime}
+              onChange={handleInputChange}
+            />
           </div>
         </div>
       )}

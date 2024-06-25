@@ -13,7 +13,7 @@
         },
         {
           "name": "гта2",
-          "status": "complete",
+          "status": "inProcess",
           "time": 4
         },
         {
@@ -113,15 +113,18 @@
       "additionalGames": [
         {
           "name": "Тестовая игра 1",
-          "status": "none"
+          "status": "none",
+          "time": 0
         },
         {
           "name": "Тестовая игра 2",
-          "status": "none"
+          "status": "none",
+          "time": 0
         },
         {
           "name": "Тестовая игра 4",
-          "status": "bad"
+          "status": "bad",
+          "time": 0
         }
       ]
     },
@@ -137,7 +140,39 @@
         {
           "name": "Игра со временем 3",
           "status": "none",
+          "time": 123
+        }
+      ]
+    },
+    {
+      "id": "adcb",
+      "mainName": "Тест добавления игры со временем",
+      "additionalGames": []
+    },
+    {
+      "id": "c356",
+      "mainName": "Тест добавления игры со временем 2",
+      "additionalGames": [
+        {
+          "name": "игра",
+          "status": "none",
+          "time": 111
+        }
+      ]
+    },
+    {
+      "id": "edbe",
+      "mainName": "тест суммирования времени",
+      "additionalGames": [
+        {
+          "name": "время 1",
+          "status": "none",
           "time": 3
+        },
+        {
+          "name": "время 2",
+          "status": "none",
+          "time": 1231231
         }
       ]
     }
