@@ -20,6 +20,9 @@ const GameDetails = ({
     setSelectedGameName(gameName);
     setSelectedStatus(null);
     setModalVisible(true);
+    console.log(
+      additionalGames.map((game) => game.time).reduce((a, b) => a + b, 0)
+    );
   };
 
   const handleRadioChange = (e) => {
@@ -77,7 +80,13 @@ const GameDetails = ({
 
   const renderAdditionalGames = () => (
     <details>
-      <summary>{mainGameName}</summary>
+      <summary>
+        {mainGameName} - (
+        {gameData.mainTime === 0
+          ? gameData.mainTime
+          : additionalGames.map((game) => game.time).reduce((a, b) => a + b, 0)}
+        )
+      </summary>
       <ul>
         {additionalGames.map((game, index) => (
           <li
@@ -90,6 +99,7 @@ const GameDetails = ({
             }
           >
             {game.name}
+            {game.time > 0 ? ` (${game.time})` : ""}
           </li>
         ))}
       </ul>

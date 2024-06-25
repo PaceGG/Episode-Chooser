@@ -36,6 +36,7 @@ const GameList = () => {
           additionalGames={game.additionalGames.map((addGame) => ({
             name: addGame.name,
             status: addGame.status,
+            time: addGame.time,
           }))}
         />
       ))}

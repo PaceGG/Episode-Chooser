@@ -33,6 +33,7 @@ const AddGameModal = ({ setModalVisible, updateGameData }) => {
       additionalGames: inputs.map((input) => ({
         name: input.value,
         status: "none",
+        time: 0,
       })),
     };
     try {
