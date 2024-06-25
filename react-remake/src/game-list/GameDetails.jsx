@@ -79,6 +79,7 @@ const GameDetails = ({
         await axios.put(`http://localhost:3000/games/${selectedGameID}`, {
           ...game,
           mainStatus: selectedStatus,
+          mainTime: parseInt(selectedTime),
         });
       }
     } catch (error) {
@@ -133,15 +134,16 @@ const GameDetails = ({
   const renderAdditionalGames = () => (
     <details open={isOpen}>
       <summary onContextMenu={(e) => handleRightClickDetails(e, gameData.id)}>
-        {mainGameName} - (
+        {mainGameName}
         {gameData.mainTime === 0
           ? ""
-          : convertTime(
+          : "- (" +
+            convertTime(
               additionalGames
                 .map((game) => game.time)
                 .reduce((a, b) => a + b, 0)
-            )}
-        )
+            ) +
+            ")"}
       </summary>
       <ul>
         {additionalGames.map((game, index) => (

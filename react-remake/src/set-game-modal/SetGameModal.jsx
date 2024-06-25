@@ -41,33 +41,6 @@ const AddGameModal = ({
   };
 
   const handleConfirm = async () => {
-    // try {
-    //   const response = await axios.get(
-    //     `http://localhost:3000/games/${selectedGameID}`
-    //   );
-    //   const game = response.data;
-
-    //   const updateAdditionalGames = game.additionalGames.map((game) =>
-    //     game.name === selectedGameName
-    //       ? { ...game, status: selectedStatus, time: parseInt(selectedTime) }
-    //       : game
-    //   );
-
-    //   if (updateAdditionalGames.length !== 0) {
-    //     await axios.put(`http://localhost:3000/games/${selectedGameID}`, {
-    //       ...game,
-    //       additionalGames: updateAdditionalGames,
-    //     });
-    //   } else {
-    //     await axios.put(`http://localhost:3000/games/${selectedGameID}`, {
-    //       ...game,
-    //       mainStatus: selectedStatus,
-    //     });
-    //   }
-    // } catch (error) {
-    //   console.log("Ошибка при обновлении статуса игры: ", error);
-    // }
-
     try {
       const response = await axios.get(
         `http://localhost:3000/games/${selectedGameID}`
