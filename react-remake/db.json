@@ -1,214 +1,71 @@
 {
   "games": [
     {
-      "id": "bfeb",
-      "mainName": "ГэТэА",
-      "mainStatus": "complete",
-      "maintime": 0,
-      "additionalGames": [
-        {
-          "name": "гта1",
-          "status": "complete",
-          "time": 3
-        },
-        {
-          "name": "гта2",
-          "status": "inProcess",
-          "time": 4
-        },
-        {
-          "name": "гта вай сити",
-          "status": "inProcess",
-          "time": 8
-        },
-        {
-          "name": "гта санан дрес",
-          "status": "complete",
-          "time": 1
-        },
-        {
-          "name": "гта 6",
-          "time": 10,
-          "status": "bad"
-        }
-      ]
-    },
-    {
-      "id": "afab",
-      "mainName": "мафия",
-      "mainStatus": "complete",
-      "maintime": 0,
-      "additionalGames": [
-        {
-          "name": "мафия зэ сити оф лост хевен",
-          "status": "complete",
-          "time": 0
-        }
-      ]
-    },
-    {
-      "id": "496a",
-      "mainName": "оутир вилидс",
-      "mainStatus": "bad",
-      "mainTime": 123,
-      "additionalGames": []
-    },
-    {
-      "id": "7736",
-      "mainName": "1",
-      "mainStatus": "complete",
-      "additionalGames": [
-        {
-          "name": "2",
-          "status": "bad",
-          "time": 0
-        },
-        {
-          "name": "5",
-          "status": "inProcess",
-          "time": 0
-        },
-        {
-          "name": "6",
-          "status": "complete",
-          "time": 0
-        },
-        {
-          "name": "7",
-          "status": "inProcess",
-          "time": 0
-        },
-        {
-          "name": "8",
-          "status": "bad",
-          "time": 0
-        },
-        {
-          "name": "9",
-          "status": "none",
-          "time": 0
-        }
-      ]
-    },
-    {
-      "id": "301d",
-      "mainName": "123",
-      "additionalGames": [
-        {
-          "name": "124",
-          "status": "complete",
-          "time": 0
-        },
-        {
-          "name": "123",
-          "status": "bad",
-          "time": 0
-        }
-      ]
-    },
-    {
-      "id": "b4b2",
-      "mainName": "Тестовая одиночная игра",
+      "id": "e1ef",
+      "mainName": "SOMA",
+      "mainTime": 10,
       "additionalGames": [],
       "mainStatus": "complete"
     },
     {
-      "id": "e40e",
-      "mainName": "Тестовая серия игр",
+      "id": "c453",
+      "mainName": "Cuphead",
+      "mainTime": 0,
+      "additionalGames": [],
+      "mainStatus": "inProcess"
+    },
+    {
+      "id": "456f",
+      "mainName": "Penumbra",
+      "mainTime": 0,
       "additionalGames": [
         {
-          "name": "123",
+          "name": "Penumbra: Overture",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Penumbra: Black Plague",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Penumbra: Requiem",
+          "status": "none",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "1811",
+      "mainName": "Amnesia",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Amnesia: The Dark Descent",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Amnesia: A Machine for Pigs",
           "time": null
         },
         {
-          "name": "456",
+          "name": "Amnesia: Rebirth",
           "time": null
         },
         {
-          "name": "789",
-          "time": 123,
-          "status": "complete"
+          "name": "Amnesia: The Bunker",
+          "time": null
         }
       ]
     },
     {
-      "id": "ddd2",
-      "mainName": "Тест добавления игры со временем",
-      "additionalGames": [
-        {
-          "name": "Игра со временем 2",
-          "status": "complete",
-          "time": 2
-        },
-        {
-          "name": "Игра со временем 3",
-          "status": "none",
-          "time": 123
-        }
-      ]
-    },
-    {
-      "id": "adcb",
-      "mainName": "Тест добавления игры со временем",
-      "additionalGames": []
-    },
-    {
-      "id": "c356",
-      "mainName": "Тест добавления игры со временем 2",
-      "additionalGames": [
-        {
-          "name": "игра",
-          "status": "none",
-          "time": 111
-        }
-      ]
-    },
-    {
-      "id": "edbe",
-      "mainName": "тест суммирования времени",
-      "additionalGames": [
-        {
-          "name": "время 1",
-          "status": "none",
-          "time": 3
-        },
-        {
-          "name": "время 2",
-          "status": "none",
-          "time": 1231231
-        }
-      ]
-    },
-    {
-      "id": "8191",
-      "mainName": "1",
-      "additionalGames": [
-        {
-          "name": "2",
-          "status": "none",
-          "time": 0
-        },
-        {
-          "name": "3",
-          "status": "none",
-          "time": 0
-        },
-        {
-          "name": "4",
-          "status": "none",
-          "time": 0
-        },
-        {
-          "name": "5",
-          "status": "none",
-          "time": 0
-        },
-        {
-          "name": "6",
-          "status": "none",
-          "time": 0
-        }
-      ]
+      "id": "9c71",
+      "mainName": "Inscryption",
+      "mainTime": 123,
+      "additionalGames": [],
+      "mainStatus": "complete"
     }
   ]
 }
