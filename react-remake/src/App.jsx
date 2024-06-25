@@ -12,9 +12,6 @@ const App = () => {
 
   return (
     <div className={style.modalButtonContainer}>
-      {/* <button onClick={handleButtonClick} className={style.showModalButton}>
-        Add Game
-      </button> */}
       {isModalVisible && <AddGameModal setModalVisible={setModalVisible} />}
       <GameList />
     </div>

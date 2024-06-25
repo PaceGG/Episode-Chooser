@@ -1,10 +1,23 @@
 import { useState, useRef, useEffect } from "react";
-import style from "./addGameModal.module.css";
+import axios from "axios";
+import style from "../addGameModal.module.css";
 
-const AddGameModal = ({ setModalVisible, updateGameData }) => {
+const AddGameModal = ({
+  setModalVisible,
+  updateGameData,
+  selectedGameNames,
+  mainGameNameToi,
+  selectedGameID,
+}) => {
   const [inputs, setInput] = useState([]);
   const [mainGameName, setMainGameName] = useState("");
   const inputRefs = useRef([]);
+
+  useEffect(() => {
+    setInput(selectedGameNames);
+    setMainGameName(mainGameNameToi);
+    console.log(selectedGameNames);
+  }, []);
 
   const handleMainGameNameChange = (e) => {
     setMainGameName(e.target.value);
@@ -28,35 +41,67 @@ const AddGameModal = ({ setModalVisible, updateGameData }) => {
   };
 
   const handleConfirm = async () => {
-    const gameData = {
-      mainName: mainGameName,
-      mainTime: 0,
-      additionalGames: inputs.map((input) => ({
-        name: input.value,
-        status: "none",
-        time: 0,
-      })),
-    };
+    // try {
+    //   const response = await axios.get(
+    //     `http://localhost:3000/games/${selectedGameID}`
+    //   );
+    //   const game = response.data;
+
+    //   const updateAdditionalGames = game.additionalGames.map((game) =>
+    //     game.name === selectedGameName
+    //       ? { ...game, status: selectedStatus, time: parseInt(selectedTime) }
+    //       : game
+    //   );
+
+    //   if (updateAdditionalGames.length !== 0) {
+    //     await axios.put(`http://localhost:3000/games/${selectedGameID}`, {
+    //       ...game,
+    //       additionalGames: updateAdditionalGames,
+    //     });
+    //   } else {
+    //     await axios.put(`http://localhost:3000/games/${selectedGameID}`, {
+    //       ...game,
+    //       mainStatus: selectedStatus,
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.log("Ошибка при обновлении статуса игры: ", error);
+    // }
+
     try {
-      const response = await fetch("http://localhost:3000/games", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(gameData),
+      const response = await axios.get(
+        `http://localhost:3000/games/${selectedGameID}`
+      );
+
+      const game = response.data;
+
+      console.log(inputs);
+
+      await axios.put(`http://localhost:3000/games/${selectedGameID}`, {
+        ...game,
+        mainName: mainGameName,
       });
 
-      if (response.ok) {
-        updateGameData(); // Обновление данных в GameList
-        setInput([]);
-        setMainGameName("");
-        setModalVisible(false);
-      } else {
-        console.error("Error saving data:", response.statusText);
+      const updateAdditionalGames = inputs.map((input) => ({
+        name: input.value,
+        status: input.status,
+        time: parseInt(input.time),
+      }));
+
+      console.log(updateAdditionalGames);
+
+      if (updateAdditionalGames.length !== 0) {
+        await axios.put(`http://localhost:3000/games/${selectedGameID}`, {
+          ...game,
+          additionalGames: updateAdditionalGames,
+        });
       }
     } catch (error) {
-      console.error("Error saving data:", error);
+      console.log("Ошибка при обновлении статуса игры: ", error);
     }
+
+    updateGameData();
+    setModalVisible(false);
   };
 
   const cancelConirm = () => {
