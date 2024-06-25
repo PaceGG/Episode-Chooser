@@ -1,0 +1,32 @@
+.modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-content {
+  display: flex;
+  gap: 10px;
+}
+
+/* Добавьте стили для классов bad, complete и inProcess */
+.bad {
+  background-color: red;
+  color: white;
+}
+
+.complete {
+  background-color: green;
+  color: white;
+}
+
+.inProcess {
+  background-color: yellow;
+  color: black;
+}

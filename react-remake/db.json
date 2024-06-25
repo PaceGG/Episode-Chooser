@@ -3,40 +3,123 @@
     {
       "id": "bfeb",
       "mainName": "ГэТэА",
+      "mainStatus": "complete",
       "additionalGames": [
-        "гта1",
-        "гта2",
-        "гта вай сити",
-        "гта санан дрес"
+        {
+          "name": "гта1",
+          "status": "complete"
+        },
+        {
+          "name": "гта2",
+          "status": "complete"
+        },
+        {
+          "name": "гта вай сити",
+          "status": "inProcess"
+        },
+        {
+          "name": "гта санан дрес",
+          "status": "complete"
+        }
       ]
     },
     {
       "id": "afab",
       "mainName": "мафия",
+      "mainStatus": "complete",
       "additionalGames": [
-        "мафия зэ сити оф лост хевен"
+        {
+          "name": "мафия зэ сити оф лост хевен",
+          "status": "complete"
+        }
       ]
     },
     {
       "id": "496a",
       "mainName": "оутир вилидс",
+      "mainStatus": "bad",
       "additionalGames": []
     },
     {
       "id": "d429",
       "mainName": "",
+      "mainStatus": "complete",
       "additionalGames": [
-        ""
+        {
+          "name": "",
+          "status": "none"
+        }
       ]
     },
     {
       "id": "7736",
       "mainName": "1",
+      "mainStatus": "complete",
       "additionalGames": [
-        "2",
-        "5",
-        "6",
-        "7"
+        {
+          "name": "2",
+          "status": "bad"
+        },
+        {
+          "name": "5",
+          "status": "inProcess"
+        },
+        {
+          "name": "6",
+          "status": "complete"
+        },
+        {
+          "name": "7",
+          "status": "inProcess"
+        },
+        {
+          "name": "8",
+          "status": "bad"
+        },
+        {
+          "name": "9",
+          "status": "none"
+        }
+      ],
+      "name": "7",
+      "status": "complete"
+    },
+    {
+      "id": "301d",
+      "mainName": "123",
+      "additionalGames": [
+        {
+          "name": "124",
+          "status": "complete"
+        },
+        {
+          "name": "123",
+          "status": "bad"
+        }
+      ]
+    },
+    {
+      "id": "b4b2",
+      "mainName": "Тестовая одиночная игра",
+      "additionalGames": [],
+      "mainStatus": "bad"
+    },
+    {
+      "id": "e40e",
+      "mainName": "Тестовая серия игр",
+      "additionalGames": [
+        {
+          "name": "Тестовая игра 1",
+          "status": "none"
+        },
+        {
+          "name": "Тестовая игра 2",
+          "status": "none"
+        },
+        {
+          "name": "Тестовая игра 4",
+          "status": "bad"
+        }
       ]
     }
   ]

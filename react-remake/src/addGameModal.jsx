@@ -30,7 +30,10 @@ const AddGameModal = ({ setModalVisible, updateGameData }) => {
   const handleConfirm = async () => {
     const gameData = {
       mainName: mainGameName,
-      additionalGames: inputs.map((input) => input.value),
+      additionalGames: inputs.map((input) => ({
+        name: input.value,
+        status: "none",
+      })),
     };
     try {
       const response = await fetch("http://localhost:3000/games", {
@@ -71,6 +74,7 @@ const AddGameModal = ({ setModalVisible, updateGameData }) => {
 
   return (
     <div className={style.modal}>
+      <img src="" alt="" />
       <input
         id="mainGameName"
         placeholder="Main game name"
