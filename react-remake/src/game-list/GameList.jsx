@@ -29,6 +29,7 @@ const GameList = () => {
       <button onClick={() => setModalVisible(true)}>Add Game</button>
       {games.map((game) => (
         <GameDetails
+          updateGameData={updateGameData}
           gameData={game}
           key={game.id}
           mainGameName={game.mainName}

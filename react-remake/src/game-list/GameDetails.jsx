@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./GameDetais.css";
+import SetGameModal from "../set-game-modal/SetGameModal";
 
 const GameDetails = ({
   mainGameName,
   additionalGames,
   mainStatus,
   gameData,
+  updateGameData,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalEditorVisible, setModalEditorVisible] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [selectedGameNames, setSelectedGameNames] = useState([]);
 
   const [selectedGameID, setSelectedGameID] = useState(null);
   const [selectedGameName, setSelectedGameName] = useState(null);
@@ -16,7 +23,7 @@ const GameDetails = ({
   const [selectedTime, setSelectedTime] = useState(0);
 
   const handleRightClick = (e, gameName, gameID, gameTime) => {
-    e.preventDefault(); // Prevent default context menu
+    e.preventDefault();
     setSelectedGameID(gameID);
     setSelectedGameName(gameName);
 
@@ -78,6 +85,7 @@ const GameDetails = ({
       console.log("Ошибка при обновлении статуса игры: ", error);
     }
 
+    updateGameData();
     setModalVisible(false);
   };
 
@@ -101,9 +109,30 @@ const GameDetails = ({
     </li>
   );
 
+  const handleRightClickDetails = (e, gameID) => {
+    e.preventDefault();
+    if (e.nativeEvent.which === 3) {
+      setIsOpen(true);
+    }
+    setModalEditorVisible(true);
+
+    const listItems = additionalGames.map((game, index) => ({
+      id: `${Date.now()}-${index}`,
+      value: game.name,
+      status: game.status,
+      time: game.time,
+    }));
+
+    setSelectedGameNames(listItems);
+    setSelectedGameName(mainGameName);
+    setSelectedGameID(gameID);
+  };
+
+  // const handleInputNameChange = (e) => {};
+
   const renderAdditionalGames = () => (
-    <details>
-      <summary>
+    <details open={isOpen}>
+      <summary onContextMenu={(e) => handleRightClickDetails(e, gameData.id)}>
         {mainGameName} - (
         {gameData.mainTime === 0
           ? ""
@@ -186,6 +215,15 @@ const GameDetails = ({
             />
           </div>
         </div>
+      )}
+      {modalEditorVisible && (
+        <SetGameModal
+          setModalVisible={setModalEditorVisible}
+          selectedGameNames={selectedGameNames}
+          mainGameNameToi={selectedGameName}
+          selectedGameID={selectedGameID}
+          updateGameData={updateGameData}
+        />
       )}
     </div>
   );

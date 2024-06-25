@@ -25,6 +25,11 @@
           "name": "гта санан дрес",
           "status": "complete",
           "time": 1
+        },
+        {
+          "name": "гта 6",
+          "time": 10,
+          "status": "bad"
         }
       ]
     },
@@ -112,19 +117,17 @@
       "mainName": "Тестовая серия игр",
       "additionalGames": [
         {
-          "name": "Тестовая игра 1",
-          "status": "none",
-          "time": 0
+          "name": "123",
+          "time": null
         },
         {
-          "name": "Тестовая игра 2",
-          "status": "none",
-          "time": 0
+          "name": "456",
+          "time": null
         },
         {
-          "name": "Тестовая игра 4",
-          "status": "bad",
-          "time": 0
+          "name": "789",
+          "time": 123,
+          "status": "complete"
         }
       ]
     },
@@ -134,7 +137,7 @@
       "additionalGames": [
         {
           "name": "Игра со временем 2",
-          "status": "none",
+          "status": "complete",
           "time": 2
         },
         {
@@ -173,6 +176,37 @@
           "name": "время 2",
           "status": "none",
           "time": 1231231
+        }
+      ]
+    },
+    {
+      "id": "8191",
+      "mainName": "1",
+      "additionalGames": [
+        {
+          "name": "2",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "3",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "4",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "5",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "6",
+          "status": "none",
+          "time": 0
         }
       ]
     }
