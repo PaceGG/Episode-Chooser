@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "./GameDetais.css";
 import SetGameModal from "../set-game-modal/SetGameModal";
@@ -21,6 +21,25 @@ const GameDetails = ({
   const [selectedGameName, setSelectedGameName] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
   const [selectedTime, setSelectedTime] = useState(0);
+
+  const [filter, setFilter] = useState({
+    statusComplete: false,
+    statusBad: false,
+    statusWait: false,
+  });
+
+  useEffect(() => {
+    loadFiltersData();
+  }, []);
+
+  const loadFiltersData = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/filters"); // URL вашего json-server
+      setFilter(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const handleRightClick = (e, gameName, gameID, gameTime) => {
     e.preventDefault();
@@ -83,7 +102,7 @@ const GameDetails = ({
         });
       }
     } catch (error) {
-      console.log("Ошибка при обновлении статуса игры: ", error);
+      console.error("Ошибка при обновлении статуса игры: ", error);
     }
 
     updateGameData();
@@ -104,6 +123,13 @@ const GameDetails = ({
         selectedGameName === gameData.mainName && selectedStatus
           ? selectedStatus
           : gameData.mainStatus
+      }
+      style={
+        (gameData.mainStatus === "bad" && filter.statusBad) ||
+        (gameData.mainStatus === "complete" && filter.statusComplete) ||
+        (gameData.mainStatus === "wait" && filter.statusWait)
+          ? { display: "none" }
+          : null
       }
     >
       {mainGameName}
@@ -159,6 +185,13 @@ const GameDetails = ({
               selectedGameName === game.name && selectedStatus
                 ? selectedStatus
                 : game.status
+            }
+            style={
+              (game.status === "bad" && filter.statusBad) ||
+              (game.status === "complete" && filter.statusComplete) ||
+              (game.status === "wait" && filter.statusWait)
+                ? { display: "none" }
+                : null
             }
           >
             {game.name}

@@ -65,7 +65,7 @@ const AddGameModal = ({
         });
       }
     } catch (error) {
-      console.log("Ошибка при обновлении статуса игры: ", error);
+      console.error("Ошибка при обновлении статуса игры: ", error);
     }
 
     updateGameData();

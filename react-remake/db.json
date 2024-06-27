@@ -21,7 +21,7 @@
       "additionalGames": [
         {
           "name": "Penumbra: Overture",
-          "status": "complete",
+          "status": "bad",
           "time": null
         },
         {
@@ -109,6 +109,16 @@
       "id": "0",
       "name": "https://www.google.com/",
       "img": "https://i.pinimg.com/736x/28/bd/a4/28bda407002c7e3568af6d80a0fd88bf.jpg"
+    },
+    {
+      "id": "1",
+      "name": "https://www.google.com/",
+      "img": "https://i.pinimg.com/736x/28/bd/a4/28bda407002c7e3568af6d80a0fd88bf.jpg"
     }
-  ]
+  ],
+  "filters": {
+    "statusComplete": false,
+    "statusBad": false,
+    "statusWait": false
+  }
 }

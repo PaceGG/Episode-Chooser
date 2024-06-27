@@ -9,12 +9,6 @@ const GameShowcase = () => {
     fetchGames(); // Изначальная загрузка данных при монтировании компонента
   }, []);
 
-  useEffect(() => {
-    if (games.length > 0) {
-      console.log(games[0].name);
-    }
-  }, [games]);
-
   const fetchGames = async () => {
     try {
       const response = await axios.get("http://localhost:3000/showcase"); // URL вашего json-server
