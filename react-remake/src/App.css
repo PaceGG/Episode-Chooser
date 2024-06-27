@@ -101,45 +101,7 @@ button {
   /* padding: 0 20px 20px 20px; */
   /* padding-bottom: 15px; */
 }
-.game-artworks {
-  padding: 20px 0;
-  min-width: 300px;
-  display: flex;
-  flex-grow: 1;
-  justify-content: space-evenly;
-  /* flex-wrap: wrap; */
-  border-top: 2px solid #333;
-  border-right: 2px solid #333;
-}
-.artwork {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#first-game img {
-  border-top: var(--aGameColor) 5px solid;
-  border-bottom: var(--aGameColor) 5px solid;
-}
-#first-game .artwork-game-name {
-  color: var(--aGameColor);
-}
-#second-game img {
-  border-top: var(--bGameColor) 5px solid;
-  border-bottom: var(--bGameColor) 5px solid;
-}
-#second-game .artwork-game-name {
-  color: var(--bGameColor);
-}
-.artwork-img {
-  width: 390px;
-}
-.artwork-game-name {
-  font-size: 35px;
-  padding: 10px;
-  max-width: 290px;
-  text-align: center;
-  box-sizing: border-box;
-}
+
 .game-list-content {
   border-top: 2px solid #333;
   display: flex;
@@ -186,7 +148,6 @@ summary {
 
 .complete {
   color: #11c46f;
-  display: none;
 }
 .complete::after {
   content: url("../img/complete.png");
@@ -205,12 +166,10 @@ summary {
 .bad {
   color: #ee204d;
   text-decoration: line-through;
-  display: none;
 }
 
 .wait {
   color: rgb(235, 235, 99);
-  display: none;
 }
 
 .filters {

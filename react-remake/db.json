@@ -88,6 +88,23 @@
           "time": null
         }
       ]
+    },
+    {
+      "id": "b137",
+      "mainName": "Тест стилей 1",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "фыв",
+          "status": "bad",
+          "time": 0
+        },
+        {
+          "name": "фывфыв",
+          "status": "complete",
+          "time": 0
+        }
+      ]
     }
   ],
   "showcase": [
