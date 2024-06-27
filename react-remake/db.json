@@ -108,12 +108,12 @@
     {
       "id": "0",
       "name": "https://www.google.com/",
-      "img": "https://i.pinimg.com/736x/28/bd/a4/28bda407002c7e3568af6d80a0fd88bf.jpg"
+      "img": null
     },
     {
       "id": "1",
       "name": "https://www.google.com/",
-      "img": "https://i.pinimg.com/736x/28/bd/a4/28bda407002c7e3568af6d80a0fd88bf.jpg"
+      "img": null
     }
   ],
   "filters": {

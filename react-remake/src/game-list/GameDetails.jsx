@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./GameDetais.css";
 import SetGameModal from "../set-game-modal/SetGameModal";
@@ -6,7 +6,6 @@ import SetGameModal from "../set-game-modal/SetGameModal";
 const GameDetails = ({
   mainGameName,
   additionalGames,
-  mainStatus,
   gameData,
   updateGameData,
 }) => {

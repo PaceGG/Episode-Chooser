@@ -5,6 +5,7 @@ import GameList from "./game-list/GameList.jsx";
 import GameShowcase from "./game-showcase/GameShowcase.jsx";
 import Links from "./links/Links.jsx";
 import Filter from "./filter/Filter.jsx";
+import "./App.css";
 
 const App = () => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -17,10 +18,21 @@ const App = () => {
   return (
     <div className={style.modalButtonContainer}>
       {isModalVisible && <AddGameModal setModalVisible={setModalVisible} />}
-      {/* <Links /> */}
-      {/* <GameShowcase /> */}
-      <GameList />
-      <Filter />
+      <div className="main-content">
+        <div className="useful-links">
+          <Links />
+        </div>
+        <div className="games-list">
+          <div className="header">Games List</div>
+          <div className="game-content">
+            <GameShowcase />
+            <GameList />
+          </div>
+        </div>
+        <div className="filters">
+          <Filter />
+        </div>
+      </div>
     </div>
   );
 };
