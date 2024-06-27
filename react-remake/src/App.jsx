@@ -29,9 +29,7 @@ const App = () => {
             <GameList />
           </div>
         </div>
-        <div className="filters">
-          <Filter />
-        </div>
+        <Filter />
       </div>
     </div>
   );

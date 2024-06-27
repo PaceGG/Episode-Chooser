@@ -15,19 +15,3 @@
   display: flex;
   gap: 10px;
 }
-
-/* Добавьте стили для классов bad, complete и inProcess */
-.bad {
-  background-color: red;
-  color: white;
-}
-
-.complete {
-  background-color: green;
-  color: white;
-}
-
-.inProcess {
-  background-color: yellow;
-  color: black;
-}

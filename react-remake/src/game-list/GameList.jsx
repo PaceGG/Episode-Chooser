@@ -25,28 +25,33 @@ const GameList = () => {
   };
 
   return (
-    <div>
+    <div className="game-list-content">
+      <div className="statistic">
+        <h2>Статистика</h2>
+      </div>
       <button onClick={() => setModalVisible(true)}>Add Game</button>
-      {games.map((game) => (
-        <GameDetails
-          updateGameData={updateGameData}
-          gameData={game}
-          key={game.id}
-          mainGameName={game.mainName}
-          mainStatus={game.mainStatus}
-          additionalGames={game.additionalGames.map((addGame) => ({
-            name: addGame.name,
-            status: addGame.status,
-            time: addGame.time,
-          }))}
-        />
-      ))}
-      {modalVisible && (
-        <AddGameModal
-          setModalVisible={setModalVisible}
-          updateGameData={updateGameData} // Передача функции обновления данных
-        />
-      )}
+      <ul>
+        {games.map((game) => (
+          <GameDetails
+            updateGameData={updateGameData}
+            gameData={game}
+            key={game.id}
+            mainGameName={game.mainName}
+            mainStatus={game.mainStatus}
+            additionalGames={game.additionalGames.map((addGame) => ({
+              name: addGame.name,
+              status: addGame.status,
+              time: addGame.time,
+            }))}
+          />
+        ))}
+        {modalVisible && (
+          <AddGameModal
+            setModalVisible={setModalVisible}
+            updateGameData={updateGameData} // Передача функции обновления данных
+          />
+        )}
+      </ul>
     </div>
   );
 };

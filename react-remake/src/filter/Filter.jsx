@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "../App.css";
 
 const Filter = () => {
   const [filter, setFilter] = useState({
@@ -41,8 +42,11 @@ const Filter = () => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <label>
+    <div
+      style={{ display: "flex", flexDirection: "column" }}
+      className="filters"
+    >
+      <label className="filter">
         <input
           type="checkbox"
           name="statusFilter"
@@ -50,9 +54,11 @@ const Filter = () => {
           checked={filter.statusComplete}
           onChange={handleFilterChange}
         />
-        Complete
+        <span className="checkmark"></span>
+        <span className="textmark complete-textmark"></span>
+        <span className="complete-checkbox checkbox-text">Complete</span>
       </label>
-      <label>
+      <label className="filter">
         <input
           type="checkbox"
           name="statusFilter"
@@ -60,9 +66,11 @@ const Filter = () => {
           checked={filter.statusBad}
           onChange={handleFilterChange}
         />
-        Bad
+        <span className="checkmark"></span>
+        <span className="textmark complete-textmark"></span>
+        <span className="bad-checkbox checkbox-text">Bad</span>
       </label>
-      <label>
+      <label className="filter">
         <input
           type="checkbox"
           name="statusFilter"
@@ -70,7 +78,9 @@ const Filter = () => {
           checked={filter.statusWait}
           onChange={handleFilterChange}
         />
-        Wait
+        <span className="checkmark"></span>
+        <span className="textmark complete-textmark"></span>
+        <span className="wait-checkbox checkbox-text">Wait</span>
       </label>
     </div>
   );

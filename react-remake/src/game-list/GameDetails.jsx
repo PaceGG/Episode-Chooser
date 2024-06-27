@@ -202,7 +202,7 @@ const GameDetails = ({
   );
 
   return (
-    <div>
+    <>
       {additionalGames.length === 0
         ? renderMainGame()
         : renderAdditionalGames()}
@@ -262,7 +262,7 @@ const GameDetails = ({
           updateGameData={updateGameData}
         />
       )}
-    </div>
+    </>
   );
 };
 
