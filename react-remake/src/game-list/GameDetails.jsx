@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./GameDetais.css";
 import SetGameModal from "../set-game-modal/SetGameModal";
@@ -107,6 +107,9 @@ const GameDetails = ({
       }
     >
       {mainGameName}
+      {gameData.mainTime === 0
+        ? ""
+        : " - (" + convertTime(gameData.mainTime) + ")"}
     </li>
   );
 
@@ -131,13 +134,19 @@ const GameDetails = ({
 
   // const handleInputNameChange = (e) => {};
 
+  useEffect(() => {
+    console.log(gameData.mainName);
+  }, []);
+
   const renderAdditionalGames = () => (
     <details open={isOpen}>
       <summary onContextMenu={(e) => handleRightClickDetails(e, gameData.id)}>
         {mainGameName}
-        {gameData.mainTime === 0
+
+        {additionalGames.map((game) => game.time).reduce((a, b) => a + b, 0) ===
+        0
           ? ""
-          : "- (" +
+          : " - (" +
             convertTime(
               additionalGames
                 .map((game) => game.time)

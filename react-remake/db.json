@@ -3,14 +3,14 @@
     {
       "id": "e1ef",
       "mainName": "SOMA",
-      "mainTime": 10,
+      "mainTime": 15,
       "additionalGames": [],
       "mainStatus": "complete"
     },
     {
       "id": "c453",
       "mainName": "Cuphead",
-      "mainTime": 0,
+      "mainTime": 1,
       "additionalGames": [],
       "mainStatus": "inProcess"
     },
@@ -21,18 +21,18 @@
       "additionalGames": [
         {
           "name": "Penumbra: Overture",
-          "status": "none",
-          "time": 0
+          "status": "complete",
+          "time": null
         },
         {
           "name": "Penumbra: Black Plague",
-          "status": "none",
+          "status": "complete",
           "time": 0
         },
         {
           "name": "Penumbra: Requiem",
-          "status": "none",
-          "time": 0
+          "status": "complete",
+          "time": null
         }
       ]
     },
@@ -44,7 +44,7 @@
         {
           "name": "Amnesia: The Dark Descent",
           "status": "none",
-          "time": 0
+          "time": 123
         },
         {
           "name": "Amnesia: A Machine for Pigs",
@@ -63,7 +63,7 @@
     {
       "id": "9c71",
       "mainName": "Inscryption",
-      "mainTime": 123,
+      "mainTime": 0,
       "additionalGames": [],
       "mainStatus": "complete"
     }
