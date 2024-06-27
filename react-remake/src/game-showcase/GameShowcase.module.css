@@ -1,0 +1,29 @@
+.game__showcase {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.game__card {
+  border: 2px solid;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.coverart {
+  width: 100%;
+  height: auto;
+  border-top: 10px solid; /* Верхняя граница */
+  border-bottom: 10px solid; /* Нижняя граница */
+}
+
+.game__name {
+  padding: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+}

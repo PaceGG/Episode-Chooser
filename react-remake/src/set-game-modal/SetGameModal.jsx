@@ -16,7 +16,6 @@ const AddGameModal = ({
   useEffect(() => {
     setInput(selectedGameNames);
     setMainGameName(mainGameNameToi);
-    console.log(selectedGameNames);
   }, []);
 
   const handleMainGameNameChange = (e) => {
@@ -48,8 +47,6 @@ const AddGameModal = ({
 
       const game = response.data;
 
-      console.log(inputs);
-
       await axios.put(`http://localhost:3000/games/${selectedGameID}`, {
         ...game,
         mainName: mainGameName,
@@ -60,8 +57,6 @@ const AddGameModal = ({
         status: input.status,
         time: parseInt(input.time),
       }));
-
-      console.log(updateAdditionalGames);
 
       if (updateAdditionalGames.length !== 0) {
         await axios.put(`http://localhost:3000/games/${selectedGameID}`, {

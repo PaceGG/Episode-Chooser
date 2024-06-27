@@ -66,6 +66,49 @@
       "mainTime": 0,
       "additionalGames": [],
       "mainStatus": "complete"
+    },
+    {
+      "id": "3cf5",
+      "mainName": "test",
+      "mainTime": 0,
+      "additionalGames": []
+    },
+    {
+      "id": "5c0a",
+      "mainName": "test 2",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "test 3",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "123",
+          "time": null
+        }
+      ]
+    }
+  ],
+  "showcase": [
+    {
+      "id": "0",
+      "name": "MAFIA",
+      "coverart": "https://i.pinimg.com/736x/28/bd/a4/28bda407002c7e3568af6d80a0fd88bf.jpg",
+      "color": "red"
+    },
+    {
+      "id": "1",
+      "name": "GTA",
+      "coverart": "https://man-made.ru/upload/resize_cache/webp/iblock/497/gta5-b.webp",
+      "color": "lime"
+    }
+  ],
+  "links": [
+    {
+      "id": "0",
+      "name": "https://www.google.com/",
+      "img": "https://i.pinimg.com/736x/28/bd/a4/28bda407002c7e3568af6d80a0fd88bf.jpg"
     }
   ]
 }

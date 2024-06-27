@@ -132,12 +132,6 @@ const GameDetails = ({
     setSelectedGameID(gameID);
   };
 
-  // const handleInputNameChange = (e) => {};
-
-  useEffect(() => {
-    console.log(gameData.mainName);
-  }, []);
-
   const renderAdditionalGames = () => (
     <details open={isOpen}>
       <summary onContextMenu={(e) => handleRightClickDetails(e, gameData.id)}>
