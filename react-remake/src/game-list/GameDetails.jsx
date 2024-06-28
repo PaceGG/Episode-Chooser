@@ -290,6 +290,15 @@ const GameDetails = ({
 
   const renderAdditionalGames = () => (
     <details
+      style={
+        (selectStatus(gameData.additionalGames) === "bad" &&
+          filter.statusBad) ||
+        (selectStatus(gameData.additionalGames) === "complete" &&
+          filter.statusComplete) ||
+        (selectStatus(gameData.additionalGames) === "wait" && filter.statusWait)
+          ? { display: "none" }
+          : null
+      }
       open={isOpen || selectStatus(gameData.additionalGames) === "inProcess"}
     >
       <summary
