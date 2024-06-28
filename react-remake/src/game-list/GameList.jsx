@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import GameDetails from "./GameDetails"; // Путь к вашему компоненту GameDetails
 import AddGameModal from "../addGameModal"; // Путь к вашему компоненту AddGameModal
+import style from "./GameList.module.css";
 
 const GameList = () => {
   const [games, setGames] = useState([]);
@@ -29,7 +30,12 @@ const GameList = () => {
       <div className="statistic">
         <h2>Статистика</h2>
       </div>
-      <button onClick={() => setModalVisible(true)}>Add Game</button>
+      <button
+        onClick={() => setModalVisible(true)}
+        className={style.add__game__button}
+      >
+        Add Game
+      </button>
       <ul>
         {games.map((game) => (
           <GameDetails

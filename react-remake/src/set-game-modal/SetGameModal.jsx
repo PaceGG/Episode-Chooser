@@ -93,6 +93,7 @@ const AddGameModal = ({
         id="mainGameName"
         placeholder="Main game name"
         value={mainGameName}
+        className={style.mainGameName}
         onChange={handleMainGameNameChange}
       />
       <div className={style.moreGames}>
@@ -105,14 +106,31 @@ const AddGameModal = ({
               value={input.value}
               onChange={(e) => handleInputChange(input.id, e.target.value)}
             />
-            <button onClick={() => removeInput(input.id)}>X</button>
+            <button
+              onClick={() => removeInput(input.id)}
+              className={style.removeInput__button}
+            >
+              X
+            </button>
           </div>
         ))}
       </div>
-      <button onClick={addInput}>+ add more game</button>
+      <button onClick={addInput} className={style.addInput__button}>
+        + add more game
+      </button>
       <div className={style.modalButtons}>
-        <button onClick={handleConfirm}>Confirm</button>
-        <button onClick={cancelConirm}>Cancel</button>
+        <button
+          onClick={handleConfirm}
+          className={style.addInput__button + " " + style.confirmButton}
+        >
+          Confirm
+        </button>
+        <button
+          onClick={cancelConirm}
+          className={style.addInput__button + " " + style.cancelButton}
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );

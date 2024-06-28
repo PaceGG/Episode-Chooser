@@ -1,107 +1,36 @@
 {
   "games": [
     {
-      "id": "e1ef",
+      "id": "36ca",
       "mainName": "SOMA",
-      "mainTime": 15,
+      "mainTime": 0,
       "additionalGames": [],
       "mainStatus": "complete"
     },
     {
-      "id": "c453",
+      "id": "4cb8",
       "mainName": "Cuphead",
-      "mainTime": 1,
-      "additionalGames": [],
-      "mainStatus": "inProcess"
+      "mainTime": 0,
+      "additionalGames": []
     },
     {
-      "id": "456f",
+      "id": "ac9c",
       "mainName": "Penumbra",
       "mainTime": 0,
       "additionalGames": [
         {
           "name": "Penumbra: Overture",
-          "status": "bad",
-          "time": null
+          "status": "none",
+          "time": 0
         },
         {
           "name": "Penumbra: Black Plague",
-          "status": "complete",
+          "status": "none",
           "time": 0
         },
         {
           "name": "Penumbra: Requiem",
-          "status": "complete",
-          "time": null
-        }
-      ]
-    },
-    {
-      "id": "1811",
-      "mainName": "Amnesia",
-      "mainTime": 0,
-      "additionalGames": [
-        {
-          "name": "Amnesia: The Dark Descent",
           "status": "none",
-          "time": 123
-        },
-        {
-          "name": "Amnesia: A Machine for Pigs",
-          "time": null
-        },
-        {
-          "name": "Amnesia: Rebirth",
-          "time": null
-        },
-        {
-          "name": "Amnesia: The Bunker",
-          "time": null
-        }
-      ]
-    },
-    {
-      "id": "9c71",
-      "mainName": "Inscryption",
-      "mainTime": 0,
-      "additionalGames": [],
-      "mainStatus": "complete"
-    },
-    {
-      "id": "3cf5",
-      "mainName": "test",
-      "mainTime": 0,
-      "additionalGames": []
-    },
-    {
-      "id": "5c0a",
-      "mainName": "test 2",
-      "mainTime": 0,
-      "additionalGames": [
-        {
-          "name": "test 3",
-          "status": "none",
-          "time": 0
-        },
-        {
-          "name": "123",
-          "time": null
-        }
-      ]
-    },
-    {
-      "id": "b137",
-      "mainName": "Тест стилей 1",
-      "mainTime": 0,
-      "additionalGames": [
-        {
-          "name": "фыв",
-          "status": "bad",
-          "time": 0
-        },
-        {
-          "name": "фывфыв",
-          "status": "complete",
           "time": 0
         }
       ]

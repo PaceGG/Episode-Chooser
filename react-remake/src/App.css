@@ -37,6 +37,7 @@ button {
   border: none;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .main-content {
@@ -107,6 +108,7 @@ button {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  position: relative;
 }
 .statistic {
   display: flex;
@@ -237,14 +239,14 @@ summary {
   width: 22px;
   height: 22px;
   /* background-image: url("../img/hidden.png"); */
-  content: url("../img/hidden.png");
+  content: url("../img/visible.png");
   background-color: #333;
   border: 3px solid #333;
   border-radius: 50%;
 }
 .filter input:checked + .checkmark {
   /* background-image: url("../img/visible.png"); */
-  content: url("../img/visible.png");
+  content: url("../img/hidden.png");
 }
 
 .menu-activate {

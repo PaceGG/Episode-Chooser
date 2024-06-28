@@ -208,19 +208,15 @@ const GameDetails = ({
         : renderAdditionalGames()}
       {modalVisible && (
         <div className="modal">
-          <h2>{selectedGameName}</h2>
+          {/* <h2>{selectedGameName}</h2> */}
           <div className="modal-content selectStatus">
-            <label>
-              <input
-                type="radio"
-                name="status"
-                value="bad"
-                checked={selectedStatus === "bad"}
-                onChange={handleRadioChange}
-              />
-              Крестик
-            </label>
-            <label>
+            <label
+              className={
+                selectedStatus === "complete"
+                  ? "completeActive"
+                  : "completeCheckmark"
+              }
+            >
               <input
                 type="radio"
                 name="status"
@@ -228,9 +224,33 @@ const GameDetails = ({
                 checked={selectedStatus === "complete"}
                 onChange={handleRadioChange}
               />
-              Галочка
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+              </svg>
             </label>
-            <label>
+            <label
+              className={
+                selectedStatus === "bad" ? "badActive" : "badCheckmark"
+              }
+            >
+              <input
+                type="radio"
+                name="status"
+                value="bad"
+                checked={selectedStatus === "bad"}
+                onChange={handleRadioChange}
+              />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+              </svg>
+            </label>
+            <label
+              className={
+                selectedStatus === "inProcess"
+                  ? "inProcessActive"
+                  : "inProcessCheckmark"
+              }
+            >
               <input
                 type="radio"
                 name="status"
@@ -238,18 +258,33 @@ const GameDetails = ({
                 checked={selectedStatus === "inProcess"}
                 onChange={handleRadioChange}
               />
-              Кружок
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <path d="M192 64C86 64 0 150 0 256S86 448 192 448H448c106 0 192-86 192-192s-86-192-192-192H192zM496 168a40 40 0 1 1 0 80 40 40 0 1 1 0-80zM392 304a40 40 0 1 1 80 0 40 40 0 1 1 -80 0zM168 200c0-13.3 10.7-24 24-24s24 10.7 24 24v32h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H216v32c0 13.3-10.7 24-24 24s-24-10.7-24-24V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h32V200z" />
+              </svg>
             </label>
-            <button onClick={handleSaveChanges}>Сохранить</button>
-            <button onClick={cancelChanges}>Отмена</button>
           </div>
           <div className="modal-content selectTime">
+            Время:
             <input
               type="text"
               name="time"
               value={selectedTime}
               onChange={handleInputChange}
             />
+          </div>
+          <div className="modal-buttons">
+            <button
+              onClick={handleSaveChanges}
+              className="modalButton confirmButton"
+            >
+              Сохранить
+            </button>
+            <button
+              onClick={cancelChanges}
+              className="modalButton cancelButton"
+            >
+              Отмена
+            </button>
           </div>
         </div>
       )}
