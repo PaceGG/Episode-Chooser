@@ -837,18 +837,38 @@
   "links": [
     {
       "id": "0",
-      "name": "https://www.google.com/",
-      "img": null
+      "name": "https://www.youtube.com/@pacelite",
+      "img": "https://yt3.googleusercontent.com/ytc/AIdro_knY8eHlnphUOTtDGL_Kf3RV_EG-gY1xeN7Hv-skQ=s176-c-k-c0x00ffffff-no-rj"
     },
     {
       "id": "1",
-      "name": "https://www.google.com/",
-      "img": null
+      "name": "https://studio.youtube.com/channel/UC2Y71nJHtoLzY88Wrrqm7Kw/content/playlists",
+      "img": "react-remake/public/studio.webp"
+    },
+    {
+      "id": "2",
+      "name": "https://ytplaylist-len.sharats.dev/",
+      "img": "https://ytplaylist-len.sharats.dev/static/favicon.png"
+    },
+    {
+      "id": "3",
+      "name": "https://thelastgame.ru/",
+      "img": "https://thelastgame.ru/wp-content/uploads/2017/07/cropped-gamecontroller-512-300x300.png"
+    },
+    {
+      "id": "4",
+      "name": "https://itorrents-igruha.org/",
+      "img": "https://itorrents-igruha.org/favicon.ico"
+    },
+    {
+      "id": "5",
+      "name": "https://www.steamgriddb.com/",
+      "img": "https://www.steamgriddb.com/static/favicon/16.png"
     }
   ],
   "filters": {
-    "statusComplete": false,
-    "statusBad": false,
-    "statusWait": false
+    "statusComplete": true,
+    "statusBad": true,
+    "statusWait": true
   }
 }

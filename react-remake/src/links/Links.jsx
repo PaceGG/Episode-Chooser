@@ -20,9 +20,11 @@ const Links = () => {
   return (
     <div className="links">
       {links.map((link) => (
-        <a key={link.id} href={link.name} target="_blank">
-          <img src={link.img} alt="" />
-        </a>
+        <div key={link.id} className="link">
+          <a key={link.id} href={link.name} target="_blank">
+            <img src={link.img} alt="" className="link-img" />
+          </a>
+        </div>
       ))}
     </div>
   );
