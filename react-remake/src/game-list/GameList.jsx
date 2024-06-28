@@ -52,35 +52,37 @@ const GameList = () => {
           Игр пройдено:{" "}
           <span style={{ color: "white" }}>{countCompleteGames(games)}</span>
         </h2>
+        <button
+          onClick={() => setModalVisible(true)}
+          className={style.add__game__button}
+        >
+          Add Game
+        </button>
       </div>
-      <button
-        onClick={() => setModalVisible(true)}
-        className={style.add__game__button}
-      >
-        Add Game
-      </button>
-      <ul>
-        {games.map((game) => (
-          <GameDetails
-            updateGameData={updateGameData}
-            gameData={game}
-            key={game.id}
-            mainGameName={game.mainName}
-            mainStatus={game.mainStatus}
-            additionalGames={game.additionalGames.map((addGame) => ({
-              name: addGame.name,
-              status: addGame.status,
-              time: addGame.time,
-            }))}
-          />
-        ))}
-        {modalVisible && (
-          <AddGameModal
-            setModalVisible={setModalVisible}
-            updateGameData={updateGameData} // Передача функции обновления данных
-          />
-        )}
-      </ul>
+      <div className="game-list">
+        <ul>
+          {games.map((game) => (
+            <GameDetails
+              updateGameData={updateGameData}
+              gameData={game}
+              key={game.id}
+              mainGameName={game.mainName}
+              mainStatus={game.mainStatus}
+              additionalGames={game.additionalGames.map((addGame) => ({
+                name: addGame.name,
+                status: addGame.status,
+                time: addGame.time,
+              }))}
+            />
+          ))}
+          {modalVisible && (
+            <AddGameModal
+              setModalVisible={setModalVisible}
+              updateGameData={updateGameData} // Передача функции обновления данных
+            />
+          )}
+        </ul>
+      </div>
     </div>
   );
 };

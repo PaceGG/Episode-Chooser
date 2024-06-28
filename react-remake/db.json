@@ -1,83 +1,836 @@
 {
   "games": [
     {
-      "id": "36ca",
+      "id": "1bbf",
       "mainName": "SOMA",
-      "mainTime": 17600,
+      "mainTime": 22471,
       "additionalGames": [],
       "mainStatus": "complete"
     },
     {
-      "id": "4cb8",
+      "id": "2772",
       "mainName": "Cuphead",
       "mainTime": 0,
-      "additionalGames": [],
-      "mainStatus": "complete"
+      "additionalGames": []
     },
     {
-      "id": "ac9c",
+      "id": "32e2",
       "mainName": "Penumbra",
       "mainTime": 0,
       "additionalGames": [
         {
           "name": "Penumbra: Overture",
-          "status": "complete",
+          "status": "none",
           "time": 0
         },
         {
           "name": "Penumbra: Black Plague",
-          "status": "complete",
+          "status": "none",
           "time": 0
         },
         {
           "name": "Penumbra: Requiem",
-          "status": "complete",
-          "time": 0
-        }
-      ]
-    },
-    {
-      "id": "7fe3",
-      "mainName": "Test",
-      "mainTime": 0,
-      "additionalGames": [
-        {
-          "name": "TEst 12",
-          "status": "inProcess",
-          "time": 0
-        },
-        {
-          "name": "TEst 3",
           "status": "none",
           "time": 0
         }
       ]
     },
     {
-      "id": "0aa3",
-      "mainName": "Test 435",
+      "id": "ac30",
+      "mainName": "Amnesia",
       "mainTime": 0,
       "additionalGames": [
         {
-          "name": "123",
-          "status": "inProcess",
+          "name": "Amnesia: The Dark Descent",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Amnesia: A Machine for Pigs",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Amnesia: Rebirth",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Amnesia: The Bunker",
+          "status": "none",
           "time": 0
         }
       ]
+    },
+    {
+      "id": "215f",
+      "mainName": "Inscryption",
+      "mainTime": 121255,
+      "additionalGames": [],
+      "mainStatus": "complete"
+    },
+    {
+      "id": "e299",
+      "mainName": "Starfield",
+      "mainTime": 0,
+      "additionalGames": [],
+      "mainStatus": "bad"
+    },
+    {
+      "id": "76af",
+      "mainName": "Red Dead Redemption 2",
+      "mainTime": 149643,
+      "additionalGames": [],
+      "mainStatus": "complete"
+    },
+    {
+      "id": "7e51",
+      "mainName": "GTA Anderius: Alien City",
+      "mainTime": 44265,
+      "additionalGames": [],
+      "mainStatus": "complete"
+    },
+    {
+      "id": "0306",
+      "mainName": "Metro",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Metro 2033 Redux",
+          "status": "complete",
+          "time": 28627
+        },
+        {
+          "name": "Metro: Last Light Redux",
+          "status": "complete",
+          "time": 33651
+        },
+        {
+          "name": "Metro Exodus",
+          "status": "complete",
+          "time": 75030
+        }
+      ]
+    },
+    {
+      "id": "bd48",
+      "mainName": "Dying Light",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Dying Light",
+          "status": "complete",
+          "time": 81356
+        },
+        {
+          "name": "Dying Light 2: Stay Human",
+          "status": "bad",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "7702",
+      "mainName": "Stray",
+      "mainTime": 18067,
+      "additionalGames": [],
+      "mainStatus": "complete"
+    },
+    {
+      "id": "f78a",
+      "mainName": "Mafia",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Mafia: Definitive Edition",
+          "status": "complete",
+          "time": 63323
+        },
+        {
+          "name": "Mafia II: Definitive Edition",
+          "status": "complete",
+          "time": 86187
+        },
+        {
+          "name": "Mafia III: Definitive Edition",
+          "status": "complete",
+          "time": 128127
+        }
+      ]
+    },
+    {
+      "id": "e75b",
+      "mainName": "Minecraft",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Minecraft: Восхождение",
+          "status": "bad",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "905d",
+      "mainName": "Tomb Raider",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Tomb Raider",
+          "status": "complete",
+          "time": 33918
+        },
+        {
+          "name": "Rise of the Tomb Raider",
+          "status": "complete",
+          "time": 52616
+        },
+        {
+          "name": "Shadow of the Tomb Raider",
+          "status": "complete",
+          "time": 78692
+        }
+      ]
+    },
+    {
+      "id": "e43f",
+      "mainName": "As Dusk Falls",
+      "mainTime": 19398,
+      "additionalGames": [],
+      "mainStatus": "complete"
+    },
+    {
+      "id": "ffaa",
+      "mainName": "Grand Theft Auto",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Grand Theft Auto III - The Definitive Edition",
+          "status": "complete",
+          "time": 30380
+        },
+        {
+          "name": "Grand Theft Auto: Vice City - The Definitive Edition",
+          "status": "complete",
+          "time": 65468
+        },
+        {
+          "name": "Grand Theft Auto: San Andreas",
+          "status": "complete",
+          "time": 76381
+        },
+        {
+          "name": "Grand Theft Auto IV",
+          "status": "complete",
+          "time": 71732
+        },
+        {
+          "name": "Grand Theft Auto IV: The Lost and Damned",
+          "status": "complete",
+          "time": 27839
+        },
+        {
+          "name": "Grand Theft Auto: The Ballad of Gay Tony",
+          "status": "complete",
+          "time": 26023
+        },
+        {
+          "name": "Grand Theft Auto V",
+          "status": "complete",
+          "time": 127525
+        },
+        {
+          "name": "Grand Theft Auto Online",
+          "status": "complete",
+          "time": 323047
+        }
+      ]
+    },
+    {
+      "id": "769d",
+      "mainName": "S.T.A.L.K.E.R.",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "S.T.A.L.K.E.R.: Lost Alpha DC Extended",
+          "status": "bad",
+          "time": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R. Lost Alpha Enhanced Edition",
+          "status": "bad",
+          "time": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: Lost Alpha DC",
+          "status": "inProcess",
+          "time": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: The Eternial Suffering",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: Call of Pripyat Gunslinger",
+          "status": "none",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "22a1",
+      "mainName": "The Elder Scrolls",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "The Elder Scrolls IV: Oblivion",
+          "status": "bad",
+          "time": 0
+        },
+        {
+          "name": "The Elder Scrolls V: Skyrim Anniversary Edition",
+          "status": "complete",
+          "time": 212071
+        },
+        {
+          "name": "The Elder Scrolls Online",
+          "status": "bad",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "eb1c",
+      "mainName": "Half-Life",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Black Mesa",
+          "status": "complete",
+          "time": 47680
+        },
+        {
+          "name": "Half-Life 2",
+          "status": "complete",
+          "time": 31478
+        },
+        {
+          "name": "Half-Life 2: Episode One",
+          "status": "complete",
+          "time": 9551
+        },
+        {
+          "name": "Half-Life 2: Episode Two",
+          "status": "complete",
+          "time": 13889
+        }
+      ]
+    },
+    {
+      "id": "5438",
+      "mainName": "Detroit: Become Human",
+      "mainTime": 39524,
+      "additionalGames": [],
+      "mainStatus": "complete"
+    },
+    {
+      "id": "a0eb",
+      "mainName": "Cyberpunk 2077",
+      "mainTime": 0,
+      "additionalGames": [],
+      "mainStatus": "bad"
+    },
+    {
+      "id": "eac3",
+      "mainName": "Watch Dogs",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Watch Dogs",
+          "status": "complete",
+          "time": 47278
+        },
+        {
+          "name": "Watch Dogs 2",
+          "status": "complete",
+          "time": 77952
+        },
+        {
+          "name": "Watch Dogs: Legion",
+          "status": "bad",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "3b8e",
+      "mainName": "DOOM",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "DOOM (2016)",
+          "status": "complete",
+          "time": 35485
+        },
+        {
+          "name": "DOOM Eternal",
+          "status": "bad",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "1c01",
+      "mainName": "Crysis",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Crysis Remastered",
+          "status": "complete",
+          "time": 20020
+        },
+        {
+          "name": "Crysis 2 Remastered",
+          "status": "complete",
+          "time": 26732
+        },
+        {
+          "name": "Crysis 3 Remastered",
+          "status": "bad",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "9565",
+      "mainName": "RAGE",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "RAGE",
+          "status": "complete",
+          "time": 45341
+        },
+        {
+          "name": "RAGE 2",
+          "status": "complete",
+          "time": 54186
+        }
+      ]
+    },
+    {
+      "id": "459b",
+      "mainName": "Life is Strange",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Life is Strange",
+          "status": "complete",
+          "time": 42612
+        },
+        {
+          "name": "Life Is Strange: Before The Storm",
+          "status": "complete",
+          "time": 29003
+        },
+        {
+          "name": "Life Is Strange 2",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Life Is Strange: True Colors",
+          "status": "none",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "73bd",
+      "mainName": "Protorype",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Protorype",
+          "status": "complete",
+          "time": 47518
+        },
+        {
+          "name": "Protorype 2",
+          "status": "complete",
+          "time": 49150
+        }
+      ]
+    },
+    {
+      "id": "bb70",
+      "mainName": "Dead Space",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Dead Space (2023)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Dead Space 2",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Dead Space 3",
+          "status": "none",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "984f",
+      "mainName": "Atomic Heart",
+      "mainTime": 0,
+      "additionalGames": []
+    },
+    {
+      "id": "e221",
+      "mainName": "Beyond: Two Souls",
+      "mainTime": 31524,
+      "additionalGames": [],
+      "mainStatus": "complete"
+    },
+    {
+      "id": "6f85",
+      "mainName": "Portal ",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Portal",
+          "status": "complete",
+          "time": 11168
+        },
+        {
+          "name": "Portal 2",
+          "status": "complete",
+          "time": 17812
+        }
+      ]
+    },
+    {
+      "id": "2cb8",
+      "mainName": "Death Stranding",
+      "mainTime": 0,
+      "additionalGames": [],
+      "mainStatus": "bad"
+    },
+    {
+      "id": "be39",
+      "mainName": "Fallout",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Fallout 4: Vault 13 (Fallout 1 Remake)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Fallout 4: Project Arroyo (Fallout 2 Remake)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Fallout 3",
+          "status": "complete",
+          "time": 162565
+        },
+        {
+          "name": "Fallout 3: New York",
+          "status": "bad",
+          "time": 0
+        },
+        {
+          "name": "Fallout 4: New Vegas (Fallout: New Vegas Remake)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Fallout 4",
+          "status": "complete",
+          "time": 176296
+        },
+        {
+          "name": "Fallout London",
+          "status": "none",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "2f7b",
+      "mainName": "Saints Row",
+      "mainTime": 148029,
+      "additionalGames": [],
+      "mainStatus": "complete"
+    },
+    {
+      "id": "880c",
+      "mainName": "The Witcher",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "The Witcher Remake",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "The Witcher 2: Assassins of Kings",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "The Witcher 3: Wild Hunt",
+          "status": "none",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "ce11",
+      "mainName": "Resident Evil",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Resident Evil 2",
+          "status": "complete",
+          "time": 48351
+        },
+        {
+          "name": "Resident Evil 3",
+          "status": "complete",
+          "time": 19354
+        },
+        {
+          "name": "Resident Evil 4",
+          "status": "complete",
+          "time": 54951
+        },
+        {
+          "name": "Resident Evil 5",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Resident Evil 6",
+          "status": "complete",
+          "time": 77505
+        },
+        {
+          "name": "Resident Evil 7",
+          "status": "complete",
+          "time": 66966
+        },
+        {
+          "name": "Resident Evil Village",
+          "status": "complete",
+          "time": 48800
+        }
+      ]
+    },
+    {
+      "id": "2ad7",
+      "mainName": "Teardown",
+      "mainTime": 70327,
+      "additionalGames": [],
+      "mainStatus": "complete"
+    },
+    {
+      "id": "1aa6",
+      "mainName": "Far Cry",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Far Cry",
+          "status": "bad",
+          "time": 0
+        },
+        {
+          "name": "Far Cry 2",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Far Cry 3",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Far Cry 3: Blood Dragon",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Far Cry 4",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Far Cry Primal",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Far Cry 5",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Far Cry New Dawn",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Far Cry 6",
+          "status": "none",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "7700",
+      "mainName": "Call of Duty",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Call of Duty (2003)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: United Offensive (2004)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty 2 (2005)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Modern Warfare Remastered (2007 / 2016)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: World at War (2008)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Modern Warfare 2 Remastered (2009 / 2020)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Black Ops (2010)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Modern Warfare 3 (2011)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Black Ops 2 (2012)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Ghosts (2013)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Advanced Warfare (2014)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Black Ops 3 (2015)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Infinite Warfare (2016)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: WWII (2017)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Modern Warfare (2019)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Black Ops – Cold War (2020)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Vanguard (2021)",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Call of Duty: Modern Warfare II (2022)",
+          "status": "none",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "69dd",
+      "mainName": "Sleeping Dogs",
+      "mainTime": 0,
+      "additionalGames": []
+    },
+    {
+      "id": "2660",
+      "mainName": "Heavy Rain",
+      "mainTime": 0,
+      "additionalGames": [],
+      "mainStatus": "bad"
+    },
+    {
+      "id": "87ff",
+      "mainName": "Outer Wilds",
+      "mainTime": 0,
+      "additionalGames": [],
+      "mainStatus": "inProcess"
+    },
+    {
+      "id": "3a1f",
+      "mainName": "Bully: Scholarship Edition",
+      "mainTime": 60206,
+      "additionalGames": [],
+      "mainStatus": "complete"
     }
   ],
   "showcase": [
     {
       "id": "0",
-      "name": "MAFIA",
-      "coverart": "https://i.pinimg.com/736x/28/bd/a4/28bda407002c7e3568af6d80a0fd88bf.jpg",
-      "color": "red"
+      "name": "Outer Wilds",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/753640/library_600x900_2x.jpg?t=1660850427",
+      "color": "#ff7d25"
     },
     {
       "id": "1",
-      "name": "GTA",
-      "coverart": "https://man-made.ru/upload/resize_cache/webp/iblock/497/gta5-b.webp",
-      "color": "lime"
+      "name": "S.T.A.L.K.E.R. Lost Alpha DC",
+      "coverart": "https://cdn2.steamgriddb.com/thumb/5ab25c37f2e9a302bba1618afe98d660.jpg",
+      "color": "#ebd219"
     }
   ],
   "links": [

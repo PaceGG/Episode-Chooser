@@ -26,7 +26,15 @@ const GameShowcase = () => {
           className={style.game__card}
           style={{ borderColor: game.color }}
         >
-          <img src={game.coverart} alt={game.name} className={style.coverart} />
+          <img
+            src={game.coverart}
+            alt={game.name}
+            className={style.coverart}
+            style={{
+              borderTop: `5px solid ${game.color}`,
+              borderBottom: `5px solid ${game.color}`,
+            }}
+          />
           <h2 className={style.game__name} style={{ color: game.color }}>
             {game.name}
           </h2>

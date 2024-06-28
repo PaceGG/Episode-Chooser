@@ -64,13 +64,13 @@ const GameDetails = ({
   function convertTimeString(inputString) {
     // Проверяем, что inputString не является undefined или null
     if (!inputString || typeof inputString !== "string") {
-      return ""; // Возвращаем пустую строку или другое значение по умолчанию
+      return 0; // Возвращаем пустую строку или другое значение по умолчанию
     }
 
     // Извлекаем часть строки, содержащую время
     const timePartIndex = inputString.indexOf(":");
     if (timePartIndex === -1) {
-      return ""; // Возвращаем пустую строку или другое значение по умолчанию
+      return 0; // Возвращаем пустую строку или другое значение по умолчанию
     }
 
     const timePart = inputString.substring(timePartIndex + 1).trim();
@@ -114,16 +114,29 @@ const GameDetails = ({
   function convertTimeStringToSeconds(inputString) {
     // Проверяем, что inputString не является undefined или null
     if (!inputString || typeof inputString !== "string") {
-      return 0; // Возвращаем 0 или другое значение по умолчанию
+      return inputString;
     }
 
     // Извлекаем часть строки, содержащую время
     const timePartIndex = inputString.indexOf(":");
     if (timePartIndex === -1) {
-      return 0; // Возвращаем 0 или другое значение по умолчанию
+      return inputString;
     }
 
     const timePart = inputString.substring(timePartIndex + 1).trim();
+    const timeParts = inputString.split(":");
+
+    if (timeParts.length === 3) {
+      const hours = parseInt(timeParts[0], 10);
+      const minutes = parseInt(timeParts[1], 10);
+      const seconds = parseInt(timeParts[2], 10);
+
+      if (isNaN(hours) || isNaN(minutes) || isNaN(seconds)) {
+        return inputString;
+      }
+      let totalSeconds = hours * 3600 + minutes * 60 + seconds;
+      return totalSeconds;
+    }
 
     // Разбиваем время на компоненты (дни, часы, минуты, секунды)
     const components = timePart.split(",");
@@ -257,15 +270,20 @@ const GameDetails = ({
   };
 
   const selectStatus = (game) => {
-    let toReturn = "complete";
+    let toReturn = "";
+    let counter = { none: 0, inProcess: 0, complete: 0, bad: 0 };
 
     game.forEach((game) => {
-      if (game.status === "none") toReturn = "none";
+      if (game.status === "none") counter.none++;
+      if (game.status === "inProcess") counter.inProcess++;
+      if (game.status === "complete") counter.complete++;
+      if (game.status === "bad") counter.bad++;
     });
 
-    game.forEach((game) => {
-      if (game.status === "inProcess") toReturn = "inProcess";
-    });
+    if (counter.none === 0 && counter.complete > 0) toReturn = "complete";
+    if (counter.none === 0 && counter.complete === 0 && counter.bad > 0)
+      toReturn = "bad";
+    if (counter.inProcess > 0) toReturn = "inProcess";
 
     return toReturn;
   };
