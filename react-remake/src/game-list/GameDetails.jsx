@@ -58,7 +58,101 @@ const GameDetails = ({
 
   const handleRadioChange = (e) => {
     setSelectedStatus(e.target.value);
+    console.log(convertTimeString(selectedTime));
   };
+
+  function convertTimeString(inputString) {
+    // Проверяем, что inputString не является undefined или null
+    if (!inputString || typeof inputString !== "string") {
+      return ""; // Возвращаем пустую строку или другое значение по умолчанию
+    }
+
+    // Извлекаем часть строки, содержащую время
+    const timePartIndex = inputString.indexOf(":");
+    if (timePartIndex === -1) {
+      return ""; // Возвращаем пустую строку или другое значение по умолчанию
+    }
+
+    const timePart = inputString.substring(timePartIndex + 1).trim();
+
+    // Разбиваем время на компоненты (дни, часы, минуты, секунды)
+    const components = timePart.split(",");
+
+    // Инициализируем переменные для компонентов времени
+    let days = 0,
+      hours = 0,
+      minutes = 0,
+      seconds = 0;
+
+    // Обрабатываем каждый компонент времени
+    for (let component of components) {
+      const trimmedComponent = component.trim();
+      if (trimmedComponent.includes("day")) {
+        days = parseInt(trimmedComponent.split(" ")[0]);
+      } else if (trimmedComponent.includes("hour")) {
+        hours = parseInt(trimmedComponent.split(" ")[0]);
+      } else if (trimmedComponent.includes("minute")) {
+        minutes = parseInt(trimmedComponent.split(" ")[0]);
+      } else if (trimmedComponent.includes("second")) {
+        seconds = parseInt(trimmedComponent.split(" ")[0]);
+      }
+    }
+
+    // Преобразуем дни в часы
+    hours += days * 24;
+
+    // Форматируем результат в формат HH:mm:ss
+    const formattedTime = [
+      hours.toString().padStart(2, "0"),
+      minutes.toString().padStart(2, "0"),
+      seconds.toString().padStart(2, "0"),
+    ].join(":");
+
+    return formattedTime;
+  }
+
+  function convertTimeStringToSeconds(inputString) {
+    // Проверяем, что inputString не является undefined или null
+    if (!inputString || typeof inputString !== "string") {
+      return 0; // Возвращаем 0 или другое значение по умолчанию
+    }
+
+    // Извлекаем часть строки, содержащую время
+    const timePartIndex = inputString.indexOf(":");
+    if (timePartIndex === -1) {
+      return 0; // Возвращаем 0 или другое значение по умолчанию
+    }
+
+    const timePart = inputString.substring(timePartIndex + 1).trim();
+
+    // Разбиваем время на компоненты (дни, часы, минуты, секунды)
+    const components = timePart.split(",");
+
+    // Инициализируем переменные для компонентов времени
+    let days = 0,
+      hours = 0,
+      minutes = 0,
+      seconds = 0;
+
+    // Обрабатываем каждый компонент времени
+    for (let component of components) {
+      const trimmedComponent = component.trim();
+      if (trimmedComponent.includes("day")) {
+        days = parseInt(trimmedComponent.split(" ")[0]);
+      } else if (trimmedComponent.includes("hour")) {
+        hours = parseInt(trimmedComponent.split(" ")[0]);
+      } else if (trimmedComponent.includes("minute")) {
+        minutes = parseInt(trimmedComponent.split(" ")[0]);
+      } else if (trimmedComponent.includes("second")) {
+        seconds = parseInt(trimmedComponent.split(" ")[0]);
+      }
+    }
+
+    // Преобразуем дни и часы в секунды
+    let totalSeconds = days * 24 * 3600 + hours * 3600 + minutes * 60 + seconds;
+
+    return totalSeconds;
+  }
 
   const pad = (num) => {
     return num < 10 ? "0" + num : num;
@@ -71,6 +165,7 @@ const GameDetails = ({
     const formatedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
     return formatedTime;
   };
+
   const handleInputChange = (e) => {
     setSelectedTime(e.target.value);
   };
@@ -84,7 +179,11 @@ const GameDetails = ({
 
       const updateAdditionalGames = game.additionalGames.map((game) =>
         game.name === selectedGameName
-          ? { ...game, status: selectedStatus, time: parseInt(selectedTime) }
+          ? {
+              ...game,
+              status: selectedStatus,
+              time: convertTimeStringToSeconds(selectedTime),
+            }
           : game
       );
 
@@ -97,7 +196,7 @@ const GameDetails = ({
         await axios.put(`http://localhost:3000/games/${selectedGameID}`, {
           ...game,
           mainStatus: selectedStatus,
-          mainTime: parseInt(selectedTime),
+          mainTime: convertTimeStringToSeconds(selectedTime),
         });
       }
     } catch (error) {
@@ -277,13 +376,13 @@ const GameDetails = ({
               onClick={handleSaveChanges}
               className="modalButton confirmButton"
             >
-              Сохранить
+              Confirm
             </button>
             <button
               onClick={cancelChanges}
               className="modalButton cancelButton"
             >
-              Отмена
+              Cancel
             </button>
           </div>
         </div>

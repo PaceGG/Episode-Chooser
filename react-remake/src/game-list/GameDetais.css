@@ -73,11 +73,11 @@
 }
 
 .confirmButton:hover {
-  background-color: green;
+  background-color: #11c46f;
   transition: 0.3s;
 }
 .cancelButton:hover {
-  background-color: red;
+  background-color: #ee204d;
   transition: 0.3s;
 }
 
