@@ -11,7 +11,8 @@
       "id": "4cb8",
       "mainName": "Cuphead",
       "mainTime": 0,
-      "additionalGames": []
+      "additionalGames": [],
+      "mainStatus": "complete"
     },
     {
       "id": "ac9c",
@@ -20,17 +21,46 @@
       "additionalGames": [
         {
           "name": "Penumbra: Overture",
-          "status": "none",
+          "status": "complete",
           "time": 0
         },
         {
           "name": "Penumbra: Black Plague",
-          "status": "none",
+          "status": "complete",
           "time": 0
         },
         {
           "name": "Penumbra: Requiem",
+          "status": "complete",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "7fe3",
+      "mainName": "Test",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "TEst 12",
+          "status": "inProcess",
+          "time": 0
+        },
+        {
+          "name": "TEst 3",
           "status": "none",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "0aa3",
+      "mainName": "Test 435",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "123",
+          "status": "inProcess",
           "time": 0
         }
       ]

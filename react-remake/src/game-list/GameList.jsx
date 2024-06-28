@@ -25,10 +25,33 @@ const GameList = () => {
     fetchGames(); // Обновление данных после подтверждения в AddGameModal
   };
 
+  const countCompleteGames = (data) => {
+    let count = 0;
+
+    data.forEach((game) => {
+      if (game.additionalGames.length === 0) {
+        if (game.mainStatus === "complete") {
+          count++;
+        }
+      } else {
+        game.additionalGames.forEach((additionalGame) => {
+          if (additionalGame.status === "complete") {
+            count++;
+          }
+        });
+      }
+    });
+
+    return count;
+  };
+
   return (
     <div className="game-list-content">
       <div className="statistic">
-        <h2>Статистика</h2>
+        <h2>
+          Игр пройдено:{" "}
+          <span style={{ color: "white" }}>{countCompleteGames(games)}</span>
+        </h2>
       </div>
       <button
         onClick={() => setModalVisible(true)}

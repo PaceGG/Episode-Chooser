@@ -256,9 +256,28 @@ const GameDetails = ({
     setSelectedGameID(gameID);
   };
 
+  const selectStatus = (game) => {
+    let toReturn = "complete";
+
+    game.forEach((game) => {
+      if (game.status === "none") toReturn = "none";
+    });
+
+    game.forEach((game) => {
+      if (game.status === "inProcess") toReturn = "inProcess";
+    });
+
+    return toReturn;
+  };
+
   const renderAdditionalGames = () => (
-    <details open={isOpen}>
-      <summary onContextMenu={(e) => handleRightClickDetails(e, gameData.id)}>
+    <details
+      open={isOpen || selectStatus(gameData.additionalGames) === "inProcess"}
+    >
+      <summary
+        onContextMenu={(e) => handleRightClickDetails(e, gameData.id)}
+        className={selectStatus(gameData.additionalGames)}
+      >
         {mainGameName}
 
         {additionalGames.map((game) => game.time).reduce((a, b) => a + b, 0) ===

@@ -54,9 +54,10 @@ const AddGameModal = ({
 
       const updateAdditionalGames = inputs.map((input) => ({
         name: input.value,
-        status: input.status,
+        status: input.status ? input.status : "none",
         time: parseInt(input.time),
       }));
+      console.log(updateAdditionalGames);
 
       if (updateAdditionalGames.length !== 0) {
         await axios.put(`http://localhost:3000/games/${selectedGameID}`, {
