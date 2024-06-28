@@ -6,6 +6,12 @@ from datetime import datetime
 import win32api
 import win32gui
 import requests
+import json
+
+
+with open("react-remake/db.json") as f:
+    data = json.load(f)
+
 
 
 # Переключение раскладки клавиатуры на английскую
@@ -27,8 +33,8 @@ chat_id = '-1002035302407'
 # DATA
 
 # Официальные назцания игр
-first_game_name = 'Outer Wilds'
-second_game_name = 'S.T.A.L.K.E.R. Lost Alpha DC'
+first_game_name = data['showcase'][0]['name']
+second_game_name = data['showcase'][1]['name']
 third_game_name = 'SnowRunner'
 
 # Название ярлыков
@@ -367,7 +373,7 @@ def print_info():
     print_game_list_newFormat()
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 1
+run_flag = 0
 
 setEngLayout()
 

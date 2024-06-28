@@ -11,7 +11,8 @@
       "id": "2772",
       "mainName": "Cuphead",
       "mainTime": 0,
-      "additionalGames": []
+      "additionalGames": [],
+      "mainStatus": "inProcess"
     },
     {
       "id": "32e2",
@@ -809,7 +810,7 @@
       "mainName": "Outer Wilds",
       "mainTime": 0,
       "additionalGames": [],
-      "mainStatus": "inProcess"
+      "mainStatus": "bad"
     },
     {
       "id": "3a1f",
@@ -822,9 +823,9 @@
   "showcase": [
     {
       "id": "0",
-      "name": "Outer Wilds",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/753640/library_600x900_2x.jpg?t=1660850427",
-      "color": "#ff7d25"
+      "name": "Cuphead",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/268910/library_600x900_2x.jpg?t=1709068320",
+      "color": "#ffd011"
     },
     {
       "id": "1",
