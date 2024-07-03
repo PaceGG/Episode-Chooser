@@ -31,10 +31,12 @@ const AddGameModal = ({ setModalVisible, updateGameData }) => {
     const gameData = {
       mainName: mainGameName,
       mainTime: 0,
+      mainNumberOfEps: 0,
       additionalGames: inputs.map((input) => ({
         name: input.value,
         status: "none",
         time: 0,
+        numberOfEps: 0,
       })),
     };
     try {

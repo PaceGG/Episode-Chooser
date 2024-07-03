@@ -20,6 +20,7 @@ const GameDetails = ({
   const [selectedGameName, setSelectedGameName] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
   const [selectedTime, setSelectedTime] = useState(0);
+  const [selectedEps, setSelectedEps] = useState(0);
 
   const [filter, setFilter] = useState({
     statusComplete: false,
@@ -40,7 +41,7 @@ const GameDetails = ({
     }
   };
 
-  const handleRightClick = (e, gameName, gameID, gameTime) => {
+  const handleRightClick = (e, gameName, gameID, gameTime, gameEps) => {
     e.preventDefault();
     setSelectedGameID(gameID);
     setSelectedGameName(gameName);
@@ -54,11 +55,11 @@ const GameDetails = ({
     }
     setModalVisible(true);
     setSelectedTime(gameTime);
+    setSelectedEps(gameEps);
   };
 
   const handleRadioChange = (e) => {
     setSelectedStatus(e.target.value);
-    console.log(convertTimeString(selectedTime));
   };
 
   function convertTimeString(inputString) {
@@ -182,6 +183,9 @@ const GameDetails = ({
   const handleInputChange = (e) => {
     setSelectedTime(e.target.value);
   };
+  const handleEpsInputChange = (e) => {
+    setSelectedEps(e.target.value);
+  };
 
   const handleSaveChanges = async () => {
     try {
@@ -196,6 +200,7 @@ const GameDetails = ({
               ...game,
               status: selectedStatus,
               time: convertTimeStringToSeconds(selectedTime),
+              numberOfEps: parseInt(selectedEps),
             }
           : game
       );
@@ -210,6 +215,7 @@ const GameDetails = ({
           ...game,
           mainStatus: selectedStatus,
           mainTime: convertTimeStringToSeconds(selectedTime),
+          mainNumberOfEps: parseInt(selectedEps),
         });
       }
     } catch (error) {
@@ -228,7 +234,13 @@ const GameDetails = ({
   const renderMainGame = () => (
     <li
       onContextMenu={(e) =>
-        handleRightClick(e, gameData.mainName, gameData.id, gameData.mainTime)
+        handleRightClick(
+          e,
+          gameData.mainName,
+          gameData.id,
+          gameData.mainTime,
+          gameData.mainNumberOfEps
+        )
       }
       className={
         selectedGameName === gameData.mainName && selectedStatus
@@ -246,7 +258,11 @@ const GameDetails = ({
       {mainGameName}
       {gameData.mainTime === 0
         ? ""
-        : " - (" + convertTime(gameData.mainTime) + ")"}
+        : " - " +
+          gameData.mainNumberOfEps +
+          " (" +
+          convertTime(gameData.mainTime) +
+          ")"}
     </li>
   );
 
@@ -310,7 +326,11 @@ const GameDetails = ({
         {additionalGames.map((game) => game.time).reduce((a, b) => a + b, 0) ===
         0
           ? ""
-          : " - (" +
+          : " - " +
+            additionalGames
+              .map((game) => game.numberOfEps)
+              .reduce((a, b) => a + b, 0) +
+            " (" +
             convertTime(
               additionalGames
                 .map((game) => game.time)
@@ -323,7 +343,13 @@ const GameDetails = ({
           <li
             key={index}
             onContextMenu={(e) =>
-              handleRightClick(e, game.name, gameData.id, game.time)
+              handleRightClick(
+                e,
+                game.name,
+                gameData.id,
+                game.time,
+                game.numberOfEps
+              )
             }
             className={
               selectedGameName === game.name && selectedStatus
@@ -339,7 +365,9 @@ const GameDetails = ({
             }
           >
             {game.name}
-            {game.time > 0 ? ` (${convertTime(game.time)})` : ""}
+            {game.time > 0
+              ? ` - ` + game.numberOfEps + ` (${convertTime(game.time)})`
+              : ""}
           </li>
         ))}
       </ul>
@@ -408,14 +436,34 @@ const GameDetails = ({
               </svg>
             </label>
           </div>
-          <div className="modal-content selectTime">
-            Время:
-            <input
-              type="text"
-              name="time"
-              placeholder={convertTime(selectedTime)}
-              onChange={handleInputChange}
-            />
+          <div
+            className="modal-content selectTime"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "start",
+            }}
+          >
+            <div style={{ display: "inline" }}>
+              Время:
+              <input
+                type="text"
+                name="time"
+                placeholder={convertTime(selectedTime)}
+                onChange={handleInputChange}
+                style={{ width: "66px" }}
+              />
+            </div>
+            <div>
+              Количество серий:
+              <input
+                type="text"
+                name="episodes"
+                placeholder={selectedEps}
+                onChange={handleEpsInputChange}
+                style={{ width: "22px" }}
+              />
+            </div>
           </div>
           <div className="modal-buttons">
             <button

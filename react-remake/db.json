@@ -5,12 +5,14 @@
       "mainName": "SOMA",
       "mainTime": 22471,
       "additionalGames": [],
-      "mainStatus": "complete"
+      "mainStatus": "complete",
+      "mainNumberOfEps": 9
     },
     {
       "id": "2772",
       "mainName": "Cuphead",
       "mainTime": 23426,
+      "mainNumberOfEps": 11,
       "additionalGames": [],
       "mainStatus": "bad"
     },
@@ -68,28 +70,32 @@
       "mainName": "Inscryption",
       "mainTime": 121255,
       "additionalGames": [],
-      "mainStatus": "complete"
+      "mainStatus": "complete",
+      "mainNumberOfEps": 17
     },
     {
       "id": "e299",
       "mainName": "Starfield",
       "mainTime": 0,
       "additionalGames": [],
-      "mainStatus": "bad"
+      "mainStatus": "bad",
+      "mainNumberOfEps": "0"
     },
     {
       "id": "76af",
       "mainName": "Red Dead Redemption 2",
       "mainTime": 149643,
       "additionalGames": [],
-      "mainStatus": "complete"
+      "mainStatus": "complete",
+      "mainNumberOfEps": 56
     },
     {
       "id": "7e51",
       "mainName": "GTA Anderius: Alien City",
       "mainTime": 44265,
       "additionalGames": [],
-      "mainStatus": "complete"
+      "mainStatus": "complete",
+      "mainNumberOfEps": 15
     },
     {
       "id": "0306",
@@ -99,17 +105,20 @@
         {
           "name": "Metro 2033 Redux",
           "status": "complete",
-          "time": 28627
+          "time": 28627,
+          "numberOfEps": 11
         },
         {
           "name": "Metro: Last Light Redux",
           "status": "complete",
-          "time": 33651
+          "time": 33651,
+          "numberOfEps": 13
         },
         {
           "name": "Metro Exodus",
           "status": "complete",
-          "time": 75030
+          "time": 75030,
+          "numberOfEps": 25
         }
       ]
     },
@@ -121,12 +130,14 @@
         {
           "name": "Dying Light",
           "status": "complete",
-          "time": 81356
+          "time": 81356,
+          "numberOfEps": 21
         },
         {
           "name": "Dying Light 2: Stay Human",
           "status": "bad",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -135,7 +146,8 @@
       "mainName": "Stray",
       "mainTime": 18067,
       "additionalGames": [],
-      "mainStatus": "complete"
+      "mainStatus": "complete",
+      "mainNumberOfEps": 7
     },
     {
       "id": "f78a",
@@ -145,17 +157,20 @@
         {
           "name": "Mafia: Definitive Edition",
           "status": "complete",
-          "time": 63323
+          "time": 63323,
+          "numberOfEps": 21
         },
         {
           "name": "Mafia II: Definitive Edition",
           "status": "complete",
-          "time": 86187
+          "time": 86187,
+          "numberOfEps": 23
         },
         {
           "name": "Mafia III: Definitive Edition",
           "status": "complete",
-          "time": 128127
+          "time": 128127,
+          "numberOfEps": 36
         }
       ]
     },
@@ -167,7 +182,8 @@
         {
           "name": "Minecraft: Восхождение",
           "status": "bad",
-          "time": 340683
+          "time": 340683,
+          "numberOfEps": 25
         }
       ]
     },
@@ -179,17 +195,20 @@
         {
           "name": "Tomb Raider",
           "status": "complete",
-          "time": 33918
+          "time": 33918,
+          "numberOfEps": 11
         },
         {
           "name": "Rise of the Tomb Raider",
           "status": "complete",
-          "time": 52616
+          "time": 52616,
+          "numberOfEps": 17
         },
         {
           "name": "Shadow of the Tomb Raider",
           "status": "complete",
-          "time": 78692
+          "time": 78692,
+          "numberOfEps": 22
         }
       ]
     },
@@ -198,7 +217,8 @@
       "mainName": "As Dusk Falls",
       "mainTime": 19398,
       "additionalGames": [],
-      "mainStatus": "complete"
+      "mainStatus": "complete",
+      "mainNumberOfEps": 8
     },
     {
       "id": "ffaa",
@@ -208,42 +228,50 @@
         {
           "name": "Grand Theft Auto III - The Definitive Edition",
           "status": "complete",
-          "time": 30380
+          "time": 30380,
+          "numberOfEps": 8
         },
         {
           "name": "Grand Theft Auto: Vice City - The Definitive Edition",
           "status": "complete",
-          "time": 65468
+          "time": 65468,
+          "numberOfEps": 12
         },
         {
           "name": "Grand Theft Auto: San Andreas",
           "status": "complete",
-          "time": 76381
+          "time": 76381,
+          "numberOfEps": 21
         },
         {
           "name": "Grand Theft Auto IV",
           "status": "complete",
-          "time": 71732
+          "time": 71732,
+          "numberOfEps": 26
         },
         {
           "name": "Grand Theft Auto IV: The Lost and Damned",
           "status": "complete",
-          "time": 27839
+          "time": 27839,
+          "numberOfEps": 9
         },
         {
           "name": "Grand Theft Auto: The Ballad of Gay Tony",
           "status": "complete",
-          "time": 26023
+          "time": 26023,
+          "numberOfEps": 10
         },
         {
           "name": "Grand Theft Auto V",
           "status": "complete",
-          "time": 127525
+          "time": 127525,
+          "numberOfEps": 42
         },
         {
           "name": "Grand Theft Auto Online",
           "status": "complete",
-          "time": 323047
+          "time": 323047,
+          "numberOfEps": 78
         }
       ]
     },
@@ -255,27 +283,32 @@
         {
           "name": "S.T.A.L.K.E.R.: Lost Alpha DC Extended",
           "status": "bad",
-          "time": 141711
+          "time": 141711,
+          "numberOfEps": 28
         },
         {
           "name": "S.T.A.L.K.E.R. Lost Alpha Enhanced Edition",
           "status": "bad",
-          "time": 12749
+          "time": 12749,
+          "numberOfEps": 2
         },
         {
           "name": "S.T.A.L.K.E.R.: Lost Alpha DC",
           "status": "inProcess",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "S.T.A.L.K.E.R.: The Eternial Suffering",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "S.T.A.L.K.E.R.: Call of Pripyat Gunslinger",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -287,17 +320,20 @@
         {
           "name": "The Elder Scrolls IV: Oblivion",
           "status": "bad",
-          "time": 0
+          "time": 24602,
+          "numberOfEps": 9
         },
         {
           "name": "The Elder Scrolls V: Skyrim Anniversary Edition",
           "status": "complete",
-          "time": 212071
+          "time": 212071,
+          "numberOfEps": 75
         },
         {
           "name": "The Elder Scrolls Online",
           "status": "bad",
-          "time": 0
+          "time": 44966,
+          "numberOfEps": 13
         }
       ]
     },
@@ -309,22 +345,26 @@
         {
           "name": "Black Mesa",
           "status": "complete",
-          "time": 47680
+          "time": 47680,
+          "numberOfEps": 16
         },
         {
           "name": "Half-Life 2",
           "status": "complete",
-          "time": 31478
+          "time": 31478,
+          "numberOfEps": 11
         },
         {
           "name": "Half-Life 2: Episode One",
           "status": "complete",
-          "time": 9551
+          "time": 9551,
+          "numberOfEps": 4
         },
         {
           "name": "Half-Life 2: Episode Two",
           "status": "complete",
-          "time": 13889
+          "time": 13889,
+          "numberOfEps": 5
         }
       ]
     },
@@ -333,14 +373,16 @@
       "mainName": "Detroit: Become Human",
       "mainTime": 39524,
       "additionalGames": [],
-      "mainStatus": "complete"
+      "mainStatus": "complete",
+      "mainNumberOfEps": 15
     },
     {
       "id": "a0eb",
       "mainName": "Cyberpunk 2077",
       "mainTime": 52015,
       "additionalGames": [],
-      "mainStatus": "bad"
+      "mainStatus": "bad",
+      "mainNumberOfEps": 18
     },
     {
       "id": "eac3",
@@ -350,17 +392,20 @@
         {
           "name": "Watch Dogs",
           "status": "complete",
-          "time": 47278
+          "time": 47278,
+          "numberOfEps": 14
         },
         {
           "name": "Watch Dogs 2",
           "status": "complete",
-          "time": 77952
+          "time": 77952,
+          "numberOfEps": 20
         },
         {
           "name": "Watch Dogs: Legion",
           "status": "bad",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -372,12 +417,14 @@
         {
           "name": "DOOM (2016)",
           "status": "complete",
-          "time": 35485
+          "time": 35485,
+          "numberOfEps": 11
         },
         {
           "name": "DOOM Eternal",
           "status": "bad",
-          "time": 0
+          "time": 8324,
+          "numberOfEps": 3
         }
       ]
     },
@@ -389,17 +436,20 @@
         {
           "name": "Crysis Remastered",
           "status": "complete",
-          "time": 20020
+          "time": 20020,
+          "numberOfEps": 7
         },
         {
           "name": "Crysis 2 Remastered",
           "status": "complete",
-          "time": 26732
+          "time": 26732,
+          "numberOfEps": 10
         },
         {
           "name": "Crysis 3 Remastered",
           "status": "bad",
-          "time": 0
+          "time": 10822,
+          "numberOfEps": 4
         }
       ]
     },
@@ -411,12 +461,14 @@
         {
           "name": "RAGE",
           "status": "complete",
-          "time": 45341
+          "time": 45341,
+          "numberOfEps": 18
         },
         {
           "name": "RAGE 2",
           "status": "complete",
-          "time": 54186
+          "time": 54186,
+          "numberOfEps": 18
         }
       ]
     },
@@ -428,22 +480,26 @@
         {
           "name": "Life is Strange",
           "status": "complete",
-          "time": 42612
+          "time": 42612,
+          "numberOfEps": 16
         },
         {
           "name": "Life Is Strange: Before The Storm",
           "status": "complete",
-          "time": 29003
+          "time": 29003,
+          "numberOfEps": 16
         },
         {
           "name": "Life Is Strange 2",
           "status": "inProcess",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Life Is Strange: True Colors",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -455,12 +511,14 @@
         {
           "name": "Protorype",
           "status": "complete",
-          "time": 47518
+          "time": 47518,
+          "numberOfEps": 14
         },
         {
           "name": "Protorype 2",
           "status": "complete",
-          "time": 49150
+          "time": 49150,
+          "numberOfEps": 18
         }
       ]
     },
@@ -498,7 +556,8 @@
       "mainName": "Beyond: Two Souls",
       "mainTime": 31524,
       "additionalGames": [],
-      "mainStatus": "complete"
+      "mainStatus": "complete",
+      "mainNumberOfEps": 12
     },
     {
       "id": "6f85",
@@ -508,12 +567,14 @@
         {
           "name": "Portal",
           "status": "complete",
-          "time": 11168
+          "time": 11168,
+          "numberOfEps": 3
         },
         {
           "name": "Portal 2",
           "status": "complete",
-          "time": 17812
+          "time": 17812,
+          "numberOfEps": 5
         }
       ]
     },
@@ -522,7 +583,8 @@
       "mainName": "Death Stranding",
       "mainTime": 17111,
       "additionalGames": [],
-      "mainStatus": "bad"
+      "mainStatus": "bad",
+      "mainNumberOfEps": 6
     },
     {
       "id": "be39",
@@ -532,37 +594,44 @@
         {
           "name": "Fallout 4: Vault 13 (Fallout 1 Remake)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Fallout 4: Project Arroyo (Fallout 2 Remake)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Fallout 3",
           "status": "complete",
-          "time": 162565
+          "time": 162565,
+          "numberOfEps": 43
         },
         {
           "name": "Fallout 3: New York",
           "status": "bad",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Fallout 4: New Vegas (Fallout: New Vegas Remake)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Fallout 4",
           "status": "complete",
-          "time": 176296
+          "time": 176296,
+          "numberOfEps": 57
         },
         {
           "name": "Fallout London",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -571,7 +640,8 @@
       "mainName": "Saints Row",
       "mainTime": 148029,
       "additionalGames": [],
-      "mainStatus": "complete"
+      "mainStatus": "complete",
+      "mainNumberOfEps": 42
     },
     {
       "id": "880c",
@@ -579,19 +649,28 @@
       "mainTime": 0,
       "additionalGames": [
         {
+          "name": "The Witcher",
+          "status": "bad",
+          "time": 65680,
+          "numberOfEps": 24
+        },
+        {
           "name": "The Witcher Remake",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "The Witcher 2: Assassins of Kings",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "The Witcher 3: Wild Hunt",
           "status": "none",
-          "time": 0
+          "time": null,
+          "numberOfEps": 0
         }
       ]
     },
@@ -603,37 +682,44 @@
         {
           "name": "Resident Evil 2",
           "status": "complete",
-          "time": 48351
+          "time": 48351,
+          "numberOfEps": 18
         },
         {
           "name": "Resident Evil 3",
           "status": "complete",
-          "time": 19354
+          "time": 19354,
+          "numberOfEps": 6
         },
         {
           "name": "Resident Evil 4",
           "status": "complete",
-          "time": 54951
+          "time": 54951,
+          "numberOfEps": 16
         },
         {
           "name": "Resident Evil 5",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Resident Evil 6",
           "status": "complete",
-          "time": 77505
+          "time": 77505,
+          "numberOfEps": 27
         },
         {
           "name": "Resident Evil 7",
           "status": "complete",
-          "time": 66966
+          "time": 66966,
+          "numberOfEps": 22
         },
         {
           "name": "Resident Evil Village",
           "status": "complete",
-          "time": 48800
+          "time": 48800,
+          "numberOfEps": 17
         }
       ]
     },
@@ -642,7 +728,8 @@
       "mainName": "Teardown",
       "mainTime": 70327,
       "additionalGames": [],
-      "mainStatus": "complete"
+      "mainStatus": "complete",
+      "mainNumberOfEps": 26
     },
     {
       "id": "1aa6",
@@ -652,47 +739,56 @@
         {
           "name": "Far Cry",
           "status": "bad",
-          "time": 0
+          "time": 9272,
+          "numberOfEps": 3
         },
         {
           "name": "Far Cry 2",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Far Cry 3",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Far Cry 3: Blood Dragon",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Far Cry 4",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Far Cry Primal",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Far Cry 5",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Far Cry New Dawn",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Far Cry 6",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -704,92 +800,110 @@
         {
           "name": "Call of Duty (2003)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: United Offensive (2004)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty 2 (2005)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Modern Warfare Remastered (2007 / 2016)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: World at War (2008)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Modern Warfare 2 Remastered (2009 / 2020)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Black Ops (2010)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Modern Warfare 3 (2011)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Black Ops 2 (2012)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Ghosts (2013)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Advanced Warfare (2014)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Black Ops 3 (2015)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Infinite Warfare (2016)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: WWII (2017)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Modern Warfare (2019)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Black Ops – Cold War (2020)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Vanguard (2021)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Modern Warfare II (2022)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -797,28 +911,32 @@
       "id": "69dd",
       "mainName": "Sleeping Dogs",
       "mainTime": 0,
-      "additionalGames": []
+      "additionalGames": [],
+      "mainNumberOfEps": 0
     },
     {
       "id": "2660",
       "mainName": "Heavy Rain",
       "mainTime": 0,
       "additionalGames": [],
-      "mainStatus": "bad"
+      "mainStatus": "bad",
+      "mainNumberOfEps": 0
     },
     {
       "id": "87ff",
       "mainName": "Outer Wilds",
       "mainTime": 17600,
       "additionalGames": [],
-      "mainStatus": "bad"
+      "mainStatus": "bad",
+      "mainNumberOfEps": 5
     },
     {
       "id": "3a1f",
       "mainName": "Bully: Scholarship Edition",
       "mainTime": 60206,
       "additionalGames": [],
-      "mainStatus": "complete"
+      "mainStatus": "complete",
+      "mainNumberOfEps": 21
     },
     {
       "id": "9b67",
@@ -828,17 +946,20 @@
         {
           "name": "Max Payne",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Max Payne 2: The Fall of Max Payne",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Max Payne 3",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -850,12 +971,14 @@
         {
           "name": "Manhunt",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Manhunt 2",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     }
@@ -913,7 +1036,7 @@
   ],
   "filters": {
     "statusComplete": true,
-    "statusBad": false,
+    "statusBad": true,
     "statusWait": true
   }
 }

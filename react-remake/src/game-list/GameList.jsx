@@ -45,12 +45,35 @@ const GameList = () => {
     return count;
   };
 
+  const countBadGames = (data) => {
+    let count = 0;
+
+    data.forEach((game) => {
+      if (game.additionalGames.length === 0) {
+        if (game.mainStatus === "bad") {
+          count++;
+        }
+      } else {
+        game.additionalGames.forEach((additionalGame) => {
+          if (additionalGame.status === "bad") {
+            count++;
+          }
+        });
+      }
+    });
+
+    return count;
+  };
+
   return (
     <div className="game-list-content">
       <div className="statistic">
         <h2>
           Игр пройдено:{" "}
           <span style={{ color: "white" }}>{countCompleteGames(games)}</span>
+          <br />
+          <span style={{ color: "#ee204d" }}>Игр брошено:&nbsp;&nbsp; </span>
+          <span style={{ color: "#white" }}>{countBadGames(games)}</span>
         </h2>
         <button
           onClick={() => setModalVisible(true)}
@@ -72,6 +95,7 @@ const GameList = () => {
                 name: addGame.name,
                 status: addGame.status,
                 time: addGame.time,
+                numberOfEps: addGame.numberOfEps,
               }))}
             />
           ))}

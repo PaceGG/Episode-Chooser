@@ -7,7 +7,7 @@
   border-radius: 15px;
   max-width: 80px;
   box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.3);
-  max-width: 200px;
+  max-width: 205px;
   overflow: hidden;
 }
 
@@ -94,7 +94,9 @@
   display: flex;
   align-items: center;
 }
-
+.selectTime {
+  padding: 5px;
+}
 .modal-content * {
   flex-grow: 1;
 }
@@ -107,7 +109,7 @@
   padding: 10px;
   font-size: 16px;
   flex-grow: 1;
-  width: 100%;
+  margin-left: 5px;
 
   &:focus {
     outline: none;
