@@ -413,7 +413,7 @@ const GameDetails = ({
             <input
               type="text"
               name="time"
-              value={selectedTime}
+              placeholder={convertTime(selectedTime)}
               onChange={handleInputChange}
             />
           </div>

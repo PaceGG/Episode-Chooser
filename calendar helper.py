@@ -1,12 +1,20 @@
 from collections import Counter
 
 game_mapping = {
+    "Pt" : "Prototype",
+    "Bl": "Bully: Scholarship Edition",
+    "F3" : "Fallout 3",
+    "Cp" : "Cyberpunk 2077",
+    "Gt0" : "Grand Theft Auto Online",
     'Sw' : "Saints Row",
     'Re6' : "Resident Evil 6",
     'Re7': "Resident Evil 7",
     'Re8' : "Resident Evil Village",
     'Sr' : "Snow Runner",
-    "St" : "S.T.A.L.K.E.R. Lost Alpha DC"
+    "St" : "S.T.A.L.K.E.R. Lost Alpha DC",
+    "So": "Soma",
+    "Cu": "Cuphead",
+    "Ow": "Outer Wilds",
 }
 
 with open("games.txt", "r") as file:

@@ -1,37 +1,41 @@
 
-Sw
-Sw
+Cp
+
+Gt0
+Gt0
 
 
 
-SwRe6
-Re7
-SwRe7
-Re7
-SwSr
-SwSt
-Re7
-St
+Gt0SrCp
+
+Gt0
+Gt0
+F3
+
+Gt0F3
+Gt0SrF3
+Gt0Bl
+F3
+F3
+F3SrBl
+
+Bl
+
+F3Bl
 Sr
+Bl
 
-St
 
-St
-StRe7
-Re7Re8St
-Re8
-St
-SrRe8
-St
 
-St
-StRe8
-Sr
+
+F3Bl
+Pt
+
+F3Pt
+F3Sr
 
 
 
 
 
-St
-Re8
 

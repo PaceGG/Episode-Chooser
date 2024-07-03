@@ -10,9 +10,9 @@
     {
       "id": "2772",
       "mainName": "Cuphead",
-      "mainTime": 0,
+      "mainTime": 23426,
       "additionalGames": [],
-      "mainStatus": "inProcess"
+      "mainStatus": "bad"
     },
     {
       "id": "32e2",
@@ -167,7 +167,7 @@
         {
           "name": "Minecraft: Восхождение",
           "status": "bad",
-          "time": 0
+          "time": 340683
         }
       ]
     },
@@ -255,12 +255,12 @@
         {
           "name": "S.T.A.L.K.E.R.: Lost Alpha DC Extended",
           "status": "bad",
-          "time": 0
+          "time": 141711
         },
         {
           "name": "S.T.A.L.K.E.R. Lost Alpha Enhanced Edition",
           "status": "bad",
-          "time": 0
+          "time": 12749
         },
         {
           "name": "S.T.A.L.K.E.R.: Lost Alpha DC",
@@ -338,7 +338,7 @@
     {
       "id": "a0eb",
       "mainName": "Cyberpunk 2077",
-      "mainTime": 0,
+      "mainTime": 52015,
       "additionalGames": [],
       "mainStatus": "bad"
     },
@@ -437,7 +437,7 @@
         },
         {
           "name": "Life Is Strange 2",
-          "status": "none",
+          "status": "inProcess",
           "time": 0
         },
         {
@@ -520,7 +520,7 @@
     {
       "id": "2cb8",
       "mainName": "Death Stranding",
-      "mainTime": 0,
+      "mainTime": 17111,
       "additionalGames": [],
       "mainStatus": "bad"
     },
@@ -809,7 +809,7 @@
     {
       "id": "87ff",
       "mainName": "Outer Wilds",
-      "mainTime": 0,
+      "mainTime": 17600,
       "additionalGames": [],
       "mainStatus": "bad"
     },
@@ -819,14 +819,53 @@
       "mainTime": 60206,
       "additionalGames": [],
       "mainStatus": "complete"
+    },
+    {
+      "id": "9b67",
+      "mainName": "Max Payne",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Max Payne",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Max Payne 2: The Fall of Max Payne",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Max Payne 3",
+          "status": "none",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": "b59b",
+      "mainName": "Manhunt",
+      "mainTime": 0,
+      "additionalGames": [
+        {
+          "name": "Manhunt",
+          "status": "none",
+          "time": 0
+        },
+        {
+          "name": "Manhunt 2",
+          "status": "none",
+          "time": 0
+        }
+      ]
     }
   ],
   "showcase": [
     {
       "id": "0",
-      "name": "Cuphead",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/268910/library_600x900_2x.jpg?t=1709068320",
-      "color": "#ffd011"
+      "name": "Life Is Strange 2",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/532210/library_600x900_2x.jpg?t=1599730221",
+      "color": "#d79e17"
     },
     {
       "id": "1",
@@ -865,11 +904,16 @@
       "id": "5",
       "name": "https://www.steamgriddb.com/",
       "img": "https://www.steamgriddb.com/static/favicon/16.png"
+    },
+    {
+      "id": "6",
+      "name": "http://localhost:3000/",
+      "img": "https://cdn-icons-png.flaticon.com/512/9672/9672242.png"
     }
   ],
   "filters": {
     "statusComplete": true,
-    "statusBad": true,
+    "statusBad": false,
     "statusWait": true
   }
 }
