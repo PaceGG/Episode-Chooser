@@ -358,8 +358,10 @@ const GameDetails = ({
                 : game.status
             }
             style={
-              (game.status === "bad" && filter.statusBad) ||
-              (game.status === "complete" && filter.statusComplete) ||
+              (game.status === "bad" && filter.statusBad && game.time > 0) ||
+              (game.status === "complete" &&
+                filter.statusComplete &&
+                game.time > 0) ||
               (game.status === "wait" && filter.statusWait)
                 ? { display: "none" }
                 : null
