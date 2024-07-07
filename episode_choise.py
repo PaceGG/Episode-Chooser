@@ -370,12 +370,15 @@ def edit_tg_info_message():
     first_game_count = game_list.count(first_game_name)
     second_game_count = game_list.count(second_game_name)
 
-    if today == first_game_name:
-        if first_game_count == second_game_count == 1: second_game_count += 1
-        else: first_game_count -= 1
-    else:
-        if first_game_count == second_game_count == 1: first_game_count += 1
-        else: second_game_count -= 1
+    if first_game_count == second_game_count == 1:
+        if today == first_game_name: second_game_count += 1
+        if today == second_game_name: first_game_count += 1
+    elif first_game_count > 1:
+        if today == first_game_name: first_game_count -= 1
+        if today == second_game_name: first_game_count += 1
+    elif second_game_count > 1:
+        if today == first_game_name: second_game_count += 1
+        if today == second_game_name: second_game_count -= 1
 
     if first_game_count == second_game_count == 1: add_message = f"• {first_game_name}: {first_game_count}" + "\n" + f"• {second_game_name}: {second_game_count}"
     if first_game_count > 1: add_message = f"• {first_game_name}: {first_game_count}"
@@ -426,12 +429,9 @@ def run_random_game():
         run_game('SR')
 
 edit_text = ""
-
-def printT(string):
+def add_edit_text(string):
     global edit_text
     edit_text += string + "\n"
-    print(string)
-
 
 def print_game_list_newFormat():
     global game_list
@@ -440,14 +440,17 @@ def print_game_list_newFormat():
     second_game_count = game_list.count(second_game_name)
 
     if first_game_count == second_game_count == 1:
-        printT(f"{first_game_name}: {first_game_count}")
-        printT(f'{second_game_name}: {second_game_count}')
+        print(f"{first_game_name}: {first_game_count}")
+        print(f'{second_game_name}: {second_game_count}')
+        add_edit_text("Шансы равны")
         return
     if first_game_count > 1:
-        printT(f'{first_game_name}: {first_game_count}')
+        print(f'{first_game_name}: {first_game_count}')
+        add_edit_text(f"• {first_game_name}: {first_game_count}")
         return
     if second_game_count > 1:
-        printT(f'{second_game_name}: {second_game_count}')
+        print(f'{second_game_name}: {second_game_count}')
+        add_edit_text(f"• {second_game_name}: {second_game_count}")
         return
 
 def print_info():
@@ -467,16 +470,18 @@ def print_info():
         ep_prefix = 'й'
 
     if games_to_sr_counter > 0:
-        printT(f"До SnowRunner'a ещё {games_to_sr_counter} сери{ep_prefix}")
+        print(f"До SnowRunner'a ещё {games_to_sr_counter} сери{ep_prefix}")
+        add_edit_text(f"• SR: {5 - games_for_sr_counter}")
     else:
-        printT(f"Сегодня SnowRunner")
+        print(f"Сегодня SnowRunner")
+        add_edit_text("• Сегодня SnowRunner!!!")
         
         
     # print(today)
     print_game_list_newFormat()
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 1
+run_flag = 0
 
 setEngLayout()
 
