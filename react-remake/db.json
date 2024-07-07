@@ -1035,7 +1035,7 @@
     }
   ],
   "filters": {
-    "statusComplete": true,
+    "statusComplete": false,
     "statusBad": true,
     "statusWait": true
   }

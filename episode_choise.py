@@ -35,6 +35,28 @@ def send_image(bot_token, chat_id, image_path, caption=None):
     response = requests.post(url, files=files, data=params)
     return response.json
 
+# 396
+def edit_telegram_message(bot_token, chat_id, message_id, new_text):
+    """
+    Редактирует сообщение в Telegram по его ID.
+    
+    :param bot_token: Токен бота Telegram
+    :param chat_id: ID чата
+    :param message_id: ID сообщения, которое нужно отредактировать
+    :param new_text: Новый текст сообщения
+    :return: Ответ API Telegram
+    """
+    url = f"https://api.telegram.org/bot{bot_token}/editMessageText"
+    params = {
+        "chat_id": chat_id,
+        "message_id": message_id,
+        "text": new_text
+    }
+    
+    response = requests.post(url, params=params)
+    
+    return response.json()
+
 bot_token = '6739691945:AAG_FoagOmFd-GUFpFwriEeTFgma-rwjGx8'
 chat_id = '-1002035302407'
 
@@ -68,9 +90,8 @@ second_game_video_extra = ""
 
 # Programm
 # Путри к играм
-# first_game_path = 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\' + first_game_ico + '.lnk'
-first_game_path = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Life Is Strange 2\Life Is Strange 2.lnk"
-second_game_path = 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\' + second_game_ico + ".lnk"
+first_game_path = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Life Is Strange 2\\Life Is Strange 2.lnk"
+second_game_path = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\ladc.lnk"
 third_game_path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 
 # Пути к файлам видео
@@ -378,6 +399,14 @@ def run_random_game():
     else:
         run_game('SR')
 
+edit_text = ""
+
+def printT(string):
+    global edit_text
+    edit_text += string + "\n"
+    print(string)
+
+
 def print_game_list_newFormat():
     global game_list
 
@@ -385,14 +414,14 @@ def print_game_list_newFormat():
     second_game_count = game_list.count(second_game_name)
 
     if first_game_count == second_game_count == 1:
-        print(f'{first_game_name}: {first_game_count}')
-        print(f'{second_game_name}: {second_game_count}')
+        printT(f"{first_game_name}, {second_game_name}")
+        printT(f'{second_game_name}: {second_game_count}')
         return 0
     if first_game_count > 1:
-        print(f'{first_game_name}: {first_game_count}')
+        printT(f'{first_game_name}: {first_game_count}')
         return
     if second_game_count > 1:
-        print(f'{second_game_name}: {second_game_count}')
+        printT(f'{second_game_name}: {second_game_count}')
         return 0
 
 def print_info():
@@ -412,9 +441,10 @@ def print_info():
         ep_prefix = 'й'
 
     if games_to_sr_counter > 0:
-        print(f"До SnowRunner'a ещё {games_to_sr_counter} сери{ep_prefix}")
+        printT(f"До SnowRunner'a ещё {games_to_sr_counter} сери{ep_prefix}")
     else:
-        print(f'Сегодня SnowRunner')
+        printT(f"Сегодня SnowRunner")
+        
         
     # print(today)
     print_game_list_newFormat()
@@ -426,6 +456,7 @@ setEngLayout()
 
 print_info()
 print("\n"*10)
+edit_telegram_message(bot_token, chat_id, 396, edit_text)
 
 if run_flag:
     confirm = input()
