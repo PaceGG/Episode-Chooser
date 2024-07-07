@@ -56,6 +56,7 @@ const AddGameModal = ({
         name: input.value,
         status: input.status ? input.status : "none",
         time: parseInt(input.time),
+        numberOfEps: parseInt(input.numberOfEps),
       }));
       console.log(updateAdditionalGames);
 

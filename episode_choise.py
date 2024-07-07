@@ -481,7 +481,7 @@ def print_info():
     print_game_list_newFormat()
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 0
+run_flag = 1
 
 setEngLayout()
 

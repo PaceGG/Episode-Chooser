@@ -278,6 +278,7 @@ const GameDetails = ({
       value: game.name,
       status: game.status,
       time: game.time,
+      numberOfEps: game.numberOfEps,
     }));
 
     setSelectedGameNames(listItems);
