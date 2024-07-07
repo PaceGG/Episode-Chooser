@@ -366,6 +366,31 @@ def sr_db_clear():
     with open(dir, 'w') as f:
         f.write('')
 
+def edit_tg_info_message():
+    first_game_count = game_list.count(first_game_name)
+    second_game_count = game_list.count(second_game_name)
+
+    if today == first_game_name:
+        if first_game_count == second_game_count == 1: second_game_count += 1
+        else: first_game_count -= 1
+    else:
+        if first_game_count == second_game_count == 1: first_game_count += 1
+        else: second_game_count -= 1
+
+    if first_game_count == second_game_count == 1: add_message = f"• {first_game_name}: {first_game_count}" + "\n" + f"• {second_game_name}: {second_game_count}"
+    if first_game_count > 1: add_message = f"• {first_game_name}: {first_game_count}"
+    if second_game_count > 1: add_message = f"• {second_game_name}: {second_game_count}"
+
+
+    if 5 - games_for_sr_counter - 1 != 0: sr_info_add_message = f"• SR: {5 - games_for_sr_counter - 1}"
+    else: sr_info_add_message = "• Сегодня SnowRunner!!!"
+
+
+    edit_telegram_message(bot_token, chat_id, 396, f"""
+{sr_info_add_message}
+{add_message}
+    """)
+
 def run_game(x):
     # os.startfile(f'"{"D:/Program Files/obs-studio/bin/64bit/obs64.exe"}"')
     if x == first_game_name:
@@ -384,6 +409,7 @@ def run_game(x):
         addEp(third_folder_name)
         os.startfile(third_game_path)
     sr_db_edit()
+    edit_tg_info_message()
         
 
 def run_random_game():
@@ -414,15 +440,15 @@ def print_game_list_newFormat():
     second_game_count = game_list.count(second_game_name)
 
     if first_game_count == second_game_count == 1:
-        printT(f"{first_game_name}, {second_game_name}")
+        printT(f"{first_game_name}: {first_game_count}")
         printT(f'{second_game_name}: {second_game_count}')
-        return 0
+        return
     if first_game_count > 1:
         printT(f'{first_game_name}: {first_game_count}')
         return
     if second_game_count > 1:
         printT(f'{second_game_name}: {second_game_count}')
-        return 0
+        return
 
 def print_info():
     global games_for_sr_counter
@@ -450,14 +476,14 @@ def print_info():
     print_game_list_newFormat()
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 0
+run_flag = 1
 
 setEngLayout()
 
 print_info()
-print("\n"*10)
 edit_telegram_message(bot_token, chat_id, 396, edit_text)
 
 if run_flag:
+    print("\n"*10)
     confirm = input()
     run_random_game()
