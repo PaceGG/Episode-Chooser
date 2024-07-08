@@ -91,7 +91,7 @@ second_game_video_extra = ""
 # Programm
 # Путри к играм
 first_game_path = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Life Is Strange 2\\Life Is Strange 2.lnk"
-second_game_path = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\ladc.lnk"
+second_game_path = "C:\\Users\\yura3\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\re5dx9.lnk"
 third_game_path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 
 # Пути к файлам видео

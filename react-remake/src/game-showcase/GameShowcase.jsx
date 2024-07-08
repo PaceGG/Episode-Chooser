@@ -4,6 +4,7 @@ import style from "./GameShowcase.module.css";
 
 const GameShowcase = () => {
   const [games, setGames] = useState([]);
+  const [initialGames, setInitialGames] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -14,6 +15,7 @@ const GameShowcase = () => {
     try {
       const response = await axios.get("http://localhost:3000/showcase"); // URL вашего json-server
       setGames(response.data);
+      setInitialGames(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -38,6 +40,11 @@ const GameShowcase = () => {
     } catch (error) {
       console.error("Error saving data:", error);
     }
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setGames(initialGames);
   };
 
   const renderShowcase = () =>
@@ -113,9 +120,14 @@ const GameShowcase = () => {
           </svg>
         </button>
         {isModalOpen && (
-          <button className={style.confirm} onClick={handleConfirm}>
-            Confirm
-          </button>
+          <>
+            <button className={style.confirm} onClick={handleConfirm}>
+              Confirm
+            </button>
+            <button className={style.confirm} onClick={handleCancel}>
+              Cancel
+            </button>
+          </>
         )}
       </div>
       {isModalOpen ? renderEditor() : renderShowcase()}
