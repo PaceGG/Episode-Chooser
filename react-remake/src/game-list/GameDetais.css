@@ -64,7 +64,14 @@
 .inProcessCheckmark svg {
   fill: #0b79d0;
 }
-
+.reset {
+  border-left: 2px solid #555;
+}
+.resetButton {
+  & svg {
+    fill: #eee;
+  }
+}
 .modal-buttons {
   display: flex;
   & button {
@@ -90,6 +97,23 @@
   margin: 5px;
 }
 
+.time-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  & a {
+    background-color: #555;
+    border-radius: 20px;
+    height: 35px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    margin-right: 4px;
+    &:hover {
+      background-color: #666;
+    }
+  }
+}
 .modal-content {
   display: flex;
   align-items: center;

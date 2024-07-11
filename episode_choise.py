@@ -63,8 +63,8 @@ chat_id = '-1002035302407'
 # DATA
 
 # Официальные назцания игр
-first_game_name = data['showcase'][0]['name']
-second_game_name = data['showcase'][1]['name']
+first_game_name = data['showcase'][0]['name'].replace(":", "")
+second_game_name = data['showcase'][1]['name'].replace(":", "")
 third_game_name = 'SnowRunner'
 
 # Название ярлыков
@@ -90,8 +90,8 @@ second_game_video_extra = ""
 
 # Programm
 # Путри к играм
-first_game_path = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Life Is Strange 2\\Life Is Strange 2.lnk"
-second_game_path = "C:\\Users\\yura3\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\re5dx9.lnk"
+first_game_path = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Lost Alpha Enhanced Edition.lnk"
+second_game_path = "C:\\Users\\yura3\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Launcher (2).lnk"
 third_game_path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 
 # Пути к файлам видео
@@ -367,6 +367,22 @@ def sr_db_clear():
         f.write('')
 
 def edit_tg_info_message():
+    if first_episodes == second_episodes == 0:
+        sr_info_add_message = "• SR: 4"
+        if earlier == second_game_name:
+            add_message = f"• {second_game_name}: 2"
+        elif earlier == first_game_name:
+            add_message = f"• {first_game_name}: 2"
+
+        edit_telegram_message(bot_token, chat_id, 396, f"""
+{sr_info_add_message}
+{add_message}
+    """)
+        return
+
+
+
+
     first_game_count = game_list.count(first_game_name)
     second_game_count = game_list.count(second_game_name)
 

@@ -438,6 +438,18 @@ const GameDetails = ({
                 <path d="M192 64C86 64 0 150 0 256S86 448 192 448H448c106 0 192-86 192-192s-86-192-192-192H192zM496 168a40 40 0 1 1 0 80 40 40 0 1 1 0-80zM392 304a40 40 0 1 1 80 0 40 40 0 1 1 -80 0zM168 200c0-13.3 10.7-24 24-24s24 10.7 24 24v32h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H216v32c0 13.3-10.7 24-24 24s-24-10.7-24-24V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h32V200z" />
               </svg>
             </label>
+            <label className="reset">
+              <button
+                className="resetButton"
+                onClick={() => {
+                  setSelectedStatus("none");
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M125.7 160H176c17.7 0 32 14.3 32 32s-14.3 32-32 32H48c-17.7 0-32-14.3-32-32V64c0-17.7 14.3-32 32-32s32 14.3 32 32v51.2L97.6 97.6c87.5-87.5 229.3-87.5 316.8 0s87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3s-163.8-62.5-226.3 0L125.7 160z" />
+                </svg>
+              </button>
+            </label>
           </div>
           <div
             className="modal-content selectTime"
@@ -447,7 +459,14 @@ const GameDetails = ({
               alignItems: "start",
             }}
           >
-            <div style={{ display: "inline" }}>
+            <div className="time-line">
+              <a href="https://ytplaylist-len.sharats.dev/">
+                <img
+                  src="https://ytplaylist-len.sharats.dev/static/favicon.png"
+                  alt=""
+                  width={"35px"}
+                />
+              </a>
               Время:
               <input
                 type="text"

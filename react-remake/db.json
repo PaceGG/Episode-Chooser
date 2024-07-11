@@ -23,18 +23,21 @@
       "additionalGames": [
         {
           "name": "Penumbra: Overture",
-          "status": "none",
-          "time": 0
+          "status": "inProcess",
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Penumbra: Black Plague",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         },
         {
           "name": "Penumbra: Requiem",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -287,7 +290,7 @@
           "numberOfEps": 28
         },
         {
-          "name": "S.T.A.L.K.E.R. Lost Alpha Enhanced Edition",
+          "name": "S.T.A.L.K.E.R.: Lost Alpha Enhanced Edition",
           "status": "bad",
           "time": 12749,
           "numberOfEps": 2
@@ -295,11 +298,17 @@
         {
           "name": "S.T.A.L.K.E.R.: Lost Alpha DC",
           "status": "complete",
+          "time": 96034,
+          "numberOfEps": 28
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: Lost Alpha Enhanced Edition [ng++]",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
         {
-          "name": "S.T.A.L.K.E.R.: New Project",
+          "name": "S.T.A.L.K.E.R.: Second Breath of Clear Sky",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
@@ -308,6 +317,12 @@
           "name": "S.T.A.L.K.E.R.: Call of Pripyat Gunslinger",
           "status": "none",
           "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: New Project",
+          "status": "none",
+          "time": null,
           "numberOfEps": 0
         }
       ]
@@ -491,14 +506,14 @@
         },
         {
           "name": "Life Is Strange 2",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 48268,
+          "numberOfEps": 19
         },
         {
-          "name": "Life Is Strange: True Colors",
-          "status": "none",
-          "time": 0,
+          "name": "Life is Strange: True Colors",
+          "status": "bad",
+          "time": null,
           "numberOfEps": 0
         }
       ]
@@ -530,7 +545,8 @@
         {
           "name": "Dead Space (2023)",
           "status": "none",
-          "time": 0
+          "time": 0,
+          "numberOfEps": null
         },
         {
           "name": "Dead Space 2",
@@ -1001,20 +1017,172 @@
           "numberOfEps": 0
         }
       ]
+    },
+    {
+      "id": "67a9",
+      "mainName": "Assassin’s Creed",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "Assassin’s Creed",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed: Altaïr’s Chronicles",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed: Bloodlines",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed II",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed II: Discovery",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed: Brotherhood",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed: Revelations",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed III",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed III Assassin’s Creed III: Liberation",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed IV: Black Flag",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed: Pirates",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed: Freedom Cry",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Unity",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Identity",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Rogue",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Chronicles: China",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Syndicate",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Chronicles: India",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Chronicles: Russia",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Origins",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Odyssey",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Rebellion",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Valhalla",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Assassin’s Creed Mirage",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        }
+      ]
     }
   ],
   "showcase": [
     {
       "id": "0",
-      "name": "Life Is Strange 2",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/532210/library_600x900_2x.jpg?t=1599730221",
-      "color": "#d79e17"
+      "name": "S.T.A.L.K.E.R.: Lost Alpha Enhanced Edition [ng++]",
+      "coverart": "https://cdn2.steamgriddb.com/thumb/5ab25c37f2e9a302bba1618afe98d660.jpg",
+      "color": "#ffc800"
     },
     {
       "id": "1",
-      "name": "Resident Evil 5",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/21690/library_600x900_2x.jpg?t=1677549529",
-      "color": "#e88631"
+      "name": "Penumbra: Overture",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/22180/library_600x900_2x.jpg?t=1667218895",
+      "color": "#6c99cf"
     }
   ],
   "links": [
