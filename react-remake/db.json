@@ -23,19 +23,19 @@
       "additionalGames": [
         {
           "name": "Penumbra: Overture",
-          "status": "inProcess",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Penumbra: Black Plague",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Penumbra: Requiem",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         }
@@ -48,23 +48,27 @@
       "additionalGames": [
         {
           "name": "Amnesia: The Dark Descent",
-          "status": "none",
-          "time": 0
+          "status": "bad",
+          "time": 0,
+          "numberOfEps": null
         },
         {
           "name": "Amnesia: A Machine for Pigs",
-          "status": "none",
-          "time": 0
+          "status": "bad",
+          "time": 0,
+          "numberOfEps": null
         },
         {
           "name": "Amnesia: Rebirth",
-          "status": "none",
-          "time": 0
+          "status": "bad",
+          "time": 0,
+          "numberOfEps": null
         },
         {
           "name": "Amnesia: The Bunker",
-          "status": "none",
-          "time": 0
+          "status": "bad",
+          "time": 0,
+          "numberOfEps": null
         }
       ]
     },
@@ -309,7 +313,7 @@
         },
         {
           "name": "S.T.A.L.K.E.R.: Second Breath of Clear Sky",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -322,7 +326,13 @@
         {
           "name": "S.T.A.L.K.E.R.: New Project",
           "status": "none",
-          "time": null,
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: Ф.О.Т.О.Г.Р.А.Ф.",
+          "status": "none",
+          "time": 0,
           "numberOfEps": 0
         }
       ]
@@ -565,7 +575,8 @@
       "mainName": "Atomic Heart",
       "mainTime": 0,
       "additionalGames": [],
-      "mainStatus": "none"
+      "mainStatus": "inProcess",
+      "mainNumberOfEps": 0
     },
     {
       "id": "e221",
@@ -715,9 +726,9 @@
         },
         {
           "name": "Resident Evil 5",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 22800,
+          "numberOfEps": 9
         },
         {
           "name": "Resident Evil 6",
@@ -1174,15 +1185,15 @@
   "showcase": [
     {
       "id": "0",
-      "name": "S.T.A.L.K.E.R.: Lost Alpha Enhanced Edition [ng++]",
-      "coverart": "https://cdn2.steamgriddb.com/thumb/5ab25c37f2e9a302bba1618afe98d660.jpg",
-      "color": "#ffc800"
+      "name": "S.T.A.L.K.E.R.: Second Breath of Clear Sky",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/20510/library_600x900_2x.jpg?t=1669089022",
+      "color": "#66769e"
     },
     {
       "id": "1",
-      "name": "Penumbra: Overture",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/22180/library_600x900_2x.jpg?t=1667218895",
-      "color": "#6c99cf"
+      "name": "Atomic Heart",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/668580/library_600x900_2x.jpg?t=1717419095",
+      "color": "#e13b2c"
     }
   ],
   "links": [

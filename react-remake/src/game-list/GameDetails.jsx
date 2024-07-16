@@ -115,13 +115,13 @@ const GameDetails = ({
   function convertTimeStringToSeconds(inputString) {
     // Проверяем, что inputString не является undefined или null
     if (!inputString || typeof inputString !== "string") {
-      return inputString;
+      return parseInt(0);
     }
 
     // Извлекаем часть строки, содержащую время
     const timePartIndex = inputString.indexOf(":");
     if (timePartIndex === -1) {
-      return inputString;
+      return parseInt(inputString);
     }
 
     const timePart = inputString.substring(timePartIndex + 1).trim();
@@ -133,10 +133,10 @@ const GameDetails = ({
       const seconds = parseInt(timeParts[2], 10);
 
       if (isNaN(hours) || isNaN(minutes) || isNaN(seconds)) {
-        return inputString;
+        return parseInt(inputString);
       }
       let totalSeconds = hours * 3600 + minutes * 60 + seconds;
-      return totalSeconds;
+      return parseInt(totalSeconds);
     }
 
     // Разбиваем время на компоненты (дни, часы, минуты, секунды)

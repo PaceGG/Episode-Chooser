@@ -67,10 +67,6 @@ first_game_name = data['showcase'][0]['name'].replace(":", "")
 second_game_name = data['showcase'][1]['name'].replace(":", "")
 third_game_name = 'SnowRunner'
 
-# Название ярлыков
-first_game_ico = "Cuphead"
-second_game_ico = 'ladc'
-
 # create files:
 # ng.png in icons_new folder
 # run mkdir.py
@@ -90,8 +86,8 @@ second_game_video_extra = ""
 
 # Programm
 # Путри к играм
-first_game_path = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Lost Alpha Enhanced Edition.lnk"
-second_game_path = "C:\\Users\\yura3\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Launcher (2).lnk"
+first_game_path = "C:\\Users\\yura3\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Play GUNSLINGER Mod.lnk"
+second_game_path = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\TileIconify\\Custom Shortcuts\\Atomic Heart\\Atomic Heart.lnk"
 third_game_path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 
 # Пути к файлам видео
