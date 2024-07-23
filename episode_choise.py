@@ -12,16 +12,6 @@ import json
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)
 
-
-
-test = 0
-
-if test == 1:
-    print(data['showcase'][0]['name'])
-    print(data['showcase'][1]['name'])
-    exit(0)
-
-
 # Переключение раскладки клавиатуры на английскую
 def setEngLayout():
     window_handle = win32gui.GetForegroundWindow()
@@ -65,7 +55,10 @@ chat_id = '-1002035302407'
 # Официальные назцания игр
 first_game_name = data['showcase'][0]['name'].replace(":", "")
 second_game_name = data['showcase'][1]['name'].replace(":", "")
-third_game_name = 'SnowRunner'
+third_game_name = 'SnowRunner [ng+]'
+
+first_game_short_name = data['showcase'][0]['shortName']
+second_game_short_name = data['showcase'][1]['shortName']
 
 # create files:
 # ng.png in icons_new folder
@@ -260,7 +253,7 @@ if force_flag:
 
 
 # Game list/today
-    
+  
 more_game = abs(first_episodes-second_episodes)//3 + 1
 
 if first_episodes > second_episodes:
@@ -277,7 +270,41 @@ for i in range(first_chanse):
 for i in range(second_chanse):
     game_list.append(second_game_name)
 
-today = game_list[randint(0,len(game_list)-1)]
+def check_frequency():
+    with open("games_log.txt", 'rb') as f:
+        # Сначала переместимся в конец файла
+        f.seek(0, 2)
+        end_pos = f.tell()
+        
+        # Теперь будем читать файл с конца, начиная с позиции end_pos
+        buffer_size = 1024
+        buffer = b''
+        pos = end_pos
+        lines = []
+        
+        while pos > 0 and len(lines) < 4:
+            # Определяем текущую позицию для чтения
+            start_pos = max(pos - buffer_size, 0)
+            f.seek(start_pos)
+            buffer = f.read(pos - start_pos) + buffer
+            pos = start_pos
+            
+            # Разбиваем буфер на строки
+            lines = buffer.split(b'\n')[-4:]
+            buffer = lines[0]
+            
+        last_three_games = [line.decode('utf-8')[:-1] for line in lines if line]
+
+        if len(set(last_three_games)) > 1:
+            return game_list[randint(0,len(game_list)-1)], "random", last_three_games
+        elif len(set(last_three_games)) == 1:
+            popular_game = last_three_games[0]
+            if popular_game == first_game_name:
+                unpopular_game = second_game_name
+            else:
+                unpopular_game = first_game_name
+            return unpopular_game, "force", last_three_games
+today, today_method, last_three_games = check_frequency()
     
 
 # Game_time
@@ -366,9 +393,9 @@ def edit_tg_info_message():
     if first_episodes == second_episodes == 0:
         sr_info_add_message = "• SR: 4"
         if earlier == second_game_name:
-            add_message = f"• {second_game_name}: 2"
+            add_message = f"• {second_game_short_name}: 2"
         elif earlier == first_game_name:
-            add_message = f"• {first_game_name}: 2"
+            add_message = f"• {first_game_short_name}: 2"
 
         edit_telegram_message(bot_token, chat_id, 396, f"""
 {sr_info_add_message}
@@ -376,11 +403,18 @@ def edit_tg_info_message():
     """)
         return
 
-
-
-
     first_game_count = game_list.count(first_game_name)
     second_game_count = game_list.count(second_game_name)
+
+    if len(set(last_three_games[1:] + [today])) == 1:
+        popular_game = last_three_games[-1]
+        if popular_game == first_game_short_name:
+            unpopular_game = second_game_short_name
+        else:
+            unpopular_game = first_game_short_name
+        force_info_message = f"• Force: {unpopular_game}"
+    else:
+        force_info_message = ""
 
     if first_game_count == second_game_count == 1:
         if today == first_game_name: second_game_count += 1
@@ -392,9 +426,9 @@ def edit_tg_info_message():
         if today == first_game_name: second_game_count += 1
         if today == second_game_name: second_game_count -= 1
 
-    if first_game_count == second_game_count == 1: add_message = f"• {first_game_name}: {first_game_count}" + "\n" + f"• {second_game_name}: {second_game_count}"
-    if first_game_count > 1: add_message = f"• {first_game_name}: {first_game_count}"
-    if second_game_count > 1: add_message = f"• {second_game_name}: {second_game_count}"
+    if first_game_count == second_game_count == 1: add_message = f"• Шансы равны"
+    if first_game_count > 1: add_message = f"• {first_game_short_name}: {first_game_count}"
+    if second_game_count > 1: add_message = f"• {second_game_short_name}: {second_game_count}"
 
 
     if 5 - games_for_sr_counter - 1 != 0: sr_info_add_message = f"• SR: {5 - games_for_sr_counter - 1}"
@@ -403,8 +437,13 @@ def edit_tg_info_message():
 
     edit_telegram_message(bot_token, chat_id, 396, f"""
 {sr_info_add_message}
+{force_info_message}
 {add_message}
     """)
+
+def add_game_log(game):
+    with open("games_log.txt", "a") as f:
+        f.write(f"{game}\n")
 
 def run_game(x):
     # os.startfile(f'"{"D:/Program Files/obs-studio/bin/64bit/obs64.exe"}"')
@@ -412,11 +451,13 @@ def run_game(x):
         print(first_game_name)
         send_image(bot_token, chat_id, first_game_icon, first_game_caption)
         addEp(first_folder_name)
+        add_game_log(first_game_name)
         os.startfile(first_game_path)
     if x == second_game_name:
         print(second_game_name)
         send_image(bot_token, chat_id, second_game_icon, second_game_caption)
         addEp(second_folder_name)
+        add_game_log(second_game_name)
         os.startfile(second_game_path)
     if x == 'SR':
         print(third_game_name)
@@ -451,6 +492,11 @@ def print_game_list_newFormat():
     first_game_count = game_list.count(first_game_name)
     second_game_count = game_list.count(second_game_name)
 
+    if today_method == "force":
+        print(f"Force: {today}\n")
+        if today == first_game_name: add_edit_text(f"• Force: {first_game_short_name}")
+        if today == second_game_name: add_edit_text(f"• Force: {second_game_short_name}")
+
     if first_game_count == second_game_count == 1:
         print(f"{first_game_name}: {first_game_count}")
         print(f'{second_game_name}: {second_game_count}')
@@ -458,11 +504,11 @@ def print_game_list_newFormat():
         return
     if first_game_count > 1:
         print(f'{first_game_name}: {first_game_count}')
-        add_edit_text(f"• {first_game_name}: {first_game_count}")
+        add_edit_text(f"• {first_game_short_name}: {first_game_count}")
         return
     if second_game_count > 1:
         print(f'{second_game_name}: {second_game_count}')
-        add_edit_text(f"• {second_game_name}: {second_game_count}")
+        add_edit_text(f"• {second_game_short_name}: {second_game_count}")
         return
 
 def print_info():

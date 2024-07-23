@@ -307,19 +307,25 @@
         },
         {
           "name": "S.T.A.L.K.E.R.: Lost Alpha Enhanced Edition [ng++]",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 26932,
+          "numberOfEps": 4
         },
         {
           "name": "S.T.A.L.K.E.R.: Second Breath of Clear Sky",
+          "status": "complete",
+          "time": 8081,
+          "numberOfEps": 3
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: Clear Sky",
           "status": "inProcess",
           "time": 0,
-          "numberOfEps": 0
+          "numberOfEps": 3
         },
         {
           "name": "S.T.A.L.K.E.R.: Call of Pripyat Gunslinger",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -331,6 +337,43 @@
         },
         {
           "name": "S.T.A.L.K.E.R.: Ф.О.Т.О.Г.Р.А.Ф.",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+
+        {
+          "name": "S.T.A.L.K.E.R.: Anomaly Redux",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: Dead Air",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: NLC 7",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: Золотой Шар. Завершение",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: Объединённый пак",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R.: OGSR MOD",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
@@ -1185,13 +1228,15 @@
   "showcase": [
     {
       "id": "0",
-      "name": "S.T.A.L.K.E.R.: Second Breath of Clear Sky",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/20510/library_600x900_2x.jpg?t=1669089022",
-      "color": "#66769e"
+      "name": "S.T.A.L.K.E.R.: Call of Pripyat Gunslinger",
+      "shortName": "STALKER",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/41700/library_600x900_2x.jpg?t=1669088580",
+      "color": "#f9a240"
     },
     {
       "id": "1",
       "name": "Atomic Heart",
+      "shortName": "Atomic Heart",
       "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/668580/library_600x900_2x.jpg?t=1717419095",
       "color": "#e13b2c"
     }
