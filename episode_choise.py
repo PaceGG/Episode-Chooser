@@ -491,6 +491,13 @@ def add_game_log(game):
     with open("games_log.txt", "a") as f:
         f.write(f"{game}\n")
 
+def snowrunner_updater():
+    updater_path = f"D:/Program Files/Shadow Play/SnowRunner/update.txt"
+    if os.path.exists(updater_path): os.remove(updater_path)
+    else:
+        with open(updater_path, 'w') as f:
+            pass
+
 def run_game(x):
     # os.startfile(f'"{"D:/Program Files/obs-studio/bin/64bit/obs64.exe"}"')
     if x == first_game_name:
@@ -585,12 +592,14 @@ def print_info():
     print_game_list_newFormat()
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 1
+run_flag = 0
 
 setEngLayout()
 
 print_info()
 edit_telegram_message(bot_token, chat_id, 396, edit_text)
+
+snowrunner_updater()
 
 if run_flag:
     print("\n"*10)
