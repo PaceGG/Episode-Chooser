@@ -66,7 +66,7 @@ second_game_short_name = data['showcase'][1]['shortName']
 
 # Telegram captions
 first_game_extra_caption = ""
-second_game_extra_caption = ""
+second_game_extra_caption = "Инстинкт Истребления"
 
 # Пути к файлам видео
 first_game_video = first_game_name
@@ -102,6 +102,10 @@ def create_game_structure(game_name, base_directory):
     episodes_log_path = os.path.join(previews_path, "episodes log.txt")
     with open(episodes_log_path, 'w'):
         pass
+    episodes_time_path = os.path.join(previews_path, "episodes time.txt")
+    with open(episodes_time_path, 'w') as f:
+        f.write("0\n0")
+        
     print("Директории созданы")
 
 def icon_rename(game_name):
@@ -117,12 +121,22 @@ def icon_rename(game_name):
             return
     print("Ни один из файлов для переименовывания не найден")
 
+# Время игр
+def get_time(dir):
+    dir += "/episodes time.txt"
+
+    with open(dir, 'r') as f:
+        time = int(f.readline())
+        additional_time = int(f.readline())
+        time += additional_time
+    return time
+
 # Номер последней серии
 def get_last_episode(dir):
     dir += "/episodes log.txt"
 
     try: open(dir)
-    except:
+    except: 
         if dir.find(first_game_name) != -1:
             game_name = first_game_name
         if dir.find(second_game_name) != -1:
@@ -153,6 +167,38 @@ first_game_last_ep, first_game_last_ep_real = get_last_episode(first_folder_name
 second_game_last_ep, second_game_last_ep_real = get_last_episode(second_folder_name)
 third_game_last_ep, third_game_last_ep_real = get_last_episode(third_folder_name)
 
+first_game_time = get_time(first_folder_name)
+second_game_time = get_time(second_folder_name)
+third_game_time = get_time(third_folder_name)
+
+min_time = min(first_game_time, second_game_time)
+first_game_time -= min_time
+second_game_time -= min_time
+
+first_game_time_dir = first_folder_name + "episodes time.txt"
+second_game_time_dir = second_folder_name + "episodes time.txt"
+
+with open(first_game_time_dir, 'w') as f:
+    f.write(f"{str(first_game_time)}\n0")
+with open(second_game_time_dir, 'w') as f:
+    f.write(f"{str(second_game_time)}\n0")
+
+first_game_time = (120 - first_game_time)/3
+second_game_time = (120 - second_game_time)/3
+third_game_time = 120 - third_game_time
+
+if first_game_time.is_integer(): first_game_time = int(first_game_time)
+if second_game_time.is_integer(): second_game_time = int(second_game_time)
+
+if first_game_time != 40: first_game_time = f"{first_game_time} ({first_game_time*3})"
+else: first_game_time = ""
+if second_game_time != 40: second_game_time = f"{second_game_time} ({second_game_time*3})"
+else: second_game_time = ""
+if third_game_time == 120: third_game_time = ""
+
+first_game_length = first_game_time
+second_game_length = second_game_time
+third_game_length = third_game_time
 
 
 if first_game_extra_caption != "": first_game_extra_caption = ": "+first_game_extra_caption
@@ -448,19 +494,19 @@ def add_game_log(game):
 def run_game(x):
     # os.startfile(f'"{"D:/Program Files/obs-studio/bin/64bit/obs64.exe"}"')
     if x == first_game_name:
-        print(first_game_name)
+        print(f"{first_game_name}{f": {first_game_length}" if first_game_length else ""}")
         send_image(bot_token, chat_id, first_game_icon, first_game_caption)
         addEp(first_folder_name)
         add_game_log(first_game_name)
         os.startfile(first_game_path)
     if x == second_game_name:
-        print(second_game_name)
+        print(f"{second_game_name}{f": {second_game_length}" if second_game_length else ""}")
         send_image(bot_token, chat_id, second_game_icon, second_game_caption)
         addEp(second_folder_name)
         add_game_log(second_game_name)
         os.startfile(second_game_path)
     if x == 'SR':
-        print(third_game_name)
+        print(f"{third_game_name}{f": {third_game_length}" if third_game_length else ""}")
         send_image(bot_token, chat_id, third_game_icon, third_game_caption)
         addEp(third_folder_name)
         os.startfile(third_game_path)
@@ -498,18 +544,18 @@ def print_game_list_newFormat():
         if today == second_game_name: add_edit_text(f"• Force: {second_game_short_name}")
 
     if first_game_count == second_game_count == 1:
-        print(f"{first_game_name}: {first_game_count}")
-        print(f'{second_game_name}: {second_game_count}')
+        print("Шансы равны")
         add_edit_text("Шансы равны")
-        return
-    if first_game_count > 1:
+    elif first_game_count > 1:
         print(f'{first_game_name}: {first_game_count}')
         add_edit_text(f"• {first_game_short_name}: {first_game_count}")
-        return
-    if second_game_count > 1:
+    elif second_game_count > 1:
         print(f'{second_game_name}: {second_game_count}')
         add_edit_text(f"• {second_game_short_name}: {second_game_count}")
-        return
+
+    print()
+    if first_game_length: print(f"{first_game_name}: {first_game_length}")
+    if second_game_length: print(f"{second_game_name}: {second_game_length}")
 
 def print_info():
     global games_for_sr_counter
