@@ -3,6 +3,7 @@ import os
 from os.path import *
 from time import *
 from datetime import datetime
+from math import ceil
 import win32api
 import win32gui
 import requests
@@ -66,7 +67,7 @@ second_game_short_name = data['showcase'][1]['shortName']
 
 # Telegram captions
 first_game_extra_caption = ""
-second_game_extra_caption = "Инстинкт Истребления"
+second_game_extra_caption = ""
 
 # Пути к файлам видео
 first_game_video = first_game_name
@@ -80,7 +81,7 @@ second_game_video_extra = ""
 # Programm
 # Путри к играм
 first_game_path = "C:\\Users\\yura3\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Play GUNSLINGER Mod.lnk"
-second_game_path = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\TileIconify\\Custom Shortcuts\\Atomic Heart\\Atomic Heart.lnk"
+second_game_path = r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TileIconify\Custom Shortcuts\Dead Space\Dead Space.lnk"
 third_game_path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 
 # Пути к файлам видео
@@ -183,16 +184,20 @@ with open(first_game_time_dir, 'w') as f:
 with open(second_game_time_dir, 'w') as f:
     f.write(f"{str(second_game_time)}\n0")
 
-first_game_time = (120 - first_game_time)/3
-second_game_time = (120 - second_game_time)/3
+first_game_time = ceil((120 - first_game_time)/3)
+second_game_time = ceil((120 - second_game_time)/3)
 third_game_time = 120 - third_game_time
+
+def time_format(minutes):
+    if minutes > 60: return f"{minutes//60:02}:{minutes%60:02} ({minutes})"
+    return str(ceil(minutes))
 
 if first_game_time.is_integer(): first_game_time = int(first_game_time)
 if second_game_time.is_integer(): second_game_time = int(second_game_time)
 
-if first_game_time != 40: first_game_time = f"{first_game_time} ({first_game_time*3})"
+if first_game_time != 40: first_game_time = f"::({time_format(first_game_time) + " / "}{time_format(first_game_time*3/2) + " / "}{time_format(first_game_time*3)})::"
 else: first_game_time = ""
-if second_game_time != 40: second_game_time = f"{second_game_time} ({second_game_time*3})"
+if second_game_time != 40: second_game_time = f"::({time_format(second_game_time) + " / "}{time_format(second_game_time*3/2) + " / "}{time_format(second_game_time*3)})::"
 else: second_game_time = ""
 if third_game_time == 120: third_game_time = ""
 
@@ -555,14 +560,14 @@ def print_game_list_newFormat():
         add_edit_text("Шансы равны")
     elif first_game_count > 1:
         print(f'{first_game_name}: {first_game_count}')
-        add_edit_text(f"• {first_game_short_name}: {first_game_count}")
+        add_edit_text(f"• {first_game_short_name} {first_game_count}")
     elif second_game_count > 1:
         print(f'{second_game_name}: {second_game_count}')
-        add_edit_text(f"• {second_game_short_name}: {second_game_count}")
+        add_edit_text(f"• {second_game_short_name} {second_game_count}")
 
     print()
-    if first_game_length: print(f"{first_game_name}: {first_game_length}")
-    if second_game_length: print(f"{second_game_name}: {second_game_length}")
+    if first_game_length: print(f"{first_game_name} {first_game_length}")
+    if second_game_length: print(f"{second_game_name} {second_game_length}")
 
 def print_info():
     global games_for_sr_counter
@@ -592,14 +597,12 @@ def print_info():
     print_game_list_newFormat()
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 0
+run_flag = 1
 
 setEngLayout()
 
 print_info()
 edit_telegram_message(bot_token, chat_id, 396, edit_text)
-
-snowrunner_updater()
 
 if run_flag:
     print("\n"*10)
