@@ -128,7 +128,7 @@ def get_time(dir):
     dir += "/episodes time.txt"
 
     with open(dir, 'r') as f:
-        time = int(f.readline())
+        real_time = int(f.readline())
         my_time = f.readline()
 
         if "," in my_time:
@@ -141,17 +141,20 @@ def get_time(dir):
                 else:
                     time = int(time)
                 total_time += time
-        my_time = total_time
-        if my_time == 0:
-            return time
+            my_time = total_time
         else:
-            extra_time = my_time - time
-            time = 120 - extra_time
+            my_time = int(my_time)
+
+        if my_time == 0:
+            return real_time
+        else:
+            extra_time = my_time - real_time
+            real_time = 120 - extra_time
     
     with open(dir, 'w') as f:
         f.write(f"{time}\n0")
     
-    return time
+    return real_time
 
 # Номер последней серии
 def get_last_episode(dir):
@@ -629,7 +632,7 @@ def print_info():
     print_game_list_newFormat()
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 1
+run_flag = 0
 
 setEngLayout()
 
