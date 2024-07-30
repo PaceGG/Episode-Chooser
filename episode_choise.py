@@ -60,6 +60,7 @@ third_game_name = 'SnowRunner [ng+]'
 
 first_game_short_name = data['showcase'][0]['shortName']
 second_game_short_name = data['showcase'][1]['shortName']
+third_game_short_name = 'SR'
 
 # create files:
 # ng.png in icons_new folder
@@ -213,11 +214,15 @@ def time_format(minutes):
 if first_game_time.is_integer(): first_game_time = int(first_game_time)
 if second_game_time.is_integer(): second_game_time = int(second_game_time)
 
+first_game_total_length = time_format(first_game_time)
+second_game_total_length = time_format(second_game_time)
+third_game_total_length = time_format(third_game_time)
 if first_game_time != 120: first_game_time = f"::({time_format(first_game_time/3) + " / "}{time_format(first_game_time/3*2) + " / "}{time_format(first_game_time)})::"
 else: first_game_time = ""
 if second_game_time != 120: second_game_time = f"::({time_format(second_game_time/3) + " / "}{time_format(second_game_time/3*2) + " / "}{time_format(second_game_time)})::"
 else: second_game_time = ""
-# if third_game_time == 120: third_game_time = ""
+if third_game_time != 120: third_game_time = f"::({time_format(third_game_time)})::"
+else: third_game_time = ""
 
 first_game_length = first_game_time
 second_game_length = second_game_time
@@ -487,7 +492,7 @@ def edit_tg_info_message():
 
 
     if games_for_sr_counter - 1 != 0: sr_info_add_message = f"• SR: {games_for_sr_counter - 1}"
-    else: sr_info_add_message = "• Сегодня SnowRunner!!!"
+    else: sr_info_add_message = f"• Сегодня SnowRunner!!! • {third_game_short_name}: {third_game_total_length}" if third_game_length else "• Сегодня SnowRunner!!!"
 
 
     edit_telegram_message(bot_token, chat_id, 396, f"""
@@ -564,14 +569,18 @@ def print_game_list_newFormat():
         add_edit_text("Шансы равны")
     elif first_game_count > 1:
         print(f'{first_game_name}: {first_game_count}')
-        add_edit_text(f"• {first_game_short_name} {first_game_count}")
+        add_edit_text(f"• {first_game_short_name}: {first_game_count}")
     elif second_game_count > 1:
         print(f'{second_game_name}: {second_game_count}')
-        add_edit_text(f"• {second_game_short_name} {second_game_count}")
+        add_edit_text(f"• {second_game_short_name}: {second_game_count}")
 
     print()
     if first_game_length: print(f"{first_game_name} {first_game_length}")
     if second_game_length: print(f"{second_game_name} {second_game_length}")
+    if first_game_length or second_game_length or third_game_length: add_edit_text("")
+    add_edit_text(f"• {first_game_short_name}: {first_game_total_length}") if first_game_length else ""
+    add_edit_text(f"• {second_game_short_name}: {second_game_total_length}") if second_game_length else ""
+    add_edit_text(f"• {third_game_short_name}: {third_game_total_length}") if third_game_length else ""
 
 def print_info():
     global games_for_sr_counter
@@ -589,10 +598,13 @@ def print_info():
 
     if games_for_sr_counter > 0:
         print(f"До SnowRunner'a ещё {games_for_sr_counter} сери{ep_prefix}")
+        print()
         add_edit_text(f"• SR: {games_for_sr_counter}")
     else:
-        print(f"Сегодня SnowRunner")
+        print(f"Сегодня SnowRunner: {third_game_length}")
+        print()
         add_edit_text("• Сегодня SnowRunner!!!")
+        add_edit_text(f"• {third_game_short_name}: {third_game_total_length}") if third_game_length else ""
         
         
     # print(today)
