@@ -129,7 +129,19 @@ def get_time(dir):
 
     with open(dir, 'r') as f:
         time = int(f.readline())
-        my_time = int(f.readline())
+        my_time = f.readline()
+
+        if "," in my_time:
+            total_time = 0
+            my_time = my_time.split(",")
+            for time in my_time:
+                if ":" in time:
+                    time = time.split(":")
+                    time = int(time[0]) * 60 + int(time[1])
+                else:
+                    time = int(time)
+                total_time += time
+        my_time = total_time
         if my_time == 0:
             return time
         else:
@@ -494,11 +506,17 @@ def edit_tg_info_message():
     if games_for_sr_counter - 1 != 0: sr_info_add_message = f"• SR: {games_for_sr_counter - 1}"
     else: sr_info_add_message = f"• Сегодня SnowRunner!!! • {third_game_short_name}: {third_game_total_length}" if third_game_length else "• Сегодня SnowRunner!!!"
 
+    length_message = ""
+    length_message += f"• {first_game_short_name}: {first_game_length}\n" if first_game_length else ""
+    length_message += f"• {second_game_short_name}: {second_game_length}\n" if second_game_length else ""
+    length_message += f"• {third_game_short_name}: {third_game_total_length}\n" if third_game_length else ""
+
 
     edit_telegram_message(bot_token, chat_id, 396, f"""
 {sr_info_add_message}
 {force_info_message}
 {add_message}
+{length_message}
     """)
 
 def add_game_log(game):
@@ -611,7 +629,7 @@ def print_info():
     print_game_list_newFormat()
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 0
+run_flag = 1
 
 setEngLayout()
 
