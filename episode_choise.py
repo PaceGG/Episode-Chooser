@@ -128,8 +128,16 @@ def get_time(dir):
 
     with open(dir, 'r') as f:
         time = int(f.readline())
-        additional_time = int(f.readline())
-        time += additional_time
+        my_time = int(f.readline())
+        if my_time == 0:
+            return time
+        else:
+            extra_time = my_time - time
+            time = time - extra_time
+    
+    with open(dir, 'w') as f:
+        f.write(f"{time}\n0")
+    
     return time
 
 # Номер последней серии
@@ -172,32 +180,31 @@ first_game_time = get_time(first_folder_name)
 second_game_time = get_time(second_folder_name)
 third_game_time = get_time(third_folder_name)
 
-min_time = min(first_game_time, second_game_time)
-first_game_time -= min_time
-second_game_time -= min_time
+# Time equalization
+first_game_time_penalty = 120 - first_game_time
+second_game_time_penalty = 120 - second_game_time
+penalty_min = min(first_game_time_penalty, second_game_time_penalty)
+first_game_time += penalty_min
+second_game_time += penalty_min
 
 first_game_time_dir = first_folder_name + "episodes time.txt"
 second_game_time_dir = second_folder_name + "episodes time.txt"
-
 with open(first_game_time_dir, 'w') as f:
     f.write(f"{str(first_game_time)}\n0")
 with open(second_game_time_dir, 'w') as f:
     f.write(f"{str(second_game_time)}\n0")
 
-first_game_time = ceil((120 - first_game_time)/3)
-second_game_time = ceil((120 - second_game_time)/3)
-third_game_time = 120 - third_game_time
-
 def time_format(minutes):
+    minutes = ceil(minutes)
     if minutes > 60: return f"{minutes//60:02}:{minutes%60:02} ({minutes})"
     return str(ceil(minutes))
 
 if first_game_time.is_integer(): first_game_time = int(first_game_time)
 if second_game_time.is_integer(): second_game_time = int(second_game_time)
 
-if first_game_time != 40: first_game_time = f"::({time_format(first_game_time) + " / "}{time_format(first_game_time*3/2) + " / "}{time_format(first_game_time*3)})::"
+if first_game_time != 120: first_game_time = f"::({time_format(first_game_time/3) + " / "}{time_format(first_game_time/3*2) + " / "}{time_format(first_game_time)})::"
 else: first_game_time = ""
-if second_game_time != 40: second_game_time = f"::({time_format(second_game_time) + " / "}{time_format(second_game_time*3/2) + " / "}{time_format(second_game_time*3)})::"
+if second_game_time != 120: second_game_time = f"::({time_format(second_game_time/3) + " / "}{time_format(second_game_time/3*2) + " / "}{time_format(second_game_time)})::"
 else: second_game_time = ""
 if third_game_time == 120: third_game_time = ""
 
@@ -206,6 +213,7 @@ second_game_length = second_game_time
 third_game_length = third_game_time
 
 
+# Game caption
 if first_game_extra_caption != "": first_game_extra_caption = ": "+first_game_extra_caption
 if second_game_extra_caption != "": second_game_extra_caption = ": "+second_game_extra_caption
 
@@ -259,9 +267,9 @@ current_date = int(time())
 
 # Когда будет снов ранер new
 with open("D:/Program Files/Shadow Play/SnowRunner/previews/snowrunner counter.txt") as f:
-    times = [int(time) for time in f.readlines()]
+    games_for_sr_counter = int(f.readline())
 
-games_for_sr_counter = len(times)
+print(games_for_sr_counter)
 
 
 # earlier & start_from
@@ -597,7 +605,7 @@ def print_info():
     print_game_list_newFormat()
     
 # 1 для запуска игры, 0 для вывода списка игр
-run_flag = 1
+run_flag = 0
 
 setEngLayout()
 
