@@ -133,7 +133,7 @@ def get_time(dir):
             return time
         else:
             extra_time = my_time - time
-            time = time - extra_time
+            time = 120 - extra_time
     
     with open(dir, 'w') as f:
         f.write(f"{time}\n0")
@@ -189,10 +189,21 @@ second_game_time += penalty_min
 
 first_game_time_dir = first_folder_name + "episodes time.txt"
 second_game_time_dir = second_folder_name + "episodes time.txt"
+third_game_time_dir = third_folder_name + "episodes time.txt"
 with open(first_game_time_dir, 'w') as f:
-    f.write(f"{str(first_game_time)}\n0")
+    f.write(f"{first_game_time}\n0")
 with open(second_game_time_dir, 'w') as f:
-    f.write(f"{str(second_game_time)}\n0")
+    f.write(f"{second_game_time}\n0")
+
+with open("D:/Program Files/Shadow Play/SnowRunner/previews/snowrunner counter.txt", 'r') as f:
+    games_for_sr_counter = int(f.readline())
+
+if third_game_time <= 0:
+    with open(third_game_time_dir, 'w') as f:
+        f.write(f"{120 + third_game_time}\n0")
+    with open("D:/Program Files/Shadow Play/SnowRunner/previews/snowrunner counter.txt", 'w') as f:
+        f.write(f"{games_for_sr_counter+5}\n")
+
 
 def time_format(minutes):
     minutes = ceil(minutes)
@@ -206,7 +217,7 @@ if first_game_time != 120: first_game_time = f"::({time_format(first_game_time/3
 else: first_game_time = ""
 if second_game_time != 120: second_game_time = f"::({time_format(second_game_time/3) + " / "}{time_format(second_game_time/3*2) + " / "}{time_format(second_game_time)})::"
 else: second_game_time = ""
-if third_game_time == 120: third_game_time = ""
+# if third_game_time == 120: third_game_time = ""
 
 first_game_length = first_game_time
 second_game_length = second_game_time
@@ -263,13 +274,6 @@ else:
     third_date = 0
     
 current_date = int(time())
-
-
-# Когда будет снов ранер new
-with open("D:/Program Files/Shadow Play/SnowRunner/previews/snowrunner counter.txt") as f:
-    games_for_sr_counter = int(f.readline())
-
-print(games_for_sr_counter)
 
 
 # earlier & start_from
@@ -431,22 +435,14 @@ def addEp(dir):
 def sr_db_edit():
     dir = "D:/Program Files/Shadow Play/SnowRunner/previews/snowrunner counter.txt"
 
-    with open(dir, 'r+') as f:
-        times = [int(time) for time in f.readlines()]
-    
-        for_sr = 5 - len(times)
-
-        if for_sr > 0:
-            f.write(f'{str(int(time()))}\n')
-        if for_sr == 0:
-            with open(dir, 'w') as ff:
-                f.write('')
+    with open(dir, 'w') as f:
+        f.write(str(games_for_sr_counter - 1))
 
 def sr_db_clear():
     dir = "D:/Program Files/Shadow Play/SnowRunner/previews/snowrunner counter.txt"
 
     with open(dir, 'w') as f:
-        f.write('')
+        f.write('5')
 
 def edit_tg_info_message():
     if first_episodes == second_episodes == 0:
@@ -490,7 +486,7 @@ def edit_tg_info_message():
     if second_game_count > 1: add_message = f"• {second_game_short_name}: {second_game_count}"
 
 
-    if 5 - games_for_sr_counter - 1 != 0: sr_info_add_message = f"• SR: {5 - games_for_sr_counter - 1}"
+    if games_for_sr_counter - 1 != 0: sr_info_add_message = f"• SR: {games_for_sr_counter - 1}"
     else: sr_info_add_message = "• Сегодня SnowRunner!!!"
 
 
@@ -542,7 +538,7 @@ def run_random_game():
         if earlier == first_game_name:
             run_game(second_game_name)
     # elif not(first_game_week and second_game_week and third_game_week):
-    elif games_for_sr_counter < 5:
+    elif games_for_sr_counter != 0:
         run_game(today)
     else:
         run_game('SR')
@@ -580,22 +576,20 @@ def print_game_list_newFormat():
 def print_info():
     global games_for_sr_counter
 
-    games_to_sr_counter = 5 - games_for_sr_counter
-        
-    if games_to_sr_counter == 1:
+    if games_for_sr_counter == 1:
         ep_prefix = 'я'
-    elif 1 < games_to_sr_counter < 5:
+    elif 1 < games_for_sr_counter < 5:
         ep_prefix = 'и'
     else:
         ep_prefix = 'й'
     
     if first_episodes == second_episodes == 0:
-        games_to_sr_counter = 5
+        games_for_sr_counter = 5
         ep_prefix = 'й'
 
-    if games_to_sr_counter > 0:
-        print(f"До SnowRunner'a ещё {games_to_sr_counter} сери{ep_prefix}")
-        add_edit_text(f"• SR: {5 - games_for_sr_counter}")
+    if games_for_sr_counter > 0:
+        print(f"До SnowRunner'a ещё {games_for_sr_counter} сери{ep_prefix}")
+        add_edit_text(f"• SR: {games_for_sr_counter}")
     else:
         print(f"Сегодня SnowRunner")
         add_edit_text("• Сегодня SnowRunner!!!")
