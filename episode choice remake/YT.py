@@ -9,24 +9,21 @@ with open("episode choice remake/YT.json", encoding="utf-8") as f:
 with open("episode choice remake/pydb.json", encoding="utf-8") as f:
     pydata = json.load(f)
 
-def search_videos_on_channel(search_string):
-    api_key = 'AIzaSyCTcKHZ4w2LNlG_KX7p-2UxFd_VPlE_jJQ'  # Замените на ваш API ключ
+def search_videos_on_channel(search_string, type="video"):
+    api_key = 'AIzaSyCTcKHZ4w2LNlG_KX7p-2UxFd_VPlE_jJQ'
     channel_id = "UC2Y71nJHtoLzY88Wrrqm7Kw"
 
-    # Создаем объект для работы с YouTube API
     youtube = build('youtube', 'v3', developerKey=api_key)
 
-    # Получаем последние 25 видео с канала
     request = youtube.search().list(
         part='snippet',
         channelId=channel_id,
         maxResults=25,
         order='date',
-        type='video'
+        type=type
     )
     response = request.execute()
 
-    # Ищем видео, в названии которых содержится искомая строка
     videos = {}
     for item in response['items']:
         video_title = item['snippet']['title']
@@ -36,7 +33,8 @@ def search_videos_on_channel(search_string):
     return videos
 
 def edit_game_message(game_name, ep_range, id):
-    videos = search_videos_on_channel(game_name)
+    if game_name != "SnowRunner": videos = search_videos_on_channel(game_name)
+    else: videos = search_videos_on_channel(game_name, type="live")
     names = []
 
     for n in range(ep_range[0],ep_range[1] +1):
@@ -49,7 +47,8 @@ def edit_game_message(game_name, ep_range, id):
 
     if names:
         new_text = f"{game_name} № {ep_range[0]}-{ep_range[0]+len(names)-1}: \n{names_message}"
-        if pydata["episodes_log"][game_name][1]-2 == ep_range[0] and pydata["episodes_log"][game_name][1] != ep_range[0]+len(names)-1:
+        if game_name == "SnowRunner": new_text = f"{game_name} № {ep_range[0]}: \n{names_message}"
+        if pydata["episodes_log"][game_name][1]-2 == ep_range[0] and pydata["episodes_log"][game_name][1] != ep_range[0]+len(names)-1 and game_name != "SnowRunner":
             pydata["episodes_log"][game_name][1] = ep_range[0]+len(names)-1
             with open("episode choice remake/pydb.json", "w", encoding="utf-8") as f:
                 json.dump(pydata, f, indent=4)
@@ -77,7 +76,5 @@ def add_empty_message(game_name, ep_range, id):
 
 if __name__ == '__main__':
     # edit_game_message("Dead Space 3", [4,5], 462)
-
     edit_empty_messages()
-
     pass
