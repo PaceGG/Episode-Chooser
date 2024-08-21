@@ -22,12 +22,17 @@ def search_videos_on_channel(search_string, type="video"):
         order='date',
         type=type
     )
-    response = request.execute()
+
+    try:
+        response = request.execute()
+    except:
+        return {}
 
     videos = {}
     for item in response['items']:
         video_title = item['snippet']['title']
         if search_string.lower() in video_title.lower():
+            print(video_title)
             videos[int(video_title.split(" • ")[1][2:])] = video_title.split(" • ")[0]
 
     return videos
@@ -76,5 +81,5 @@ def add_empty_message(game_name, ep_range, id):
 
 if __name__ == '__main__':
     # edit_game_message("Dead Space 3", [4,5], 462)
-    edit_empty_messages()
+    # edit_empty_messages()
     pass
