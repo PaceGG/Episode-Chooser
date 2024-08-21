@@ -1,41 +1,36 @@
+CuSr
+StCu
 
-Cp
+Ls2St
+Ls2St
+Ls2
+Ls2StSr
+Re5St
+Ls2
+Ls2Re5
+StRe5
+StAh
+St
+StAh
+Sc
 
-Gt0
-Gt0
 
-
-
-Gt0SrCp
-
-Gt0
-Gt0
-F3
-
-Gt0F3
-Gt0SrF3
-Gt0Bl
-F3
-F3
-F3SrBl
-
-Bl
-
-F3Bl
+Sc
+ScAh
 Sr
-Bl
+ScAh
+ScSrSp
+Ah
+Ah
+SrSp
 
 
-
-
-F3Bl
-Pt
-
-F3Pt
-F3Sr
-
-
-
-
-
+Ah
+AhDs
+Sp
+Ds
+Sp
+DsSpSr
+DsSp
+DsFv
 

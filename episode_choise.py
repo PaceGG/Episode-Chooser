@@ -26,7 +26,7 @@ def send_image(bot_token, chat_id, image_path, caption=None):
     response = requests.post(url, files=files, data=params)
     return response.json
 
-# 396
+# pinned info message id = 396
 def edit_telegram_message(bot_token, chat_id, message_id, new_text):
     """
     Редактирует сообщение в Telegram по его ID.
@@ -81,8 +81,8 @@ second_game_video_extra = ""
 
 # Programm
 # Путри к играм
-first_game_path = "C:\\Users\\yura3\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Play GUNSLINGER Mod.lnk"
-second_game_path = r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TileIconify\Custom Shortcuts\Dead Space\Dead Space.lnk"
+first_game_path = r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\New Vegas EE.lnk"
+second_game_path = r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\deadspace3.lnk"
 third_game_path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 
 # Пути к файлам видео
@@ -106,7 +106,7 @@ def create_game_structure(game_name, base_directory):
         pass
     episodes_time_path = os.path.join(previews_path, "episodes time.txt")
     with open(episodes_time_path, 'w') as f:
-        f.write("0\n0")
+        f.write("120\n0")
         
     print("Директории созданы")
 
@@ -131,7 +131,7 @@ def get_time(dir):
         real_time = int(f.readline())
         my_time = f.readline()
 
-        if "," in my_time:
+        if "," in my_time or ":" in my_time:
             total_time = 0
             my_time = my_time.split(",")
             for time in my_time:
@@ -152,7 +152,7 @@ def get_time(dir):
             real_time = 120 - extra_time
     
     with open(dir, 'w') as f:
-        f.write(f"{time}\n0")
+        f.write(f"{real_time}\n0")
     
     return real_time
 
@@ -226,15 +226,19 @@ def time_format(minutes):
     if minutes > 60: return f"{minutes//60:02}:{minutes%60:02} ({minutes})"
     return str(ceil(minutes))
 
-if first_game_time.is_integer(): first_game_time = int(first_game_time)
-if second_game_time.is_integer(): second_game_time = int(second_game_time)
+if first_game_time.is_integer():
+    first_game_time = int(first_game_time)
+    first_game_time_int = int(first_game_time)
+if second_game_time.is_integer():
+    second_game_time = int(second_game_time)
+    second_game_time_int = int(second_game_time)
 
 first_game_total_length = time_format(first_game_time)
 second_game_total_length = time_format(second_game_time)
 third_game_total_length = time_format(third_game_time)
-if first_game_time != 120: first_game_time = f"::({time_format(first_game_time/3) + " / "}{time_format(first_game_time/3*2) + " / "}{time_format(first_game_time)})::"
+if first_game_time != 120: first_game_time = f"::({time_format(first_game_time/3) + " / "}{time_format(first_game_time/2) + " / "}{time_format(first_game_time)})::"
 else: first_game_time = ""
-if second_game_time != 120: second_game_time = f"::({time_format(second_game_time/3) + " / "}{time_format(second_game_time/3*2) + " / "}{time_format(second_game_time)})::"
+if second_game_time != 120: second_game_time = f"::({time_format(second_game_time/3) + " / "}{time_format(second_game_time/2) + " / "}{time_format(second_game_time)})::"
 else: second_game_time = ""
 if third_game_time != 120: third_game_time = f"::({time_format(third_game_time)})::"
 else: third_game_time = ""
@@ -346,48 +350,43 @@ else:
     first_chanse = more_game
     second_chanse = 1
     
-game_list = []
-
-for i in range(first_chanse):
-    game_list.append(first_game_name)
-for i in range(second_chanse):
-    game_list.append(second_game_name)
+game_list = [first_game_name] * first_chanse + [second_game_name] * second_chanse
 
 def check_frequency():
-    with open("games_log.txt", 'rb') as f:
-        # Сначала переместимся в конец файла
-        f.seek(0, 2)
-        end_pos = f.tell()
-        
-        # Теперь будем читать файл с конца, начиная с позиции end_pos
-        buffer_size = 1024
-        buffer = b''
-        pos = end_pos
-        lines = []
-        
-        while pos > 0 and len(lines) < 4:
-            # Определяем текущую позицию для чтения
-            start_pos = max(pos - buffer_size, 0)
-            f.seek(start_pos)
-            buffer = f.read(pos - start_pos) + buffer
-            pos = start_pos
-            
-            # Разбиваем буфер на строки
-            lines = buffer.split(b'\n')[-4:]
-            buffer = lines[0]
-            
-        last_three_games = [line.decode('utf-8')[:-1] for line in lines if line]
+    with open("games_log.txt", 'r') as f:
+        last_three_games = [line[:-1] for line in f.readlines()]
 
-        if len(set(last_three_games)) > 1:
-            return game_list[randint(0,len(game_list)-1)], "random", last_three_games
-        elif len(set(last_three_games)) == 1:
-            popular_game = last_three_games[0]
-            if popular_game == first_game_name:
-                unpopular_game = second_game_name
-            else:
-                unpopular_game = first_game_name
-            return unpopular_game, "force", last_three_games
+    if len(set(last_three_games)) > 1:
+        return game_list[randint(0,len(game_list)-1)], "random", last_three_games
+    elif len(set(last_three_games)) == 1:
+        popular_game = last_three_games[0]
+        if popular_game == first_game_name:
+            unpopular_game = second_game_name
+        else:
+            unpopular_game = first_game_name
+        return unpopular_game, "force", last_three_games
+    
 today, today_method, last_three_games = check_frequency()
+
+
+# def recount():
+#     global today, today_method, last_three_games, game_list, game_list
+
+#     first_game_last_ep, first_game_last_ep_real = get_last_episode(first_folder_name)
+#     second_game_last_ep, second_game_last_ep_real = get_last_episode(second_folder_name)
+
+#     first_episodes = first_game_last_ep*3
+#     second_episodes = second_game_last_ep*3
+
+#     more_game = abs(first_episodes-second_episodes)//3 + 1
+#     if first_episodes > second_episodes:
+#         first_chanse = 1
+#         second_chanse = more_game
+#     else:
+#         first_chanse = more_game
+#         second_chanse = 1
+#     game_list = [first_game_name] * first_chanse + [second_game_name] * second_chanse
+#     today, today_method, last_three_games = check_frequency()
     
 
 # Game_time
@@ -429,7 +428,7 @@ for i in range(second_game_time.count('')):
 
     
 # Output
-def addEp(dir):
+def addEp(dir, zero_flag=False):
     dir += "/episodes log.txt"
 
     with open(dir, 'r') as f:
@@ -450,10 +449,21 @@ def addEp(dir):
         if 'SnowRunner' in dir:
             f.write(f"{str(last_ep+1)} ({last_ep+1})\n")
         else:
-            f.write(f"{str(last_ep+1)} ({real_ep+1}-{real_ep+3})\n")
+            if not zero_flag:
+                f.write(f"{str(last_ep+1)} ({real_ep+1}-{real_ep+3})\n")
+            else:
+                f.write(f"{str(last_ep+1)} ({real_ep}-{real_ep})\n")
+
 
 def sr_db_edit():
     dir = "D:/Program Files/Shadow Play/SnowRunner/previews/snowrunner counter.txt"
+
+    with open(dir, 'r') as f:
+        games_for_sr_counter = int(f.readline())
+    
+    if games_for_sr_counter == 0:
+        sr_db_clear()
+        return
 
     with open(dir, 'w') as f:
         f.write(str(games_for_sr_counter - 1))
@@ -506,12 +516,13 @@ def edit_tg_info_message():
     if second_game_count > 1: add_message = f"• {second_game_short_name}: {second_game_count}"
 
 
-    if games_for_sr_counter - 1 != 0: sr_info_add_message = f"• SR: {games_for_sr_counter - 1}"
+    if games_for_sr_counter != 0: sr_info_add_message = f"• SR: {games_for_sr_counter}"
     else: sr_info_add_message = f"• Сегодня SnowRunner!!! • {third_game_short_name}: {third_game_total_length}" if third_game_length else "• Сегодня SnowRunner!!!"
 
+    print()
     length_message = ""
-    length_message += f"• {first_game_short_name}: {first_game_length}\n" if first_game_length else ""
-    length_message += f"• {second_game_short_name}: {second_game_length}\n" if second_game_length else ""
+    length_message += f"• {first_game_short_name}: {first_game_total_length}\n" if first_game_length else ""
+    length_message += f"• {second_game_short_name}: {second_game_total_length}\n" if second_game_length else ""
     length_message += f"• {third_game_short_name}: {third_game_total_length}\n" if third_game_length else ""
 
 
@@ -523,8 +534,10 @@ def edit_tg_info_message():
     """)
 
 def add_game_log(game):
-    with open("games_log.txt", "a") as f:
-        f.write(f"{game}\n")
+    with open("games_log.txt", "w") as f:
+        update_last_tree_gaems = last_three_games[1:] + [game]
+        for game in update_last_tree_gaems:
+            f.write(f"{game}\n")
 
 def snowrunner_updater():
     updater_path = f"D:/Program Files/Shadow Play/SnowRunner/update.txt"
@@ -534,14 +547,33 @@ def snowrunner_updater():
             pass
 
 def run_game(x):
+    global first_game_length, second_game_length
     # os.startfile(f'"{"D:/Program Files/obs-studio/bin/64bit/obs64.exe"}"')
     if x == first_game_name:
+        if int(first_game_time_int) <= 0:
+            with open(first_game_time_dir, 'w') as f:
+                f.write(f"{120 + first_game_time_int}\n0")
+            addEp(first_folder_name, True)
+            add_game_log(first_game_name)
+            first_game_length = time_format(first_game_time_int)
+            sr_db_edit()
+            edit_tg_info_message()
+            return
         print(f"{first_game_name}{f": {first_game_length}" if first_game_length else ""}")
         send_image(bot_token, chat_id, first_game_icon, first_game_caption)
         addEp(first_folder_name)
         add_game_log(first_game_name)
         os.startfile(first_game_path)
     if x == second_game_name:
+        if int(second_game_time_int) <= 0:
+            with open(second_game_time_dir, 'w') as f:
+                f.write(f"{120 + second_game_time_int}\n0")
+            addEp(second_folder_name, True)
+            add_game_log(second_game_name)
+            second_game_length = time_format(120 + second_game_time_int)
+            sr_db_edit()
+            edit_tg_info_message()
+            return
         print(f"{second_game_name}{f": {second_game_length}" if second_game_length else ""}")
         send_image(bot_token, chat_id, second_game_icon, second_game_caption)
         addEp(second_folder_name)
@@ -552,6 +584,7 @@ def run_game(x):
         send_image(bot_token, chat_id, third_game_icon, third_game_caption)
         addEp(third_folder_name)
         os.startfile(third_game_path)
+        snowrunner_updater()
     sr_db_edit()
     edit_tg_info_message()
         

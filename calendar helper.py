@@ -7,14 +7,21 @@ game_mapping = {
     "Cp" : "Cyberpunk 2077",
     "Gt0" : "Grand Theft Auto Online",
     'Sw' : "Saints Row",
+    "Re5": "Resident Evil 5",
     'Re6' : "Resident Evil 6",
     'Re7': "Resident Evil 7",
     'Re8' : "Resident Evil Village",
     'Sr' : "Snow Runner",
-    "St" : "S.T.A.L.K.E.R. Lost Alpha DC",
+    "St" : "S.T.A.L.K.E.R.: Lost Alpha DC",
+    "Sc": "S.T.A.L.K.E.R.: Clear Sky",
+    "Sp": "S.T.A.L.K.E.R.: Call of Pripyat",
     "So": "Soma",
     "Cu": "Cuphead",
     "Ow": "Outer Wilds",
+    "Ls2": "Life Is Strange 2",
+    "Ah": "Atomic Heart",
+    "Ds": "Dead Space",
+    "Fv": "Fallout: New Vegas",
 }
 
 with open("games.txt", "r") as file:
