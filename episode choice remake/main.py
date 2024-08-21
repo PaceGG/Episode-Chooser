@@ -2,6 +2,7 @@ import json
 import os
 from time import time
 from random import randint
+from YT import add_empty_message, edit_empty_messages
 os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # modules
@@ -159,7 +160,8 @@ def run_game(game_to_run):
         add_episode(game_to_run, True)
     else:
         print(f"{game_to_run.name}{f" {game_to_run.long_time_format}" if game_to_run.time != 120 else ""}")
-        send_image(game_to_run.icon, game_to_run.caption)
+        game_message_id = send_image(game_to_run.icon, game_to_run.caption)
+        add_empty_message(game_to_run.name, [game_to_run.last_episode+1, game_to_run.last_episode+3], game_message_id)
         add_episode(game_to_run)
     add_game_log(game_to_run.name)
     sr_db_edit()
@@ -220,6 +222,7 @@ def print_info():
     
 
 if __name__ == "__main__":
+    edit_empty_messages()
     print_info()
     run_random_game()
     pass
