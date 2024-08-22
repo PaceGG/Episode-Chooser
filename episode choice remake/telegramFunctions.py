@@ -1,4 +1,5 @@
-import requests
+# import requests
+from requests import post
 
 # Инициализация бота
 bot_token='6739691945:AAG_FoagOmFd-GUFpFwriEeTFgma-rwjGx8'
@@ -8,7 +9,7 @@ def send_image(image_path, caption=None):
     url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"
     files = {'photo': open(image_path, 'rb')}
     params = {'chat_id': chat_id, 'caption': caption}
-    response = requests.post(url, files=files, data=params)
+    response = post(url, files=files, data=params)
     response_data = response.json()
     message_id = response_data.get('result', {}).get('message_id')
     return message_id
@@ -21,7 +22,7 @@ def edit_telegram_message(new_text, message_id=396):
         "message_id": message_id,
         "text": new_text
     }
-    response = requests.post(url, params=params)
+    response = post(url, params=params)
     return response.json()
 
 def edit_telegram_caption(new_caption, message_id):
@@ -31,7 +32,7 @@ def edit_telegram_caption(new_caption, message_id):
         "message_id": message_id,
         "caption": new_caption
     }
-    response = requests.post(url, params=params)
+    response = post(url, params=params)
     return response.json()
 
 

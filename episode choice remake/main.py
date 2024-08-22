@@ -3,11 +3,10 @@ os.chdir("D:\\Program Files\\HTML\\Games")
 import json
 from time import time
 from random import randint
-from YT import add_empty_message, edit_empty_messages
-from episodesManipulate import reset_console_flag
-
 
 # modules
+from YT import add_empty_message, edit_empty_messages
+from episodesManipulate import reset_console_flag
 from setEngLayout import set_eng_layout
 from telegramFunctions import edit_telegram_message, send_image
 from classGame import Game
@@ -18,14 +17,10 @@ with open("react-remake/db.json", encoding="utf-8") as f:
 with open("episode choice remake/pydb.json", encoding="utf-8") as f:
     pydata = json.load(f)
 
-start_time = time()
-print("start:", time()-start_time)
-
 # game init
 game = [Game(name=item["name"]) for item in data]
 game.append(Game(name="SnowRunner", short_name="SR"))
 
-print("games done", time()-start_time)
 # game paths
 game[0].path = r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\New Vegas EE.lnk"
 game[1].path = r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\deadspace3.lnk"

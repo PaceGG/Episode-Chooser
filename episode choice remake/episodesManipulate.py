@@ -12,10 +12,14 @@ def save_db():
 def get_old_name(data_key):
     with open("react-remake/db.json", encoding="utf-8") as f:
         showcase = json.load(f)["showcase"]
-        actual_names = [game["name"] for game in showcase] + ["SnowRunner"]
-    stored_names = list(data[data_key].keys())
+        actual_names = [game["name"] for game in showcase]
+    # old_names = list(data[data_key].keys())
+    old_names = [name for name in list(data[data_key].keys()) if name != "SnowRunner"]
 
-    for name in stored_names:
+    if old_names==actual_names or old_names == reversed(actual_names): return None
+
+    for name in old_names:
+        print("time: ", time() - start_time)
         if name not in actual_names:
             return name
 
@@ -133,6 +137,6 @@ if __name__ == "__main__":
 
     start_time = time()
     print("start time: ", time() - start_time)
-    print(get_time("Fallout: New Vegas"))
+    print(get_episodes("Fallout: New Vegas"))
     print("end time: ", time() - start_time)
     pass
