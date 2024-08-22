@@ -1,20 +1,22 @@
 {
-    "games_log": ["Dead Space 3", "Fallout: New Vegas", "Dead Space 3"],
+    "games_log": ["Fallout: New Vegas", "Dead Space 3", "Dead Space 3"],
     "start_from": 4,
-    "games_for_sr_counter": 2,
+    "games_for_sr_counter": 1,
     "episodes_log": {
         "Fallout: New Vegas": [5, 12],
         "SnowRunner": [2, 2],
-        "Dead Space 3": [2, 5]
+        "Dead Space 3": [3, 8]
     },
     "episodes_time": {
         "Fallout: New Vegas": {
             "time": 120,
-            "my_time": ""
+            "my_time": "",
+            "add_by_console": "False"
         },
         "Dead Space 3": {
-            "time": 114,
-            "my_time": ""
+            "time": 54,
+            "my_time": "",
+            "add_by_console": "True"
         },
         "SnowRunner": {
             "time": 78,

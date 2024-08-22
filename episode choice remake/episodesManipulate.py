@@ -45,10 +45,11 @@ def count_dir_time(check_name):
         dir = os.path.join("D:/Program Files/Shadow Play", game_name.replace(":", ""))
         if os.path.exists(dir) and game_name == check_name:
             dir_duration = get_total_duration(dir)//60
-            if dir_duration > 0:
+            if dir_duration > 0 and data["episodes_time"][game_name]["add_by_console"] == "False":
                 print(f"В {game_name} есть видео продолжительностью {dir_duration} минут. Хотите добавить их к сумме?")
                 my_time = input(f"Введите время для {game_name}: ")
                 data["episodes_time"][game_name]["my_time"] = my_time
+                data["episodes_time"][game_name]["add_by_console"] = "True"
                 save_db()
 
 def get_time(name):
@@ -122,12 +123,11 @@ def equalize_time_sr():
         data["episodes_time"]["SnowRunner"]["time"] = 120 + sr_time
         data["games_for_sr_counter"] += 5
 
+def reset_console_flag(name):
+    data["episodes_time"][name]["add_to_console"] = "False"
+    save_db()
 
 if __name__ == "__main__":
-    count_dir_time()
-
-
-
 
 
     pass

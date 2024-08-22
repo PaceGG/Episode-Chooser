@@ -1,9 +1,11 @@
-import json
 import os
+os.chdir("D:\\Program Files\\HTML\\Games")
+import json
 from time import time
 from random import randint
 from YT import add_empty_message, edit_empty_messages
-os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from episodesManipulate import reset_console_flag
+
 
 # modules
 from setEngLayout import set_eng_layout
@@ -166,6 +168,7 @@ def run_game(game_to_run):
     add_game_log(game_to_run.name)
     sr_db_edit()
     edit_tg_info_message()
+    reset_console_flag(game_to_run.name)
     os.startfile(game_to_run.path)
     
 

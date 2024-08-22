@@ -78,6 +78,9 @@ def edit_empty_messages():
 def add_empty_message(game_name, ep_range, id):
     empty_messages.append({"game_name": game_name, "ep_range": ep_range, "id": id})
 
+    with open("episode choice remake/YT.json", "w", encoding="utf-8") as f:
+        json.dump(empty_messages, f, indent=4)
+
 
 if __name__ == '__main__':
     # edit_game_message("Dead Space 3", [4,5], 462)
