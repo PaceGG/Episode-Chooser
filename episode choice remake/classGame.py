@@ -1,7 +1,7 @@
 from episodesManipulate import *
 from createGameStructure import *
 from math import ceil
-from time import strftime, localtime
+from time import strftime, localtime, time
 
 def get_short_name(name):
     short_name = ""
@@ -17,6 +17,7 @@ def time_format(minutes):
     return str(ceil(minutes))
 class Game:
     def __init__(self, **kwargs):
+        start_time = time()
         self.name = kwargs.get("name", "")
         self.path = kwargs.get("path", "")
         
@@ -28,13 +29,16 @@ class Game:
         self.video = f"D:/Program Files/Shadow Play/{video}/previews"
         self.icon = kwargs.get("icon", f"D:/Program Files/HTML/Games/icons_new/{safe_name}.png")
 
+        print("start timer: ", time()-start_time)
         last_session, last_episode = get_episodes(self.name)
         self.last_session = kwargs.get("last_session", last_session)
         self.last_episode = kwargs.get("last_episode", last_episode)
+        print("after get_episodes: ", time()-start_time)
 
         self.time = get_time(self.name)
         self.time_format = time_format(self.time)
         self.long_time_format = f"::({time_format(self.time/3) + " / "}{time_format(self.time/2) + " / "}{time_format(self.time)})::"
+        print("after get time: ", time()-start_time)
 
         if self.name != "SnowRunner": self.caption = kwargs.get("caption", f"{self.name} № {self.last_episode+1}-{last_episode+3}:\n• \n• \n• ")
         elif self.name == "SnowRunner": self.caption = kwargs.get("caption", f"{self.name} № {self.last_episode+1}:\n• ")
@@ -58,7 +62,7 @@ class Game:
 if __name__ == "__main__":
     # print(get_short_name("Mafia II: Definitive Edition"))
 
-    test = Game(name="Dead Space 4")
-    print(test)
+    test = Game(name="Fallout: New Vegas")
+    # print(test)
 
     pass

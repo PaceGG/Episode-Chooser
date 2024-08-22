@@ -1,4 +1,5 @@
 import json
+from time import time
 
 from googleapiclient.discovery import build
 from telegramFunctions import *
@@ -66,6 +67,7 @@ def edit_game_message(game_name, ep_range, id):
 
 
 def edit_empty_messages():
+    if int(time()) - pydata["last_update"] < 12*60*60: return
     update_empty_messages = []
 
     for game_info in empty_messages:
@@ -74,6 +76,10 @@ def edit_empty_messages():
 
     with open("episode choice remake/YT.json", "w", encoding="utf-8") as f:
         json.dump(update_empty_messages, f, indent=4)
+
+    pydata["last_update"] = int(time())
+    with open("episode choice remake/pydb.json", "w", encoding="utf-8") as f:
+        json.dump(pydata, f, indent=4)
 
 def add_empty_message(game_name, ep_range, id):
     empty_messages.append({"game_name": game_name, "ep_range": ep_range, "id": id})
@@ -84,5 +90,5 @@ def add_empty_message(game_name, ep_range, id):
 
 if __name__ == '__main__':
     # edit_game_message("Dead Space 3", [4,5], 462)
-    # edit_empty_messages()
+    edit_empty_messages()
     pass

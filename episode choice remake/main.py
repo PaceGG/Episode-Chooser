@@ -9,7 +9,7 @@ from episodesManipulate import reset_console_flag
 
 # modules
 from setEngLayout import set_eng_layout
-from telegramFunctions import *
+from telegramFunctions import edit_telegram_message, send_image
 from classGame import Game
 
 with open("react-remake/db.json", encoding="utf-8") as f:
@@ -18,10 +18,14 @@ with open("react-remake/db.json", encoding="utf-8") as f:
 with open("episode choice remake/pydb.json", encoding="utf-8") as f:
     pydata = json.load(f)
 
+start_time = time()
+print("start:", time()-start_time)
+
 # game init
 game = [Game(name=item["name"]) for item in data]
 game.append(Game(name="SnowRunner", short_name="SR"))
 
+print("games done", time()-start_time)
 # game paths
 game[0].path = r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\New Vegas EE.lnk"
 game[1].path = r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\deadspace3.lnk"
@@ -157,6 +161,7 @@ def snowrunner_updater():
 
 
 def run_game(game_to_run):
+    set_eng_layout()
     if game_to_run.time <= 0:
         pydata["episodes_time"][game_to_run.name]["time"] += 120
         add_episode(game_to_run, True)
@@ -227,6 +232,6 @@ def print_info():
 if __name__ == "__main__":
     edit_empty_messages()
     print_info()
-    run_random_game()
+    # run_random_game()
     pass
 

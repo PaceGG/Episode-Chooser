@@ -1,4 +1,5 @@
 import json
+from time import time
 from moviepy.video.io.VideoFileClip import *
 
 with open("episode choice remake/pydb.json", encoding="utf-8") as f:
@@ -27,7 +28,7 @@ def replace_game_data(new_name, data_key):
         return new_name
     
     if data_key == "episodes_time":
-        default_value = {"time": 120, "my_time": ""}
+        default_value = {"time": 120, "my_time": "", "add_by_console": "False"}
     elif data_key == "episodes_log":
         default_value = [0, 0]
 
@@ -43,9 +44,9 @@ def count_dir_time(check_name):
 
     for game_name in game_names:
         dir = os.path.join("D:/Program Files/Shadow Play", game_name.replace(":", ""))
-        if os.path.exists(dir) and game_name == check_name:
+        if os.path.exists(dir) and game_name == check_name and data["episodes_time"][game_name]["add_by_console"] == "False":
             dir_duration = get_total_duration(dir)//60
-            if dir_duration > 0 and data["episodes_time"][game_name]["add_by_console"] == "False":
+            if dir_duration > 0:
                 print(f"В {game_name} есть видео продолжительностью {dir_duration} минут. Хотите добавить их к сумме?")
                 my_time = input(f"Введите время для {game_name}: ")
                 data["episodes_time"][game_name]["my_time"] = my_time
@@ -57,7 +58,7 @@ def get_time(name):
     try:
         time_data = data["episodes_time"][replace_game_data(name, "episodes_time")]
     except KeyError:
-        time_data = {"time": 120, "my_time": ""}
+        time_data = {"time": 120, "my_time": "", "add_by_console": "False"}
 
     time = time_data["time"]
     my_time = time_data["my_time"]
@@ -93,6 +94,7 @@ def get_time(name):
 
     return time_data["time"]
 
+#not optimized!
 def get_episodes(name):
     try:
         return data["episodes_log"][replace_game_data(name, "episodes_log")][:2]
@@ -124,10 +126,13 @@ def equalize_time_sr():
         data["games_for_sr_counter"] += 5
 
 def reset_console_flag(name):
-    data["episodes_time"][name]["add_to_console"] = "False"
+    data["episodes_time"][name]["add_by_console"] = "False"
     save_db()
 
 if __name__ == "__main__":
 
-
+    start_time = time()
+    print("start time: ", time() - start_time)
+    print(get_time("Fallout: New Vegas"))
+    print("end time: ", time() - start_time)
     pass
