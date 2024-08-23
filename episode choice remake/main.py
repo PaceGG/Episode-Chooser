@@ -10,12 +10,10 @@ from episodesManipulate import reset_console_flag
 from setEngLayout import set_eng_layout
 from telegramFunctions import edit_telegram_message, send_image
 from classGame import Game
+from pydata import pydata_load, pydata_save
 
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
-
-with open("episode choice remake/pydb.json", encoding="utf-8") as f:
-    pydata = json.load(f)
 
 # game init
 game = [Game(name=item["name"]) for item in data]
@@ -30,12 +28,13 @@ game[2].path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 earlier, later = sorted(game[:2], key=lambda g: g.date)[0].name, sorted(game[:2], key=lambda g: g.date)[1].name
 
 if game[0].last_session == 0 or game[1].last_session == 0:
+    pydata = pydata_load()
     if game[0].last_session == 0: pydata["start_from"] = game[1].last_session
     if game[1].last_session == 0: pydata["start_from"] = game[0].last_session
 
-    with open("episode choice remake/pydb.json", "w", encoding="utf-8") as f:
-        json.dump(pydata, f, indent=4)
+    pydata_save(pydata)
 
+pydata = pydata_load()
 start_from = pydata["start_from"]
 
 if earlier == game[0].name: game[0].last_session -= start_from
@@ -65,7 +64,9 @@ def select_random_game(games):
 
     return game_list[randint(0,len(game_list)-1)]
 
-def get_unpopular_game(games_log = pydata["games_log"]):
+def get_unpopular_game():
+    pydata = pydata_load()
+    games_log = pydata["games_log"]
     if len(set(games_log)) == 1:
         popular_game = games_log[0]
         if popular_game == game[0].name: unpopular_game = game[1].name
@@ -82,6 +83,7 @@ choice, chose_method = check_frequency()
 
 def add_episode(G, zero_flag=False):
     global game
+    pydata = pydata_load()
     name = G.name
 
     pydata["episodes_log"][name][0] += 1
@@ -91,32 +93,30 @@ def add_episode(G, zero_flag=False):
             g.last_session += 1
             count_chance()
 
-    if name == "SnowRunner":
-        pydata["episodes_log"][name][1] += 1
-
+    if name == "SnowRunner":pydata["episodes_log"][name][1] += 1
     else: pydata["episodes_log"][name][1] += (not zero_flag) * 3
 
-    with open("episode choice remake/pydb.json", "w", encoding="utf-8") as f:
-        json.dump(pydata, f, indent=4)
+    pydata_save(pydata)
+    
 
 def sr_db_edit():
+    pydata = pydata_load()
     if pydata["games_for_sr_counter"] == 0:
         sr_db_clear()
         return
     pydata["games_for_sr_counter"] -= 1
+    pydata_save(pydata)
 
-    with open("episode choice remake/pydb.json", "w", encoding="utf-8") as f:
-        json.dump(pydata, f, indent=4)
     
 
 def sr_db_clear():
+    pydata = pydata_load()
     pydata["games_for_sr_counter"] = 5
-
-    with open("episode choice remake/pydb.json", "w", encoding="utf-8") as f:
-        json.dump(pydata, f, indent=4)
+    pydata_save(pydata)
 
 def edit_tg_info_message():
     # Для новой игры
+    pydata = pydata_load()
     if game[0].last_session == game[1].last_session == 0:
         sr_counter_message = f"• SR: {pydata['games_for_sr_counter']}"
         chance_info_message = f"Forece: {later}"
@@ -144,28 +144,28 @@ def edit_tg_info_message():
 
 
 def add_game_log(game_name):
+    pydata = pydata_load()
     pydata["games_log"] = pydata["games_log"][1:] + [game_name]
-
-
-
-    with open("episode choice remake/pydb.json", "w", encoding="utf-8") as f:
-        json.dump(pydata, f, indent=4)
+    pydata_save(pydata)
 
 def snowrunner_updater():
     os.utime("D:/Program Files/Shadow Play/SnowRunner", (time(), time()))
 
 
 def run_game(game_to_run):
+    pydata = pydata_load()
     set_eng_layout()
     if game_to_run.time <= 0:
         pydata["episodes_time"][game_to_run.name]["time"] += 120
+        pydata_save(pydata)
         add_episode(game_to_run, True)
     else:
         print(f"{game_to_run.name}{f" {game_to_run.long_time_format}" if game_to_run.time != 120 else ""}")
         game_message_id = send_image(game_to_run.icon, game_to_run.caption)
         add_empty_message(game_to_run.name, [game_to_run.last_episode+1, game_to_run.last_episode+3], game_message_id)
         add_episode(game_to_run)
-    add_game_log(game_to_run.name)
+    if game_to_run.name != "SnowRunner":
+        add_game_log(game_to_run.name)
     sr_db_edit()
     edit_tg_info_message()
     reset_console_flag(game_to_run.name)
@@ -180,6 +180,7 @@ def get_game(name):
 def run_random_game():
     print("\n"*10)
     confirm = input()
+    pydata = pydata_load()
 
     if game[0].last_session == 0 and game[1].last_session == 0:
         sr_db_clear()
@@ -192,6 +193,7 @@ def run_random_game():
         snowrunner_updater()
 
 def print_info():
+    pydata = pydata_load()
     if pydata["games_for_sr_counter"] == 1:
         ep_prefix = 'я'
     elif 1 < pydata["games_for_sr_counter"] < 5:
@@ -201,10 +203,9 @@ def print_info():
 
     if pydata["games_for_sr_counter"] > 0:
         print(f"До SnowRunner'a ещё {pydata['games_for_sr_counter']} сери{ep_prefix}")
-        print()
     else:
         print(f"Сегодня SnowRunner: {game[2].long_time_format}")
-        print()
+    print()
 
     if chose_method == "force":
         print(f"Force: {choice}")
@@ -227,6 +228,6 @@ def print_info():
 if __name__ == "__main__":
     edit_empty_messages()
     print_info()
-    # run_random_game()
+    run_random_game()
     pass
 

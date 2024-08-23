@@ -3,12 +3,10 @@ from time import time
 
 from googleapiclient.discovery import build
 from telegramFunctions import *
+from pydata import pydata_load, pydata_save
 
 with open("episode choice remake/YT.json", encoding="utf-8") as f:
     empty_messages = json.load(f)
-
-with open("episode choice remake/pydb.json", encoding="utf-8") as f:
-    pydata = json.load(f)
 
 def search_videos_on_channel(search_string, type="video"):
     api_key = 'AIzaSyCTcKHZ4w2LNlG_KX7p-2UxFd_VPlE_jJQ'
@@ -33,7 +31,6 @@ def search_videos_on_channel(search_string, type="video"):
     for item in response['items']:
         video_title = item['snippet']['title']
         if search_string.lower() in video_title.lower():
-            print(video_title)
             videos[int(video_title.split(" • ")[1][2:])] = video_title.split(" • ")[0]
 
     return videos
@@ -51,13 +48,13 @@ def edit_game_message(game_name, ep_range, id):
     for name in names:
         names_message += f"• {name}\n"
 
+    pydata = pydata_load()
     if names:
         new_text = f"{game_name} № {ep_range[0]}-{ep_range[0]+len(names)-1}: \n{names_message}"
         if game_name == "SnowRunner": new_text = f"{game_name} № {ep_range[0]}: \n{names_message}"
         if pydata["episodes_log"][game_name][1]-2 == ep_range[0] and pydata["episodes_log"][game_name][1] != ep_range[0]+len(names)-1 and game_name != "SnowRunner":
             pydata["episodes_log"][game_name][1] = ep_range[0]+len(names)-1
-            with open("episode choice remake/pydb.json", "w", encoding="utf-8") as f:
-                json.dump(pydata, f, indent=4)
+            pydata_save(pydata)
 
         edit_telegram_caption(new_text, message_id=id)
         return True
@@ -67,6 +64,7 @@ def edit_game_message(game_name, ep_range, id):
 
 
 def edit_empty_messages():
+    pydata = pydata_load()
     if int(time()) - pydata["last_update"] < 12*60*60: return
     update_empty_messages = []
 
@@ -78,8 +76,7 @@ def edit_empty_messages():
         json.dump(update_empty_messages, f, indent=4)
 
     pydata["last_update"] = int(time())
-    with open("episode choice remake/pydb.json", "w", encoding="utf-8") as f:
-        json.dump(pydata, f, indent=4)
+    pydata_save(pydata)
 
 def add_empty_message(game_name, ep_range, id):
     empty_messages.append({"game_name": game_name, "ep_range": ep_range, "id": id})

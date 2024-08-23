@@ -1,19 +1,13 @@
 import json
 from time import time
 from moviepy.video.io.VideoFileClip import *
-
-with open("episode choice remake/pydb.json", encoding="utf-8") as f:
-    data = json.load(f)
-    
-
-def save_db():
-    json.dump(data, open("episode choice remake/pydb.json", "w"), indent=4)
+from pydata import pydata_load, pydata_save
 
 def get_old_name(data_key):
+    data = pydata_load()
     with open("react-remake/db.json", encoding="utf-8") as f:
         showcase = json.load(f)["showcase"]
         actual_names = [game["name"] for game in showcase]
-    # old_names = list(data[data_key].keys())
     old_names = [name for name in list(data[data_key].keys()) if name != "SnowRunner"]
 
     if old_names==actual_names or old_names == reversed(actual_names): return None
@@ -31,6 +25,7 @@ def replace_game_data(new_name, data_key):
     if old_name is None:
         return new_name
     
+    data = pydata_load()
     if data_key == "episodes_time":
         default_value = {"time": 120, "my_time": "", "add_by_console": "False"}
     elif data_key == "episodes_log":
@@ -38,11 +33,12 @@ def replace_game_data(new_name, data_key):
 
     data[data_key].pop(old_name)
     data[data_key][new_name] = default_value
-    save_db()
 
+    pydata_save(data)
     return new_name
 
 def count_dir_time(check_name):
+    data = pydata_load()
 
     game_names = [name for name in data["episodes_time"].keys() if name != "SnowRunner"]
 
@@ -55,10 +51,11 @@ def count_dir_time(check_name):
                 my_time = input(f"Введите время для {game_name}: ")
                 data["episodes_time"][game_name]["my_time"] = my_time
                 data["episodes_time"][game_name]["add_by_console"] = "True"
-                save_db()
+                pydata_save(data)
 
 def get_time(name):
     count_dir_time(name)
+    data = pydata_load()
     try:
         time_data = data["episodes_time"][replace_game_data(name, "episodes_time")]
     except KeyError:
@@ -94,20 +91,19 @@ def get_time(name):
     if name != "SnowRunner": equalize_time()
     elif name == "SnowRunner": equalize_time_sr()
 
-    save_db()
-
+    pydata_save(data)
     return time_data["time"]
 
 #not optimized!
 def get_episodes(name):
+    data = pydata_load()
     try:
         return data["episodes_log"][replace_game_data(name, "episodes_log")][:2]
     except KeyError:
         return [0, 0]
 
 def equalize_time():
-    global data
-
+    data = pydata_load()
     times_to_equalize = {name: time["time"] for name, time in data["episodes_time"].items() if name != "SnowRunner"}
     times_list = list(times_to_equalize.values())
     e0 = times_list[0]
@@ -122,16 +118,23 @@ def equalize_time():
         if name in data["episodes_time"]:
             data["episodes_time"][name]["time"] = new_time
 
+    pydata_save(data)
+
 def equalize_time_sr():
+    data = pydata_load()
+
     sr_time = data["episodes_time"]["SnowRunner"]["time"]
 
     if sr_time <= 0:
         data["episodes_time"]["SnowRunner"]["time"] = 120 + sr_time
         data["games_for_sr_counter"] += 5
 
+    pydata_save(data)
+
 def reset_console_flag(name):
+    data = pydata_load()
     data["episodes_time"][name]["add_by_console"] = "False"
-    save_db()
+    pydata_save(data)
 
 if __name__ == "__main__":
 
