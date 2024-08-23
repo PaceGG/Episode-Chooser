@@ -1,3 +1,4 @@
+print("Загрузка...")
 import os
 os.chdir("D:\\Program Files\\HTML\\Games")
 import json
@@ -194,6 +195,7 @@ def run_random_game():
 
 def print_info():
     pydata = pydata_load()
+    os.system('cls')
     if pydata["games_for_sr_counter"] == 1:
         ep_prefix = 'я'
     elif 1 < pydata["games_for_sr_counter"] < 5:
