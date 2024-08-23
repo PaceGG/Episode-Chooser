@@ -25,7 +25,7 @@ def icon_rename(game_name):
     
 
 # Название игры
-game_name = "Outer Wilds"
+game_name = "Cuphead"
 
 
 icon_rename(game_name)
