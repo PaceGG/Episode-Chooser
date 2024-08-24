@@ -1,17 +1,1 @@
-[
-    {
-        "id": 525,
-        "game_name": "Dead Space 3",
-        "ep_range": [6, 8]
-    },
-    {
-        "game_name": "Fallout: New Vegas",
-        "ep_range": [13, 15],
-        "id": 527
-    },
-    {
-        "game_name": "SnowRunner",
-        "ep_range": [3, 5],
-        "id": 537
-    }
-]
+[]

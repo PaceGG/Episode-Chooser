@@ -2,7 +2,7 @@ print("Загрузка...")
 import os
 os.chdir("D:\\Program Files\\HTML\\Games")
 import json
-from time import time, strftime, localtime
+from time import time
 from random import randint
 
 # modules
@@ -12,6 +12,7 @@ from setEngLayout import set_eng_layout
 from telegramFunctions import edit_telegram_message, send_image
 from classGame import Game
 from pydata import pydata_load, pydata_save
+from timeFormat import pc_date_format
 
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
@@ -119,7 +120,7 @@ def edit_tg_info_message():
     # Для новой игры
     pydata = pydata_load()
 
-    next_update_message = f"Nex Update: {strftime("%d.%m.%y %H:%M", localtime(pydata["last_update"] + 12*60*60))}"
+    next_update_message = f"Next Update: {pc_date_format(pydata["last_update"] + 12*60*60)}"
 
     if game[0].last_session == game[1].last_session == 0:
         sr_counter_message = f"• SR: {pydata['games_for_sr_counter']}"
