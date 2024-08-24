@@ -2,7 +2,7 @@ print("Загрузка...")
 import os
 os.chdir("D:\\Program Files\\HTML\\Games")
 import json
-from time import time
+from time import time, strftime, localtime
 from random import randint
 
 # modules
@@ -118,11 +118,14 @@ def sr_db_clear():
 def edit_tg_info_message():
     # Для новой игры
     pydata = pydata_load()
+
+    next_update_message = f"Nex Update: {strftime("%d.%m.%y %H:%M", localtime(pydata["last_update"] + 12*60*60))}"
+
     if game[0].last_session == game[1].last_session == 0:
         sr_counter_message = f"• SR: {pydata['games_for_sr_counter']}"
         chance_info_message = f"Forece: {later}"
 
-        edit_telegram_message(f"{sr_counter_message}\n{chance_info_message}")
+        edit_telegram_message(f"{sr_counter_message}\n{chance_info_message}\n\n{next_update_message}")
         return
     
     # Для старой игры
@@ -141,7 +144,7 @@ def edit_tg_info_message():
     for g in game:
         if g.time != 120: time_format_message += f"• {g.short_name}: {g.time_format}\n"
 
-    edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_format_message}")
+    edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_format_message}\n\n{next_update_message}")
 
 
 def add_game_log(game_name):

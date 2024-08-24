@@ -40,7 +40,7 @@ def replace_game_data(new_name, data_key):
 def count_dir_time(check_name):
     data = pydata_load()
 
-    game_names = [name for name in data["episodes_time"].keys()z    ]
+    game_names = [name for name in data["episodes_time"].keys()]
 
     for game_name in game_names:
         dir = os.path.join("D:/Program Files/Shadow Play", game_name.replace(":", ""))
