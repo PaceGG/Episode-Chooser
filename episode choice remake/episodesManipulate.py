@@ -40,7 +40,7 @@ def replace_game_data(new_name, data_key):
 def count_dir_time(check_name):
     data = pydata_load()
 
-    game_names = [name for name in data["episodes_time"].keys() if name != "SnowRunner"]
+    game_names = [name for name in data["episodes_time"].keys()z    ]
 
     for game_name in game_names:
         dir = os.path.join("D:/Program Files/Shadow Play", game_name.replace(":", ""))
@@ -49,6 +49,7 @@ def count_dir_time(check_name):
             if dir_duration > 0:
                 print(f"В {game_name} есть видео продолжительностью {dir_duration} минут. Хотите добавить их к сумме?")
                 my_time = input(f"Введите время для {game_name}: ")
+                os.system("cls")
                 data["episodes_time"][game_name]["my_time"] = my_time
                 data["episodes_time"][game_name]["add_by_console"] = "True"
                 pydata_save(data)

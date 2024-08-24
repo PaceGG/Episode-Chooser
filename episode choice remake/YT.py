@@ -36,8 +36,7 @@ def search_videos_on_channel(search_string, type="video"):
     return videos
 
 def edit_game_message(game_name, ep_range, id):
-    if game_name != "SnowRunner": videos = search_videos_on_channel(game_name)
-    else: videos = search_videos_on_channel(game_name, type="live")
+    videos = search_videos_on_channel(game_name)
     names = []
 
     for n in range(ep_range[0],ep_range[1] +1):
