@@ -50,7 +50,7 @@ def count_dir_time(check_name):
                 my_time = input(f"Введите время для {game_name}: ")
                 os.system("cls")
                 data["episodes_time"][game_name]["my_time"] = my_time
-                data["episodes_time"][game_name]["add_by_console"] = "True"
+                if my_time != "": data["episodes_time"][game_name]["add_by_console"] = "True"
                 pydata_save(data)
 
 def time_sum(my_time):

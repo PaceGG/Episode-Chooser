@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "game_name": "Fallout: New Vegas",
+        "ep_range": [
+            16,
+            18
+        ],
+        "id": 538
+    }
+]
