@@ -12,7 +12,7 @@ def time_format(minutes):
     """ 134 -> 02:34 (134) """
     minutes = ceil(minutes)
     if minutes > 60: return f"{minutes//60:02}:{minutes%60:02} ({minutes})"
-    return str(ceil(minutes))
+    return f"({ceil(minutes)})"
 
 def short_date_format(time):
     """ dd.mm.yy HH:MM """
