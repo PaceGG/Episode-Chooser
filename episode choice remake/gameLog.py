@@ -9,7 +9,7 @@ def save_log(log):
     with open('episode choice remake/game_log.json', 'w', encoding='utf-8') as f:
         json.dump(log, f, indent=4)
 
-default = [[[], [], [], [], [], [], []],[[], [], [], [], [], [], []],[[], [], [], [], [], [], []],[[], [], [], [], [], [], []],[[], [], [], [], [], [], []]]
+default = [[[]]*7]*5
 
 def game_log(name):
     week, day = date_position(today())
@@ -19,7 +19,7 @@ def game_log(name):
     if today() > log["next_reset"]:
         log["game_log"]= default
         log["next_reset"] = end_of_month(today())
-        # calc_statistics(log["next_reset"])
+        # calc_statistics(log["game_log"])
 
     log["game_log"][week][day].append(name)
     save_log(log)
