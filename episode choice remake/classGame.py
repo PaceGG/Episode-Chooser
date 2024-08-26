@@ -44,6 +44,11 @@ class Game:
         self.date_format = short_date_format(self.date)
 
         self.chance = kwargs.get("chance", 0)
+
+    def update_time(self):
+        self.time = get_time(self.name)
+        self.time_format = time_format(self.time)
+        self.long_time_format = f"::({time_format(self.time/3) + " / "}{time_format(self.time/2) + " / "}{time_format(self.time)})::"
             
 
     def __repr__(self):
