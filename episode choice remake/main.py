@@ -13,6 +13,7 @@ from telegramFunctions import edit_telegram_message, send_image
 from classGame import Game
 from pydata import pydata_load, pydata_save
 from timeFormat import pc_date_format
+from gameLog import game_log
 
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
@@ -174,6 +175,7 @@ def run_game(game_to_run):
     sr_db_edit()
     edit_tg_info_message()
     reset_console_flag(game_to_run.name)
+    game_log(game_to_run.name)
     os.startfile(game_to_run.path)
     
 
