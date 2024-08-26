@@ -11,7 +11,7 @@
         "game_name": "Dead Space 3",
         "ep_range": [
             8,
-            10
+            9
         ],
         "id": 539
     },
@@ -19,8 +19,16 @@
         "game_name": "Fallout: New Vegas",
         "ep_range": [
             19,
-            21
+            20
         ],
         "id": 540
+    },
+    {
+        "game_name": "Dead Space 3",
+        "ep_range": [
+            10,
+            12
+        ],
+        "id": 541
     }
 ]
