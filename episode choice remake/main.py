@@ -12,6 +12,7 @@ from setEngLayout import set_eng_layout
 from telegramFunctions import edit_telegram_message, send_image
 from classGame import Game
 from pydata import pydata_load, pydata_save
+from timeFormat import pc_date_format
 
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
@@ -118,11 +119,14 @@ def sr_db_clear():
 def edit_tg_info_message():
     # Для новой игры
     pydata = pydata_load()
+
+    next_update_message = f"Next Update: {pc_date_format(pydata["last_update"] + 12*60*60)}"
+
     if game[0].last_session == game[1].last_session == 0:
         sr_counter_message = f"• SR: {pydata['games_for_sr_counter']}"
         chance_info_message = f"Forece: {later}"
 
-        edit_telegram_message(f"{sr_counter_message}\n{chance_info_message}")
+        edit_telegram_message(f"{sr_counter_message}\n{chance_info_message}\n\n{next_update_message}")
         return
     
     # Для старой игры
@@ -141,7 +145,7 @@ def edit_tg_info_message():
     for g in game:
         if g.time != 120: time_format_message += f"• {g.short_name}: {g.time_format}\n"
 
-    edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_format_message}")
+    edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_format_message}\n\n{next_update_message}")
 
 
 def add_game_log(game_name):

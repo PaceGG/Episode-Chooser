@@ -1,8 +1,10 @@
-# import requests
 from requests import post
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 # Инициализация бота
-bot_token='6739691945:AAG_FoagOmFd-GUFpFwriEeTFgma-rwjGx8'
+bot_token=os.getenv("TELEGRAM_BOT_TOKEN")
 chat_id = '-1002035302407'
 
 def send_image(image_path, caption=None):

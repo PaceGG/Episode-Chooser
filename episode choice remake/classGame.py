@@ -1,7 +1,7 @@
 from episodesManipulate import get_episodes, get_time
 from createGameStructure import create_game_structure
 from math import ceil
-from time import strftime, localtime
+from timeFormat import time_format, short_date_format
 
 def get_short_name(name):
     short_name = ""
@@ -11,10 +11,7 @@ def get_short_name(name):
         short_name += c
 
     return short_name
-def time_format(minutes):
-    minutes = ceil(minutes)
-    if minutes > 60: return f"{minutes//60:02}:{minutes%60:02} ({minutes})"
-    return str(ceil(minutes))
+
 class Game:
     def __init__(self, **kwargs):
         self.name = kwargs.get("name", "")
@@ -40,7 +37,7 @@ class Game:
         elif self.name == "SnowRunner": self.caption = kwargs.get("caption", f"{self.name} № {self.last_episode+1}:\n• ")
 
         self.date = create_game_structure(safe_name)
-        self.date_format = strftime("%d.%m.%y %H:%M", localtime(self.date))
+        self.date_format = short_date_format(self.date)
 
         self.chance = kwargs.get("chance", 0)
             
@@ -60,5 +57,6 @@ if __name__ == "__main__":
 
     test = Game(name="Fallout: New Vegas")
     # print(test)
+    print(test.date_format)
 
     pass
