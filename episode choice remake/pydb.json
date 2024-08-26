@@ -1,39 +1,39 @@
 {
-    "last_update": 1724416926,
+    "last_update": 1724603411,
     "games_log": [
-        "Dead Space 3",
+        "Fallout: New Vegas",
         "Dead Space 3",
         "Fallout: New Vegas"
     ],
     "start_from": 4,
-    "games_for_sr_counter": 5,
+    "games_for_sr_counter": 2,
     "episodes_log": {
         "SnowRunner": [
             3,
             3
         ],
         "Fallout: New Vegas": [
-            6,
-            15
+            8,
+            21
         ],
         "Dead Space 3": [
-            3,
-            8
+            4,
+            10
         ]
     },
     "episodes_time": {
         "Fallout: New Vegas": {
-            "time": 120,
+            "time": 112,
             "my_time": "",
             "add_by_console": "True"
         },
         "Dead Space 3": {
-            "time": 104,
+            "time": 120,
             "my_time": "",
             "add_by_console": "True"
         },
         "SnowRunner": {
-            "time": 78,
+            "time": 42,
             "my_time": "",
             "add_by_console": "False"
         }
