@@ -14,5 +14,13 @@
             10
         ],
         "id": 539
+    },
+    {
+        "game_name": "Fallout: New Vegas",
+        "ep_range": [
+            19,
+            21
+        ],
+        "id": 540
     }
 ]

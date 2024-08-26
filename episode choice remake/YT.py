@@ -1,5 +1,8 @@
 import json
 from time import time
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 from googleapiclient.discovery import build
 from telegramFunctions import *
@@ -9,7 +12,7 @@ with open("episode choice remake/YT.json", encoding="utf-8") as f:
     empty_messages = json.load(f)
 
 def search_videos_on_channel(search_string, type="video"):
-    api_key = 'AIzaSyCTcKHZ4w2LNlG_KX7p-2UxFd_VPlE_jJQ'
+    api_key = os.getenv("YT_API_KEY")
     channel_id = "UC2Y71nJHtoLzY88Wrrqm7Kw"
 
     youtube = build('youtube', 'v3', developerKey=api_key)

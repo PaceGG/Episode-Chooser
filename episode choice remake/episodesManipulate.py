@@ -46,7 +46,7 @@ def count_dir_time(check_name):
         if os.path.exists(dir) and game_name == check_name and data["episodes_time"][game_name]["add_by_console"] == "False":
             dir_duration = get_total_duration(dir)//60
             if dir_duration > 0:
-                print(f"В {game_name} есть видео продолжительностью {dir_duration} минут. Хотите добавить их к сумме?")
+                print(f"В {game_name} есть видео продолжительностью {dir_duration} минут. Добавить их к сумме?")
                 my_time = input(f"Введите время для {game_name}: ")
                 os.system("cls")
                 data["episodes_time"][game_name]["my_time"] = my_time
