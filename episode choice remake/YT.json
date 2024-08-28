@@ -1,34 +1,12 @@
 [
     {
-        "game_name": "Fallout: New Vegas",
-        "ep_range": [
-            16,
-            18
-        ],
-        "id": 538
-    },
-    {
-        "game_name": "Dead Space 3",
-        "ep_range": [
-            8,
-            9
-        ],
-        "id": 539
+        "game_name": "SnowRunner",
+        "ep_range": [4, 6],
+        "id": 543
     },
     {
         "game_name": "Fallout: New Vegas",
-        "ep_range": [
-            19,
-            20
-        ],
-        "id": 540
-    },
-    {
-        "game_name": "Dead Space 3",
-        "ep_range": [
-            10,
-            12
-        ],
-        "id": 541
+        "ep_range": [23, 24],
+        "id": 544
     }
 ]

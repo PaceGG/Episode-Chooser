@@ -60,8 +60,12 @@ def calendar_position(unix_timestamp):
 def date_position(unix_timestamp):
     day = get_day(unix_timestamp)
 
-    week = day // 7
-    wday = day % 7 - 1
+    if day % 7 == 0:
+        week = day // 7 - 1
+        wday = 7 - 1
+    else:
+        week = day // 7
+        wday = day % 7 - 1
 
     return week, wday
 
@@ -102,7 +106,9 @@ def today():
 
 if __name__ == "__main__":
 
-    print(last_day(today()))
-    print(end_of_month(today()))
+    # print(last_day(today()))
+    # print(end_of_month(today())
+    # print(date_position(1724739895))
+    print(date_position(today()))
 
     pass
