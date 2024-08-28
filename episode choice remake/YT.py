@@ -7,9 +7,10 @@ load_dotenv()
 from googleapiclient.discovery import build
 from telegramFunctions import *
 from pydata import pydata_load, pydata_save
+from jsonLoader import *
+empty_messages_path = "episode choice remake/YT.json"
 
-with open("episode choice remake/YT.json", encoding="utf-8") as f:
-    empty_messages = json.load(f)
+shift_range = {}
 
 def search_videos_on_channel(search_string, type="video"):
     api_key = os.getenv("YT_API_KEY")
@@ -39,6 +40,7 @@ def search_videos_on_channel(search_string, type="video"):
     return videos
 
 def edit_game_message(game_name, ep_range, id):
+    global shift_range
     videos = search_videos_on_channel(game_name if game_name != "SnowRunner" else "SnowRunner [ng+]")
     names = []
 
@@ -50,13 +52,17 @@ def edit_game_message(game_name, ep_range, id):
     for name in names:
         names_message += f"• {name}\n"
 
-    pydata = pydata_load()
     if names:
+        pydata = pydata_load()
         new_text = f"{game_name} № {ep_range[0]}-{ep_range[0]+len(names)-1}: \n{names_message}"
-        if game_name == "SnowRunner": new_text = f"{game_name} № {ep_range[0]}: \n{names_message}"
+        if len(names) == 1: new_text = f"{game_name} № {ep_range[0]}: \n{names_message}"
         if pydata["episodes_log"][game_name][1]-2 == ep_range[0] and pydata["episodes_log"][game_name][1] != ep_range[0]+len(names)-1 and game_name != "SnowRunner":
             pydata["episodes_log"][game_name][1] = ep_range[0]+len(names)-1
+
             pydata_save(pydata)
+
+        try: shift_range[game_name] += 3-len(names)
+        except: shift_range[game_name] = 3-len(names)
 
         edit_telegram_caption(new_text, message_id=id)
         return True
@@ -64,30 +70,37 @@ def edit_game_message(game_name, ep_range, id):
     return False
 
 
-
 def edit_empty_messages():
     pydata = pydata_load()
-    if int(time()) - pydata["last_update"] < 12*60*60: return
+    empty_messages = json_load(empty_messages_path)
+    # if int(time()) - pydata["last_update"] < 12*60*60: return
     update_empty_messages = []
 
     for game_info in empty_messages:
-        if not edit_game_message(game_info["game_name"], game_info["ep_range"], game_info["id"]):
-            update_empty_messages.append(game_info)
+        try: s_range = shift_range[game_info["game_name"]]
+        except: s_range = 0
+        print(game_info, shift_range, s_range)
+        if not edit_game_message(game_info["game_name"], [game_info["ep_range"][0]-s_range, game_info["ep_range"][1]-s_range], game_info["id"]):
+            update_game_info = game_info
+            update_game_info["ep_range"][0] -= s_range
+            update_game_info["ep_range"][1] -= s_range
+            update_empty_messages.append(update_game_info)
 
-    with open("episode choice remake/YT.json", "w", encoding="utf-8") as f:
-        json.dump(update_empty_messages, f, indent=4)
-
+    pydata = pydata_load()
     pydata["last_update"] = int(time())
     pydata_save(pydata)
+    json_save(empty_messages_path, update_empty_messages)
 
 def add_empty_message(game_name, ep_range, id):
+    empty_messages = json_load(empty_messages_path)
+
     empty_messages.append({"game_name": game_name, "ep_range": ep_range, "id": id})
 
-    with open("episode choice remake/YT.json", "w", encoding="utf-8") as f:
-        json.dump(empty_messages, f, indent=4)
+    json_save(empty_messages_path, empty_messages)
 
 
 if __name__ == '__main__':
     # edit_game_message("Dead Space 3", [4,5], 462)
     edit_empty_messages()
+
     pass

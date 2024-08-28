@@ -1,12 +1,18 @@
 [
     {
         "game_name": "SnowRunner",
-        "ep_range": [4, 6],
+        "ep_range": [
+            4,
+            6
+        ],
         "id": 543
     },
     {
         "game_name": "Fallout: New Vegas",
-        "ep_range": [23, 24],
+        "ep_range": [
+            23,
+            25
+        ],
         "id": 544
     }
 ]
