@@ -23,13 +23,12 @@ game = [Game(name=item["name"]) for item in data]
 game.append(Game(name="SnowRunner", short_name="SR"))
 
 if game[0].time != 120 and game[1].time != 120:
-    print("start recount time")
     for g in game:
         g.update_time()
 
 # game paths
 game[0].path = r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\New Vegas EE.lnk"
-game[1].path = r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\deadspace3.lnk"
+game[1].path = r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TileIconify\Custom Shortcuts\VLADiK BRUTAL\VLADiK BRUTAL.lnk"
 game[2].path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 
 # Chance Count
@@ -39,6 +38,7 @@ if game[0].last_session == 0 or game[1].last_session == 0:
     pydata = pydata_load()
     if game[0].last_session == 0: pydata["start_from"] = game[1].last_session
     if game[1].last_session == 0: pydata["start_from"] = game[0].last_session
+    if pydata["games_for_sr_counter"] <= 5: pydata["games_for_sr_counter"] = 5
 
     pydata_save(pydata)
 
@@ -222,6 +222,8 @@ def print_info():
 
     if chose_method == "force":
         print(f"Force: {choice}")
+    if game[0].last_session == game[1].last_session == 0:
+        print(f"Force: {later}")
     
     for i in range(2):
         g = game[i]

@@ -73,13 +73,12 @@ def edit_game_message(game_name, ep_range, id):
 def edit_empty_messages():
     pydata = pydata_load()
     empty_messages = json_load(empty_messages_path)
-    # if int(time()) - pydata["last_update"] < 12*60*60: return
+    if int(time()) - pydata["last_update"] < 12*60*60: return
     update_empty_messages = []
 
     for game_info in empty_messages:
         try: s_range = shift_range[game_info["game_name"]]
         except: s_range = 0
-        print(game_info, shift_range, s_range)
         if not edit_game_message(game_info["game_name"], [game_info["ep_range"][0]-s_range, game_info["ep_range"][1]-s_range], game_info["id"]):
             update_game_info = game_info
             update_game_info["ep_range"][0] -= s_range
@@ -88,6 +87,10 @@ def edit_empty_messages():
 
     pydata = pydata_load()
     pydata["last_update"] = int(time())
+
+    # for game_info in update_empty_messages:
+    #     edit_telegram_caption(f"{game_info[]}")
+
     pydata_save(pydata)
     json_save(empty_messages_path, update_empty_messages)
 

@@ -3,7 +3,7 @@ from time import time
 from moviepy.video.io.VideoFileClip import *
 from pydata import pydata_load, pydata_save
 
-def get_old_name(data_key):
+def get_old_name(new_name, data_key):
     data = pydata_load()
     with open("react-remake/db.json", encoding="utf-8") as f:
         showcase = json.load(f)["showcase"]
@@ -13,13 +13,13 @@ def get_old_name(data_key):
     if old_names==actual_names or old_names == reversed(actual_names): return None
 
     for name in old_names:
-        if name not in actual_names:
+        if name not in actual_names and new_name not in old_names:
             return name
 
     return None
 
 def replace_game_data(new_name, data_key):
-    old_name = get_old_name(data_key)
+    old_name = get_old_name(new_name, data_key)
 
     if old_name is None:
         return new_name
@@ -143,5 +143,16 @@ if __name__ == "__main__":
     # print("start time: ", time() - start_time)
     # print(get_episodes("Fallout: New Vegas"))
     # print("end time: ", time() - start_time)
-    print(get_time("SnowRunner"))
+    # print(get_time("SnowRunner"))
+
+    # print(get_old_name("episodes_log"))
+
+    # replace_game_data("VLADiK BRUTAL", "episodes_log")
+
+    print(get_episodes("Fallout: New Vegas"))
+    print(get_time("Fallout: New Vegas"))
+    print()
+    print(get_episodes("VLADiK BRUTAL"))
+    print(get_time("VLADiK BRUTAL"))
+
     pass

@@ -1,6 +1,5 @@
 from episodesManipulate import get_episodes, get_time
 from createGameStructure import create_game_structure
-from math import ceil
 from timeFormat import time_format, short_date_format
 # from gameTime import calc_game_time
 
@@ -53,19 +52,18 @@ class Game:
 
     def __repr__(self):
         return f"class Game:\n{'\n'.join(f'{k} = {v!r}' for k, v in vars(self).items())}"
-    
-    # Недоделано и нигде не используется
-    # def set_name(self, name):
-    #     self.name = name
-    #     self.short_name = get_short_name(self.name)
-    #     self.video = self.name.replace(":", "")
-    #     self.video = f"D:/Program Files/Shadow Play/{name.replace(":", "")}/previews"
 
 if __name__ == "__main__":
     # print(get_short_name("Mafia II: Definitive Edition"))
 
-    test = Game(name="Fallout: New Vegas")
+    # test = Game(name="VLADiK BRUTAL")
     # print(test)
-    print(test.date_format)
+
+    a = Game(name="Fallout: New Vegas")
+    b = Game(name="VLADiK BRUTAL")
+
+    print(a)
+    print()
+    print(b)
 
     pass
