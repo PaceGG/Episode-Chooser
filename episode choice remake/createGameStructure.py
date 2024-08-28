@@ -13,6 +13,12 @@ def create_game_structure(game_name):
 
 def icon_rename(game_name):
     directory = "D:/Program Files/HTML/Games/icons_new"
+
+    icon_path = os.path.join(directory, f"{game_name}.png")
+
+    if os.path.exists(icon_path):
+        return icon_path
+
     variants = ["ng", "new_game", "new game"]
     
     for variant in variants:
@@ -20,9 +26,7 @@ def icon_rename(game_name):
         if os.path.exists(full_path):
             new_full_path = os.path.join(directory, f"{game_name}.png")
             os.rename(full_path, new_full_path)
-            print(f"Файл '{full_path}' переименован в '{new_full_path}'")
-            return
-    print("Иконка не найдена")
+            return new_full_path
 
 if __name__ == "__main__":
     game_name = "test"

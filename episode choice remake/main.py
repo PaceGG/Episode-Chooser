@@ -130,13 +130,14 @@ def edit_tg_info_message():
 
     if game[0].last_session == game[1].last_session == 0:
         sr_counter_message = f"• SR: {pydata['games_for_sr_counter']}"
-        chance_info_message = f"Forece: {later}"
+        chance_info_message = f"Force: {later}\nШансы равны"
 
         edit_telegram_message(f"{sr_counter_message}\n{chance_info_message}\n\n{next_update_message}")
         return
     
     # Для старой игры
-    if get_unpopular_game() is not None: force_info_message = f"• Force: {get_unpopular_game()}"
+    unpopular_game = get_unpopular_game()
+    if unpopular_game is not None: force_info_message = f"• Force: {unpopular_game}"
     else: force_info_message = ""
 
     count_chance()

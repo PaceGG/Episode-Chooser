@@ -1,5 +1,5 @@
 from episodesManipulate import get_episodes, get_time
-from createGameStructure import create_game_structure
+from createGameStructure import create_game_structure, icon_rename
 from timeFormat import time_format, short_date_format
 # from gameTime import calc_game_time
 
@@ -24,7 +24,7 @@ class Game:
 
         video = kwargs.get("video", safe_name)
         self.video = f"D:/Program Files/Shadow Play/{video}"
-        self.icon = kwargs.get("icon", f"D:/Program Files/HTML/Games/icons_new/{safe_name}.png")
+        self.icon = icon_rename(safe_name)
 
         last_session, last_episode = get_episodes(self.name)
         self.last_session = kwargs.get("last_session", last_session)
@@ -59,11 +59,11 @@ if __name__ == "__main__":
     # test = Game(name="VLADiK BRUTAL")
     # print(test)
 
-    a = Game(name="Fallout: New Vegas")
+    # a = Game(name="Fallout: New Vegas")
     b = Game(name="VLADiK BRUTAL")
 
-    print(a)
-    print()
+    # print(a)
+    # print()
     print(b)
 
     pass
