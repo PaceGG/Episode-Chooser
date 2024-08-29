@@ -22,9 +22,8 @@ with open("react-remake/db.json", encoding="utf-8") as f:
 game = [Game(name=item["name"]) for item in data]
 game.append(Game(name="SnowRunner", short_name="SR"))
 
-if game[0].time != 120 and game[1].time != 120:
-    for g in game:
-        g.update_time()
+for g in game:
+    g.update_time()
 
 # game paths
 game[0].path = r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\New Vegas EE.lnk"
