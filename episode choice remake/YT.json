@@ -1,18 +1,7 @@
 [
     {
-        "game_name": "Dead Space 3",
-        "ep_range": [
-            13,
-            15
-        ],
-        "id": 545
-    },
-    {
         "game_name": "VLADiK BRUTAL",
-        "ep_range": [
-            1,
-            3
-        ],
-        "id": 549
+        "ep_range": [4, 6],
+        "id": 553
     }
 ]

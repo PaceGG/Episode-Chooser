@@ -84,12 +84,16 @@ def edit_empty_messages():
             update_game_info["ep_range"][0] -= s_range
             update_game_info["ep_range"][1] -= s_range
             update_empty_messages.append(update_game_info)
-
+            
     pydata = pydata_load()
     pydata["last_update"] = int(time())
+    
 
-    # for game_info in update_empty_messages:
-    #     edit_telegram_caption(f"{game_info[]}")
+
+    if shift_range != {}:
+        for game_info in update_empty_messages:
+            pydata["episodes_log"][game_info["game_name"]][1] = game_info["ep_range"][1]
+            edit_telegram_caption(f"{game_info["game_name"]} № {f"{game_info["ep_range"][0]}-{game_info["ep_range"][1]}" if game_info["ep_range"][0] != game_info["ep_range"][1] else game_info['ep_range'][0]}:", message_id=game_info["id"])
 
     pydata_save(pydata)
     json_save(empty_messages_path, update_empty_messages)
@@ -105,5 +109,6 @@ def add_empty_message(game_name, ep_range, id):
 if __name__ == '__main__':
     # edit_game_message("Dead Space 3", [4,5], 462)
     edit_empty_messages()
+    
 
     pass
