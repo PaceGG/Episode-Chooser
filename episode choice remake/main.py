@@ -234,7 +234,7 @@ def run_random_game():
         run_game(get_game(choice))
 
 def print_info():
-    # os.system('cls')
+    os.system('cls')
     pydata = pydata_load()
     if pydata["games_for_sr_counter"] == 1:
         ep_prefix = 'я'

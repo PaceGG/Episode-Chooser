@@ -1,3 +1,10 @@
-l = [1,3]
+d = {
+    "a": 1,
+    "b": 2,
+}
 
-print(l)
+if "b" in d:
+    print(d["b"])
+
+if "c" in d:
+    print(d["c"])
