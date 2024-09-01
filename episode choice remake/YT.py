@@ -1,12 +1,15 @@
-import json
 from time import time
 from dotenv import load_dotenv
 import os
 load_dotenv()
 
+print("Загрузка модуля googleapiclient.discovery для YT...")
 from googleapiclient.discovery import build
-from telegramFunctions import *
+print("Загрузка модуля telegramFunctions для YT...")
+from telegramFunctions import edit_telegram_caption
+print("Загрузка модуля pydata для YT...")
 from pydata import pydata_load, pydata_save
+print("Загрузка модуля jsonLoader для YT...")
 from jsonLoader import *
 empty_messages_path = "episode choice remake/YT.json"
 
@@ -73,7 +76,9 @@ def edit_game_message(game_name, ep_range, id):
 def edit_empty_messages():
     pydata = pydata_load()
     empty_messages = json_load(empty_messages_path)
-    if int(time()) - pydata["last_update"] < 12*60*60: return
+    # if int(time()) - pydata["last_update"] < 12*60*60: return
+    print()
+    print("Синхронизация Telegram с YouTube...")
     update_empty_messages = []
 
     for game_info in empty_messages:
@@ -108,7 +113,8 @@ def add_empty_message(game_name, ep_range, id):
 
 if __name__ == '__main__':
     # edit_game_message("Dead Space 3", [4,5], 462)
-    edit_empty_messages()
+    # edit_empty_messages()
+
     
 
     pass

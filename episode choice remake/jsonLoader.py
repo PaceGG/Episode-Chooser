@@ -13,7 +13,6 @@ def json_load(filename):
         print(f"Error: Failed to decode JSON from the file {filename}.")
         return None
 
-@staticmethod
 def json_save(filename, data):
     """Save data to a JSON file."""
     try:

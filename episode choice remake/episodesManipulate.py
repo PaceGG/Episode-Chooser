@@ -1,6 +1,9 @@
 import json
-from time import time
-from moviepy.video.io.VideoFileClip import *
+import os
+
+print("Загрузка модуля moviepy.video.io.VideoFileClip для epiosdesManipulate...")
+from moviepy.video.io.VideoFileClip import get_total_duration
+print("Загрузка модуля pydata для episodesManipulate...")
 from pydata import pydata_load, pydata_save
 
 def get_old_name(new_name, data_key):

@@ -1,7 +1,9 @@
+print("Загрузка модуля episodesManipulate для classGame...")
 from episodesManipulate import get_episodes, get_time
+print("Загрузка модуля createGameStructure для classGame...")
 from createGameStructure import create_game_structure, icon_rename
+print("Загрузка модуля timeFormat для classGame...")
 from timeFormat import time_format, short_date_format
-# from gameTime import calc_game_time
 
 def get_short_name(name):
     short_name = ""
@@ -15,6 +17,7 @@ def get_short_name(name):
 class Game:
     def __init__(self, **kwargs):
         self.name = kwargs.get("name", "")
+        print(f"Инициализация {self.name}...")
         self.path = kwargs.get("path", "")
         
         safe_name = self.name.replace(":", "")

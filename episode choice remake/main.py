@@ -6,14 +6,37 @@ from time import time
 from random import randint
 
 # modules
+print("Загрузка модуля YT...")
 from YT import add_empty_message, edit_empty_messages
+print()
+
+print("Загрузка модуля episodesManipulate...")
 from episodesManipulate import reset_console_flag
+print()
+
+print("Загрузка модуля setEngLayout...")
 from setEngLayout import set_eng_layout
+print()
+
+print("Загрузка модуля telegramFunctions...")
 from telegramFunctions import edit_telegram_message, send_image
+print()
+
+print("Загрузка модуля classGame...")
 from classGame import Game
+print()
+
+print("Загрузка модуля pydata...")
 from pydata import pydata_load, pydata_save
+print()
+
+print("Загрузка модуля timeFormat...")
 from timeFormat import short_date_format, pc_date_format, today
+print()
+
+print("Загрузка модуля gameLog...")
 from gameLog import game_log
+print()
 
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
@@ -211,7 +234,7 @@ def run_random_game():
         run_game(get_game(choice))
 
 def print_info():
-    os.system('cls')
+    # os.system('cls')
     pydata = pydata_load()
     if pydata["games_for_sr_counter"] == 1:
         ep_prefix = 'я'
