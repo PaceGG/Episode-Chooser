@@ -1,16 +1,17 @@
 {
-    "last_update": 1725107217,
+    "last_update": 1725149281,
     "games_log": [
         "Fallout: New Vegas",
         "Fallout: New Vegas",
         "VLADiK BRUTAL"
     ],
     "start_from": 10,
-    "games_for_sr_counter": 0,
+    "games_for_sr_counter": 5,
+    "time_for_sr_counter": 1725739580,
     "episodes_log": {
         "SnowRunner": [
-            4,
-            4
+            5,
+            5
         ],
         "Fallout: New Vegas": [
             13,
@@ -28,9 +29,9 @@
             "add_by_console": "True"
         },
         "SnowRunner": {
-            "time": 29,
+            "time": 4,
             "my_time": "",
-            "add_by_console": "False"
+            "add_by_console": "True"
         },
         "VLADiK BRUTAL": {
             "time": 120,

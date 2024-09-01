@@ -1,7 +1,18 @@
 [
     {
         "game_name": "VLADiK BRUTAL",
-        "ep_range": [4, 6],
+        "ep_range": [
+            4,
+            6
+        ],
         "id": 553
+    },
+    {
+        "game_name": "SnowRunner",
+        "ep_range": [
+            5,
+            7
+        ],
+        "id": 554
     }
 ]

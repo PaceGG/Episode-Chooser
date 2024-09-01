@@ -12,7 +12,7 @@ from setEngLayout import set_eng_layout
 from telegramFunctions import edit_telegram_message, send_image
 from classGame import Game
 from pydata import pydata_load, pydata_save
-from timeFormat import pc_date_format
+from timeFormat import short_date_format, pc_date_format, today
 from gameLog import game_log
 
 with open("react-remake/db.json", encoding="utf-8") as f:
@@ -108,7 +108,9 @@ def add_episode(G, zero_flag=False):
 
 def sr_db_edit():
     pydata = pydata_load()
-    if pydata["games_for_sr_counter"] == 0:
+    if pydata["games_for_sr_counter"] <= 0:
+        pydata["time_for_sr_counter"] = today() + 7*24*60*60
+        pydata_save(pydata)
         sr_db_clear()
         return
     pydata["games_for_sr_counter"] -= 1
@@ -118,7 +120,7 @@ def sr_db_edit():
 
 def sr_db_clear():
     pydata = pydata_load()
-    pydata["games_for_sr_counter"] = 5
+    pydata["games_for_sr_counter"] += 5
     pydata_save(pydata)
 
 def edit_tg_info_message():
@@ -144,14 +146,17 @@ def edit_tg_info_message():
     elif game[0].chance > 1: chance_info_message = f"• {game[0].short_name}: {game[0].chance}"
     elif game[1].chance > 1: chance_info_message = f"• {game[1].short_name}: {game[1].chance}"
 
-    if pydata["games_for_sr_counter"] != 0: sr_counter_message = f"• SR: {pydata['games_for_sr_counter']}"
+    if pydata["games_for_sr_counter"] > 0: sr_counter_message = f"• SR: {pydata['games_for_sr_counter']}"
+    elif pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] > today(): sr_counter_message = f"SR: {short_date_format(pydata['time_for_sr_counter'])}"
     else: sr_counter_message = f"• Сегодня SnowRunner!!! • {game[2].short_name}: {game[2].time_format}" if game[2].time != 120 else "• Сегодня SnowRunner!!!"
+
+    time_for_sr_message = f"SR after {pc_date_format(pydata['time_for_sr_counter'])}"
 
     time_format_message = ""
     for g in game:
         if g.time != 120: time_format_message += f"• {g.short_name}: {g.time_format}\n"
 
-    edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_format_message}\n\n{next_update_message}")
+    edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_format_message}\n{time_for_sr_message}\n{next_update_message}")
 
 
 def add_game_log(game_name):
@@ -198,15 +203,16 @@ def run_random_game():
         sr_db_clear()
         if earlier == game[0].name: run_game(game[1])
         if earlier == game[1].name: run_game(game[0])
-    elif pydata["games_for_sr_counter"] != 0:
-        run_game(get_game(choice))
-    else:
+
+    if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today():
         run_game(game[2])
         snowrunner_updater()
+    else:
+        run_game(get_game(choice))
 
 def print_info():
-    pydata = pydata_load()
     os.system('cls')
+    pydata = pydata_load()
     if pydata["games_for_sr_counter"] == 1:
         ep_prefix = 'я'
     elif 1 < pydata["games_for_sr_counter"] < 5:
@@ -214,10 +220,13 @@ def print_info():
     else:
         ep_prefix = 'й'
 
-    if pydata["games_for_sr_counter"] > 0:
+    if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today():
+        print(f"Сегодня SnowRunner: {game[2].long_time_format}")
+    elif pydata["games_for_sr_counter"] > 0:
         print(f"До SnowRunner'a ещё {pydata['games_for_sr_counter']} сери{ep_prefix}")
     else:
-        print(f"Сегодня SnowRunner: {game[2].long_time_format}")
+        print(f"SnowRunner после {pc_date_format(pydata['time_for_sr_counter'])}")
+
     print()
 
     if chose_method == "force":
