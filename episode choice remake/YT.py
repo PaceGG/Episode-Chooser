@@ -100,7 +100,7 @@ def edit_game_message(game_name, ep_range, id, last_videos):
 def edit_empty_messages():
     pydata = pydata_load()
     empty_messages = json_load(empty_messages_path)
-    # if int(time()) - pydata["last_update"] < 12*60*60: return
+    if int(time()) - pydata["last_update"] < 12*60*60: return
     print()
     print("Синхронизация Telegram с YouTube...")
     last_videos = get_last_videos()
@@ -123,7 +123,8 @@ def edit_empty_messages():
 
     if shift_range != {}:
         for game_info in update_empty_messages:
-            pydata["episodes_log"][game_info["game_name"]][1] = game_info["ep_range"][1]
+            try: pydata["episodes_log"][game_info["game_name"]][1] = game_info["ep_range"][1]
+            except: pass
             edit_telegram_caption(f"{game_info["game_name"]} № {f"{game_info["ep_range"][0]}-{game_info["ep_range"][1]}" if game_info["ep_range"][0] != game_info["ep_range"][1] else game_info['ep_range'][0]}:", message_id=game_info["id"])
 
     pydata_save(pydata)

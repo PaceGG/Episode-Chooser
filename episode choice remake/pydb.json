@@ -1,11 +1,11 @@
 {
-    "last_update": 1725156344,
+    "last_update": 1725290381,
     "games_log": [
         "Fallout: New Vegas",
         "Fallout: New Vegas",
         "VLADiK BRUTAL"
     ],
-    "start_from": 10,
+    "start_from": 15,
     "games_for_sr_counter": 5,
     "time_for_sr_counter": 1725739580,
     "episodes_log": {
@@ -14,17 +14,17 @@
             7
         ],
         "Fallout: New Vegas": [
-            13,
-            29
+            15,
+            33
         ],
-        "VLADiK BRUTAL": [
-            2,
-            6
+        "BioShock Remastered": [
+            0,
+            0
         ]
     },
     "episodes_time": {
         "Fallout: New Vegas": {
-            "time": 81,
+            "time": 106,
             "my_time": "",
             "add_by_console": "True"
         },
@@ -33,10 +33,10 @@
             "my_time": "",
             "add_by_console": "True"
         },
-        "VLADiK BRUTAL": {
+        "BioShock Remastered": {
             "time": 120,
             "my_time": "",
-            "add_by_console": "True"
+            "add_by_console": "False"
         }
     }
 }

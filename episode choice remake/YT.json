@@ -1,10 +1,26 @@
 [
     {
-        "game_name": "SnowRunner",
+        "game_name": "Fallout: New Vegas",
         "ep_range": [
-            5,
-            7
+            30,
+            31
         ],
-        "id": 554
+        "id": 555
+    },
+    {
+        "game_name": "Fallout: New Vegas",
+        "ep_range": [
+            32,
+            33
+        ],
+        "id": 556
+    },
+    {
+        "game_name": "VLADiK BRUTAL",
+        "ep_range": [
+            7,
+            9
+        ],
+        "id": 557
     }
 ]

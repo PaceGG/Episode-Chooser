@@ -50,7 +50,7 @@ for g in game:
 
 # game paths
 game[0].path = r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\New Vegas EE.lnk"
-game[1].path = r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TileIconify\Custom Shortcuts\VLADiK BRUTAL\VLADiK BRUTAL.lnk"
+game[1].path = r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BioShock Remastered\BioShock Remastered.lnk"
 game[2].path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 
 # Chance Count
