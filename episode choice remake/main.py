@@ -181,7 +181,18 @@ def edit_tg_info_message():
 
     time_format_message = ""
     for g in game:
-        if g.time != 120: time_format_message += f"• {g.short_name}: {g.time_format}\n"
+        time = g.time_format
+        if g.time == 120: time = ""
+
+        game_time = calc_game_time(g.video)
+        if game_time == []: game_time = ""
+
+        msg = f"• {g.short_name}: "
+
+        if time: msg += f"{time}"
+        if game_time: msg += f" {game_time}"
+
+        if msg != f"• {g.short_name}: ": time_format_message += msg + "\n"
 
     edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_format_message}\n{time_for_sr_message}\n{next_update_message}")
 
@@ -247,6 +258,7 @@ def print_info():
     else:
         ep_prefix = 'й'
 
+    # snowrunner info "До SnowRunner'a ещё 3 серии" or "SnowRunner после 05.01.2022"
     if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today():
         print(f"Сегодня SnowRunner: {game[2].long_time_format}")
     elif pydata["games_for_sr_counter"] > 0:
@@ -256,22 +268,31 @@ def print_info():
 
     print()
 
+    # force info
     if chose_method == "force":
         print(f"Force: {choice}")
     if game[0].last_session == game[1].last_session == 0:
         print(f"Force: {later}")
     
+    # chance info "Шансы равны" or "Fallout: 2"
     for i in range(2):
         g = game[i]
         if g.chance != 1: print(f"{g.name}: {g.chance}")
-    
     if game[0].chance == game[1].chance == 1: print("Шансы равны")
 
     print()
 
+    # time info "Fallout: New Vegas: ::((21) / (31) / 01:01 (61))::"
     for i in range(2):
         g = game[i]
         if g.time != 120: print(f"{g.name}: {g.long_time_format}")
+
+    print()
+
+    #game time info "Fallout: New Vegas: [-5, -5]"
+    for g in game[:2]:
+        game_time = calc_game_time(g.video)
+        if game_time: print(f"{g.name}: {game_time}")
 
     edit_tg_info_message()
     

@@ -1,60 +1,18 @@
 {
     "game_log": [
         [
-            [
-                "SnowRunner",
-                "Fallout: New Vegas",
-                "Fallout: New Vegas"
-            ],
-            [
-                "VLADiK BRUTAL",
-                "BioShock Remastered",
-                "BioShock Remastered"
-            ],
-            [
-                "Fallout: New Vegas"
-            ],
+            ["SnowRunner", "Fallout: New Vegas", "Fallout: New Vegas"],
+            ["VLADiK BRUTAL", "BioShock Remastered"],
+            ["Fallout: New Vegas"],
             [],
             [],
             [],
             []
         ],
-        [
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []
-        ],
-        [
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []
-        ],
-        [
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []
-        ],
-        [
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []
-        ]
+        [[], [], [], [], [], [], []],
+        [[], [], [], [], [], [], []],
+        [[], [], [], [], [], [], []],
+        [[], [], [], [], [], [], []]
     ],
     "next_reset": 1727722799
 }
