@@ -47,13 +47,17 @@ def count_dir_time(check_name):
     for game_name in game_names:
         dir = os.path.join("D:/Program Files/Shadow Play", game_name.replace(":", ""))
         if os.path.exists(dir) and game_name == check_name and data["episodes_time"][game_name]["add_by_console"] == "False":
-            dir_duration = get_total_duration(dir)//60
+            dir_duration, number_of_files = get_total_duration(dir)
+            dir_duration//=60
             if dir_duration > 0:
                 print(f"В {game_name} есть видео продолжительностью {dir_duration} минут. Добавить их к сумме?")
                 my_time = input(f"Введите время для {game_name}: ")
                 os.system("cls")
                 data["episodes_time"][game_name]["my_time"] = my_time
                 if my_time != "": data["episodes_time"][game_name]["add_by_console"] = "True"
+
+                # test is need to make check flag
+                data["episodes_log"][game_name][1] -= 3 - number_of_files
                 pydata_save(data)
 
 def time_sum(my_time):
