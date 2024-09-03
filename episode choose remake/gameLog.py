@@ -1,5 +1,5 @@
 from jsonLoader import *
-path = "episode choice remake/game_log.json"
+path = "episode choose remake/game_log.json"
 
 print("Загрузка модуля timeFormat для gameLog...")
 from timeFormat import date_position, today, end_of_month
