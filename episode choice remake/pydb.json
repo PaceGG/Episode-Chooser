@@ -1,12 +1,12 @@
 {
-    "last_update": 1725290381,
+    "last_update": 1725377776,
     "games_log": [
         "Fallout: New Vegas",
-        "Fallout: New Vegas",
-        "VLADiK BRUTAL"
+        "VLADiK BRUTAL",
+        "BioShock Remastered"
     ],
     "start_from": 15,
-    "games_for_sr_counter": 5,
+    "games_for_sr_counter": 4,
     "time_for_sr_counter": 1725739580,
     "episodes_log": {
         "SnowRunner": [
@@ -15,16 +15,16 @@
         ],
         "Fallout: New Vegas": [
             15,
-            33
+            31
         ],
         "BioShock Remastered": [
-            0,
-            0
+            1,
+            3
         ]
     },
     "episodes_time": {
         "Fallout: New Vegas": {
-            "time": 106,
+            "time": 120,
             "my_time": "",
             "add_by_console": "True"
         },
@@ -34,9 +34,9 @@
             "add_by_console": "True"
         },
         "BioShock Remastered": {
-            "time": 120,
+            "time": 115,
             "my_time": "",
-            "add_by_console": "False"
+            "add_by_console": "True"
         }
     }
 }

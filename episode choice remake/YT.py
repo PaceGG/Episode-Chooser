@@ -83,10 +83,11 @@ def edit_game_message(game_name, ep_range, id, last_videos):
         pydata = pydata_load()
         new_text = f"{game_name} № {ep_range[0]}-{ep_range[0]+len(names)-1}: \n{names_message}"
         if len(names) == 1: new_text = f"{game_name} № {ep_range[0]}: \n{names_message}"
-        if pydata["episodes_log"][game_name][1]-2 == ep_range[0] and pydata["episodes_log"][game_name][1] != ep_range[0]+len(names)-1 and game_name != "SnowRunner":
-            pydata["episodes_log"][game_name][1] = ep_range[0]+len(names)-1
-
-            pydata_save(pydata)
+        try:
+            if pydata["episodes_log"][game_name][1]-2 == ep_range[0] and pydata["episodes_log"][game_name][1] != ep_range[0]+len(names)-1 and game_name != "SnowRunner":
+                pydata["episodes_log"][game_name][1] = ep_range[0]+len(names)-1
+                pydata_save(pydata)
+        except: pass
 
         try: shift_range[game_name] += 3-len(names)
         except: shift_range[game_name] = 3-len(names)

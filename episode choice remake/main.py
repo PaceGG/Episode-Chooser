@@ -223,7 +223,6 @@ def run_random_game():
     pydata = pydata_load()
 
     if game[0].last_session == 0 and game[1].last_session == 0:
-        sr_db_clear()
         if earlier == game[0].name: run_game(game[1])
         if earlier == game[1].name: run_game(game[0])
 
