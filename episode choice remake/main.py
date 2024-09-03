@@ -38,6 +38,10 @@ print("Загрузка модуля gameLog...")
 from gameLog import game_log
 print()
 
+print("Загрузка модуля gameTime...")
+from gameTime import calc_game_time
+print()
+
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
 
@@ -194,6 +198,7 @@ def snowrunner_updater():
 def run_game(game_to_run):
     pydata = pydata_load()
     set_eng_layout()
+    calc_game_time(game_to_run.video)
     if game_to_run.time <= 0:
         pydata["episodes_time"][game_to_run.name]["time"] += 120
         pydata_save(pydata)
