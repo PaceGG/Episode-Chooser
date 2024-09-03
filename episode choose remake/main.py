@@ -38,10 +38,6 @@ print("Загрузка модуля gameLog...")
 from gameLog import game_log
 print()
 
-print("Загрузка модуля gameTime...")
-from gameTime import calc_game_time
-print()
-
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
 
@@ -184,7 +180,7 @@ def edit_tg_info_message():
         time = g.time_format
         if g.time == 120: time = ""
 
-        game_time = calc_game_time(g.video)
+        game_time = g.game_time
         if game_time == []: game_time = ""
 
         msg = f"• {g.short_name}: "
@@ -209,7 +205,6 @@ def snowrunner_updater():
 def run_game(game_to_run):
     pydata = pydata_load()
     set_eng_layout()
-    calc_game_time(game_to_run.video)
     if game_to_run.time <= 0:
         pydata["episodes_time"][game_to_run.name]["time"] += 120
         pydata_save(pydata)
@@ -291,7 +286,7 @@ def print_info():
 
     #game time info "Fallout: New Vegas: [-5, -5]"
     for g in game[:2]:
-        game_time = calc_game_time(g.video)
+        game_time = g.game_time
         if game_time: print(f"{g.name}: {game_time}")
 
     edit_tg_info_message()

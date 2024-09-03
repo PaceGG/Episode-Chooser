@@ -4,6 +4,8 @@ print("Загрузка модуля createGameStructure для classGame...")
 from createGameStructure import create_game_structure, icon_rename
 print("Загрузка модуля timeFormat для classGame...")
 from timeFormat import time_format, short_date_format
+print("Загрузка модуля gameTime для classGame...")
+from gameTime import calc_game_time
 
 def get_short_name(name):
     short_name = ""
@@ -37,7 +39,7 @@ class Game:
         self.time_format = time_format(self.time)
         self.long_time_format = f"::({time_format(self.time/3) + " / "}{time_format(self.time/2) + " / "}{time_format(self.time)})::"
 
-        # self.game_time = calc_game_time(self.video)
+        self.game_time = calc_game_time(self.video)
 
         if self.name != "SnowRunner": self.caption = kwargs.get("caption", f"{self.name} № {self.last_episode+1}-{last_episode+3}:\n• \n• \n• ")
         elif self.name == "SnowRunner": self.caption = kwargs.get("caption", f"{self.name} № {self.last_episode+1}:\n• ")
