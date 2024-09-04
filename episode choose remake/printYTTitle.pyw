@@ -4,7 +4,7 @@ from pyperclip import copy
 from timeFormat import get_time
 import os
 
-os.chdir("D:\\Program Files\\HTML\\Games")
+os.chdir("D:\\Program Files\\HTML\\Episode-Chooser")
 
 if __name__ == "__main__":
     unicode_string = yt_title_pop()
