@@ -147,34 +147,25 @@ def sr_db_clear():
     pydata_save(pydata)
 
 def edit_tg_info_message():
-    # Для новой игры
     pydata = pydata_load()
 
-    next_update_message = f"Next Update: {pc_date_format(pydata["last_update"] + 12*60*60)}"
+    # sr_counter_message
+    if pydata["games_for_sr_counter"] > 0: sr_counter_message = f"• SR: {pydata['games_for_sr_counter']}"
+    elif pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] > today(): sr_counter_message = f"SR: {short_date_format(pydata['time_for_sr_counter'])}"
+    else: sr_counter_message = f"• Сегодня SnowRunner!!! • {game[2].short_name}: {game[2].time_format}" if game[2].time != 120 else "• Сегодня SnowRunner!!!"
 
-    if game[0].last_session == game[1].last_session == 0:
-        sr_counter_message = f"• SR: {pydata['games_for_sr_counter']}"
-        chance_info_message = f"Force: {later}\nШансы равны"
-
-        edit_telegram_message(f"{sr_counter_message}\n{chance_info_message}\n\n{next_update_message}")
-        return
-    
-    # Для старой игры
+    # force_info_message
     unpopular_game = get_unpopular_game()
-    if unpopular_game is not None: force_info_message = f"• Force: {unpopular_game}"
+    if unpopular_game is not None or game[0].last_session == game[1].last_session == 0: force_info_message = f"• Force: {unpopular_game}"
     else: force_info_message = ""
 
+    # chance_info_message
     count_chance()
     if game[0].chance == game[1].chance == 1: chance_info_message = "• Шансы равны"
     elif game[0].chance > 1: chance_info_message = f"• {game[0].short_name}: {game[0].chance}"
     elif game[1].chance > 1: chance_info_message = f"• {game[1].short_name}: {game[1].chance}"
 
-    if pydata["games_for_sr_counter"] > 0: sr_counter_message = f"• SR: {pydata['games_for_sr_counter']}"
-    elif pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] > today(): sr_counter_message = f"SR: {short_date_format(pydata['time_for_sr_counter'])}"
-    else: sr_counter_message = f"• Сегодня SnowRunner!!! • {game[2].short_name}: {game[2].time_format}" if game[2].time != 120 else "• Сегодня SnowRunner!!!"
-
-    time_for_sr_message = f"SR after {pc_date_format(pydata['time_for_sr_counter'])}"
-
+    # time_format_message aka time_info_message
     time_format_message = ""
     for g in game:
         time = g.time_format
@@ -189,6 +180,12 @@ def edit_tg_info_message():
         if game_time: msg += f" {game_time}"
 
         if msg != f"• {g.short_name}: ": time_format_message += msg + "\n"
+
+    # time_for_sr_message
+    time_for_sr_message = f"SR after {pc_date_format(pydata['time_for_sr_counter'])}"
+
+    # next_update_message
+    next_update_message = f"Next Update: {pc_date_format(pydata["last_update"] + 12*60*60)}"
 
     edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_format_message}\n{time_for_sr_message}\n{next_update_message}")
 
