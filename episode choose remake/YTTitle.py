@@ -1,12 +1,20 @@
 from pydata import *
+from timeFormat import get_time
 
 def yt_title_pop():
     yt_log = pydata_load("game_log_YTTitle")
-    try: pop = yt_log.pop(0)
-    except: pop = None
-    pydata_save(yt_log, "game_log_YTTitle")
 
-    return pop
+    return_str = yt_log[0]
+
+    if "•" in return_str:
+        yt_log[0] = get_time()
+        pydata_save(yt_log, "game_log_YTTitle")
+        return return_str
+    else:
+        try: pop = yt_log.pop(0)
+        except: pop = None
+        pydata_save(yt_log, "game_log_YTTitle")
+        return pop
 
 def add_yt_titles(game_name):
     from episodesManipulate import get_last_object
