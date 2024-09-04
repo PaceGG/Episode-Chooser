@@ -5,6 +5,10 @@ print("Загрузка модуля moviepy.video.io.VideoFileClip для epios
 from moviepy.video.io.VideoFileClip import get_total_duration
 print("Загрузка модуля pydata для episodesManipulate...")
 from pydata import pydata_load, pydata_save
+print("Загрузка модуля jsonLoader для episodesManipulate...")
+from jsonLoader import *
+print()
+from YT import empty_messages_path, get_last_object
 
 def get_old_name(new_name, data_key):
     data = pydata_load()
@@ -41,6 +45,7 @@ def replace_game_data(new_name, data_key):
 
 def count_dir_time(check_name):
     data = pydata_load()
+    empty_messages = json_load(empty_messages_path)
 
     game_names = [name for name in data["episodes_time"].keys()]
 
@@ -57,8 +62,15 @@ def count_dir_time(check_name):
                 if my_time != "": data["episodes_time"][game_name]["add_by_console"] = "True"
 
                 # test is need to make check flag
-                data["episodes_log"][game_name][1] -= 3 - number_of_files
+                if 3 - number_of_files > 0:
+                    data["episodes_log"][game_name][1] -= 3 - number_of_files
+
+                    to_edit_index = get_last_object(game_name)[1]
+                    empty_messages[to_edit_index]["ep_range"][1] -= 3 - number_of_files
+
+                
                 pydata_save(data)
+                json_save(empty_messages_path, empty_messages)
 
 def time_sum(my_time):
     my_time = my_time.split(",")

@@ -8,4 +8,4 @@ def pydata_load():
 
 def pydata_save(pydata):
     with open("episode choose remake/pydb.json", "w", encoding="utf-8") as f:
-        json.dump(pydata, f, indent=4)
+        json.dump(pydata, f)

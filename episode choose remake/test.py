@@ -1,10 +1,6 @@
-d = {
-    "a": 1,
-    "b": 2,
-}
+a = [1,2,3]
+b = [4,5,6]
 
-if "b" in d:
-    print(d["b"])
+a.extend(b)
 
-if "c" in d:
-    print(d["c"])
+print(a[4])

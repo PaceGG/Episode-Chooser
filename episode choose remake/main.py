@@ -7,7 +7,7 @@ from random import randint
 
 # modules
 print("Загрузка модуля YT...")
-from YT import add_empty_message, edit_empty_messages
+from YT import add_empty_message, edit_empty_messages, get_last_object
 print()
 
 print("Загрузка модуля episodesManipulate...")
@@ -37,6 +37,12 @@ print()
 print("Загрузка модуля gameLog...")
 from gameLog import game_log
 print()
+
+print("Загрузка модуля jsonLoader...")
+from jsonLoader import *
+print()
+
+from YTTitle import yt_title_log_path
 
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
@@ -193,10 +199,20 @@ def edit_tg_info_message():
     edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_format_message}\n{time_for_sr_message}\n{next_update_message}")
 
 
-def add_game_log(game_name):
+def add_game_log(g):
     pydata = pydata_load()
-    pydata["games_log"] = pydata["games_log"][1:] + [game_name]
+    pydata["games_log"] = pydata["games_log"][1:] + [g.name]
     pydata_save(pydata)
+    
+    yt_log = json_load(yt_title_log_path)
+    ep_range = get_last_object(g.name)[0]["ep_range"]
+
+    for i in range(ep_range[0], ep_range[1] +1):
+        yt_log.append(f" • № {i} • {g.name}")
+        if i == 1: yt_log.append(g.name)
+
+    json_save(yt_title_log_path, yt_log)
+    
 
 def snowrunner_updater():
     os.utime("D:/Program Files/Shadow Play/SnowRunner", (time(), time()))
@@ -215,7 +231,7 @@ def run_game(game_to_run):
         add_empty_message(game_to_run.name, [game_to_run.last_episode+1, game_to_run.last_episode+3], game_message_id)
         add_episode(game_to_run)
     if game_to_run.name != "SnowRunner":
-        add_game_log(game_to_run.name)
+        add_game_log(game_to_run)
     sr_db_edit()
     edit_tg_info_message()
     reset_console_flag(game_to_run.name)
@@ -297,4 +313,3 @@ if __name__ == "__main__":
     print_info()
     run_random_game()
     pass
-

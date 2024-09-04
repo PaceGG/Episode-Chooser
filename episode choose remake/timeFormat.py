@@ -13,6 +13,7 @@
 - get_day: Возвращает день месяца
 - get_month: Возвращает месяц
 - get_year: Возвращает год
+- get_time: Возвращает время формата HH:MM
 
 - end_of_month: Возвращает дату конца месяца
 """
@@ -69,16 +70,19 @@ def date_position(unix_timestamp):
 
     return week, wday
 
-def get_day(unix_timestamp):
+def get_day(unix_timestamp=time()):
     return int(strftime("%d", localtime(unix_timestamp)))
 
-def get_month(unix_timestamp):
+def get_month(unix_timestamp=time()):
     return int(strftime("%m", localtime(unix_timestamp)))
 
-def get_year(unix_timestamp):
+def get_year(unix_timestamp=time()):
     return int(strftime("%Y", localtime(unix_timestamp)))
 
-def last_day(unix_timestamp):
+def get_time(unix_timestamp=time()):
+    return strftime("%H:%M", localtime(unix_timestamp))
+
+def last_day(unix_timestamp=time()):
     month = get_month(unix_timestamp)
 
     if month == 2 and get_year(unix_timestamp) % 4 != 0: return 28
@@ -100,6 +104,7 @@ def end_of_month(unix_time):
     first_of_next_month_unix = int(mktime(first_of_next_month))
     
     return first_of_next_month_unix - 1
+
 
 def today():
     return int(time())

@@ -12,6 +12,7 @@ from pydata import pydata_load, pydata_save
 print("Загрузка модуля jsonLoader для YT...")
 from jsonLoader import *
 empty_messages_path = "episode choose remake/YT.json"
+print()
 
 shift_range = {}
 
@@ -138,12 +139,23 @@ def add_empty_message(game_name, ep_range, id):
 
     json_save(empty_messages_path, empty_messages)
 
+def get_last_object(game_name):
+    empty_messages = json_load(empty_messages_path)
+
+    for i in range(1, len(empty_messages) +1):
+        i*=-1
+        if game_name == empty_messages[i]["game_name"]: return empty_messages[i], i
+    
+    return None, None
+
 
 if __name__ == '__main__':
     # edit_game_message("Dead Space 3", [4,5], 462)
     # edit_empty_messages()
 
-    last_videos = get_last_videos()
-    print(last_videos)
+    # last_videos = get_last_videos()
+    # print(last_videos)
+
+    print(get_last_object("BioShock Remastered")[0]["ep_range"])
 
     pass

@@ -17,6 +17,6 @@ def json_save(filename, data):
     """Save data to a JSON file."""
     try:
         with open(filename, 'w') as file:
-            json.dump(data, file, indent=4)
+            json.dump(data, file)
     except Exception as e:
         print(f"Error: Failed to save data to {filename}. Reason: {e}")
