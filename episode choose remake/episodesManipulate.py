@@ -7,8 +7,10 @@ print("Загрузка модуля pydata для episodesManipulate...")
 from pydata import pydata_load, pydata_save
 print("Загрузка модуля jsonLoader для episodesManipulate...")
 from jsonLoader import *
-print()
+print("Загрузка модуля YT для episodesManipulate...")
 from YT import empty_messages_path, get_last_object
+print("Загрузка модуля YTTitle для episodesManipulate...")
+from YTTitle import add_yt_titles
 
 def get_old_name(new_name, data_key):
     data = pydata_load()
@@ -68,9 +70,10 @@ def count_dir_time(check_name):
                     to_edit_index = get_last_object(game_name)[1]
                     empty_messages[to_edit_index]["ep_range"][1] -= 3 - number_of_files
 
-                
                 pydata_save(data)
                 json_save(empty_messages_path, empty_messages)
+
+                add_yt_titles(game_name)
 
 def time_sum(my_time):
     my_time = my_time.split(",")

@@ -202,17 +202,7 @@ def edit_tg_info_message():
 def add_game_log(g):
     pydata = pydata_load()
     pydata["games_log"] = pydata["games_log"][1:] + [g.name]
-    pydata_save(pydata)
-    
-    yt_log = json_load(yt_title_log_path)
-    ep_range = get_last_object(g.name)[0]["ep_range"]
-
-    for i in range(ep_range[0], ep_range[1] +1):
-        yt_log.append(f" • № {i} • {g.name}")
-        if i == 1: yt_log.append(g.name)
-
-    json_save(yt_title_log_path, yt_log)
-    
+    pydata_save(pydata)    
 
 def snowrunner_updater():
     os.utime("D:/Program Files/Shadow Play/SnowRunner", (time(), time()))
