@@ -1,7 +1,7 @@
 from requests import post
 from dotenv import load_dotenv
 import os
-load_dotenv()
+load_dotenv("gitignore/.env")
 
 # Инициализация бота
 bot_token=os.getenv("TELEGRAM_BOT_TOKEN")

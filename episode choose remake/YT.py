@@ -1,7 +1,7 @@
 from time import time
 from dotenv import load_dotenv
 import os
-load_dotenv()
+load_dotenv("gitignore/.env")
 
 print("Загрузка модуля googleapiclient.discovery для YT...")
 from googleapiclient.discovery import build
@@ -153,6 +153,6 @@ if __name__ == '__main__':
     # last_videos = get_last_videos()
     # print(last_videos)
 
-    print(get_last_object("BioShock Remastered")[0]["ep_range"])
+    # print(get_last_object("BioShock Remastered")[0]["ep_range"])
 
     pass
