@@ -1,8 +1,9 @@
 import json
 import os
 
-print("Загрузка модуля moviepy.video.io.VideoFileClip для epiosdesManipulate...")
-from moviepy.video.io.VideoFileClip import get_total_duration
+print("Загрузка класса VideoFileClip для epiosdesManipulate...")
+# from moviepy.video.io.VideoFileClip import get_total_duration
+from moviepy.video.io.VideoFileClip import VideoFileClip
 print("Загрузка модуля pydata для episodesManipulate...")
 from pydata import pydata_load, pydata_save
 print("Загрузка модуля jsonLoader для episodesManipulate...")
@@ -56,10 +57,10 @@ def count_dir_time(check_name):
         if os.path.exists(dir) and game_name == check_name and data["episodes_time"][game_name]["add_by_console"] == "False":
             dir_duration, number_of_files = get_total_duration(dir)
             dir_duration//=60
-            if dir_duration > 0:
+            if dir_duration > data["epesides_time"][game_name]["time"]:
+                os.system("cls")
                 print(f"В {game_name} есть видео продолжительностью {dir_duration} минут. Добавить их к сумме?")
                 my_time = input(f"Введите время для {game_name}: ")
-                os.system("cls")
                 data["episodes_time"][game_name]["my_time"] = my_time
                 if my_time != "": data["episodes_time"][game_name]["add_by_console"] = "True"
 
@@ -74,6 +75,26 @@ def count_dir_time(check_name):
                 json_save(empty_messages_path, empty_messages)
 
                 add_yt_titles(game_name)
+            else:
+                return game_name
+            
+def get_total_duration(directory):
+    total_duration = 0
+    number_of_files = 0
+
+    for filename in os.listdir(directory):
+        if filename.endswith(".mp4"):
+            number_of_files += 1
+            file_path = os.path.join(directory, filename)
+            try:
+                with VideoFileClip(file_path) as video:
+                    duration = video.duration
+                    total_duration += int(duration)
+            except Exception as e:
+                print(f"Ошибка при обработке файла {filename}: {e}")
+
+    return total_duration, number_of_files
+            
 
 def time_sum(my_time):
     my_time = my_time.split(",")

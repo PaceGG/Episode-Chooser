@@ -7,11 +7,11 @@ from random import randint
 
 # modules
 print("Загрузка модуля YT...")
-from YT import add_empty_message, edit_empty_messages, get_last_object
+from YT import add_empty_message, edit_empty_messages
 print()
 
 print("Загрузка модуля episodesManipulate...")
-from episodesManipulate import reset_console_flag
+from episodesManipulate import reset_console_flag, get_total_duration
 print()
 
 print("Загрузка модуля setEngLayout...")
@@ -41,8 +41,6 @@ print()
 print("Загрузка модуля jsonLoader...")
 from jsonLoader import *
 print()
-
-from YTTitle import yt_title_log_path
 
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
@@ -210,7 +208,6 @@ def snowrunner_updater():
 
 def run_game(game_to_run):
     pydata = pydata_load()
-    set_eng_layout()
     if game_to_run.time <= 0:
         pydata["episodes_time"][game_to_run.name]["time"] += 120
         pydata_save(pydata)
@@ -233,31 +230,53 @@ def get_game(name):
     for g in game:
         if g.name == name:
             return g
+        
+def uncomplited_session():
+    pydata = pydata_load()
+    for g in game:
+        if pydata["episodes_time"][g.name]["add_by_console"] == "False": return g
+
+    return None
 
 def run_random_game():
     print("\n"*10)
     confirm = input()
+    set_eng_layout()
     pydata = pydata_load()
 
     if game[0].last_session == 0 and game[1].last_session == 0:
         if earlier == game[0].name: run_game(game[1])
         if earlier == game[1].name: run_game(game[0])
+        return
 
-    if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today():
-        run_game(game[2])
-        snowrunner_updater()
+    uncomplited_game = uncomplited_session()
+
+    if uncomplited_game is None:
+        if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today():
+            run_game(game[2])
+            snowrunner_updater()
+        else:
+            run_game(get_game(choice))
     else:
-        run_game(get_game(choice))
+        completed_duration = get_total_duration(dir)
+        duration = pydata["episodes_time"][uncomplited_game.name]["time"] - completed_duration
+        
+        # форматирование существительного
+        if duration % 10 == 1 and duration % 100 != 11: form = "минута"
+        elif duration % 10 in {2, 3, 4} and not (duration % 100 in {12, 13, 14}): form = "минуты"
+        else: form = "минут"
+
+        print(f"Сессия {uncomplited_game.name} ещё не завершена, осталось {duration} {form}")
+        print(f"Запустить {uncomplited_game.name}?")
+        confirm = input()
+        os.startfile(uncomplited_game.path)
 
 def print_info():
     os.system('cls')
     pydata = pydata_load()
-    if pydata["games_for_sr_counter"] == 1:
-        ep_prefix = 'я'
-    elif 1 < pydata["games_for_sr_counter"] < 5:
-        ep_prefix = 'и'
-    else:
-        ep_prefix = 'й'
+    if pydata["games_for_sr_counter"] == 1: ep_prefix = 'я'
+    elif 1 < pydata["games_for_sr_counter"] < 5: ep_prefix = 'и'
+    else: ep_prefix = 'й'
 
     # snowrunner info "До SnowRunner'a ещё 3 серии" or "SnowRunner после 05.01.2022"
     if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today():
@@ -269,7 +288,7 @@ def print_info():
 
     print()
 
-    # force info
+    # force info "Force: Fallout: New Vegas"
     if chose_method == "force":
         print(f"Force: {choice}")
     if game[0].last_session == game[1].last_session == 0:
