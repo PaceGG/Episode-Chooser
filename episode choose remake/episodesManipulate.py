@@ -5,11 +5,9 @@ print("Загрузка класса VideoFileClip для epiosdesManipulate..."
 # from moviepy.video.io.VideoFileClip import get_total_duration
 from moviepy.video.io.VideoFileClip import VideoFileClip
 print("Загрузка модуля pydata для episodesManipulate...")
-from pydata import pydata_load, pydata_save
-print("Загрузка модуля jsonLoader для episodesManipulate...")
-from jsonLoader import *
+from pydata import *
 print("Загрузка модуля YT для episodesManipulate...")
-from YT import empty_messages_path, get_last_object
+from YT import get_last_object
 print("Загрузка модуля YTTitle для episodesManipulate...")
 from YTTitle import add_yt_titles
 print("Загрузка модулей для episodesManipulate завершена")
@@ -55,7 +53,7 @@ def add_last_time(game_name):
 
 def count_dir_time(check_name):
     data = pydata_load()
-    empty_messages = json_load(empty_messages_path)
+    empty_messages = pydata_load("YT")
 
     game_names = [name for name in data["episodes_time"].keys()]
 
@@ -80,7 +78,7 @@ def count_dir_time(check_name):
                     empty_messages[to_edit_index]["ep_range"][1] -= 3 - number_of_files
 
                 pydata_save(data)
-                json_save(empty_messages_path, empty_messages)
+                pydata_save(data, "YT")
 
                 add_yt_titles(game_name)
             else:

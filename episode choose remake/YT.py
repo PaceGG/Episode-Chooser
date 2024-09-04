@@ -9,10 +9,9 @@ print("Загрузка модуля telegramFunctions для YT...")
 from telegramFunctions import edit_telegram_caption
 print("Загрузка модуля pydata для YT...")
 from pydata import pydata_load, pydata_save
-print("Загрузка модуля jsonLoader для YT...")
-from jsonLoader import *
-empty_messages_path = "episode choose remake/YT.json"
-print()
+# print("Загрузка модуля jsonLoader для YT...")
+# from jsonLoader import *
+# empty_messages_path = "episode choose remake/YT.json"
 
 shift_range = {}
 
@@ -101,7 +100,7 @@ def edit_game_message(game_name, ep_range, id, last_videos):
 
 def edit_empty_messages():
     pydata = pydata_load()
-    empty_messages = json_load(empty_messages_path)
+    empty_messages = pydata_load("YT")
     if int(time()) - pydata["last_update"] < 12*60*60: return
     print()
     print("Синхронизация Telegram с YouTube...")
@@ -120,8 +119,6 @@ def edit_empty_messages():
             
     pydata = pydata_load()
     pydata["last_update"] = int(time())
-    
-
 
     if shift_range != {}:
         for game_info in update_empty_messages:
@@ -130,17 +127,17 @@ def edit_empty_messages():
             edit_telegram_caption(f"{game_info["game_name"]} № {f"{game_info["ep_range"][0]}-{game_info["ep_range"][1]}" if game_info["ep_range"][0] != game_info["ep_range"][1] else game_info['ep_range'][0]}:", message_id=game_info["id"])
 
     pydata_save(pydata)
-    json_save(empty_messages_path, update_empty_messages)
+    pydata_save(update_empty_messages, "YT")
 
 def add_empty_message(game_name, ep_range, id):
-    empty_messages = json_load(empty_messages_path)
+    empty_messages = pydata_load("YT")
 
     empty_messages.append({"game_name": game_name, "ep_range": ep_range, "id": id})
 
-    json_save(empty_messages_path, empty_messages)
+    pydata_save(empty_messages, "YT")
 
 def get_last_object(game_name):
-    empty_messages = json_load(empty_messages_path)
+    empty_messages = pydata_load("YT")
 
     for i in range(1, len(empty_messages) +1):
         i*=-1

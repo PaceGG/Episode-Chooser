@@ -38,10 +38,6 @@ print("Загрузка модуля gameLog...")
 from gameLog import game_log
 print()
 
-print("Загрузка модуля jsonLoader...")
-from jsonLoader import *
-print()
-
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
 
