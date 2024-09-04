@@ -460,7 +460,7 @@ const GameDetails = ({
             }}
           >
             <div className="time-line">
-              <a href="https://ytplaylist-len.sharats.dev/" target="_blank">
+              <a href="https://ytplaylist-len.sharats.dev/">
                 <img
                   src="https://ytplaylist-len.sharats.dev/static/favicon.png"
                   alt=""
