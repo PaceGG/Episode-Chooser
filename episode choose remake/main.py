@@ -1,6 +1,6 @@
 print("Загрузка...")
 import os
-os.chdir("D:\\Program Files\\HTML\\Games")
+os.chdir(r"D:\Program Files\HTML\Episode-Chooser")
 import json
 from time import time
 from random import randint
