@@ -11,7 +11,7 @@ from YT import add_empty_message, edit_empty_messages
 print()
 
 print("Загрузка модуля episodesManipulate...")
-from episodesManipulate import reset_console_flag, get_total_duration
+from episodesManipulate import reset_console_flag, get_total_duration, add_last_time
 print()
 
 print("Загрузка модуля setEngLayout...")
@@ -223,6 +223,7 @@ def run_game(game_to_run):
     edit_tg_info_message()
     reset_console_flag(game_to_run.name)
     game_log(game_to_run.name)
+    add_last_time(game_to_run.name)
     os.startfile(game_to_run.path)
     
 
@@ -261,7 +262,7 @@ def run_random_game():
         completed_duration = get_total_duration(dir)
         duration = pydata["episodes_time"][uncomplited_game.name]["time"] - completed_duration
         
-        # форматирование существительного
+        # склонение существительного
         if duration % 10 == 1 and duration % 100 != 11: form = "минута"
         elif duration % 10 in {2, 3, 4} and not (duration % 100 in {12, 13, 14}): form = "минуты"
         else: form = "минут"

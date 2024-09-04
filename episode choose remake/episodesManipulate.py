@@ -12,6 +12,7 @@ print("Загрузка модуля YT для episodesManipulate...")
 from YT import empty_messages_path, get_last_object
 print("Загрузка модуля YTTitle для episodesManipulate...")
 from YTTitle import add_yt_titles
+print("Загрузка модулей для episodesManipulate завершена")
 
 def get_old_name(new_name, data_key):
     data = pydata_load()
@@ -46,6 +47,12 @@ def replace_game_data(new_name, data_key):
     pydata_save(data)
     return new_name
 
+def add_last_time(game_name):
+    data = pydata_load()
+    dir = os.path.join("D:/Program Files/Shadow Play", game_name.replace(":", ""))
+    data["episodes_time"][game_name]["last_time"] = get_total_duration(dir)[0]//60
+    pydata_save(data)
+
 def count_dir_time(check_name):
     data = pydata_load()
     empty_messages = json_load(empty_messages_path)
@@ -57,6 +64,7 @@ def count_dir_time(check_name):
         if os.path.exists(dir) and game_name == check_name and data["episodes_time"][game_name]["add_by_console"] == "False":
             dir_duration, number_of_files = get_total_duration(dir)
             dir_duration//=60
+            dir_duration-=data["episodes_time"][game_name]["last_time"]
             if dir_duration > data["epesides_time"][game_name]["time"]:
                 os.system("cls")
                 print(f"В {game_name} есть видео продолжительностью {dir_duration} минут. Добавить их к сумме?")
@@ -192,10 +200,13 @@ if __name__ == "__main__":
 
     # replace_game_data("VLADiK BRUTAL", "episodes_log")
 
-    print(get_episodes("Fallout: New Vegas"))
-    print(get_time("Fallout: New Vegas"))
-    print()
-    print(get_episodes("VLADiK BRUTAL"))
-    print(get_time("VLADiK BRUTAL"))
+    # print(get_episodes("Fallout: New Vegas"))
+    # print(get_time("Fallout: New Vegas"))
+    # print()
+    # print(get_episodes("VLADiK BRUTAL"))
+    # print(get_time("VLADiK BRUTAL"))
+
+    print(get_total_duration("D:/Program Files/Shadow Play/Fallout New Vegas"))
+    print(get_total_duration("D:/Program Files/Shadow Play/BioShock Remastered"))
 
     pass

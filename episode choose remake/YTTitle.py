@@ -1,5 +1,4 @@
 from jsonLoader import *
-from episodesManipulate import get_last_object
 
 yt_title_log_path = "episode choose remake/game_log_YTtitle.json"
 
@@ -12,6 +11,7 @@ def yt_title_pop():
     return pop
 
 def add_yt_titles(game_name):
+    from episodesManipulate import get_last_object
     yt_log = json_load(yt_title_log_path)
     ep_range = get_last_object(game_name)[0]["ep_range"]
 

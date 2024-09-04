@@ -13,16 +13,19 @@
         "Fallout: New Vegas": {
             "time": 61,
             "my_time": "",
+            "last_time": 0,
             "add_by_console": "True"
         },
         "SnowRunner": {
             "time": 4,
             "my_time": "",
+            "last_time": 0,
             "add_by_console": "True"
         },
         "BioShock Remastered": {
             "time": 120,
             "my_time": "",
+            "last_time": 0,
             "add_by_console": "True"
         }
     }
