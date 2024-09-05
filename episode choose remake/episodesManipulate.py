@@ -78,7 +78,7 @@ def count_dir_time(check_name):
                     empty_messages[to_edit_index]["ep_range"][1] -= 3 - number_of_files
 
                 pydata_save(data)
-                pydata_save(data, "YT")
+                pydata_save(empty_messages, "YT")
 
                 add_yt_titles(game_name)
             else:
