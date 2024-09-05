@@ -3,7 +3,6 @@ import PATHS
 import os
 os.chdir(PATHS.repository)
 import json
-from time import time
 from random import randint
 
 # modules
@@ -12,7 +11,7 @@ from YT import add_empty_message, edit_empty_messages
 print()
 
 print("Загрузка модуля episodesManipulate...")
-from episodesManipulate import reset_console_flag, get_total_duration, add_last_time, add_game_log, sr_db_edit, snowrunner_updater
+from episodesManipulate import reset_console_flag, get_total_duration, add_last_time, add_game_log, sr_db_update, snowrunner_updater, add_quiet_time
 print()
 
 print("Загрузка модуля setEngLayout...")
@@ -39,93 +38,8 @@ print("Загрузка модуля gameLog...")
 from gameLog import game_log
 print()
 
-with open("react-remake/db.json", encoding="utf-8") as f:
-    data = json.load(f)["showcase"]
-
-# game init
-game = [Game(name=item["name"]) for item in data]
-game.append(Game(name="SnowRunner", short_name="SR"))
-
-for g in game:
-    g.update_time()
-
-# game paths
-for i, g in enumerate(game):
-    g.path = PATHS.game[i]
-
-# Chance Count
-earlier, later = sorted(game[:2], key=lambda g: g.date)[0].name, sorted(game[:2], key=lambda g: g.date)[1].name
-
-if game[0].last_session == 0 or game[1].last_session == 0:
-    pydata = pydata_load()
-    if game[0].last_session == 0: pydata["start_from"] = game[1].last_session
-    if game[1].last_session == 0: pydata["start_from"] = game[0].last_session
-    if pydata["games_for_sr_counter"] <= 5: pydata["games_for_sr_counter"] = 5
-
-    pydata_save(pydata)
-
-pydata = pydata_load()
-start_from = pydata["start_from"]
-
-if earlier == game[0].name: game[0].last_session -= start_from
-if earlier == game[1].name: game[1].last_session -= start_from
-
-def count_chance():
-    global start_from, game
-
-    more_game = abs(game[0].last_session-game[1].last_session) + 1
-
-    if game[0].last_session > game[1].last_session:
-        game[0].chance = 1
-        game[1].chance = more_game
-    else:
-        game[0].chance = more_game
-        game[1].chance = 1
-
-count_chance()
-
-game_list = []
-def select_random_game(games):
-    global game_list
-    for game in games:
-        game_list.extend([game.name] * game.chance)
-
-    return game_list[randint(0,len(game_list)-1)]
-
-def get_unpopular_game():
-    pydata = pydata_load()
-    games_log = pydata["games_log"]
-    if len(set(games_log)) == 1:
-        popular_game = games_log[0]
-        if popular_game == game[0].name: unpopular_game = game[1].name
-        elif popular_game == game[1].name: unpopular_game = game[0].name
-        return unpopular_game
-    return None
-
-def check_frequency():
-    if get_unpopular_game() is not None:
-        return get_unpopular_game(), "force"
-    return select_random_game(game), "random"
-    
-choice, chose_method = check_frequency()
-
-def add_episode(G, zero_flag=False):
-    global game
-    pydata = pydata_load()
-    name = G.name
-
-    pydata["episodes_log"][name][0] += 1
-
-    for g in game:
-        if g.name == name:
-            g.last_session += 1
-            count_chance()
-
-    if name == "SnowRunner":pydata["episodes_log"][name][1] += 1
-    else: pydata["episodes_log"][name][1] += (not zero_flag) * 3
-
-    pydata_save(pydata)
-
+# functions
+# information and statistics functions
 def edit_tg_info_message():
     pydata = pydata_load()
 
@@ -136,8 +50,7 @@ def edit_tg_info_message():
 
     # force_info_message
     unpopular_game = get_unpopular_game()
-    if unpopular_game is not None or game[0].last_session == game[1].last_session == 0: force_info_message = f"• Force: {unpopular_game}"
-    else: force_info_message = ""
+    force_info_message = f"• Force: {unpopular_game}" if unpopular_game is not None or game[0].last_session == game[1].last_session == 0 else ""
 
     # chance_info_message
     count_chance()
@@ -169,94 +82,21 @@ def edit_tg_info_message():
 
     edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_info_message}\n{time_for_sr_message}\n{next_update_message}")
 
-def run_game(game_to_run):
-    pydata = pydata_load()
-    if game_to_run.time <= 0:
-        pydata["episodes_time"][game_to_run.name]["time"] += 120
-        pydata_save(pydata)
-        add_episode(game_to_run, True)
-    else:
-        print(f"{game_to_run.name}{f" {game_to_run.long_time_format}" if game_to_run.time != 120 else ""}")
-        game_message_id = send_image(game_to_run.icon, game_to_run.caption)
-        add_empty_message(game_to_run.name, [game_to_run.last_episode+1, game_to_run.last_episode+3], game_message_id)
-        add_episode(game_to_run)
-    if game_to_run.name != "SnowRunner":
-        add_game_log(game_to_run.name)
-    sr_db_edit()
-    edit_tg_info_message()
-    reset_console_flag(game_to_run.name)
-    game_log(game_to_run.name)
-    add_last_time(game_to_run.name)
-    os.startfile(game_to_run.path)
-    
-
-def get_game(name):
-    for g in game:
-        if g.name == name:
-            return g
-        
-def uncomplited_session():
-    pydata = pydata_load()
-    for g in game:
-        if pydata["episodes_time"][g.name]["add_by_console"] == "False": return g
-
-    return None
-
-def run_random_game():
-    print("\n"*10)
-    confirm = input()
-    set_eng_layout()
-    pydata = pydata_load()
-
-    if game[0].last_session == 0 and game[1].last_session == 0:
-        if earlier == game[0].name: run_game(game[1])
-        if earlier == game[1].name: run_game(game[0])
-        return
-
-    uncomplited_game = uncomplited_session()
-
-    if uncomplited_game is None:
-        if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today():
-            run_game(game[2])
-            snowrunner_updater()
-        else:
-            run_game(get_game(choice))
-    else:
-        completed_duration = get_total_duration(uncomplited_game.video)[0]
-        duration = pydata["episodes_time"][uncomplited_game.name]["time"] - completed_duration
-        
-        # склонение существительного
-        if duration % 10 == 1 and duration % 100 != 11: form = "минута"
-        elif duration % 10 in {2, 3, 4} and not (duration % 100 in {12, 13, 14}): form = "минуты"
-        else: form = "минут"
-
-        print(f"Сессия {uncomplited_game.name} ещё не завершена, осталось {duration} {form}")
-        print(f"Запустить {uncomplited_game.name}?")
-        confirm = input()
-        os.startfile(uncomplited_game.path)
-
 def print_info():
     os.system('cls')
     pydata = pydata_load()
-    if pydata["games_for_sr_counter"] == 1: ep_prefix = 'я'
-    elif 1 < pydata["games_for_sr_counter"] < 5: ep_prefix = 'и'
-    else: ep_prefix = 'й'
 
     # snowrunner info "До SnowRunner'a ещё 3 серии" or "SnowRunner после 05.01.2022"
-    if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today():
-        print(f"Сегодня SnowRunner: {game[2].long_time_format}")
-    elif pydata["games_for_sr_counter"] > 0:
-        print(f"До SnowRunner'a ещё {pydata['games_for_sr_counter']} сери{ep_prefix}")
-    else:
-        print(f"SnowRunner после {pc_date_format(pydata['time_for_sr_counter'])}")
+    ep_prefix = 'я' if abs(pydata["games_for_sr_counter"]) == 1 else ('и' if 1 < abs(pydata["games_for_sr_counter"]) < 5 else 'й')
+
+    if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today(): print(f"Сегодня SnowRunner: {game[2].long_time_format}")
+    elif pydata["games_for_sr_counter"] > 0: print(f"До SnowRunner'a ещё {pydata['games_for_sr_counter']} сери{ep_prefix}")
+    else: print(f"SnowRunner после {pc_date_format(pydata['time_for_sr_counter'])}")
 
     print()
 
     # force info "Force: Fallout: New Vegas"
-    if chose_method == "force":
-        print(f"Force: {choice}")
-    if game[0].last_session == game[1].last_session == 0:
-        print(f"Force: {later}")
+    if choose_method == "force": print(f"Force: {choose}")
     
     # chance info "Шансы равны" or "Fallout: 2"
     for i in range(2):
@@ -279,11 +119,149 @@ def print_info():
         if game_time: print(f"{g.name}: {game_time}")
 
     edit_tg_info_message()
-    
-
-if __name__ == "__main__":
     edit_empty_messages()
-    print_info()
-    run_random_game()
-    pass
-# test 2
+
+
+# run game functions
+def add_episode(G):
+    global game
+    pydata = pydata_load()
+    name = G.name
+
+    pydata["episodes_log"][name][0] += 1
+
+    for g in game:
+        if g.name == name:
+            g.last_session += 1
+            count_chance()
+
+    if name == "SnowRunner": pydata["episodes_log"][name][1] += 1
+    else: pydata["episodes_log"][name][1] += (G.time > 0) * 3
+
+    pydata_save(pydata)
+
+def run_game(game_to_run):
+    if game_to_run.time <= 0:
+        add_quiet_time(game_to_run.name)
+    else:
+        print(f"{game_to_run.name}{f" {game_to_run.long_time_format}" if game_to_run.time != 120 else ""}")
+        game_message_id = send_image(game_to_run.icon, game_to_run.caption)
+        add_empty_message(game_to_run.name, [game_to_run.last_episode+1, game_to_run.last_episode+3], game_message_id)
+    if game_to_run.name != "SnowRunner":
+        add_game_log(game_to_run.name)
+    add_episode(game_to_run)
+    sr_db_update(game_to_run.name)
+    edit_tg_info_message()
+    reset_console_flag(game_to_run.name)
+    game_log(game_to_run.name)
+    add_last_time(game_to_run.name)
+    os.startfile(game_to_run.path)
+
+def uncomplited_session():
+    pydata = pydata_load()
+    for g in game:
+        if pydata["episodes_time"][g.name]["add_by_console"] == "False": return g
+
+    return None
+
+def run_random_game():
+    print("\n"*10)
+    confirm = input()
+    set_eng_layout()
+    pydata = pydata_load()
+
+    uncomplited_game = uncomplited_session()
+
+    if uncomplited_game is None:
+        if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today():
+            run_game(game[2])
+            snowrunner_updater()
+        else:
+            run_game(choose)
+    else:
+        completed_duration = get_total_duration(uncomplited_game.video)[0]
+        duration = pydata["episodes_time"][uncomplited_game.name]["time"] - completed_duration
+        
+        # склонение существительного
+        if duration % 10 == 1 and duration % 100 != 11: form = "минута"
+        elif duration % 10 in {2, 3, 4} and not (duration % 100 in {12, 13, 14}): form = "минуты"
+        else: form = "минут"
+
+        print(f"Сессия {uncomplited_game.name} ещё не завершена, осталось {duration} {form}")
+        print(f"Запустить {uncomplited_game.name}?")
+        confirm = input()
+        os.startfile(uncomplited_game.path)
+
+# databases init
+with open("react-remake/db.json", encoding="utf-8") as f:
+    data = json.load(f)["showcase"]
+pydata = pydata_load()
+
+# game init
+game = [Game(name=item["name"]) for item in data]
+game.append(Game(name="SnowRunner", short_name="SR"))
+
+for g in game:
+    g.update_time()
+
+for i, g in enumerate(game):
+    g.path = PATHS.game[i]
+
+# earlier and later definition
+earlier, later = sorted(game[:2], key=lambda g: g.date)[0].name, sorted(game[:2], key=lambda g: g.date)[1].name
+
+# start from
+if game[0].last_session == 0 or game[1].last_session == 0:
+    pydata = pydata_load()
+    if game[0].last_session == 0: pydata["start_from"] = game[1].last_session
+    if game[1].last_session == 0: pydata["start_from"] = game[0].last_session
+    if pydata["games_for_sr_counter"] <= 5: pydata["games_for_sr_counter"] = 5
+    pydata_save(pydata)
+
+start_from = pydata["start_from"]
+
+if earlier == game[0].name: game[0].last_session -= start_from
+if earlier == game[1].name: game[1].last_session -= start_from
+
+# count chance
+def count_chance():
+    global start_from, game
+
+    more_game = abs(game[0].last_session-game[1].last_session) + 1
+
+    if game[0].last_session > game[1].last_session:
+        game[0].chance = 1
+        game[1].chance = more_game
+    else:
+        game[0].chance = more_game
+        game[1].chance = 1
+
+count_chance()
+
+# select random game
+def select_random_game():
+    game_list = []
+    for g in game:
+        game_list.extend([g.name] * g.chance)
+
+    return game_list[randint(0,len(game_list)-1)]
+
+def get_unpopular_game():
+    pydata = pydata_load()
+    games_log = pydata["games_log"]
+    if game[0].name not in games_log: return game[1]
+    if game[1].name not in games_log: return game[0]
+    return None
+
+def check_frequency():
+    if get_unpopular_game() is not None or game[0].last_session == game[1].last_session == 0:
+        return get_unpopular_game(), "force"
+    return select_random_game(), "random"
+    
+choose, choose_method = check_frequency()
+
+# print information/status
+print_info()
+
+# run random game
+run_random_game()

@@ -9,9 +9,6 @@ print("Загрузка модуля telegramFunctions для YT...")
 from telegramFunctions import edit_telegram_caption
 print("Загрузка модуля pydata для YT...")
 from pydata import pydata_load, pydata_save
-# print("Загрузка модуля jsonLoader для YT...")
-# from jsonLoader import *
-# empty_messages_path = "episode choose remake/YT.json"
 
 shift_range = {}
 
