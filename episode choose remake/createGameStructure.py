@@ -15,7 +15,7 @@ def create_game_structure(game_name):
     return int(getctime(game_path))
 
 def icon_rename(game_name):
-    directory = r"D:\Program Files\HTML\Games\gitignore\icons"
+    directory = r"D:\Program Files\HTML\Episode-Chooser\gitignore\icons"
 
     icon_path = os.path.join(directory, f"{game_name}.png")
 

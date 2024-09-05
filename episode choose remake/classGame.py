@@ -65,10 +65,10 @@ if __name__ == "__main__":
     # print(test)
 
     a = Game(name="Fallout: New Vegas")
-    b = Game(name="BioShock Remastered")
+    # b = Game(name="BioShock Remastered")
 
     print(a)
     print()
-    print(b)
+    # print(b)
 
     pass
