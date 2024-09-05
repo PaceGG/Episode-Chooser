@@ -2,8 +2,10 @@ import os
 import json
 from os.path import getctime
 
+import PATHS
+
 def create_game_structure(game_name):
-    game_path = os.path.join("D:/Program Files/Shadow Play", game_name)
+    game_path = os.path.join(PATHS.video, game_name)
     if os.path.exists(game_path):
         return int(getctime(game_path))
     os.makedirs(game_path, exist_ok=True)
@@ -15,7 +17,7 @@ def create_game_structure(game_name):
     return int(getctime(game_path))
 
 def icon_rename(game_name):
-    directory = r"D:\Program Files\HTML\Episode-Chooser\gitignore\icons"
+    directory = os.path.join(PATHS.repository, "gitignore", "icons")
 
     icon_path = os.path.join(directory, f"{game_name}.png")
 
@@ -32,6 +34,9 @@ def icon_rename(game_name):
             return new_full_path
 
 if __name__ == "__main__":
-    game_name = "test"
+    # game_name = "test"
     # icon_rename(game_name)
-    create_game_structure(game_name)
+    # create_game_structure(game_name)
+
+    print(__file__)
+    print(os.path.dirname(os.path.dirname(__file__)))

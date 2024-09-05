@@ -1,6 +1,7 @@
 print("Загрузка...")
+import PATHS
 import os
-os.chdir(r"D:\Program Files\HTML\Episode-Chooser")
+os.chdir(PATHS.repository)
 import json
 from time import time
 from random import randint
@@ -49,9 +50,8 @@ for g in game:
     g.update_time()
 
 # game paths
-game[0].path = r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\New Vegas EE.lnk"
-game[1].path = r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BioShock Remastered\BioShock Remastered.lnk"
-game[2].path = 'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
+for g, i in enumerate(game):
+    g.path = PATHS.game[i]
 
 # Chance Count
 earlier, later = sorted(game[:2], key=lambda g: g.date)[0].name, sorted(game[:2], key=lambda g: g.date)[1].name
@@ -196,7 +196,7 @@ def add_game_log(g):
     pydata_save(pydata)    
 
 def snowrunner_updater():
-    os.utime("D:/Program Files/Shadow Play/SnowRunner", (time(), time()))
+    os.utime(os.path.join(PATHS.video, "SnowRunner"), (time(), time()))
 
 
 def run_game(game_to_run):
