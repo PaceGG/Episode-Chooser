@@ -12,6 +12,8 @@ print("Загрузка модуля YTTitle для episodesManipulate...")
 from YTTitle import add_yt_titles
 print("Загрузка модулей для episodesManipulate завершена")
 
+import PATHS
+
 def get_old_name(new_name, data_key):
     data = pydata_load()
     with open("react-remake/db.json", encoding="utf-8") as f:
@@ -47,7 +49,7 @@ def replace_game_data(new_name, data_key):
 
 def add_last_time(game_name):
     data = pydata_load()
-    dir = os.path.join("D:/Program Files/Shadow Play", game_name.replace(":", ""))
+    dir = os.path.join(PATHS.video, game_name.replace(":", ""))
     data["episodes_time"][game_name]["last_time"] = get_total_duration(dir)[0]//60
     pydata_save(data)
 
@@ -58,7 +60,7 @@ def count_dir_time(check_name):
     game_names = [name for name in data["episodes_time"].keys()]
 
     for game_name in game_names:
-        dir = os.path.join("D:/Program Files/Shadow Play", game_name.replace(":", ""))
+        dir = os.path.join(PATHS.video, game_name.replace(":", ""))
         if os.path.exists(dir) and game_name == check_name and data["episodes_time"][game_name]["add_by_console"] == "False":
             dir_duration, number_of_files = get_total_duration(dir)
             dir_duration//=60

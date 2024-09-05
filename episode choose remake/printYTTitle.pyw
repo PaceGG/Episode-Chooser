@@ -5,7 +5,8 @@ from timeFormat import get_time
 import os
 from time import sleep
 
-os.chdir("D:\\Program Files\\HTML\\Episode-Chooser")
+import PATHS
+os.chdir(PATHS.repository)
 
 if __name__ == "__main__":
     unicode_string = yt_title_pop()

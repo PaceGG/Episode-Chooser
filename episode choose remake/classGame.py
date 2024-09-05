@@ -7,6 +7,9 @@ from timeFormat import time_format, short_date_format
 print("Загрузка модуля gameTime для classGame...")
 from gameTime import calc_game_time
 
+import PATHS
+import os
+
 def get_short_name(name):
     short_name = ""
     break_chars = [":", "["]
@@ -28,7 +31,7 @@ class Game:
         self.short_name = kwargs.get("short_name", get_short_name(self.name))
 
         video = kwargs.get("video", safe_name)
-        self.video = f"D:/Program Files/Shadow Play/{video}"
+        self.video = os.path.join(PATHS.video, video)
         self.icon = icon_rename(safe_name)
 
         last_session, last_episode = get_episodes(self.name)
