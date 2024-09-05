@@ -252,7 +252,7 @@ def run_random_game():
         else:
             run_game(get_game(choice))
     else:
-        completed_duration = get_total_duration(dir)
+        completed_duration = get_total_duration(uncomplited_game.video)[0]
         duration = pydata["episodes_time"][uncomplited_game.name]["time"] - completed_duration
         
         # склонение существительного
