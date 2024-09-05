@@ -195,20 +195,20 @@ def add_game_log(game_name):
     pydata["games_log"] = pydata["games_log"][1:] + [game_name]
     pydata_save(pydata)
 
-# SnowRunner Manipulate
-def sr_db_edit():
+def add_quiet_time(game_name):
     pydata = pydata_load()
-    if pydata["games_for_sr_counter"] <= 0:
-        pydata["time_for_sr_counter"] = today() + 7*24*60*60
-        pydata_save(pydata)
-        sr_db_clear()
-        return
-    pydata["games_for_sr_counter"] -= 1
+    pydata["episodes_time"][game_name]["time"] += 120
     pydata_save(pydata)
 
-def sr_db_clear():
+# SnowRunner Manipulate
+def sr_db_update(game_name):
     pydata = pydata_load()
-    pydata["games_for_sr_counter"] += 5
+    if game_name == "SnowRunner":
+        pydata["games_for_sr_counter"] += 5
+        pydata["time_for_sr_counter"] = today() + 7*24*60*60
+    else:
+        pydata["games_for_sr_counter"] -= 1
+
     pydata_save(pydata)
 
 def snowrunner_updater():
