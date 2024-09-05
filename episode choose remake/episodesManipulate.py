@@ -10,6 +10,8 @@ print("Загрузка модуля YT для episodesManipulate...")
 from YT import get_last_object
 print("Загрузка модуля YTTitle для episodesManipulate...")
 from YTTitle import add_yt_titles
+print("Загрузка модуля timeFormat для episodesManipulate...")
+from timeFormat import today
 print("Загрузка модулей для episodesManipulate завершена")
 
 import PATHS
@@ -187,6 +189,31 @@ def reset_console_flag(name):
     data = pydata_load()
     data["episodes_time"][name]["add_by_console"] = "False"
     pydata_save(data)
+
+def add_game_log(game_name):
+    pydata = pydata_load()
+    pydata["games_log"] = pydata["games_log"][1:] + [game_name]
+    pydata_save(pydata)
+
+# SnowRunner Manipulate
+def sr_db_edit():
+    pydata = pydata_load()
+    if pydata["games_for_sr_counter"] <= 0:
+        pydata["time_for_sr_counter"] = today() + 7*24*60*60
+        pydata_save(pydata)
+        sr_db_clear()
+        return
+    pydata["games_for_sr_counter"] -= 1
+    pydata_save(pydata)
+
+def sr_db_clear():
+    pydata = pydata_load()
+    pydata["games_for_sr_counter"] += 5
+    pydata_save(pydata)
+
+def snowrunner_updater():
+    # os.utime(os.path.join(PATHS.video, "SnowRunner"), (time(), time()))
+    os.utime(os.path.join(PATHS.video, "SnowRunner"), (today()))
 
 if __name__ == "__main__":
 
