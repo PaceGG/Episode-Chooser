@@ -12,7 +12,7 @@ from YT import add_empty_message, edit_empty_messages
 print()
 
 print("Загрузка модуля episodesManipulate...")
-from episodesManipulate import reset_console_flag, get_total_duration, add_last_time
+from episodesManipulate import reset_console_flag, get_total_duration, add_last_time, add_game_log, sr_db_edit, snowrunner_updater
 print()
 
 print("Загрузка модуля setEngLayout...")
@@ -50,7 +50,7 @@ for g in game:
     g.update_time()
 
 # game paths
-for g, i in enumerate(game):
+for i, g in enumerate(game):
     g.path = PATHS.game[i]
 
 # Chance Count
@@ -69,8 +69,6 @@ start_from = pydata["start_from"]
 
 if earlier == game[0].name: game[0].last_session -= start_from
 if earlier == game[1].name: game[1].last_session -= start_from
-
-
 
 def count_chance():
     global start_from, game
@@ -127,24 +125,6 @@ def add_episode(G, zero_flag=False):
     else: pydata["episodes_log"][name][1] += (not zero_flag) * 3
 
     pydata_save(pydata)
-    
-
-def sr_db_edit():
-    pydata = pydata_load()
-    if pydata["games_for_sr_counter"] <= 0:
-        pydata["time_for_sr_counter"] = today() + 7*24*60*60
-        pydata_save(pydata)
-        sr_db_clear()
-        return
-    pydata["games_for_sr_counter"] -= 1
-    pydata_save(pydata)
-
-    
-
-def sr_db_clear():
-    pydata = pydata_load()
-    pydata["games_for_sr_counter"] += 5
-    pydata_save(pydata)
 
 def edit_tg_info_message():
     pydata = pydata_load()
@@ -165,8 +145,8 @@ def edit_tg_info_message():
     elif game[0].chance > 1: chance_info_message = f"• {game[0].short_name}: {game[0].chance}"
     elif game[1].chance > 1: chance_info_message = f"• {game[1].short_name}: {game[1].chance}"
 
-    # time_format_message aka time_info_message
-    time_format_message = ""
+    # time_info_message
+    time_info_message = ""
     for g in game:
         time = g.time_format
         if g.time == 120: time = ""
@@ -179,7 +159,7 @@ def edit_tg_info_message():
         if time: msg += f"{time}"
         if game_time: msg += f" {game_time}"
 
-        if msg != f"• {g.short_name}: ": time_format_message += msg + "\n"
+        if msg != f"• {g.short_name}: ": time_info_message += msg + "\n"
 
     # time_for_sr_message
     time_for_sr_message = f"SR after {pc_date_format(pydata['time_for_sr_counter'])}"
@@ -187,17 +167,7 @@ def edit_tg_info_message():
     # next_update_message
     next_update_message = f"Next Update: {pc_date_format(pydata["last_update"] + 12*60*60)}"
 
-    edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_format_message}\n{time_for_sr_message}\n{next_update_message}")
-
-
-def add_game_log(g):
-    pydata = pydata_load()
-    pydata["games_log"] = pydata["games_log"][1:] + [g.name]
-    pydata_save(pydata)    
-
-def snowrunner_updater():
-    os.utime(os.path.join(PATHS.video, "SnowRunner"), (time(), time()))
-
+    edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_info_message}\n{time_for_sr_message}\n{next_update_message}")
 
 def run_game(game_to_run):
     pydata = pydata_load()
@@ -211,7 +181,7 @@ def run_game(game_to_run):
         add_empty_message(game_to_run.name, [game_to_run.last_episode+1, game_to_run.last_episode+3], game_message_id)
         add_episode(game_to_run)
     if game_to_run.name != "SnowRunner":
-        add_game_log(game_to_run)
+        add_game_log(game_to_run.name)
     sr_db_edit()
     edit_tg_info_message()
     reset_console_flag(game_to_run.name)

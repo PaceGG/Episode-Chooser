@@ -8,4 +8,4 @@ game = [
 
 video = "D:/Program Files/Shadow Play"
 
-repository = print(os.path.dirname(os.path.dirname(__file__))) # automacy
+repository = os.path.dirname(os.path.dirname(__file__)) # automacy
