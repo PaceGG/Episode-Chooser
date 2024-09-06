@@ -83,6 +83,7 @@ def edit_tg_info_message():
     edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_info_message}\n{time_for_sr_message}\n{next_update_message}")
 
 def print_info():
+    edit_empty_messages()
     os.system('cls')
     pydata = pydata_load()
 
@@ -119,7 +120,6 @@ def print_info():
         if game_time: print(f"{g.name}: {game_time}")
 
     edit_tg_info_message()
-    edit_empty_messages()
 
 
 # run game functions
@@ -244,7 +244,11 @@ def select_random_game():
     for g in game:
         game_list.extend([g.name] * g.chance)
 
-    return game_list[randint(0,len(game_list)-1)]
+    choose = game_list[randint(0,len(game_list)-1)]
+
+    choosen_game = game[0] if choose == game[0].name else game[1]
+
+    return choosen_game
 
 def get_unpopular_game():
     pydata = pydata_load()
