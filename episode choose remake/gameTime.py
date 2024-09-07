@@ -1,8 +1,12 @@
 import json
 import os
 
+def create_game_time_file(game_time_file):
+    with open (game_time_file, 'w') as f: json.dump({"game_time": []}, f)
+
 def load_game_time(video_folder):
     game_time_file = os.path.join(video_folder, "game_time.json")
+    if not os.path.exists(game_time_file): create_game_time_file(game_time_file)
     with open (game_time_file, 'r') as f:
         game_time = json.load(f)["game_time"]
 
