@@ -50,7 +50,7 @@ def edit_tg_info_message():
 
     # force_info_message
     unpopular_game = get_unpopular_game()
-    force_info_message = f"• Force: {unpopular_game}" if unpopular_game is not None or game[0].last_session == game[1].last_session == 0 else ""
+    force_info_message = f"• Force: {unpopular_game.name}" if unpopular_game is not None or game[0].last_session == game[1].last_session == 0 else ""
 
     # chance_info_message
     count_chance()
@@ -97,7 +97,7 @@ def print_info():
     print()
 
     # force info "Force: Fallout: New Vegas"
-    if choose_method == "force": print(f"Force: {choose}")
+    if choose_method == "force": print(f"Force: {choose.name}")
     
     # chance info "Шансы равны" or "Fallout: 2"
     for i in range(2):
@@ -179,7 +179,7 @@ def run_random_game():
         else:
             run_game(choose)
     else:
-        completed_duration = get_total_duration(uncomplited_game.video)[0]
+        completed_duration = get_total_duration(uncomplited_game.video)[0] // 60 - pydata["episodes_time"][uncomplited_game.name]["last_time"]
         duration = pydata["episodes_time"][uncomplited_game.name]["time"] - completed_duration
         
         # склонение существительного

@@ -89,6 +89,7 @@ def count_dir_time(check_name):
                 return game_name
             
 def get_total_duration(directory):
+    """returns a duration of videos in directory in seconds and number of videos"""
     total_duration = 0
     number_of_files = 0
 
