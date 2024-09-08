@@ -1,6 +1,6 @@
 {
   "data": {
-    "last_update": 1725693997,
+    "last_update": 1725838563,
     "games_log": [
       "BioShock Remastered",
       "BioShock Remastered",
@@ -36,7 +36,6 @@
     }
   },
   "YT": [
-    { "game_name": "BioShock Remastered", "ep_range": [4, 6], "id": 563 },
     { "game_name": "BioShock Remastered", "ep_range": [7, 9], "id": 564 },
     { "game_name": "BioShock Remastered", "ep_range": [10, 12], "id": 565 }
   ],
