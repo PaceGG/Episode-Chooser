@@ -49,8 +49,7 @@ def edit_tg_info_message():
     else: sr_counter_message = f"• Сегодня SnowRunner!!! • {game[2].short_name}: {game[2].time_format}" if game[2].time != 120 else "• Сегодня SnowRunner!!!"
 
     # force_info_message
-    unpopular_game = get_unpopular_game()
-    force_info_message = f"• Force: {unpopular_game.name}" if unpopular_game is not None or game[0].last_session == game[1].last_session == 0 else ""
+    force_info_message = f"\n• Force: {choose.name}" if is_choose_forced else ""
 
     # chance_info_message
     count_chance()
@@ -97,7 +96,7 @@ def print_info():
     print()
 
     # force info "Force: Fallout: New Vegas"
-    if choose_method == "force": print(f"Force: {choose.name}")
+    if is_choose_forced: print(f"Force: {choose.name}")
     
     # chance info "Шансы равны" or "Fallout: 2"
     for i in range(2):
@@ -208,7 +207,7 @@ for i, g in enumerate(game):
     g.path = PATHS.game[i]
 
 # earlier and later definition
-earlier, later = sorted(game[:2], key=lambda g: g.date)[0].name, sorted(game[:2], key=lambda g: g.date)[1].name
+earlier, later = sorted(game[:2], key=lambda g: g.date)[0], sorted(game[:2], key=lambda g: g.date)[1]
 
 # start from
 if game[0].last_session == 0 or game[1].last_session == 0:
@@ -220,8 +219,8 @@ if game[0].last_session == 0 or game[1].last_session == 0:
 
 start_from = pydata["start_from"]
 
-if earlier == game[0].name: game[0].last_session -= start_from
-if earlier == game[1].name: game[1].last_session -= start_from
+if earlier.name == game[0].name: game[0].last_session -= start_from
+if earlier.name == game[1].name: game[1].last_session -= start_from
 
 # count chance
 def count_chance():
@@ -253,16 +252,17 @@ def select_random_game():
 def get_unpopular_game():
     pydata = pydata_load()
     games_log = pydata["games_log"]
-    if game[0].name not in games_log: return game[1]
-    if game[1].name not in games_log: return game[0]
+    if game[0].last_session == game[1].last_session == 0: return later
+    if game[0].name not in games_log: return game[0]
+    if game[1].name not in games_log: return game[1]
     return None
 
 def check_frequency():
-    if get_unpopular_game() is not None or game[0].last_session == game[1].last_session == 0:
-        return get_unpopular_game(), "force"
-    return select_random_game(), "random"
+    unpopular_game = get_unpopular_game()
+    if unpopular_game is not None: return unpopular_game, True
+    else: return select_random_game(), False
     
-choose, choose_method = check_frequency()
+choose, is_choose_forced = check_frequency()
 
 # print information/status
 print_info()

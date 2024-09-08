@@ -1252,17 +1252,18 @@
     {
       "id": "5591",
       "mainName": "VLADiK BRUTAL",
-      "mainTime": 0,
-      "mainNumberOfEps": 0,
+      "mainTime": 22282,
+      "mainNumberOfEps": 9,
       "additionalGames": [],
-      "mainStatus": "inProcess"
+      "mainStatus": "complete"
     },
     {
       "id": "5e20",
       "mainName": "The Callisto Protocol",
       "mainTime": 0,
       "mainNumberOfEps": 0,
-      "additionalGames": []
+      "additionalGames": [],
+      "mainStatus": "inProcess"
     },
     {
       "id": "5739",
@@ -1329,13 +1330,13 @@
         },
         {
           "name": "BioShock 2 Remastered",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "BioShock Infinite",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         }
