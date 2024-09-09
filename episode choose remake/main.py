@@ -14,7 +14,7 @@ from YT import add_empty_message, edit_empty_messages
 print()
 
 print("Загрузка модуля episodesManipulate...")
-from episodesManipulate import reset_console_flag, get_total_duration, add_last_time, add_game_log, sr_db_update, snowrunner_updater, add_quiet_time
+from episodesManipulate import reset_console_flag, add_last_time, add_game_log, sr_db_update, snowrunner_updater, add_quiet_time
 print()
 
 print("Загрузка модуля setEngLayout...")
@@ -43,6 +43,10 @@ print()
 
 print("Загрузка модуля YTTitle...")
 from YTTitle import add_yt_titles
+print()
+
+print("Загрузка модуля totalDuration...")
+from totalDuration import get_total_duration, get_number_of_videos
 print()
 
 # functions
@@ -90,7 +94,7 @@ def edit_tg_info_message():
 
 def print_info():
     edit_empty_messages()
-    os.system('cls')
+    # os.system('cls')
     pydata = pydata_load()
 
     # snowrunner info "До SnowRunner'a ещё 3 серии" or "SnowRunner после 05.01.2022"
@@ -185,7 +189,8 @@ def run_random_game():
         else:
             run_game(choose)
     else:
-        total_duration, number_of_files = get_total_duration(uncomplited_game.video)
+        total_duration = get_total_duration(uncomplited_game.name)
+        number_of_videos = get_number_of_videos(uncomplited_game.name)
         completed_duration = total_duration // 60 - pydata["episodes_time"][uncomplited_game.name]["last_time"]
         duration = pydata["episodes_time"][uncomplited_game.name]["time"] - completed_duration
         
@@ -198,7 +203,7 @@ def run_random_game():
         print(f"Запустить {uncomplited_game.name}? Введите \"-\" для добавления серий к yt titles")
         confirm = input()
         if confirm == "-":
-            add_yt_titles(uncomplited_game.name, number_of_files - pydata["episodes_time"][uncomplited_game.name]["last_episodes"])
+            add_yt_titles(uncomplited_game.name, number_of_videos - pydata["episodes_time"][uncomplited_game.name]["last_episodes"])
         else:
             os.startfile(uncomplited_game.path)
 

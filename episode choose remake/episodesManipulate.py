@@ -1,9 +1,6 @@
 import json
 import os
 
-print("Загрузка класса VideoFileClip для epiosdesManipulate...")
-# from moviepy.video.io.VideoFileClip import get_total_duration
-from moviepy.video.io.VideoFileClip import VideoFileClip
 print("Загрузка модуля pydata для episodesManipulate...")
 from pydata import *
 print("Загрузка модуля YT для episodesManipulate...")
@@ -13,6 +10,7 @@ from YTTitle import add_yt_titles
 print("Загрузка модуля timeFormat для episodesManipulate...")
 from timeFormat import today
 print("Загрузка модулей для episodesManipulate завершена")
+from totalDuration import get_total_duration, get_number_of_videos
 
 import PATHS
 
@@ -51,8 +49,8 @@ def replace_game_data(new_name, data_key):
 
 def add_last_time(game_name):
     data = pydata_load()
-    dir = os.path.join(PATHS.video, game_name.replace(":", ""))
-    total_duration, number_of_files = get_total_duration(dir)
+    total_duration = get_total_duration(game_name)
+    number_of_files = get_number_of_videos(game_name)
     data["episodes_time"][game_name]["last_time"] = total_duration//60
     data["episodes_time"][game_name]["last_episodes"] = number_of_files[1]
     pydata_save(data)
@@ -64,9 +62,9 @@ def count_dir_time(check_name):
     game_names = [name for name in data["episodes_time"].keys()]
 
     for game_name in game_names:
-        dir = os.path.join(PATHS.video, game_name.replace(":", ""))
-        if os.path.exists(dir) and game_name == check_name and data["episodes_time"][game_name]["add_by_console"] == "False":
-            dir_duration, number_of_files = get_total_duration(dir)
+        if game_name == check_name and data["episodes_time"][game_name]["add_by_console"] == "False":
+            dir_duration = get_total_duration(game_name)
+            number_of_files = get_number_of_videos(game_name)
             dir_duration//=60
             dir_duration-=data["episodes_time"][game_name]["last_time"]
             if dir_duration > data["episodes_time"][game_name]["time"]:
@@ -89,27 +87,6 @@ def count_dir_time(check_name):
             else:
                 return game_name
             
-def get_total_duration(directory):
-    """returns a duration of videos in directory in seconds and number of videos"""
-    total_duration = 0
-    number_of_files = 0
-
-    print("Подсчет продолжительности серий...")
-    for filename in os.listdir(directory):
-        if filename.endswith(".mp4"):
-            print("Обработка файла " + filename)
-            number_of_files += 1
-            file_path = os.path.join(directory, filename)
-            try:
-                with VideoFileClip(file_path) as video:
-                    duration = video.duration
-                    total_duration += int(duration)
-            except Exception as e:
-                print(f"Ошибка при обработке файла {filename}: {e}")
-
-    return total_duration, number_of_files
-            
-
 def time_sum(my_time):
     my_time = my_time.split(",")
     for i, time in enumerate(my_time):
@@ -237,8 +214,7 @@ if __name__ == "__main__":
     # print(get_episodes("VLADiK BRUTAL"))
     # print(get_time("VLADiK BRUTAL"))
 
-    print(get_total_duration("D:/Program Files/Shadow Play/Fallout New Vegas"))
-    print(get_total_duration("D:/Program Files/Shadow Play/BioShock Remastered"))
-    print(get_total_duration("D:/Program Files/Shadow Play/SnowRunner"))
+    print(get_total_duration("Fallout: New Vegas"))
+    print(get_total_duration("BioShock Remastered"))
 
     pass
