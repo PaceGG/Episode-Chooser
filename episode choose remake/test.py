@@ -1,19 +1,10 @@
-import json
-import PATHS
-
-game_name = "Fallout: New Vegas"
-
-with open("react-remake/db.json", encoding="utf-8") as f:
-        showcase = json.load(f)["showcase"]
-
-extra_name = ""
-if game_name == "SnowRunner":
-    extra_name = PATHS.extra_names[2]
-else:
-    for item in showcase:
-        if item["name"] == game_name:
-            extra_name = PATHS.extra_names[int(item["id"])]
-
-if extra_name != "": game_name = f"{game_name}: {extra_name}"
-
-print(game_name)
+import tkinter
+from tkinter.constants import *
+tk = tkinter.Tk()
+frame = tkinter.Frame(tk, relief=RIDGE, borderwidth=2)
+frame.pack(fill=BOTH,expand=1)
+label = tkinter.Label(frame, text="Hello, World")
+label.pack(fill=X, expand=1)
+button = tkinter.Button(frame,text="Exit",command=tk.destroy)
+button.pack(side=BOTTOM)
+tk.mainloop()
