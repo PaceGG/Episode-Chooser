@@ -1,5 +1,9 @@
 import json
+import PATHS
+import os
 from telegramFunctions import delete_message
+
+os.chdir(PATHS.repository)
 
 def save_rollback():
     with open("episode choose remake/pydb.json", "r", encoding="utf-8") as f:

@@ -3,6 +3,7 @@ import os
 import PATHS
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
+os.chdir(PATHS.repository)
 
 def get_total_duration_of_file(directory):
     """returns a duration of videos in directory in seconds and number of videos"""

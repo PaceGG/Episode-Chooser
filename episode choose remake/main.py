@@ -94,7 +94,7 @@ def edit_tg_info_message():
 
 def print_info():
     edit_empty_messages()
-    # os.system('cls')
+    os.system('cls')
     pydata = pydata_load()
 
     # snowrunner info "До SnowRunner'a ещё 3 серии" or "SnowRunner после 05.01.2022"
