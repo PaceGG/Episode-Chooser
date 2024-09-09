@@ -41,6 +41,10 @@ print("Загрузка модуля gameLog...")
 from gameLog import game_log
 print()
 
+print("Загрузка модуля YTTitle...")
+from YTTitle import add_yt_titles
+print()
+
 # functions
 # information and statistics functions
 def edit_tg_info_message():
@@ -181,7 +185,8 @@ def run_random_game():
         else:
             run_game(choose)
     else:
-        completed_duration = get_total_duration(uncomplited_game.video)[0] // 60 - pydata["episodes_time"][uncomplited_game.name]["last_time"]
+        total_duration, number_of_files = get_total_duration(uncomplited_game.video)
+        completed_duration = total_duration // 60 - pydata["episodes_time"][uncomplited_game.name]["last_time"]
         duration = pydata["episodes_time"][uncomplited_game.name]["time"] - completed_duration
         
         # склонение существительного
@@ -190,9 +195,12 @@ def run_random_game():
         else: form = "минут"
 
         print(f"Сессия {uncomplited_game.name} ещё не завершена, осталось {duration} {form}")
-        print(f"Запустить {uncomplited_game.name}?")
+        print(f"Запустить {uncomplited_game.name}? Введите \"-\" для добавления серий к yt titles")
         confirm = input()
-        os.startfile(uncomplited_game.path)
+        if confirm == "-":
+            add_yt_titles(uncomplited_game.name, number_of_files - pydata["episodes_time"][uncomplited_game.name]["last_episodes"])
+        else:
+            os.startfile(uncomplited_game.path)
 
 # databases init
 with open("react-remake/db.json", encoding="utf-8") as f:

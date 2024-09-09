@@ -52,7 +52,9 @@ def replace_game_data(new_name, data_key):
 def add_last_time(game_name):
     data = pydata_load()
     dir = os.path.join(PATHS.video, game_name.replace(":", ""))
-    data["episodes_time"][game_name]["last_time"] = get_total_duration(dir)[0]//60
+    total_duration, number_of_files = get_total_duration(dir)
+    data["episodes_time"][game_name]["last_time"] = total_duration//60
+    data["episodes_time"][game_name]["last_episodes"] = number_of_files[1]
     pydata_save(data)
 
 def count_dir_time(check_name):
@@ -92,8 +94,10 @@ def get_total_duration(directory):
     total_duration = 0
     number_of_files = 0
 
+    print("Подсчет продолжительности серий...")
     for filename in os.listdir(directory):
         if filename.endswith(".mp4"):
+            print("Обработка файла " + filename)
             number_of_files += 1
             file_path = os.path.join(directory, filename)
             try:
@@ -235,5 +239,6 @@ if __name__ == "__main__":
 
     print(get_total_duration("D:/Program Files/Shadow Play/Fallout New Vegas"))
     print(get_total_duration("D:/Program Files/Shadow Play/BioShock Remastered"))
+    print(get_total_duration("D:/Program Files/Shadow Play/SnowRunner"))
 
     pass

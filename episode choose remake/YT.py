@@ -137,8 +137,7 @@ def add_empty_message(game_name, ep_range, id):
 def get_last_object(game_name):
     empty_messages = pydata_load("YT")
 
-    for i in range(1, len(empty_messages) +1):
-        i*=-1
+    for i in range(len(empty_messages) - 1, -1, -1):
         if game_name == empty_messages[i]["game_name"]: return empty_messages[i], i
     
     return None, None

@@ -19,18 +19,21 @@
         "time": 107,
         "my_time": "",
         "last_time": 0,
+        "last_episodes": 0,
         "add_by_console": "True"
       },
       "SnowRunner": {
         "time": 4,
         "my_time": "",
         "last_time": 0,
+        "last_episodes": 0,
         "add_by_console": "True"
       },
       "BioShock Remastered": {
         "time": 120,
         "my_time": "",
         "last_time": 129,
+        "last_episodes": 3,
         "add_by_console": "False"
       }
     }
@@ -60,6 +63,7 @@
   "game_log_YTTitle": [
     " \u2022 \u2116 7 \u2022 BioShock Remastered",
     " \u2022 \u2116 8 \u2022 BioShock Remastered",
-    " \u2022 \u2116 9 \u2022 BioShock Remastered"
+    " \u2022 \u2116 9 \u2022 BioShock Remastered",
+    " \u2022 \u2116 10 \u2022 BioShock Remastered"
   ]
 }
