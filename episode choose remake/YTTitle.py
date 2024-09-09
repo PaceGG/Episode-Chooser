@@ -19,7 +19,7 @@ def yt_title_pop():
         pydata_save(yt_log, "game_log_YTTitle")
         return pop
 
-def add_yt_titles(game_name):
+def add_yt_titles(game_name, number_of_videos=3):
     from episodesManipulate import get_last_object
 
     with open("react-remake/db.json", encoding="utf-8") as f:
@@ -37,6 +37,7 @@ def add_yt_titles(game_name):
 
     yt_log = pydata_load("game_log_YTTitle")
     ep_range = get_last_object(game_name)[0]["ep_range"]
+    ep_range[1] -= 3 - number_of_videos
 
     for i in range(ep_range[0], ep_range[1] +1):
         yt_log.append(f" • № {i} • {game_name}")
