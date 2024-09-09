@@ -16,15 +16,13 @@ def create_game_structure(game_name):
     print("Директории созданы")
     return int(getctime(game_path))
 
-def icon_rename(game_name):
-    directory = os.path.join(PATHS.repository, "gitignore", "icons")
-
+def rename(directory, game_name):
     icon_path = os.path.join(directory, f"{game_name}.png")
 
     if os.path.exists(icon_path):
         return icon_path
 
-    variants = ["ng", "new_game", "new game"]
+    variants = ["ng", "header", "new_game", "new game"]
     
     for variant in variants:
         full_path = os.path.join(directory, f"{variant}.png")
@@ -32,6 +30,14 @@ def icon_rename(game_name):
             new_full_path = os.path.join(directory, f"{game_name}.png")
             os.rename(full_path, new_full_path)
             return new_full_path
+
+def icon_rename(game_name):
+    directory = os.path.join(PATHS.repository, "gitignore", "icons")
+    return rename(directory, game_name)
+
+def header_rename(game_name):
+    directory = os.path.join(PATHS.repository, "gitignore", "headers")
+    return rename(directory, game_name)
 
 if __name__ == "__main__":
     # game_name = "test"

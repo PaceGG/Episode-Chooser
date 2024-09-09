@@ -1,7 +1,7 @@
 print("Загрузка модуля episodesManipulate для classGame...")
 from episodesManipulate import get_episodes, get_time
 print("Загрузка модуля createGameStructure для classGame...")
-from createGameStructure import create_game_structure, icon_rename
+from createGameStructure import create_game_structure, icon_rename, header_rename
 print("Загрузка модуля timeFormat для classGame...")
 from timeFormat import time_format, short_date_format
 print("Загрузка модуля gameTime для classGame...")
@@ -43,6 +43,7 @@ class Game:
         video = kwargs.get("video", safe_name)
         self.video = os.path.join(PATHS.video, video)
         self.icon = icon_rename(safe_name)
+        self.header = header_rename(safe_name)
 
         last_session, last_episode = get_episodes(self.name)
         self.last_session = kwargs.get("last_session", last_session)
