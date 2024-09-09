@@ -49,7 +49,7 @@ def edit_tg_info_message():
     else: sr_counter_message = f"• Сегодня SnowRunner!!! • {game[2].short_name}: {game[2].time_format}" if game[2].time != 120 else "• Сегодня SnowRunner!!!"
 
     # force_info_message
-    force_info_message = f"\n• Force: {choose.name}" if is_choose_forced else ""
+    force_info_message = f"\n• Force: {choose.short_name}" if is_choose_forced else ""
 
     # chance_info_message
     count_chance()
@@ -139,13 +139,13 @@ def add_episode(G):
 
     pydata_save(pydata)
 
-def run_game(game_to_run):
+def run_game(game_to_run: Game):
     if game_to_run.time <= 0:
         add_quiet_time(game_to_run.name)
     else:
         print(f"{game_to_run.name}{f" {game_to_run.long_time_format}" if game_to_run.time != 120 else ""}")
         game_message_id = send_image(game_to_run.icon, game_to_run.caption)
-        add_empty_message(game_to_run.name, [game_to_run.last_episode+1, game_to_run.last_episode+3], game_message_id)
+        add_empty_message(game_to_run.extra_name, [game_to_run.last_episode+1, game_to_run.last_episode+3], game_message_id)
     if game_to_run.name != "SnowRunner":
         add_game_log(game_to_run.name)
     add_episode(game_to_run)
@@ -200,11 +200,10 @@ pydata = pydata_load()
 game = [Game(name=item["name"]) for item in data]
 game.append(Game(name="SnowRunner", short_name="SR"))
 
-for g in game:
-    g.update_time()
-
 for i, g in enumerate(game):
+    g.update_time()
     g.path = PATHS.game[i]
+    g.extra_name = PATHS.extra_names[i]
 
 # earlier and later definition
 earlier, later = sorted(game[:2], key=lambda g: g.date)[0], sorted(game[:2], key=lambda g: g.date)[1]

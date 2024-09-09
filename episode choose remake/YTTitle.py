@@ -1,3 +1,6 @@
+import json
+import PATHS
+
 from pydata import *
 from timeFormat import get_time
 
@@ -18,7 +21,20 @@ def yt_title_pop():
 
 def add_yt_titles(game_name):
     from episodesManipulate import get_last_object
-    # yt_log = json_load(yt_title_log_path)
+
+    with open("react-remake/db.json", encoding="utf-8") as f:
+        showcase = json.load(f)["showcase"]
+
+    extra_name = ""
+    if game_name == "SnowRunner":
+        extra_name = PATHS.extra_names[2]
+    else:
+        for item in showcase:
+            if item["name"] == game_name:
+                extra_name = PATHS.extra_names[int(item["id"])]
+
+    if extra_name != "": game_name = f"{game_name}: {extra_name}"
+
     yt_log = pydata_load("game_log_YTTitle")
     ep_range = get_last_object(game_name)[0]["ep_range"]
 
