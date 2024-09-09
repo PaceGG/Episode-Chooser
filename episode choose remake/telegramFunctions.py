@@ -37,6 +37,15 @@ def edit_telegram_caption(new_caption, message_id):
     response = post(url, params=params)
     return response.json()
 
+def delete_message(message_id):
+    url = f"https://api.telegram.org/bot{bot_token}/deleteMessage"
+    params = {
+        "chat_id": chat_id,
+        "message_id": message_id
+    }
+    response = post(url, params=params)
+    return response.json()
+
 
 if __name__ == '__main__':
     # print(send_image(r"D:\Program Files\Shadow Play\Dead Space 3\previews\1.jpg"))

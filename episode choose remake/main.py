@@ -1,3 +1,6 @@
+from rollback import save_rollback
+save_rollback()
+
 print("Загрузка...")
 import PATHS
 import os
