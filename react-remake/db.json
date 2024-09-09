@@ -1373,14 +1373,12 @@
     {
       "id": "0",
       "name": "Fallout: New Vegas",
-      "shortName": "Fallout",
       "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/22380/library_600x900_2x.jpg?t=1316473416",
       "color": "#fdb746"
     },
     {
       "id": "1",
       "name": "BioShock Remastered",
-      "shortName": "Dead Space",
       "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/409710/library_600x900_2x.jpg?t=1568739568",
       "color": "#c4942a"
     }

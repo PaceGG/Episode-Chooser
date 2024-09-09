@@ -1,9 +1,19 @@
-original_names = ['Fallout: New Vegas', 'BioShock Remastered']
-name = 'Fallout: New Vegas: Old World Blues'
+import json
+import PATHS
 
-def check_name(name):
-    if original_names[0] in name or original_names[1] in name: return True
-    else: return False
-    
+game_name = "Fallout: New Vegas"
 
-print(check_name(name))
+with open("react-remake/db.json", encoding="utf-8") as f:
+        showcase = json.load(f)["showcase"]
+
+extra_name = ""
+if game_name == "SnowRunner":
+    extra_name = PATHS.extra_names[2]
+else:
+    for item in showcase:
+        if item["name"] == game_name:
+            extra_name = PATHS.extra_names[int(item["id"])]
+
+if extra_name != "": game_name = f"{game_name}: {extra_name}"
+
+print(game_name)

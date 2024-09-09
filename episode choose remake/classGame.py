@@ -14,20 +14,30 @@ def get_short_name(name):
     short_name = ""
     break_chars = [":", "["]
     for c in name:
-        if c in break_chars or c.isnumeric(): return short_name[:-1] if short_name[-1]==" " else short_name
+        if c in break_chars or c.isnumeric(): break
         short_name += c
+    name = short_name[:-1] if short_name[-1]==" " else short_name
 
-    return short_name
+    short_name = []
+    break_words = ["Remastered"]
+    for s in name.split(" "):
+        if s in break_words: break
+        short_name.append(s)
+    name = " ".join(short_name)
+
+    return name
 
 class Game:
     def __init__(self, **kwargs):
         self.name = kwargs.get("name", "")
+        self.extra_name = kwargs.get("extra_name", "")
         print(f"Инициализация {self.name}...")
+
         self.path = kwargs.get("path", "")
         
         safe_name = self.name.replace(":", "")
 
-        # берем из имени
+        # takes from name
         self.short_name = kwargs.get("short_name", get_short_name(self.name))
 
         video = kwargs.get("video", safe_name)
@@ -44,8 +54,8 @@ class Game:
 
         self.game_time = calc_game_time(self.video)
 
-        if self.name != "SnowRunner": self.caption = kwargs.get("caption", f"{self.name} № {self.last_episode+1}-{last_episode+3}:\n• \n• \n• ")
-        elif self.name == "SnowRunner": self.caption = kwargs.get("caption", f"{self.name} № {self.last_episode+1}:\n• ")
+        if self.name != "SnowRunner": self.caption = kwargs.get("caption", f"{self.extra_name} № {self.last_episode+1}-{last_episode+3}:\n• \n• \n• ")
+        if self.name == "SnowRunner": self.caption = kwargs.get("caption", f"{self.extra_name} № {self.last_episode+1}:\n• ")
 
         self.date = create_game_structure(safe_name)
         self.date_format = short_date_format(self.date)
@@ -60,6 +70,14 @@ class Game:
 
     def __repr__(self):
         return f"class Game:\n{'\n'.join(f'{k} = {v!r}' for k, v in vars(self).items())}"
+    
+    def __getattribute__(self, item):
+        if item == "extra_name":
+            name = super().__getattribute__("name")
+            extra_name = super().__getattribute__("extra_name")
+            if extra_name == "": return name
+            return f"{name}: {extra_name}"
+        return super().__getattribute__(item)
 
 if __name__ == "__main__":
     # print(get_short_name("Mafia II: Definitive Edition"))
@@ -67,11 +85,14 @@ if __name__ == "__main__":
     # test = Game(name="VLADiK BRUTAL")
     # print(test)
 
-    a = Game(name="Fallout: New Vegas")
-    # b = Game(name="BioShock Remastered")
+    # a = Game(name="Fallout: New Vegas")
+    # a.extra_name = "test"
 
-    print(a)
-    print()
-    # print(b)
+    # # print(a)
+
+    # print(a.name)
+
+    # print(f"{get_short_name("BioShock Remastered")}|")
+    # print(f"{get_short_name("BioShock 2 Remastered")}|")
 
     pass

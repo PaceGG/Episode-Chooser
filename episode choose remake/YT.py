@@ -49,11 +49,6 @@ def get_last_videos():
 
     videos = {}
 
-    with open("react-remake/db.json", encoding="utf-8") as f:
-        showcase = json.load(f)["showcase"]
-
-    original_names = [game["name"] for game in showcase]
-
     for item in playlist_response['items']:
         try: name, number, game = item['snippet']['title'].split(" • ")
         except: continue
@@ -61,8 +56,6 @@ def get_last_videos():
         number = intc(number)
         if "SnowRunner" in game:
             game = "SnowRunner"
-        if original_names[0] in game: game = original_names[0]
-        if original_names[1] in game: game = original_names[1]
 
         try: videos[game][number] = name
         except: videos[game] = {number: name}
@@ -155,11 +148,11 @@ if __name__ == '__main__':
     # edit_game_message("Dead Space 3", [4,5], 462)
     # edit_empty_messages()
 
-    # last_videos = get_last_videos()
-    # print(last_videos)
+    last_videos = get_last_videos()
+    print(last_videos)
 
     # print(get_last_object("BioShock Remastered")[0]["ep_range"])
 
-    edit_empty_messages()
+    # edit_empty_messages()
 
     pass

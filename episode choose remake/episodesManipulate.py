@@ -74,7 +74,6 @@ def count_dir_time(check_name):
                 data["episodes_time"][game_name]["my_time"] = my_time
                 if my_time != "": data["episodes_time"][game_name]["add_by_console"] = "True"
 
-                # test is need to make check flag
                 if 3 - number_of_files > 0:
                     data["episodes_log"][game_name][1] -= 3 - number_of_files
 
