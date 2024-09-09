@@ -49,6 +49,10 @@ print("Загрузка модуля totalDuration...")
 from totalDuration import get_total_duration, get_number_of_videos
 print()
 
+print("Загрузка модуля showimg...")
+from showimg import show_image
+print()
+
 # functions
 # information and statistics functions
 def edit_tg_info_message():
@@ -165,6 +169,7 @@ def run_game(game_to_run: Game):
     reset_console_flag(game_to_run.name)
     game_log(game_to_run.name)
     add_last_time(game_to_run.name)
+    show_image(game_to_run.header)
     os.startfile(game_to_run.path)
 
 def uncomplited_session():
@@ -184,8 +189,8 @@ def run_random_game():
 
     if uncomplited_game is None:
         if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today():
-            run_game(game[2])
             snowrunner_updater()
+            run_game(game[2])
         else:
             run_game(choose)
     else:
