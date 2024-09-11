@@ -2,7 +2,7 @@ import os
 
 game = [
     r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\New Vegas EE.lnk",
-    r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BioShock Remastered\BioShock Remastered.lnk",
+    r"D:\Games\The Callisto Protocol\TheCallistoProtocol.exe",
     'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 ]
 

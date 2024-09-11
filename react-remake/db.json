@@ -1324,9 +1324,9 @@
       "additionalGames": [
         {
           "name": "BioShock Remastered",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "bad",
+          "time": 27952,
+          "numberOfEps": 10
         },
         {
           "name": "BioShock 2 Remastered",
@@ -1378,9 +1378,9 @@
     },
     {
       "id": "1",
-      "name": "BioShock Remastered",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/409710/library_600x900_2x.jpg?t=1568739568",
-      "color": "#c4942a"
+      "name": "The Callisto Protocol",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/1544020/library_600x900_2x.jpg?t=1703127416",
+      "color": "#d15b0e"
     }
   ],
   "links": [

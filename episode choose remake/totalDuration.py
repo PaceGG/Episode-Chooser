@@ -2,11 +2,17 @@ import json
 import os
 import PATHS
 from moviepy.video.io.VideoFileClip import VideoFileClip
+from createGameStructure import create_game_structure
 
 os.chdir(PATHS.repository)
 
-def get_total_duration_of_file(directory):
+def get_total_duration(game_name):
     """returns a duration of videos in directory in seconds and number of videos"""
+    directory = os.path.join(PATHS.video, game_name.replace(":", ""))
+
+    if not os.path.exists(directory):
+        create_game_structure(game_name)
+
     total_duration = 0
     number_of_files = 0
 
@@ -28,17 +34,17 @@ def get_total_duration_of_file(directory):
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
 
-video_paths = [os.path.join(PATHS.video, game["name"].replace(":", "")) for game in data] + ["D:/Program Files/Shadow Play/SnowRunner"]
+games = [data[0]["name"], data[1]["name"], "SnowRunner"]
 
 dirs = {}
 
-total_duration, number_of_videos = get_total_duration_of_file(video_paths[0])
+total_duration, number_of_videos = get_total_duration(games[0])
 dirs[data[0]["name"]] = {"total_duration": total_duration, "number_of_videos": number_of_videos}
 
-total_duration, number_of_videos = get_total_duration_of_file(video_paths[1])
+total_duration, number_of_videos = get_total_duration(games[1])
 dirs[data[1]["name"]] = {"total_duration": total_duration, "number_of_videos": number_of_videos}
 
-total_duration, number_of_videos = get_total_duration_of_file(video_paths[2])
+total_duration, number_of_videos = get_total_duration(games[2])
 dirs["SnowRunner"] = {"total_duration": total_duration, "number_of_videos": number_of_videos}
 
 def get_total_duration(game_name):

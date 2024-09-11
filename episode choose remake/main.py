@@ -64,6 +64,7 @@ def edit_tg_info_message():
     else: sr_counter_message = f"• Сегодня SnowRunner!!! • {game[2].short_name}: {game[2].time_format}" if game[2].time != 120 else "• Сегодня SnowRunner!!!"
 
     # force_info_message
+    check_frequency()
     force_info_message = f"\n• Force: {choose.short_name}" if is_choose_forced else ""
 
     # chance_info_message
@@ -159,7 +160,7 @@ def run_game(game_to_run: Game):
         add_quiet_time(game_to_run.name)
     else:
         print(f"{game_to_run.name}{f" {game_to_run.long_time_format}" if game_to_run.time != 120 else ""}")
-        game_message_id = send_image(game_to_run.icon, game_to_run.caption)
+        game_message_id = send_image(game_to_run.header, game_to_run.caption)
         add_empty_message(game_to_run.extra_name, [game_to_run.last_episode+1, game_to_run.last_episode+3], game_message_id)
     if game_to_run.name != "SnowRunner":
         add_game_log(game_to_run.name)
@@ -273,19 +274,23 @@ def get_unpopular_game():
     pydata = pydata_load()
     games_log = pydata["games_log"]
     if game[0].last_session == game[1].last_session == 0: return later
-    if game[0].name not in games_log: return game[0]
-    if game[1].name not in games_log: return game[1]
+    if len(set(games_log)) == 1:
+        if game[0].name not in games_log: return game[0]
+        if game[1].name not in games_log: return game[1]
     return None
 
 def check_frequency():
+    global choose, is_choose_forced
     unpopular_game = get_unpopular_game()
-    if unpopular_game is not None: return unpopular_game, True
-    else: return select_random_game(), False
+    if unpopular_game is not None: choose, is_choose_forced = unpopular_game, True
+    else: choose, is_choose_forced = select_random_game(), False
+
+check_frequency()
     
-choose, is_choose_forced = check_frequency()
 
-# print information/status
-print_info()
+if __name__ == "__main__":
+    # print information/status
+    print_info()
 
-# run random game
-run_random_game()
+    # run random game
+    run_random_game()
