@@ -37,7 +37,7 @@ def replace_game_data(new_name, data_key):
     
     data = pydata_load()
     if data_key == "episodes_time":
-        default_value = {"time": 120, "my_time": "", "add_by_console": "False"}
+        default_value = {"time": 120, "my_time": "", "last_time": 0, "last_episodes": 0, "add_by_console": "True"}
     elif data_key == "episodes_log":
         default_value = [0, 0]
 
@@ -52,7 +52,7 @@ def add_last_time(game_name):
     total_duration = get_total_duration(game_name)
     number_of_files = get_number_of_videos(game_name)
     data["episodes_time"][game_name]["last_time"] = total_duration//60
-    data["episodes_time"][game_name]["last_episodes"] = number_of_files[1]
+    data["episodes_time"][game_name]["last_episodes"] = number_of_files
     pydata_save(data)
 
 def count_dir_time(check_name):

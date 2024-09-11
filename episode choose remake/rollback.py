@@ -16,7 +16,10 @@ def rollback():
     with open("episode choose remake/rollback.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    delete_message(data["YT"][-1]["id"])
+    with open("episode choose remake/pydb.json", "r", encoding="utf-8") as f:
+        last_message_id = json.load(f)["YT"][-1]["id"]
+
+    delete_message(last_message_id)
 
     with open("episode choose remake/pydb.json", "w", encoding="utf-8") as f:
         json.dump(data, f)
@@ -36,3 +39,5 @@ if __name__ == "__main__":
     if confirm == confirm_check:
         print("Откат...")
         rollback()
+        from main import edit_tg_info_message
+        edit_tg_info_message()
