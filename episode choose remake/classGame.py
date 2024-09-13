@@ -55,8 +55,8 @@ class Game:
 
         self.game_time = calc_game_time(self.video)
 
-        if self.name != "SnowRunner": self.caption = kwargs.get("caption", f"{self.extra_name} № {self.last_episode+1}-{last_episode+3}:\n• \n• \n• ")
-        if self.name == "SnowRunner": self.caption = kwargs.get("caption", f"{self.extra_name} № {self.last_episode+1}:\n• ")
+        if self.name != "SnowRunner": self.caption = kwargs.get("caption", f"{self.extra_name} № {self.last_episode+1}-{self.last_episode+3}")
+        if self.name == "SnowRunner": self.caption = kwargs.get("caption", f"{self.extra_name} № {self.last_episode+1}")
 
         self.date = create_game_structure(safe_name)
         self.date_format = short_date_format(self.date)
