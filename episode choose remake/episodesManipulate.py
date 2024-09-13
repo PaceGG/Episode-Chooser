@@ -105,7 +105,7 @@ def get_time(name):
     try:
         time_data = data["episodes_time"][replace_game_data(name, "episodes_time")]
     except KeyError:
-        time_data = {"time": 120, "my_time": "", "add_by_console": "False"}
+        time_data = {"time": 120, "my_time": "", "last_time": 0, "last_episodes": 0, "add_by_console": "True"}
 
     time = time_data["time"]
     my_time = time_data["my_time"]

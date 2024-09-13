@@ -1,6 +1,8 @@
 from requests import post
 from dotenv import load_dotenv
 import os
+import PATHS
+os.chdir(PATHS.repository)
 load_dotenv("gitignore/.env")
 
 # Инициализация бота
@@ -52,6 +54,6 @@ if __name__ == '__main__':
 
     # print(edit_telegram_caption("tesфывt", 462))
 
-
+    print(send_image(r"D:\Program Files\Shadow Play\Dead Space 3\previews\1.jpg"))
 
     pass

@@ -11,7 +11,7 @@ def create_game_structure(game_name):
     os.makedirs(game_path, exist_ok=True)
     previews_path = os.path.join(game_path, "previews")
     os.makedirs(previews_path, exist_ok=True)
-    game_time_file = os.path.join(previews_path, "game_time.json")
+    game_time_file = os.path.join(game_path, "game_time.json")
     with open (game_time_file, 'w') as f: json.dump({"game_time": []}, f)
     print("Директории созданы")
     return int(getctime(game_path))

@@ -156,6 +156,7 @@ def add_episode(G):
     pydata_save(pydata)
 
 def run_game(game_to_run: Game):
+    confirm = input()
     if game_to_run.time <= 0:
         add_quiet_time(game_to_run.name)
     else:
@@ -182,7 +183,6 @@ def uncomplited_session():
 
 def run_random_game():
     print("\n"*10)
-    confirm = input()
     set_eng_layout()
     pydata = pydata_load()
 

@@ -73,6 +73,8 @@ def edit_game_message(game_name, ep_range, id, last_videos):
         if n in videos.keys():
             names.append(videos[n])
 
+    if len(names) != ep_range[1]-ep_range[0]+1: return False
+
     names_message = ""
     for name in names:
         names_message += f"• {name}\n"
@@ -122,7 +124,7 @@ def edit_empty_messages():
         for game_info in update_empty_messages:
             try: pydata["episodes_log"][game_info["game_name"]][1] = game_info["ep_range"][1]
             except: pass
-            edit_telegram_caption(f"{game_info["game_name"]} № {f"{game_info["ep_range"][0]}-{game_info["ep_range"][1]}" if game_info["ep_range"][0] != game_info["ep_range"][1] else game_info['ep_range'][0]}:", message_id=game_info["id"])
+            edit_telegram_caption(f"{game_info["game_name"]} № {f"{game_info["ep_range"][0]}-{game_info["ep_range"][1]}" if game_info["ep_range"][0] != game_info["ep_range"][1] else game_info['ep_range'][0]}", message_id=game_info["id"])
 
     pydata_save(pydata)
     pydata_save(update_empty_messages, "YT")
@@ -138,7 +140,7 @@ def get_last_object(game_name):
     empty_messages = pydata_load("YT")
 
     for i in range(len(empty_messages) - 1, -1, -1):
-        if game_name == empty_messages[i]["game_name"]: return empty_messages[i], i
+        if game_name in empty_messages[i]["game_name"]: return empty_messages[i], i
     
     return None, None
 
