@@ -51,7 +51,8 @@ class Game:
 
         self.time = get_time(self.name)
         self.time_format = time_format(self.time)
-        self.long_time_format = f"::({time_format(self.time/3) + " / "}{time_format(self.time/2) + " / "}{time_format(self.time)})::"
+        if self.name != "SnowRunner": self.long_time_format = f"::({time_format(self.time/3) + " / "}{time_format(self.time/2) + " / "}{time_format(self.time)})::"
+        else: self.long_time_format = f"::({time_format(self.time)})::"
 
         self.game_time = calc_game_time(self.video)
 
@@ -66,7 +67,8 @@ class Game:
     def update_time(self):
         self.time = get_time(self.name)
         self.time_format = time_format(self.time)
-        self.long_time_format = f"::({time_format(self.time/3) + " / "}{time_format(self.time/2) + " / "}{time_format(self.time)})::"
+        if self.name != "SnowRunner": self.long_time_format = f"::({time_format(self.time/3) + " / "}{time_format(self.time/2) + " / "}{time_format(self.time)})::"
+        else: self.long_time_format = f"::({time_format(self.time)})::"
             
 
     def __repr__(self):

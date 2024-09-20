@@ -40,7 +40,9 @@ def add_yt_titles(game_name, number_of_videos=3):
     ep_range[1] -= 3 - number_of_videos
 
     for i in range(ep_range[0], ep_range[1] +1):
-        yt_log.append(f"• № {i} • {game_name}")
+        s = f"• № {i} • {game_name}"
+        if "SnowRunner" in game_name: s += f" [ng+]"
+        yt_log.append(s)
         if i == 1: yt_log.append(game_name)
 
     pydata_save(yt_log, "game_log_YTTitle")

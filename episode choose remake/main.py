@@ -4,6 +4,7 @@ save_rollback()
 print("Загрузка...")
 import PATHS
 import os
+from psutil import disk_usage
 os.chdir(PATHS.repository)
 import json
 from random import randint
@@ -102,11 +103,15 @@ def print_info():
     os.system('cls')
     pydata = pydata_load()
 
-    # snowrunner info "До SnowRunner'a ещё 3 серии" or "SnowRunner после 05.01.2022"
+    print(f"Место на диске: {disk_usage(PATHS.video).free/1024/1024/1024:.2f} GB")
+
+    print()
+
+    # snowrunner info "До SnowRunner'a ещё 3 сессии" or "SnowRunner после 05.01.2022"
     ep_prefix = 'я' if abs(pydata["games_for_sr_counter"]) == 1 else ('и' if 1 < abs(pydata["games_for_sr_counter"]) < 5 else 'й')
 
     if pydata["games_for_sr_counter"] <= 0 and pydata["time_for_sr_counter"] <= today(): print(f"Сегодня SnowRunner: {game[2].long_time_format}")
-    elif pydata["games_for_sr_counter"] > 0: print(f"До SnowRunner'a ещё {pydata['games_for_sr_counter']} сери{ep_prefix}")
+    elif pydata["games_for_sr_counter"] > 0: print(f"До SnowRunner'a ещё {pydata['games_for_sr_counter']} сесси{ep_prefix}")
     else: print(f"SnowRunner после {pc_date_format(pydata['time_for_sr_counter'])}")
 
     print()
