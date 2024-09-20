@@ -1,5 +1,6 @@
 import json
 import os
+from time import time
 
 print("Загрузка модуля pydata для episodesManipulate...")
 from pydata import *
@@ -193,8 +194,7 @@ def sr_db_update(game_name):
     pydata_save(pydata)
 
 def snowrunner_updater():
-    # os.utime(os.path.join(PATHS.video, "SnowRunner"), (time(), time()))
-    os.utime(os.path.join(PATHS.video, "SnowRunner"), (today()))
+    os.utime(os.path.join(PATHS.video, "SnowRunner"), (time(), time()))
 
 if __name__ == "__main__":
 
