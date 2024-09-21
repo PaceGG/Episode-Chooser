@@ -47,7 +47,7 @@ from YTTitle import add_yt_titles
 print()
 
 print("Загрузка модуля totalDuration...")
-from totalDuration import get_total_duration, get_number_of_videos
+from totalDuration import get_total_duration, get_number_of_videos, get_last_local_episode
 print()
 
 print("Загрузка модуля showimg...")
