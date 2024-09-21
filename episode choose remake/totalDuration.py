@@ -7,7 +7,8 @@ from pydata import pydata_load
 
 os.chdir(PATHS.repository)
 
-def get_total_duration(game_name):
+def get_duration(game_name):
+    global last_local_ep
     """returns a duration of videos in directory in seconds and number of videos"""
     directory = os.path.join(PATHS.video, game_name.replace(":", ""))
 
@@ -23,14 +24,23 @@ def get_total_duration(game_name):
             print("Обработка файла " + filename)
             number_of_files += 1
             file_path = os.path.join(directory, filename)
-            try:
-                with VideoFileClip(file_path) as video:
+            with VideoFileClip(file_path) as video:
                     duration = video.duration
                     total_duration += int(duration)
-            except Exception as e:
-                print(f"Ошибка при обработке файла {filename}: {e}")
+            last_episode = filename
+            if "OBS" in directory and not(filename[:-4].isnumeric()):
+                os.rename(file_path, os.path.join(directory, f"{last_local_ep+1}.mp4"))
+                last_local_ep += 1
+
+    try: episode = int(last_episode[:-4])
+    except: episode = 0
+    increase_local_ep(episode)
 
     return total_duration, number_of_files
+
+def increase_local_ep(episode):
+    global last_local_ep
+    if episode > last_local_ep: last_local_ep = episode
 
 with open("react-remake/db.json", encoding="utf-8") as f:
     data = json.load(f)["showcase"]
@@ -38,12 +48,14 @@ with open("react-remake/db.json", encoding="utf-8") as f:
 games = [data[0]["name"], data[1]["name"], "SnowRunner"]
 
 dirs = {}
+last_local_ep = 0
+
 
 for game_name in games:
-    total_duration, number_of_videos = get_total_duration(game_name)
+    total_duration, number_of_videos = get_duration(game_name)
     dirs[game_name] = {"total_duration": total_duration, "number_of_videos": number_of_videos}
 
-obs_duration, obs_number = get_total_duration("OBS")
+obs_duration, obs_number = get_duration("OBS")
 
 def uncomplited_session():
     pydata = pydata_load()
@@ -64,3 +76,6 @@ def get_total_duration(game_name):
 def get_number_of_videos(game_name):
     try: return dirs[game_name]["number_of_videos"]
     except: return None
+
+def get_last_local_episode():
+    return last_local_ep
