@@ -3,14 +3,16 @@ import os
 import PATHS
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from createGameStructure import create_game_structure
-from pydata import pydata_load
+from pydata import pydata_load, pydata_save
 
 os.chdir(PATHS.repository)
 
+updated_cache = {}
 def get_duration(game_name):
-    global last_local_ep
     """returns a duration of videos in directory in seconds and number of videos"""
+    global last_local_ep
     directory = os.path.join(PATHS.video, game_name.replace(":", ""))
+    durations = pydata_load("durations")
 
     if not os.path.exists(directory):
         create_game_structure(game_name)
@@ -24,17 +26,23 @@ def get_duration(game_name):
             print("Обработка файла " + filename)
             number_of_files += 1
             file_path = os.path.join(directory, filename)
-            with VideoFileClip(file_path) as video:
-                    duration = video.duration
-                    total_duration += int(duration)
+            ctime = str(os.path.getctime(file_path))
+            try: duration = durations[ctime]
+            except:
+                with VideoFileClip(file_path) as video: duration = video.duration
+                durations[ctime] = duration
+            total_duration += int(duration)
             last_episode = filename
             if "OBS" in directory and not(filename[:-4].isnumeric()):
                 os.rename(file_path, os.path.join(directory, f"{last_local_ep+1}.mp4"))
                 last_local_ep += 1
+            updated_cache[ctime] = duration
 
     try: episode = int(last_episode[:-4])
     except: episode = 0
     increase_local_ep(episode)
+
+    pydata_save(durations, "durations")
 
     return total_duration, number_of_files
 
@@ -68,6 +76,10 @@ if uncomplited_game is not None:
     dirs[uncomplited_game]["total_duration"] += obs_duration
     dirs[uncomplited_game]["number_of_videos"] += obs_number
 
+def update_cache():
+    global updated_cache
+    pydata_save(updated_cache, "durations")
+update_cache()
 
 def get_total_duration(game_name):
     try: return dirs[game_name]["total_duration"]
