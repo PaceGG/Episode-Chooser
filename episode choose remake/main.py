@@ -86,7 +86,7 @@ def edit_tg_info_message():
         msg = f"• {g.short_name}: "
 
         if time: msg += f"{time}"
-        if game_time: msg += f" [{'; '.join(game_time)}]"
+        if game_time != "[]": msg += game_time
 
         if msg != f"• {g.short_name}: ": time_info_message += msg + "\n"
 
@@ -139,7 +139,7 @@ def print_info():
     #game time info "Fallout: New Vegas: [-5, -5]"
     for g in game[:2]:
         game_time = g.game_time
-        if game_time: print(f"{g.name}: [{'; '.join(game_time)}]")
+        if game_time != "[]": print(f"{g.name}: {game_time}")
 
     edit_tg_info_message()
 

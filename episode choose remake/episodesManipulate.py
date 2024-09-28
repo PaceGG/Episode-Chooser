@@ -89,8 +89,9 @@ def count_dir_time(check_name):
                 print("\n"*4)
 
                 game_time = [int(i) for i in input("Введите продолжительность контента (game_time):").split(" ")]
-                with open(os.path.join(PATHS.video, game_name.replace(":", ""), "game_time.json"), 'w') as f:
-                    json.dump({"game_time": game_time}, f)
+                game_time_data = pydata_load("game_time")
+                game_time_data[game_name]["game_time"] = game_time
+                pydata_save(game_time_data, "game_time")
             else:
                 return game_name
             
