@@ -1,21 +1,17 @@
 import json
 import os
 
-def create_game_time_file(game_time_file):
-    with open (game_time_file, 'w') as f: json.dump({"game_time": []}, f)
+from pydata import *
 
-def load_game_time(video_folder):
-    game_time_file = os.path.join(video_folder, "game_time.json")
-    if not os.path.exists(game_time_file): create_game_time_file(game_time_file)
-    with open (game_time_file, 'r') as f:
-        game_time = json.load(f)["game_time"]
+def load_game_time(game_name):
+    game_time_data = pydata_load("game_time")
 
-    return game_time
-
-def reset_game_time(video_folder):
-    game_time_file = os.path.join(video_folder, "game_time.json")
-    with open (game_time_file, 'w') as f:
-        json.dump({"game_time": []}, f)
+    try:
+        return game_time_data[game_name]
+    except KeyError:
+        game_time_data[game_name] = { "game_time": [], "time_to_play": [] }
+        pydata_save(game_time_data, "game_time")
+        return game_time_data[game_name]
 
 def strf(n):
     if n < 0: return str(n)
@@ -36,43 +32,33 @@ def calc_next_game_time(game_time):
 
     return [x*5*-1*is_negative for x in output if x != 0]
 
-def calc_game_time(video_folder):
-    game_time = load_game_time(video_folder)
+def calc_game_time(game_name):
+    game_time_data = load_game_time(game_name)
+    game_time = game_time_data["game_time"]
+    time_to_play = game_time_data["time_to_play"]
 
-    reset_game_time(video_folder)
+    time_to_play.extend(calc_next_game_time(120 - 40 * len(game_time) + sum(game_time)))
+    time_to_play = equalize_game_time(time_to_play)
 
-    time_list = calc_next_game_time(120 - 40 * len(game_time) + sum(game_time))
+    game_time_data["game_time"] = []
+    game_time_data["time_to_play"] = time_to_play
 
-    create_game_time_files(video_folder, time_list)
+    data = pydata_load("game_time")
+    data[game_name] = game_time_data
+    pydata_save(data, "game_time")
 
-    return equalize_game_time(video_folder)
+    return str([strf(x) for x in time_to_play]).replace(",", ";").replace("'", "")
 
-def create_game_time_files(video_folder, game_time_list):
-    for time in game_time_list:
-        time = strf(time) + " "
-        game_time_file = os.path.join(video_folder, f"{time}")
-        while os.path.exists(game_time_file):
-            time += " "
-            game_time_file = os.path.join(video_folder, f"{time}")
+def save_time_to_play(game_name, time_to_play):
+    game_time_data = pydata_load("game_time")
+    game_time_data[game_name]["time_to_play"] = time_to_play
+    pydata_save(game_time_data, "game_time")
 
-        with open (game_time_file, 'w') as f:
-            pass
-
-def delete_game_time_files(video_folder):
-    files_to_delete = [f for f in os.listdir(video_folder) if f.endswith(' ')]
-
-    for f in files_to_delete:
-        file_path = os.path.join(video_folder, f)
-        os.remove(file_path)
-
-def equalize_game_time(video_folder):
-    times = [int(f.rstrip(' ')) for f in os.listdir(video_folder) if f.endswith(' ')]
-    delete_game_time_files(video_folder)
-    create_game_time_files(video_folder, calc_next_game_time(120 - sum(times)))
-    return [strf(int(f.rstrip(' '))) for f in os.listdir(video_folder) if f.endswith(' ')]
+def equalize_game_time(time_to_play):
+    return calc_next_game_time(sum(calc_next_game_time(sum(time_to_play))))
 
 
 if __name__ == "__main__":
-    print(calc_game_time("D:/Program Files/Shadow Play/Fallout New Vegas"))
+    print(calc_game_time("Return to Castle Wolfenstein"))
 
     pass

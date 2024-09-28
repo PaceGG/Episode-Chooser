@@ -60,7 +60,7 @@ class Game:
         if self.name != "SnowRunner": self.long_time_format = f"::({time_format(self.time/3) + " / "}{time_format(self.time/2) + " / "}{time_format(self.time)})::"
         else: self.long_time_format = f"::({time_format(self.time)})::"
 
-        self.game_time = calc_game_time(self.video)
+        self.game_time = calc_game_time(self.name)
 
         if self.name != "SnowRunner": self.caption = kwargs.get("caption", f"{self.extra_name} № {self.last_episode+1}-{self.last_episode+3}")
         if self.name == "SnowRunner": self.caption = kwargs.get("caption", f"{self.extra_name} № {self.last_episode+1}")
