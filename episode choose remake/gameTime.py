@@ -22,7 +22,7 @@ def strf(n):
     else: return "+" + str(n)
 
 def calc_next_game_time(game_time):
-    extra_time = (game_time - 120)//5
+    extra_time = int((game_time - 120)/5)
     if extra_time > 0: is_negative = 1
     else: is_negative = -1
 
@@ -69,7 +69,7 @@ def equalize_game_time(video_folder):
     times = [int(f.rstrip(' ')) for f in os.listdir(video_folder) if f.endswith(' ')]
     delete_game_time_files(video_folder)
     create_game_time_files(video_folder, calc_next_game_time(120 - sum(times)))
-    return [int(f.rstrip(' ')) for f in os.listdir(video_folder) if f.endswith(' ')]
+    return [strf(int(f.rstrip(' '))) for f in os.listdir(video_folder) if f.endswith(' ')]
 
 
 if __name__ == "__main__":

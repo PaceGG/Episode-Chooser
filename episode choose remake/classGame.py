@@ -11,6 +11,12 @@ import PATHS
 import os
 
 def get_short_name(name):
+    local = {
+        "Return to Castle Wolfenstein": "Wolfenstein",
+    }
+
+    if name in local: return local[name]
+
     short_name = ""
     break_chars = [":", "["]
     for c in name:

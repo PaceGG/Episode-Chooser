@@ -85,6 +85,12 @@ def count_dir_time(check_name):
                 pydata_save(empty_messages, "YT")
 
                 add_yt_titles(game_name)
+
+                print("\n"*4)
+
+                game_time = [int(i) for i in input("Введите продолжительность контента (game_time):").split(" ")]
+                with open(os.path.join(PATHS.video, game_name.replace(":", ""), "game_time.json"), 'w') as f:
+                    json.dump({"game_time": game_time}, f)
             else:
                 return game_name
             

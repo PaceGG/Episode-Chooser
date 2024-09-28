@@ -15,7 +15,7 @@ from YT import add_empty_message, edit_empty_messages
 print()
 
 print("Загрузка модуля episodesManipulate...")
-from episodesManipulate import reset_console_flag, add_last_time, add_game_log, sr_db_update, snowrunner_updater, add_quiet_time
+from episodesManipulate import reset_console_flag, add_last_time, add_game_log, sr_db_update, snowrunner_updater, add_quiet_time, get_last_object
 print()
 
 print("Загрузка модуля setEngLayout...")
@@ -86,24 +86,26 @@ def edit_tg_info_message():
         msg = f"• {g.short_name}: "
 
         if time: msg += f"{time}"
-        if game_time: msg += f" {game_time}"
+        if game_time: msg += f" [{'; '.join(game_time)}]"
 
         if msg != f"• {g.short_name}: ": time_info_message += msg + "\n"
 
     # time_for_sr_message
-    time_for_sr_message = f"SR after {pc_date_format(pydata['time_for_sr_counter'])}"
+    time_for_sr_message = f"SR after {pc_date_format(pydata['time_for_sr_counter'])}\n" if pydata["time_for_sr_counter"] > today() else ""
 
     # next_update_message
     next_update_message = f"Next Update: {pc_date_format(pydata["last_update"] + 12*60*60)}"
 
-    edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_info_message}\n{time_for_sr_message}\n{next_update_message}")
+    edit_telegram_message(f"{sr_counter_message}\n{force_info_message}\n{chance_info_message}\n\n{time_info_message}\n{time_for_sr_message}{next_update_message}")
 
 def print_info():
     edit_empty_messages()
     os.system('cls')
     pydata = pydata_load()
+    yt_titles = pydata_load("game_log_YTTitle")
 
     print(f"Место на диске: {disk_usage(PATHS.video).free/1024/1024/1024:.2f} GB")
+    print(f"Видео к удалению: {max(get_last_local_episode() - len(yt_titles), 0)}")
 
     print()
 
@@ -137,7 +139,7 @@ def print_info():
     #game time info "Fallout: New Vegas: [-5, -5]"
     for g in game[:2]:
         game_time = g.game_time
-        if game_time: print(f"{g.name}: {game_time}")
+        if game_time: print(f"{g.name}: [{'; '.join(game_time)}]")
 
     edit_tg_info_message()
 
@@ -215,6 +217,11 @@ def run_random_game():
         confirm = input()
         if confirm == "-":
             add_yt_titles(uncomplited_game.name, number_of_videos - pydata["episodes_time"][uncomplited_game.name]["last_episodes"])
+
+            empty_messages = pydata_load("YT")
+            to_edit_index = get_last_object(uncomplited_game.name)[1]
+            empty_messages[to_edit_index]["ep_range"][1] -= 3 - number_of_videos
+            pydata_save(empty_messages, "YT")
         else:
             os.startfile(uncomplited_game.path)
 

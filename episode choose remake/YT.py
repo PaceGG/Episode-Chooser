@@ -1,5 +1,4 @@
 from time import time
-import json
 import os
 from dotenv import load_dotenv
 load_dotenv("gitignore/.env")
@@ -54,8 +53,6 @@ def get_last_videos():
         except: continue
 
         number = intc(number)
-        if "SnowRunner" in game:
-            game = "SnowRunner"
 
         try: videos[game][number] = name
         except: videos[game] = {number: name}
@@ -101,7 +98,7 @@ def edit_game_message(game_name, ep_range, id, last_videos):
 def edit_empty_messages():
     pydata = pydata_load()
     empty_messages = pydata_load("YT")
-    if int(time()) - pydata["last_update"] < 12*60*60: return
+    if int(time()) - pydata["last_update"] < 12*60*60 and __name__ != "__main__": return
     print()
     print("Синхронизация Telegram с YouTube...")
     last_videos = get_last_videos()
@@ -146,14 +143,8 @@ def get_last_object(game_name):
 
 
 if __name__ == '__main__':
-    # edit_game_message("Dead Space 3", [4,5], 462)
-    # edit_empty_messages()
-
     last_videos = get_last_videos()
     print(last_videos)
 
-    # print(get_last_object("BioShock Remastered")[0]["ep_range"])
-
-    # edit_empty_messages()
-
+    edit_empty_messages()
     pass
