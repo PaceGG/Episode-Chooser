@@ -1273,7 +1273,7 @@
       "additionalGames": [
         {
           "name": "Return to Castle Wolfenstein",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -1378,9 +1378,9 @@
     },
     {
       "id": "1",
-      "name": "The Callisto Protocol",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/1544020/library_600x900_2x.jpg?t=1703127416",
-      "color": "#d15b0e"
+      "name": "Return to Castle Wolfenstein",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/9010/library_600x900_2x.jpg?t=1573221699",
+      "color": "#c63330"
     }
   ],
   "links": [

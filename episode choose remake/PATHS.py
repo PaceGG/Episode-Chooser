@@ -1,13 +1,13 @@
 import os
 
 game = [
-    r"C:\Users\yura3\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\New Vegas EE.lnk",
-    r"D:\Games\The Callisto Protocol\TheCallistoProtocol.exe — ярлык.lnk",
+    r"D:\Games\Fallout New Vegas Extended Edition\MO2\New Vegas EE.lnk",
+    r"D:\Games\Return to Castle Wolfenstein\Return to Castle Wolfenstein.lnk",
     'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 ]
 
 extra_names = [
-    "Dead Money", # First game
+    "", # First game
     "", # Second game
     "Мичиган", # Extra/third game
 ]

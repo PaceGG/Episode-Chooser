@@ -20,7 +20,7 @@ def get_duration(game_name):
     total_duration = 0
     number_of_files = 0
 
-    print("Подсчет продолжительности серий...")
+    print(f"Подсчет продолжительности серий для {game_name}...")
     for filename in os.listdir(directory):
         if filename.endswith(".mp4"):
             print("Обработка файла " + filename)
@@ -29,13 +29,21 @@ def get_duration(game_name):
             ctime = str(os.path.getctime(file_path))
             try: duration = durations[ctime]
             except:
-                with VideoFileClip(file_path) as video: duration = video.duration
-                durations[ctime] = duration
+                try: 
+                    with VideoFileClip(file_path) as video: duration = video.duration
+                    durations[ctime] = duration
+                except:
+                    continue
             total_duration += int(duration)
             last_episode = filename
             if "OBS" in directory and not(filename[:-4].isnumeric()):
-                os.rename(file_path, os.path.join(directory, f"{last_local_ep+1}.mp4"))
-                last_local_ep += 1
+                while True:
+                    try:
+                        os.rename(file_path, os.path.join(directory, f"{last_local_ep+1}.mp4"))
+                        last_local_ep -= 1
+                        break
+                    except:
+                        last_local_ep += 1
             updated_cache[ctime] = duration
 
     try: episode = int(last_episode[:-4])
@@ -68,7 +76,10 @@ obs_duration, obs_number = get_duration("OBS")
 def uncomplited_session():
     pydata = pydata_load()
     for g in games:
-        if pydata["episodes_time"][g]["add_by_console"] == "False": return g
+        try: 
+            if pydata["episodes_time"][g]["add_by_console"] == "False": return g
+        except:
+            return None
     return None
 
 uncomplited_game = uncomplited_session()
