@@ -19,7 +19,7 @@
 """
 
 from math import ceil
-from time import strftime, localtime, mktime, strptime, time
+from time import strftime, localtime, mktime, strptime, time, gmtime
 
 def time_format(minutes):
     """ 134 -> 02:34 (134) """
@@ -105,6 +105,22 @@ def end_of_month(unix_time):
     
     return first_of_next_month_unix - 1
 
+def prev_month(unix_time = time()):
+    # struct_time = time.gmtime(unix_time)
+    struct_time = localtime(unix_time)
+    current_month = struct_time.tm_mon
+    current_year = struct_time.tm_year
+    
+    if current_month == 1:
+        previous_month = 12
+        previous_year = current_year - 1
+    else:
+        previous_month = current_month - 1
+        previous_year = current_year
+    
+    month = f"{previous_month:02d}"
+    year = previous_year
+    return month, year
 
 def today():
     return int(time())
