@@ -72,6 +72,7 @@ def count_dir_time(check_name):
                 os.system("cls")
                 print(f"В {game_name} есть видео продолжительностью {dir_duration} минут. Добавить их к сумме?")
                 my_time = input(f"Введите время для {game_name}: ")
+                if my_time == "": my_time = str(dir_duration)
                 data["episodes_time"][game_name]["my_time"] = my_time
                 if my_time != "": data["episodes_time"][game_name]["add_by_console"] = "True"
 
