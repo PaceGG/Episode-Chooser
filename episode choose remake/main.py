@@ -104,7 +104,8 @@ def print_info():
     pydata = pydata_load()
     yt_titles = pydata_load("game_log_YTTitle")
 
-    print(f"Место на диске: {disk_usage(PATHS.video).free/1024/1024/1024:.2f} GB")
+    free_space = disk_usage(PATHS.video).free/1024/1024/1024
+    print(f"Место на диске: {free_space:.2f} GB ~ {int(free_space//15)} видео")
     print(f"Видео к удалению: {max(get_last_local_episode() - len(yt_titles), 0)}")
 
     print()

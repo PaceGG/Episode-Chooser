@@ -2,7 +2,7 @@ import os
 
 game = [
     r"D:\Games\Fallout New Vegas Extended Edition\MO2\New Vegas EE.lnk",
-    r"D:\Games\Return to Castle Wolfenstein\Return to Castle Wolfenstein.lnk",
+    r"D:\Games\Wolfenstein\Wolfenstein.lnk",
     'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 ]
 

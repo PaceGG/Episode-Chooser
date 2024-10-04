@@ -54,7 +54,7 @@ different_games = len(games)
 statistics = f"{date}	{popular_game}	{number_of_games}	{number_of_weeks}	{longest_week}	{shortest_week}	{different_games}"
 
 
-def save(statistics):
+def save():
     statistics_filename = f"statistics {date}.txt"
     statistics_filename = os.path.join(PATHS.repository, statistics_filename)
     with open(statistics_filename, "w", encoding="utf-8") as f:
