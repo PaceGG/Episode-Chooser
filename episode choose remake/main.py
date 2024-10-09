@@ -170,9 +170,7 @@ def run_game(game_to_run: Game):
     else:
         print(f"{game_to_run.name}{f" {game_to_run.long_time_format}" if game_to_run.time != 120 else ""}")
         game_message_id = send_image(game_to_run.header, game_to_run.caption)
-        game_name = game_to_run.extra_name
-        if "SnowRunner" in game_name: game_name += " [ng+]"
-        add_empty_message(game_name, [game_to_run.last_episode+1, game_to_run.last_episode+3], game_message_id)
+        add_empty_message(game_to_run.extra_name, [game_to_run.last_episode+1, game_to_run.last_episode+3], game_message_id)
     if game_to_run.name != "SnowRunner":
         add_game_log(game_to_run.name)
     add_episode(game_to_run)
