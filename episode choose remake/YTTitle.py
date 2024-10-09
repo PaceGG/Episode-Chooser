@@ -24,7 +24,7 @@ def yt_title_pop():
         pydata_save(yt_log, "game_log_YTTitle")
         return pop
 
-def add_yt_titles(game_name, number_of_videos=3):
+def add_yt_titles(game_name, number_of_videos=3, is_last_session=False):
     from episodesManipulate import get_last_object
 
     with open("react-remake/db.json", encoding="utf-8") as f:
@@ -45,7 +45,8 @@ def add_yt_titles(game_name, number_of_videos=3):
     ep_range[1] -= 3 - number_of_videos
 
     for i in range(ep_range[0], ep_range[1] +1):
-        s = f"• № {i} • {game_name}"
+        if is_last_session and i == ep_range[1]: s = f"• № {i} - Финал • {game_name}"
+        else: s = f"• № {i} • {game_name}"
         yt_log.append(s)
         if i == 1: yt_log.append(game_name)
 
