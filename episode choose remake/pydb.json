@@ -1,6 +1,6 @@
 {
   "data": {
-    "last_update": 1728458830,
+    "last_update": 1728478048,
     "games_log": ["Fallout: New Vegas", "Far Cry 3", "Wolfenstein"],
     "start_from": 2,
     "games_for_sr_counter": 3,
@@ -20,13 +20,13 @@
       },
       "Wolfenstein": {
         "time": 120,
-        "my_time": "136",
+        "my_time": "",
         "last_time": 0,
         "last_episodes": 0,
         "add_by_console": "True"
       },
       "Far Cry 3": {
-        "time": 102,
+        "time": 118,
         "my_time": "",
         "last_time": 0,
         "last_episodes": 0,
