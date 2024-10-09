@@ -89,7 +89,9 @@ def count_dir_time(check_name):
 
                 print("\n"*4)
 
-                game_time = [int(i) for i in input("Введите продолжительность контента (game_time):").split(" ")]
+                game_time_input = input("Введите продолжительность контента (game_time):")
+                if game_time_input == "": game_time_input = "40 40 40"
+                game_time = [int(i) for i in game_time_input.split(" ")]
                 game_time_data = pydata_load("game_time")
                 game_time_data[game_name]["game_time"] = game_time
                 pydata_save(game_time_data, "game_time")
