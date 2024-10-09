@@ -40,7 +40,6 @@ def get_duration(game_name):
                 while True:
                     try:
                         os.rename(file_path, os.path.join(directory, f"{last_local_ep+1}.mp4"))
-                        last_local_ep -= 1
                         break
                     except:
                         last_local_ep += 1
