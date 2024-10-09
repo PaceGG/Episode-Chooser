@@ -221,7 +221,7 @@ def run_random_game():
 
             empty_messages = pydata_load("YT")
             to_edit_index = get_last_object(uncomplited_game.name)[1]
-            empty_messages[to_edit_index]["ep_range"][1] -= 3 - number_of_videos
+            empty_messages[to_edit_index]["ep_range"][1] -= 3 - (number_of_videos - pydata["episodes_time"][uncomplited_game.name]["last_episodes"])
             pydata_save(empty_messages, "YT")
         else:
             os.startfile(uncomplited_game.path)

@@ -1,14 +1,14 @@
 {
   "data": {
     "last_update": 1728478048,
-    "games_log": ["Fallout: New Vegas", "Far Cry 3", "Wolfenstein"],
+    "games_log": ["Wolfenstein", "Far Cry 3", "Wolfenstein"],
     "start_from": 2,
-    "games_for_sr_counter": 3,
+    "games_for_sr_counter": 1,
     "time_for_sr_counter": 1728464031,
     "episodes_log": {
       "SnowRunner": [7, 7],
-      "Wolfenstein": [3, 9],
-      "Far Cry 3": [1, 2]
+      "Wolfenstein": [4, 12],
+      "Far Cry 3": [2, 4]
     },
     "episodes_time": {
       "SnowRunner": {
@@ -21,22 +21,24 @@
       "Wolfenstein": {
         "time": 120,
         "my_time": "",
-        "last_time": 0,
-        "last_episodes": 0,
-        "add_by_console": "True"
+        "last_time": 136,
+        "last_episodes": 3,
+        "add_by_console": "False"
       },
       "Far Cry 3": {
-        "time": 118,
+        "time": 116,
         "my_time": "",
-        "last_time": 0,
-        "last_episodes": 0,
+        "last_time": 138,
+        "last_episodes": 2,
         "add_by_console": "True"
       }
     }
   },
   "YT": [
     { "game_name": "Far Cry 3", "ep_range": [1, 2], "id": 611 },
-    { "game_name": "Wolfenstein", "ep_range": [7, 9], "id": 612 }
+    { "game_name": "Wolfenstein", "ep_range": [7, 9], "id": 612 },
+    { "game_name": "Far Cry 3", "ep_range": [3, 4], "id": 613 },
+    { "game_name": "Wolfenstein", "ep_range": [10, 11], "id": 614 }
   ],
   "game_log": {
     "game_log": [
@@ -49,7 +51,7 @@
         ["Far Cry 3"],
         []
       ],
-      [[], ["Wolfenstein"], [], [], [], [], []],
+      [[], ["Wolfenstein", "Far Cry 3", "Wolfenstein"], [], [], [], [], []],
       [[], [], [], [], [], [], []],
       [[], [], [], [], [], [], []],
       [[], [], [], [], [], [], []]
@@ -62,21 +64,24 @@
     "\u2022 \u2116 2 \u2022 Far Cry 3",
     "\u2022 \u2116 7 \u2022 Wolfenstein",
     "\u2022 \u2116 8 \u2022 Wolfenstein",
-    "\u2022 \u2116 9 \u2022 Wolfenstein"
+    "\u2022 \u2116 9 \u2022 Wolfenstein",
+    "\u2022 \u2116 3 \u2022 Far Cry 3",
+    "\u2022 \u2116 4 \u2022 Far Cry 3",
+    "\u2022 \u2116 10 \u2022 Wolfenstein",
+    "\u2022 \u2116 11 \u2022 Wolfenstein"
   ],
   "durations": {
     "1728458966.2612076": 2856.88,
     "1728461905.8075533": 5464.88,
+    "1728478966.4735134": 3200.7,
+    "1728482276.2889783": 4102.96,
     "1728467483.006623": 2581.14,
     "1728470065.7396784": 2476.77,
-    "1728472543.3401136": 3146.93
+    "1728472543.3401136": 3146.93,
+    "1728488768.0891764": 3525.33,
+    "1728492410.7057354": 3416.3
   },
   "game_time": {
-    "Fallout: New Vegas": { "game_time": [], "time_to_play": [-5, -5, -5] },
-    "Return to Castle Wolfenstein": {
-      "game_time": [],
-      "time_to_play": [-5, -5]
-    },
     "SnowRunner": { "game_time": [], "time_to_play": [] },
     "Wolfenstein": { "game_time": [], "time_to_play": [] },
     "Far Cry 3": { "game_time": [], "time_to_play": [] }
