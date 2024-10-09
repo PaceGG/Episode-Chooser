@@ -217,12 +217,16 @@ def run_random_game():
         print(f"Запустить {uncomplited_game.name}? Введите \"-\" для добавления серий к yt titles")
         confirm = input()
         if confirm == "-":
-            add_yt_titles(uncomplited_game.name, number_of_videos - pydata["episodes_time"][uncomplited_game.name]["last_episodes"])
+            add_yt_titles(uncomplited_game.name, number_of_videos - pydata["episodes_time"][uncomplited_game.name]["last_episodes"], is_last_session=True)
 
             empty_messages = pydata_load("YT")
             to_edit_index = get_last_object(uncomplited_game.name)[1]
             empty_messages[to_edit_index]["ep_range"][1] -= 3 - (number_of_videos - pydata["episodes_time"][uncomplited_game.name]["last_episodes"])
             pydata_save(empty_messages, "YT")
+
+            data = pydata_load()
+            data["episodes_time"][uncomplited_game.name]["add_by_console"] = "True"
+            pydata_save(data)
         else:
             os.startfile(uncomplited_game.path)
 
