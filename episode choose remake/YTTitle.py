@@ -9,7 +9,12 @@ def yt_title_pop():
 
     return_str = yt_log[0]
 
-    if "•" in return_str:
+    if "• № 1 •" in return_str:
+        yt_log[0], yt_log[1] = yt_log[1], yt_log[0]
+        yt_log[1] = get_time()
+        pydata_save(yt_log, "game_log_YTTitle")
+        return return_str
+    elif "•" in return_str:
         yt_log[0] = get_time()
         pydata_save(yt_log, "game_log_YTTitle")
         return return_str
