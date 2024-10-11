@@ -15,7 +15,7 @@ def get_duration(game_name):
     durations = pydata_load("durations")
 
     if not os.path.exists(directory):
-        create_game_structure(game_name)
+        create_game_structure(game_name.replace(":", ""))
 
     total_duration = 0
     number_of_files = 0
