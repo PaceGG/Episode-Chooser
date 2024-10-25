@@ -3,22 +3,30 @@ import PATHS
 
 from pydata import *
 from timeFormat import get_time
+from time import time
 
 def show_yt_title():
     return pydata_load("game_log_YTTitle")
 
 def yt_title_pop():
+    last_time = pydata_load("last_yt_time")
+    if get_time() == last_time:
+        time_to_add = get_time(time() + 60)
+    else:
+        time_to_add = get_time()
+    pydata_save(time_to_add, "last_yt_time")
+    
     yt_log = pydata_load("game_log_YTTitle")
 
     return_str = yt_log[0]
 
     if "• № 1 •" in return_str:
         yt_log[0], yt_log[1] = yt_log[1], yt_log[0]
-        yt_log[1] = get_time()
+        yt_log[1] = time_to_add
         pydata_save(yt_log, "game_log_YTTitle")
         return return_str
     elif "•" in return_str:
-        yt_log[0] = get_time()
+        yt_log[0] = time_to_add
         pydata_save(yt_log, "game_log_YTTitle")
         return return_str
     else:

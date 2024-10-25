@@ -76,10 +76,8 @@
     ],
     "next_reset": 1730401199
   },
-  "game_log_YTTitle": [
-    "\u2022 \u2116 11 \u2022 Far Cry 3",
-    "\u2022 \u2116 12 \u2022 Far Cry 3"
-  ],
+  "last_yt_time": "11:11",
+  "game_log_YTTitle": ["\u2022 \u2116 12 \u2022 Far Cry 3"],
   "durations": {
     "1729668118.2259192": 3356.57,
     "1729678139.904771": 3259.03,
