@@ -4,6 +4,9 @@ import PATHS
 from pydata import *
 from timeFormat import get_time
 
+def show_yt_title():
+    return pydata_load("game_log_YTTitle")
+
 def yt_title_pop():
     yt_log = pydata_load("game_log_YTTitle")
 
