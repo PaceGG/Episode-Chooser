@@ -1,1 +1,98 @@
-{"data": {"last_update": 1728673739, "games_log": ["Wolfenstein", "Far Cry 3", "Wolfenstein"], "start_from": 2, "games_for_sr_counter": 5, "time_for_sr_counter": 1728464031, "episodes_log": {"SnowRunner": [7, 7], "Far Cry 3": [2, 4], "Wolfenstein: The New Order": [0, 0]}, "episodes_time": {"SnowRunner": {"time": 53, "my_time": "", "last_time": 0, "last_episodes": 0, "add_by_console": "True"}, "Far Cry 3": {"time": 116, "my_time": "", "last_time": 138, "last_episodes": 2, "add_by_console": "True"}, "Wolfenstein: The New Order": {"time": 120, "my_time": "", "last_time": 0, "last_episodes": 0, "add_by_console": "True"}}}, "YT": [{"game_name": "Far Cry 3", "ep_range": [1, 2], "id": 611}, {"game_name": "Wolfenstein", "ep_range": [7, 9], "id": 612}, {"game_name": "Far Cry 3", "ep_range": [3, 4], "id": 613}, {"game_name": "Wolfenstein", "ep_range": [10, 11], "id": 614}], "game_log": {"game_log": [[[], ["SnowRunner"], ["Return to Castle Wolfenstein"], ["Wolfenstein", "Wolfenstein"], ["Fallout: New Vegas", "Fallout: New Vegas", "Fallout: New Vegas"], ["Far Cry 3"], []], [[], ["Wolfenstein", "Far Cry 3", "Wolfenstein"], [], [], [], [], []], [[], [], [], [], [], [], []], [[], [], [], [], [], [], []], [[], [], [], [], [], [], []]], "next_reset": 1730401199}, "game_log_YTTitle": [], "durations": {}, "game_time": {"SnowRunner": {"game_time": [], "time_to_play": []}, "Wolfenstein": {"game_time": [], "time_to_play": []}, "Far Cry 3": {"game_time": [], "time_to_play": []}, "Wolfenstein: The New Order": {"game_time": [], "time_to_play": []}}}
+{
+  "data": {
+    "last_update": 1729846753,
+    "games_log": ["Call of Duty 2", "Far Cry 3", "Call of Duty 2"],
+    "start_from": 4,
+    "games_for_sr_counter": 2,
+    "time_for_sr_counter": 1728464031,
+    "episodes_log": {
+      "SnowRunner": [7, 7],
+      "Far Cry 3": [5, 12],
+      "Call of Duty 2": [2, 6]
+    },
+    "episodes_time": {
+      "SnowRunner": {
+        "time": 53,
+        "my_time": "",
+        "last_time": 0,
+        "last_episodes": 0,
+        "add_by_console": "True"
+      },
+      "Far Cry 3": {
+        "time": 86,
+        "my_time": "",
+        "last_time": 0,
+        "last_episodes": 0,
+        "add_by_console": "True"
+      },
+      "Call of Duty 2": {
+        "time": 120,
+        "my_time": "",
+        "last_time": 0,
+        "last_episodes": 0,
+        "add_by_console": "False"
+      }
+    }
+  },
+  "YT": [
+    { "game_name": "Far Cry 3", "ep_range": [10, 12], "id": 624 },
+    { "game_name": "Call of Duty 2", "ep_range": [4, 6], "id": 625 }
+  ],
+  "game_log": {
+    "game_log": [
+      [
+        [],
+        ["SnowRunner"],
+        ["Return to Castle Wolfenstein"],
+        ["Wolfenstein", "Wolfenstein"],
+        ["Fallout: New Vegas", "Fallout: New Vegas", "Fallout: New Vegas"],
+        ["Far Cry 3"],
+        []
+      ],
+      [
+        [],
+        ["Wolfenstein", "Far Cry 3", "Wolfenstein"],
+        [],
+        [],
+        ["Wolfenstein: The New Order", "Wolfenstein: The New Order"],
+        ["Call of Duty"],
+        []
+      ],
+      [
+        [],
+        [],
+        [],
+        [],
+        ["Far Cry 3", "Call of Duty"],
+        [
+          "Call of Duty: United Offensive",
+          "Far Cry 3",
+          "Call of Duty: United Offensive"
+        ],
+        ["Call of Duty 2"]
+      ],
+      [[], ["Far Cry 3"], [], ["Call of Duty 2"], [], [], []],
+      [[], [], [], [], [], [], []]
+    ],
+    "next_reset": 1730401199
+  },
+  "game_log_YTTitle": [
+    "\u2022 \u2116 11 \u2022 Far Cry 3",
+    "\u2022 \u2116 12 \u2022 Far Cry 3"
+  ],
+  "durations": {
+    "1729668118.2259192": 3356.57,
+    "1729678139.904771": 3259.03,
+    "1729681418.0386603": 2773.37,
+    "1729806183.383893": 2808.68
+  },
+  "game_time": {
+    "SnowRunner": { "game_time": [], "time_to_play": [] },
+    "Wolfenstein": { "game_time": [], "time_to_play": [] },
+    "Far Cry 3": { "game_time": [], "time_to_play": [] },
+    "Wolfenstein: The New Order": { "game_time": [], "time_to_play": [5] },
+    "Call of Duty": { "game_time": [], "time_to_play": [] },
+    "Call of Duty: United Offensive": { "game_time": [], "time_to_play": [] },
+    "Call of Duty 2": { "game_time": [], "time_to_play": [] }
+  }
+}
