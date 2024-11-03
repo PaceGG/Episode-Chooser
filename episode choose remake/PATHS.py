@@ -1,8 +1,24 @@
 import os
+import json
+
+repository = os.path.dirname(os.path.dirname(__file__)) # automacy
+
+with open(os.path.join(repository, "react-remake/db.json"), encoding="utf-8") as f:
+    data = json.load(f)["showcase"]
+
+if __name__ == "__main__":
+    print(data[0]["name"])
+    print(data[1]["name"])
+
+games_folder = "D:/Games"
+
+#custom paths
+game_0 = ""
+game_1 = ""
 
 game = [
-    r"D:\Games\Far Cry 3\bin\farcry3.lnk",
-    r"D:\Games\Call of Duty 2\Call of Duty 2 Одиночная игра.lnk",
+    f"{os.path.join(games_folder, data[0]["name"].replace(':', ''), "game.lnk")}" if game_0 == "" else game_0,
+    f"{os.path.join(games_folder, data[1]["name"].replace(':', ''), "game.lnk")}" if game_1 == "" else game_1,
     'C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs'
 ]
 
@@ -13,5 +29,3 @@ extra_names = [
 ]
 
 video = "D:/Program Files/Shadow Play"
-
-repository = os.path.dirname(os.path.dirname(__file__)) # automacy
