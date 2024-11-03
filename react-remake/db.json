@@ -851,7 +851,7 @@
         },
         {
           "name": "Far Cry 3: Blood Dragon",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -894,43 +894,43 @@
       "additionalGames": [
         {
           "name": "Call of Duty (2003)",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 15085,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty: United Offensive (2004)",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 15721,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty 2 (2005)",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 20898,
+          "numberOfEps": 8
         },
         {
           "name": "Call of Duty: Modern Warfare Remastered (2007 / 2016)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 16440,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty: World at War (2008)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 14950,
+          "numberOfEps": 5
         },
         {
           "name": "Call of Duty: Modern Warfare 2 Remastered (2009 / 2020)",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Call of Duty: Black Ops (2010)",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -1372,15 +1372,15 @@
   "showcase": [
     {
       "id": "0",
-      "name": "Far Cry 3",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/220240/library_600x900_2x.jpg?t=1416967799",
-      "color": "#003964"
+      "name": "Far Cry 3: Blood Dragon",
+      "coverart": "https://cdn2.steamgriddb.com/thumb/84aaa84129e365590aeb86b57697edb9.jpg",
+      "color": "#e30178"
     },
     {
       "id": "1",
-      "name": "Call of Duty 2",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/2630/library_600x900_2x.jpg?t=1571098615",
-      "color": "#bd9450"
+      "name": "Call of Duty: Black Ops",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/42700/library_600x900_2x.jpg?t=1566340880",
+      "color": "#36b3ea"
     }
   ],
   "links": [
