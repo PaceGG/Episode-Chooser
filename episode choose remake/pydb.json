@@ -1,1 +1,90 @@
-{"data": {"last_update": 1730621226, "games_log": ["Call of Duty: Black Ops", "Far Cry 3", "Far Cry 3: Blood Dragon"], "start_from": 1, "games_for_sr_counter": 4, "time_for_sr_counter": 1728464031, "episodes_log": {"SnowRunner": [7, 7], "Call of Duty: Black Ops": [1, 3], "Far Cry 3: Blood Dragon": [1, 3]}, "episodes_time": {"SnowRunner": {"time": 53, "my_time": "", "last_time": 0, "last_episodes": 0, "add_by_console": "True"}, "Call of Duty: Black Ops": {"time": 120, "my_time": "", "last_time": 0, "last_episodes": 0, "add_by_console": "True"}, "Far Cry 3: Blood Dragon": {"time": 120, "my_time": "", "last_time": 0, "last_episodes": 0, "add_by_console": "True"}}}, "YT": [{"game_name": "Call of Duty: Black Ops", "ep_range": [1, 3], "id": 639}, {"game_name": "Far Cry 3", "ep_range": [26, 27], "id": 640}, {"game_name": "Far Cry 3: Blood Dragon", "ep_range": [1, 3], "id": 641}], "game_log": {"game_log": [[["Far Cry 3", "Far Cry 3", "Far Cry 3"], ["Call of Duty: Modern Warfare 2 Remastered", "Call of Duty: Black Ops", "Far Cry 3", "Far Cry 3: Blood Dragon"], [], [], [], [], []], [[], [], [], [], [], [], []], [[], [], [], [], [], [], []], [[], [], [], [], [], [], []], [[], [], [], [], [], [], []]], "next_reset": 1732993199}, "last_yt_time": "14:11", "game_log_YTTitle": ["14:11"], "durations": {"1730538425.4284108": 2237.95, "1730540664.8955593": 2886.49, "1730543554.1114323": 3144.3, "1730564171.5425477": 2494.19, "1730566770.0596323": 2619.67, "1730569911.2253218": 1187.12}, "game_time": {"SnowRunner": {"game_time": [], "time_to_play": []}, "Wolfenstein": {"game_time": [], "time_to_play": []}, "Far Cry 3": {"game_time": [], "time_to_play": []}, "Wolfenstein: The New Order": {"game_time": [], "time_to_play": [5]}, "Call of Duty": {"game_time": [], "time_to_play": []}, "Call of Duty: United Offensive": {"game_time": [], "time_to_play": []}, "Call of Duty 2": {"game_time": [], "time_to_play": [-5, -5]}, "Call of Duty: Modern Warfare Remastered": {"game_time": [], "time_to_play": [5]}, "Call of Duty: World at War": {"game_time": [], "time_to_play": []}, "Call of Duty: Modern Warfare 2 Remastered": {"game_time": [], "time_to_play": [-5]}, "Call of Duty: Black Ops": {"game_time": [], "time_to_play": []}, "Far Cry 3: Blood Dragon": {"game_time": [], "time_to_play": []}}}
+{
+  "data": {
+    "last_update": 1730794189,
+    "games_log": ["Far Cry 4", "Far Cry 4", "Far Cry 4"],
+    "start_from": 1,
+    "games_for_sr_counter": 2,
+    "time_for_sr_counter": 1728464031,
+    "episodes_log": {
+      "SnowRunner": [7, 7],
+      "Call of Duty: Black Ops": [1, 3],
+      "Far Cry 4": [3, 7]
+    },
+    "episodes_time": {
+      "SnowRunner": {
+        "time": 53,
+        "my_time": "",
+        "last_time": 0,
+        "last_episodes": 0,
+        "add_by_console": "True"
+      },
+      "Call of Duty: Black Ops": {
+        "time": 120,
+        "my_time": "",
+        "last_time": 0,
+        "last_episodes": 0,
+        "add_by_console": "True"
+      },
+      "Far Cry 4": {
+        "time": 84,
+        "my_time": "",
+        "last_time": 0,
+        "last_episodes": 0,
+        "add_by_console": "False"
+      }
+    }
+  },
+  "YT": [
+    { "game_name": "Far Cry 3: Blood Dragon", "ep_range": [1, 3], "id": 641 },
+    { "game_name": "Far Cry 4", "ep_range": [1, 2], "id": 642 },
+    { "game_name": "Far Cry 4", "ep_range": [3, 4], "id": 643 },
+    { "game_name": "Far Cry 4", "ep_range": [5, 7], "id": 644 }
+  ],
+  "game_log": {
+    "game_log": [
+      [
+        ["Far Cry 3", "Far Cry 3", "Far Cry 3"],
+        [
+          "Call of Duty: Modern Warfare 2 Remastered",
+          "Call of Duty: Black Ops",
+          "Far Cry 3",
+          "Far Cry 3: Blood Dragon"
+        ],
+        [],
+        ["Far Cry 4", "Far Cry 4"],
+        ["Far Cry 4"],
+        [],
+        []
+      ],
+      [[], [], [], [], [], [], []],
+      [[], [], [], [], [], [], []],
+      [[], [], [], [], [], [], []],
+      [[], [], [], [], [], [], []]
+    ],
+    "next_reset": 1732993199
+  },
+  "last_yt_time": "22:20",
+  "game_log_YTTitle": [],
+  "durations": {},
+  "game_time": {
+    "SnowRunner": { "game_time": [], "time_to_play": [] },
+    "Wolfenstein": { "game_time": [], "time_to_play": [] },
+    "Far Cry 3": { "game_time": [], "time_to_play": [] },
+    "Wolfenstein: The New Order": { "game_time": [], "time_to_play": [5] },
+    "Call of Duty": { "game_time": [], "time_to_play": [] },
+    "Call of Duty: United Offensive": { "game_time": [], "time_to_play": [] },
+    "Call of Duty 2": { "game_time": [], "time_to_play": [-5, -5] },
+    "Call of Duty: Modern Warfare Remastered": {
+      "game_time": [],
+      "time_to_play": [5]
+    },
+    "Call of Duty: World at War": { "game_time": [], "time_to_play": [] },
+    "Call of Duty: Modern Warfare 2 Remastered": {
+      "game_time": [],
+      "time_to_play": [-5]
+    },
+    "Call of Duty: Black Ops": { "game_time": [], "time_to_play": [] },
+    "Far Cry 3: Blood Dragon": { "game_time": [], "time_to_play": [] },
+    "Far Cry 4": { "game_time": [], "time_to_play": [] }
+  }
+}
