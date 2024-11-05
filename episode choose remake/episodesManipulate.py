@@ -12,6 +12,7 @@ print("Загрузка модуля timeFormat для episodesManipulate...")
 from timeFormat import today
 print("Загрузка модулей для episodesManipulate завершена")
 from totalDuration import get_total_duration, get_number_of_videos
+from moveContents import move_files
 
 import PATHS
 
@@ -95,6 +96,8 @@ def count_dir_time(check_name):
                 game_time_data = pydata_load("game_time")
                 game_time_data[game_name]["game_time"] = game_time
                 pydata_save(game_time_data, "game_time")
+
+                move_files(os.path.join(PATHS.video, "OBS"), os.path.join(PATHS.video, game_name.replace(":", "")))
             else:
                 return game_name
             

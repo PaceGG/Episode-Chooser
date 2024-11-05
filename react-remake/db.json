@@ -857,7 +857,7 @@
         },
         {
           "name": "Far Cry 4",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -1372,9 +1372,9 @@
   "showcase": [
     {
       "id": "0",
-      "name": "Far Cry 3: Blood Dragon",
-      "coverart": "https://cdn2.steamgriddb.com/thumb/84aaa84129e365590aeb86b57697edb9.jpg",
-      "color": "#e30178"
+      "name": "Far Cry 4",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/298110/library_600x900_2x.jpg?t=1575376935",
+      "color": "#ec5329"
     },
     {
       "id": "1",
