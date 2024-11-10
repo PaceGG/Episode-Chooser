@@ -69,7 +69,7 @@ def count_dir_time(check_name):
             number_of_files = get_number_of_videos(game_name)
             dir_duration//=60
             dir_duration-=data["episodes_time"][game_name]["last_time"]
-            if dir_duration > data["episodes_time"][game_name]["time"]:
+            if dir_duration >= data["episodes_time"][game_name]["time"]:
                 os.system("cls")
                 print(f"В {game_name} есть видео продолжительностью {dir_duration} минут. Добавить их к сумме?")
                 my_time = input(f"Введите время для {game_name}: ")

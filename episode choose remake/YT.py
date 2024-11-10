@@ -10,8 +10,6 @@ from telegramFunctions import edit_telegram_caption
 print("Загрузка модуля pydata для YT...")
 from pydata import pydata_load, pydata_save
 
-shift_range = {}
-
 def intc(s):
     n = ""
     for c in s:
@@ -60,7 +58,6 @@ def get_last_videos():
     return videos
 
 def edit_game_message(game_name, ep_range, id, last_videos):
-    global shift_range
     if game_name not in last_videos: return False
     videos = last_videos[game_name]
     names = []
@@ -86,9 +83,6 @@ def edit_game_message(game_name, ep_range, id, last_videos):
                 pydata_save(pydata)
         except: pass
 
-        try: shift_range[game_name] += 3-len(names)
-        except: shift_range[game_name] = 3-len(names)
-
         edit_telegram_caption(new_text, message_id=id)
         return True
     
@@ -106,22 +100,11 @@ def edit_empty_messages():
 
     for game_info in empty_messages:
         print(f"Обработка {game_info['game_name']}...")
-        try: s_range = shift_range[game_info["game_name"]]
-        except: s_range = 0
-        if not edit_game_message(game_info["game_name"], [game_info["ep_range"][0]-s_range, game_info["ep_range"][1]-s_range], game_info["id"], last_videos):
-            update_game_info = game_info
-            update_game_info["ep_range"][0] -= s_range
-            update_game_info["ep_range"][1] -= s_range
-            update_empty_messages.append(update_game_info)
+        if not edit_game_message(game_info["game_name"], [game_info["ep_range"][0], game_info["ep_range"][1]], game_info["id"], last_videos):
+            update_empty_messages.append(game_info)
             
     pydata = pydata_load()
     pydata["last_update"] = int(time())
-
-    if shift_range != {}:
-        for game_info in update_empty_messages:
-            try: pydata["episodes_log"][game_info["game_name"]][1] = game_info["ep_range"][1]
-            except: pass
-            edit_telegram_caption(f"{game_info["game_name"]} № {f"{game_info["ep_range"][0]}-{game_info["ep_range"][1]}" if game_info["ep_range"][0] != game_info["ep_range"][1] else game_info['ep_range'][0]}", message_id=game_info["id"])
 
     pydata_save(pydata)
     pydata_save(update_empty_messages, "YT")
