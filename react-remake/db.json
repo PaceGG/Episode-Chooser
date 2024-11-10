@@ -845,15 +845,15 @@
         },
         {
           "name": "Far Cry 3",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 87730,
+          "numberOfEps": 28
         },
         {
           "name": "Far Cry 3: Blood Dragon",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "bad",
+          "time": 5115,
+          "numberOfEps": 2
         },
         {
           "name": "Far Cry 4",
@@ -924,25 +924,25 @@
         },
         {
           "name": "Call of Duty: Modern Warfare 2 Remastered (2009 / 2020)",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 15350,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty: Black Ops (2010)",
+          "status": "complete",
+          "time": 17318,
+          "numberOfEps": 6
+        },
+        {
+          "name": "Call of Duty: Modern Warfare 3 (2011)",
           "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
         {
-          "name": "Call of Duty: Modern Warfare 3 (2011)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
-        },
-        {
-          "name": "Call of Duty: Black Ops 2 (2012)",
-          "status": "none",
+          "name": "Call of Duty: Black Ops II (2012)",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -1378,9 +1378,9 @@
     },
     {
       "id": "1",
-      "name": "Call of Duty: Black Ops",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/42700/library_600x900_2x.jpg?t=1566340880",
-      "color": "#36b3ea"
+      "name": "Call of Duty: Black Ops II",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/202970/library_600x900_2x.jpg?t=1379377356",
+      "color": "#ff6600"
     }
   ],
   "links": [
