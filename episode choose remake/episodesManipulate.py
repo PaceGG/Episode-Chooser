@@ -77,11 +77,10 @@ def count_dir_time(check_name):
                 data["episodes_time"][game_name]["my_time"] = my_time
                 if my_time != "": data["episodes_time"][game_name]["add_by_console"] = "True"
 
-                if 3 - number_of_files > 0:
-                    data["episodes_log"][game_name][1] -= 3 - number_of_files
+                data["episodes_log"][game_name][1] -= 3 - number_of_files
 
-                    to_edit_index = get_last_object(game_name)[1]
-                    empty_messages[to_edit_index]["ep_range"][1] -= 3 - number_of_files
+                to_edit_index = get_last_object(game_name)[1]
+                empty_messages[to_edit_index]["ep_range"][1] -= 3 - number_of_files
 
                 pydata_save(data)
                 pydata_save(empty_messages, "YT")
