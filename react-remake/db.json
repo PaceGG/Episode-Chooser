@@ -936,9 +936,9 @@
         },
         {
           "name": "Call of Duty: Modern Warfare 3 (2011)",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 19240,
+          "numberOfEps": 8
         },
         {
           "name": "Call of Duty: Black Ops II (2012)",
@@ -948,7 +948,7 @@
         },
         {
           "name": "Call of Duty: Ghosts (2013)",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -1367,6 +1367,13 @@
           "numberOfEps": 0
         }
       ]
+    },
+    {
+      "id": "42db",
+      "mainName": "Mad Max",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": []
     }
   ],
   "showcase": [
@@ -1378,9 +1385,9 @@
     },
     {
       "id": "1",
-      "name": "Call of Duty: Black Ops II",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/202970/library_600x900_2x.jpg?t=1379377356",
-      "color": "#ff6600"
+      "name": "Call of Duty: Ghosts",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/209160/library_600x900_2x.jpg?t=1571082077",
+      "color": "#576898"
     }
   ],
   "links": [

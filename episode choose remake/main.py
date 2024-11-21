@@ -146,7 +146,7 @@ def print_info():
 
 
 # run game functions
-def add_episode(G):
+def add_episode(G: Game):
     global game
     pydata = pydata_load()
     name = G.name
