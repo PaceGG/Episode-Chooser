@@ -388,6 +388,12 @@
           "status": "none",
           "time": 0,
           "numberOfEps": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -711,7 +717,7 @@
           "numberOfEps": 57
         },
         {
-          "name": "Fallout London",
+          "name": "Fallout: London",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
@@ -857,13 +863,13 @@
         },
         {
           "name": "Far Cry 4",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 151459,
+          "numberOfEps": 41
         },
         {
           "name": "Far Cry Primal",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -942,37 +948,37 @@
         },
         {
           "name": "Call of Duty: Black Ops II (2012)",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 18740,
+          "numberOfEps": 7
         },
         {
           "name": "Call of Duty: Ghosts (2013)",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 15525,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty: Advanced Warfare (2014)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 19548,
+          "numberOfEps": 8
         },
         {
           "name": "Call of Duty: Black Ops 3 (2015)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 32867,
+          "numberOfEps": 13
         },
         {
           "name": "Call of Duty: Infinite Warfare (2016)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 21993,
+          "numberOfEps": 8
         },
         {
           "name": "Call of Duty: WWII (2017)",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -983,10 +989,10 @@
           "numberOfEps": 0
         },
         {
-          "name": "Call of Duty: Black Ops – Cold War (2020)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "name": "Call of Duty: Black Ops Cold War (2020)",
+          "status": "complete",
+          "time": 19490,
+          "numberOfEps": 7
         },
         {
           "name": "Call of Duty: Vanguard (2021)",
@@ -996,6 +1002,18 @@
         },
         {
           "name": "Call of Duty: Modern Warfare II (2022)",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Call of Duty: Modern Warfare III (2023)",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Call of Duty: Black Ops 6 (2024)",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
@@ -1040,7 +1058,7 @@
       "additionalGames": [
         {
           "name": "Max Payne",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -1374,20 +1392,40 @@
       "mainTime": 0,
       "mainNumberOfEps": 0,
       "additionalGames": []
+    },
+    {
+      "id": "3364",
+      "mainName": "Red Dead Redemption",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "Red Dead Redemption",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Red Dead Redemption 2",
+          "status": "complete",
+          "time": 149643,
+          "numberOfEps": 56
+        }
+      ]
     }
   ],
   "showcase": [
     {
       "id": "0",
-      "name": "Far Cry 4",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/298110/library_600x900_2x.jpg?t=1575376935",
-      "color": "#ec5329"
+      "name": "Far Cry Primal",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/371660/library_600x900_2x.jpg?t=1576501678",
+      "color": "#ef8b1b"
     },
     {
       "id": "1",
-      "name": "Call of Duty: Ghosts",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/209160/library_600x900_2x.jpg?t=1571082077",
-      "color": "#576898"
+      "name": "Max Payne",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/12140/library_600x900_2x.jpg?t=1573772269",
+      "color": "#b40000"
     }
   ],
   "links": [

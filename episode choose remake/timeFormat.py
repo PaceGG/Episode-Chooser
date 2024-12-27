@@ -24,8 +24,9 @@ from time import strftime, localtime, mktime, strptime, time, gmtime
 def time_format(minutes):
     """ 134 -> 02:34 (134) """
     minutes = ceil(minutes)
-    if minutes > 60: return f"{minutes//60:02}:{minutes%60:02} ({minutes})"
-    return f"({ceil(minutes)})"
+    return f"{minutes//60:02}:{minutes%60:02} ({minutes})"
+    # if minutes > 60: return f"{minutes//60:02}:{minutes%60:02} ({minutes})"
+    # return f"({ceil(minutes)})"
 
 def short_date_format(time):
     """ dd.mm.yy HH:MM """
@@ -123,7 +124,7 @@ def prev_month(unix_time = time()):
     return month, year
 
 def today():
-    return int(time())
+    return time()
 
 if __name__ == "__main__":
 
