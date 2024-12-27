@@ -53,11 +53,11 @@ class Game:
         self.color = paths.game_colors[self.id]
 
         self.game_path = paths.game_paths[self.id]
-        self.video_dir = paths.joinpath(paths.video_dir, self.safe_name)
+        self.video_dir = Path.joinpath(paths.video_dir, self.safe_name)
         if not self.video_dir.exists(): create_game_folder(self.video_dir)
 
         stat = Data("stat")
-        with open(Path.joinpath(Path(__file__).resolve().parent, 'data.json'), 'r', encoding='utf-8') as file:
+        with open(Path.joinpath(paths.root_dir, 'data.json'), 'r', encoding='utf-8') as file:
             if self.name not in stat.games_list and self.id != 2:
                 game_data = {
                     "name": self.name,
