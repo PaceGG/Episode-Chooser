@@ -5,13 +5,15 @@ from database_info import get_info
 from youtube_utils import EmptyMessage
 import telegram_utils
 from youtube_utils import edit_empty_messages
-from os import startfile
+from os import startfile, chdir
 from pathlib import Path
 import json
 from directory_statistics import get_duration
 
+chdir(paths.project_dir)
+
 def save_data(stat, games, empty_messages, titles):
-    with open(Path.joinpath(Path(__file__).resolve().parent, 'data.json'), 'r', encoding='utf-8') as file:
+    with open(Path.joinpath(paths.root_dir, 'data.json'), 'r', encoding='utf-8') as file:
         cache = json.load(file)["cache"]
 
     data = {}
@@ -21,11 +23,10 @@ def save_data(stat, games, empty_messages, titles):
     data["titles"] = [item.__dict__ for item in titles]
     data["cache"] = cache
 
-    with open(Path.joinpath(Path(__file__).resolve().parent, 'data.json'), 'w', encoding='utf-8') as file:
+    with open(Path.joinpath(paths.root_dir, 'data.json'), 'w', encoding='utf-8') as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
 
 class Main:
-        
     def main(self):
         # games initialization
         games = [Game(name=game_name) for game_name in paths.game_names[:2]]

@@ -2,6 +2,7 @@ from json import load
 from youtube_utils import EmptyMessage
 from youtube_utils import Title
 from pathlib import Path
+import paths
 
 class Data:
     games_list: list[str]
@@ -16,7 +17,7 @@ class Data:
     last_update: int
 
     def __init__(self, data_type):
-        with open(Path.joinpath(Path(__file__).resolve().parent, 'data.json'), 'r', encoding='utf-8') as file:
+        with open(Path.joinpath(paths.root_dir, 'data.json'), 'r', encoding='utf-8') as file:
             data = load(file)[data_type]
 
         if type(data) == dict:

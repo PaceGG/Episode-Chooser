@@ -1,42 +1,49 @@
 {
-  "stat": {
-    "last_update": 1735262631.263661,
-    "count_sr_session": 3,
-    "count_sr_date": 1735586734,
-    "games_log": ["Far Cry Primal", "Far Cry Primal", "Call of Duty: WWII"],
-    "games_list": ["Far Cry Primal", "Call of Duty: WWII"],
-    "process_game_id": -1,
-    "process_game_message_id": -1
-  },
-  "game": [
-    {
-      "name": "Far Cry Primal",
-      "count_session": 14,
-      "count_episode": 10,
-      "time_limit": 64,
-      "content_time": 0,
-      "user_time": 0
+    "stat": {
+        "last_update": 1735262631.263661,
+        "count_sr_session": 5,
+        "count_sr_date": 1735586734,
+        "games_log": [
+            "Far Cry Primal",
+            "Far Cry Primal",
+            "Call of Duty: WWII"
+        ],
+        "games_list": [
+            "Far Cry Primal",
+            "Max Payne"
+        ],
+        "process_game_id": -1,
+        "process_game_message_id": -1
     },
-    {
-      "name": "Call of Duty: WWII",
-      "count_session": 7,
-      "count_episode": 7,
-      "time_limit": 120,
-      "content_time": 0,
-      "user_time": 0
-    },
-    {
-      "name": "SnowRunner [ng+]",
-      "count_session": 9,
-      "count_episode": 9,
-      "time_limit": 100,
-      "content_time": 0,
-      "user_time": 0
+    "game": [
+        {
+            "name": "Far Cry Primal",
+            "count_session": 0,
+            "count_episode": 10,
+            "time_limit": 64,
+            "content_time": 0,
+            "user_time": 0
+        },
+        {
+            "name": "Max Payne",
+            "count_session": 0,
+            "count_episode": 0,
+            "time_limit": 120,
+            "content_time": 0,
+            "user_time": 0
+        },
+        {
+            "name": "SnowRunner [ng+]",
+            "count_session": 9,
+            "count_episode": 9,
+            "time_limit": 100,
+            "content_time": 0,
+            "user_time": 0
+        }
+    ],
+    "empty_messages": [],
+    "titles": [],
+    "cache": {
+        "durations": {}
     }
-  ],
-  "empty_messages": [],
-  "titles": [],
-  "cache": {
-    "durations": {}
-  }
 }
