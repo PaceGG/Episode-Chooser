@@ -85,7 +85,7 @@ class Main:
         tg_info = info["tg"]
         telegram_utils.edit_message(tg_info)
 
-        # startfile(response)
+        startfile(response)
 
         
 
