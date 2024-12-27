@@ -1,14 +1,11 @@
-import os
 import PATH
 from pathlib import Path
-from Data import Data
-from moviepy.video.io.VideoFileClip import VideoFileClip
 import json
 
-os.chdir(PATH.root_dir)
-
 def get_duration():
-    with open("data.json", 'r', encoding='utf-8') as file:
+    from moviepy.video.io.VideoFileClip import VideoFileClip
+
+    with open(Path.joinpath(Path(__file__).resolve().parent, 'data.json'), 'r', encoding='utf-8') as file:
         data = json.load(file)
     cache = data["cache"]["durations"]
 
@@ -24,7 +21,7 @@ def get_duration():
             updated_cache[ctime] = video_duration
 
     data["cache"]["durations"] = updated_cache
-    with open('data.json', 'w', encoding='utf-8') as file:
+    with open(Path.joinpath(Path(__file__).resolve().parent, 'data.json'), 'w', encoding='utf-8') as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
 
     return int(sum(updated_cache.values())//60)

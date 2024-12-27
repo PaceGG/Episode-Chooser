@@ -5,10 +5,8 @@ from timeFormat import time_format, today
 from Data import Data
 from roulette import spin_roulette
 from util import *
-import telegram
-from youTube import *
+from youTube import add_titles, add_empty_message
 from dir_stat import *
-
 
 def get_short_name(name):
     local = {
@@ -59,7 +57,7 @@ class Game:
         if not self.video_dir.exists(): create_game_folder(self.video_dir)
 
         stat = Data("stat")
-        with open("data.json") as file:
+        with open(Path.joinpath(Path(__file__).resolve().parent, 'data.json'), 'r', encoding='utf-8') as file:
             if self.name not in stat.games_list and self.id != 2:
                 game_data = {
                     "name": self.name,
@@ -103,7 +101,7 @@ class Game:
             "content_time": self.content_time,
             "user_time": self.user_time
         }
-
+    
     
 def chance_calculate(games: list[Game]):
     min(games[:2], key=lambda game: game.count_session).chance += abs(games[0].count_session - games[1].count_session)
@@ -118,9 +116,14 @@ def new_game(games: list[Game], stat: Data):
                 if stat.count_sr_session < 5: stat.count_sr_session = 5
 
                 game.is_selected = True
+                game.is_game_new = False
 
 def get_selected_game(games: list[Game]):
     return next((game for game in games if game.is_selected), None)
+
+def clear_selection(games: list[Game]):
+    for game in games:
+        game.is_selected = False
 
 def select_game(games: list[Game], stat: Data, skip_roulette = False):
     # force new game (not in game list)
@@ -152,13 +155,14 @@ def select_game(games: list[Game], stat: Data, skip_roulette = False):
     return selected_game, False
 
 def run_game(games: list[Game], stat: Data):
+    import telegram_util
     set_eng_layout()
     selected_game = get_selected_game(games)
 
     confirm = input()
 
     print(f"{selected_game.full_name}{f" {time_format(selected_game.time_limit)}" if selected_game.time_limit != 120 else ''}")
-    stat.process_game_message_id = telegram.send_image(selected_game.header, selected_game.caption)
+    stat.process_game_message_id = telegram_util.send_image(selected_game.header, selected_game.caption)
 
     
     if selected_game.id != 2:
@@ -191,7 +195,8 @@ def unfinished_process(games: list[Game], stat: Data):
     if confirm == "-": return None, True
     return unfinished_game.game_path, False
 
-def finished_process(games: list[Game], stat: Data, empty_messages: list[EmptyMessage], titles: list[Title], is_last_session): 
+def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_last_session): 
+    import telegram_util
     process_game_id = stat.process_game_id
     message_id = stat.process_game_message_id
     processed_game = games[process_game_id]
@@ -215,7 +220,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages: list[EmptyMe
 
     add_titles(titles, processed_game, count_videos)
     add_empty_message(empty_messages, processed_game, count_videos, message_id)
-    telegram.edit_caption(f"{processed_game.full_name}: № {processed_game.count_episode + 1}{f" - {processed_game.count_episode + count_videos}" if count_videos > 1 else ""}", message_id)
+    telegram_util.edit_caption(f"{processed_game.full_name}: № {processed_game.count_episode + 1}{f" - {processed_game.count_episode + count_videos}" if count_videos > 1 else ""}", message_id)
 
     stat.process_game_id = -1
     stat.process_game_message_id = -1

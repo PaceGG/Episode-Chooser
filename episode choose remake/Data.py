@@ -1,6 +1,7 @@
-import json
+from json import load
 from youTube import EmptyMessage
 from youTube import Title
+from pathlib import Path
 
 class Data:
     games_list: list[str]
@@ -15,8 +16,8 @@ class Data:
     last_update: int
 
     def __init__(self, data_type):
-        with open('data.json', 'r', encoding='utf-8') as file:
-            data = json.load(file)[data_type]
+        with open(Path.joinpath(Path(__file__).resolve().parent, 'data.json'), 'r', encoding='utf-8') as file:
+            data = load(file)[data_type]
 
         if type(data) == dict:
             for key, value in data.items():
