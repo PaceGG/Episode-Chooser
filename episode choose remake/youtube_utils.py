@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from util import intc
-from timeFormat import today, get_time
+from time_format import today, get_time
 load_dotenv("gitignore/.env")
 
 
@@ -93,7 +93,7 @@ def get_yt_videos():
     return videos
 
 def edit_empty_message(empty_message: EmptyMessage, yt_videos):
-    import telegram_util
+    import telegram_utils
 
     if empty_message.name not in yt_videos: return False
     videos = yt_videos[empty_message.name]
@@ -112,7 +112,7 @@ def edit_empty_message(empty_message: EmptyMessage, yt_videos):
 
     if names:
         new_text = f"{empty_message.name}: № {empty_message.ep_range[0] + 1}{f" - {empty_message.ep_range[0] + len(names)-1}" if len(names) > 1 else ""}:\n{titles}"
-        telegram_util.edit_caption(new_text, empty_message.message_id)
+        telegram_utils.edit_caption(new_text, empty_message.message_id)
 
         return True
     
