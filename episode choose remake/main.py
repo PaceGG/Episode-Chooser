@@ -1,14 +1,14 @@
-from Game import Game, new_game, chance_calculate, select_game
-from Data import Data
-import PATH
-from info import get_info
-from youTube import EmptyMessage
-import telegram_util
-from youTube import edit_empty_messages
+from game import Game, new_game, chance_calculate, select_game
+from data import Data
+import paths
+from database_info import get_info
+from youtube_utils import EmptyMessage
+import telegram_utils
+from youtube_utils import edit_empty_messages
 from os import startfile
 from pathlib import Path
 import json
-from dir_stat import get_duration
+from directory_statistics import get_duration
 
 def save_data(stat, games, empty_messages, titles):
     with open(Path.joinpath(Path(__file__).resolve().parent, 'data.json'), 'r', encoding='utf-8') as file:
@@ -28,7 +28,7 @@ class Main:
         
     def main(self):
         # games initialization
-        games = [Game(name=game_name) for game_name in PATH.game_names[:2]]
+        games = [Game(name=game_name) for game_name in paths.game_names[:2]]
         games.append(Game(name="SnowRunner [ng+]", safe_name="SnowRunner"))
 
         stat = Data("stat")
@@ -60,12 +60,12 @@ class Main:
         print(pc_info)
 
         tg_info = info["tg"]
-        telegram_util.edit_message(tg_info)
+        telegram_utils.edit_message(tg_info)
 
         save_data(stat, games, empty_messages, titles)
 
         # run random game
-        from Game import run_game, unfinished_process, finished_process, clear_selection
+        from game import run_game, unfinished_process, finished_process, clear_selection
         response = None
         is_last_session = False
         if stat.process_game_id == -1:
@@ -82,7 +82,7 @@ class Main:
         is_select_forced = select_game(games, stat, skip_roulette=True)[1]
         info = get_info(games, stat, is_select_forced, titles)
         tg_info = info["tg"]
-        telegram_util.edit_message(tg_info)
+        telegram_utils.edit_message(tg_info)
 
         # startfile(response)
 

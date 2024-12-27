@@ -1,8 +1,8 @@
 import win32api
 import win32gui
-import PATH
+import paths
 from pathlib import Path
-from dir_stat import get_disk_video
+from directory_statistics import get_disk_video
 
 def set_eng_layout():
     window_handle = win32gui.GetForegroundWindow()
@@ -10,7 +10,7 @@ def set_eng_layout():
     return(result)
 
 def move_videos(files_dir: Path):
-    obs_dir = Path.joinpath(PATH.video_dir, "OBS")
+    obs_dir = Path.joinpath(paths.video_dir, "OBS")
     for i, file in enumerate(obs_dir.iterdir()):
         file.rename(Path.joinpath(files_dir, str(get_disk_video() + i + 1)))
 
@@ -20,7 +20,7 @@ def create_game_folder(video_dir: Path):
     previews_dir.mkdir()
 
 def header_rename(game_name: str):
-    headers_dir = Path.joinpath(PATH.video_dir, "headers")
+    headers_dir = Path.joinpath(paths.video_dir, "headers")
     header_default_path = Path.joinpath(headers_dir, "header.png") 
     header_path = Path.joinpath(headers_dir, game_name + ".png")
     header_default_path.rename(header_path)

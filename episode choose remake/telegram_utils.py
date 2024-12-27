@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
 from pathlib import Path
 import os
-import PATH
-os.chdir(PATH.project_dir)
+import paths
+os.chdir(paths.project_dir)
 load_dotenv("gitignore/.env")
 
 bot_token = os.getenv("TELEGRAM_BOT_TOKEN")

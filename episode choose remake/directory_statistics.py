@@ -1,4 +1,4 @@
-import PATH
+import paths
 from pathlib import Path
 import json
 
@@ -11,7 +11,7 @@ def get_duration():
 
     updated_cache = {}
 
-    for file_path in Path.joinpath(PATH.video_dir, "OBS").iterdir():
+    for file_path in Path.joinpath(paths.video_dir, "OBS").iterdir():
         if file_path.suffix == ".mp4":
             ctime = str(file_path.stat().st_birthtime)
             if ctime in list(cache.keys()):
@@ -26,7 +26,7 @@ def get_duration():
 
     return int(sum(updated_cache.values())//60)
                 
-def get_count_videos(dir=Path.joinpath(PATH.video_dir, "OBS")):
+def get_count_videos(dir=Path.joinpath(paths.video_dir, "OBS")):
     c = 0
     for file_path in dir.iterdir():
         if file_path.suffix == ".mp4":

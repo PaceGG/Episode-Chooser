@@ -1,9 +1,9 @@
 from psutil import disk_usage
-import PATH
-from Data import Data
-from Game import Game
-from dir_stat import *
-from timeFormat import today, pc_date_format, short_date_format, time_format
+import paths
+from data import Data
+from game import Game
+from directory_statistics import *
+from time_format import today, pc_date_format, short_date_format, time_format
 
 def get_info(games: list[Game], stat: Data, is_select_forced: bool, titles):
     pc_info = ""
@@ -40,7 +40,7 @@ def get_info(games: list[Game], stat: Data, is_select_forced: bool, titles):
 def disk_info(games: list[Game], titles: list):
     info_str = ""
 
-    free_space = disk_usage(str(PATH.video_dir.drive)).free/1024/1024/1024
+    free_space = disk_usage(str(paths.video_dir.drive)).free/1024/1024/1024
     info_str += f"Место на диске: {free_space:.2f} GB ~ {int(free_space//15)} видео\n"
 
     disk_video = get_disk_video(games)

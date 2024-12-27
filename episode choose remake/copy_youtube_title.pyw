@@ -3,7 +3,7 @@ from pyperclip import copy
 from util import set_eng_layout
 from pathlib import Path
 
-from Data import Data
+from data import Data
 import json
 
 titles = Data("titles").titles

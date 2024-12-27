@@ -1,6 +1,6 @@
 from json import load
-from youTube import EmptyMessage
-from youTube import Title
+from youtube_utils import EmptyMessage
+from youtube_utils import Title
 from pathlib import Path
 
 class Data:

@@ -1,12 +1,12 @@
-import PATH
+import paths
 import json
 from pathlib import Path
-from timeFormat import time_format, today
-from Data import Data
+from time_format import time_format, today
+from data import Data
 from roulette import spin_roulette
 from util import *
-from youTube import add_titles, add_empty_message
-from dir_stat import *
+from youtube_utils import add_titles, add_empty_message
+from directory_statistics import *
 
 def get_short_name(name):
     local = {
@@ -40,20 +40,20 @@ def get_short_name(name):
 class Game:
     def __init__(self, name: str, **kwargs):
         try:
-            self.id = PATH.game_names.index(name)
+            self.id = paths.game_names.index(name)
         except ValueError:
             raise ValueError(f"Unknown game: {name}")
                 
         self.name = name
         self.safe_name = kwargs.get("safe_name", name.replace(':', ''))
         self.short_name = get_short_name(name)
-        self.extra_name = PATH.extra_names[self.id]
+        self.extra_name = paths.extra_names[self.id]
         self.full_name = f"{self.name}{f": {self.extra_name}" if self.extra_name else ''}"
 
-        self.color = PATH.game_colors[self.id]
+        self.color = paths.game_colors[self.id]
 
-        self.game_path = PATH.game_paths[self.id]
-        self.video_dir = Path.joinpath(PATH.video_dir, self.safe_name)
+        self.game_path = paths.game_paths[self.id]
+        self.video_dir = paths.joinpath(paths.video_dir, self.safe_name)
         if not self.video_dir.exists(): create_game_folder(self.video_dir)
 
         stat = Data("stat")
@@ -83,7 +83,7 @@ class Game:
         self.is_selected = False
 
         self.caption = f"{self.full_name}..."
-        self.header = Path.joinpath(PATH.video_dir, "headers", self.safe_name + ".png")
+        self.header = Path.joinpath(paths.video_dir, "headers", self.safe_name + ".png")
         if not self.header.exists(): header_rename(self.safe_name)
 
     def content_time_format(self):
@@ -155,14 +155,14 @@ def select_game(games: list[Game], stat: Data, skip_roulette = False):
     return selected_game, False
 
 def run_game(games: list[Game], stat: Data):
-    import telegram_util
+    import telegram_utils
     set_eng_layout()
     selected_game = get_selected_game(games)
 
     confirm = input()
 
     print(f"{selected_game.full_name}{f" {time_format(selected_game.time_limit)}" if selected_game.time_limit != 120 else ''}")
-    stat.process_game_message_id = telegram_util.send_image(selected_game.header, selected_game.caption)
+    stat.process_game_message_id = telegram_utils.send_image(selected_game.header, selected_game.caption)
 
     
     if selected_game.id != 2:
@@ -196,7 +196,7 @@ def unfinished_process(games: list[Game], stat: Data):
     return unfinished_game.game_path, False
 
 def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_last_session): 
-    import telegram_util
+    import telegram_utils
     process_game_id = stat.process_game_id
     message_id = stat.process_game_message_id
     processed_game = games[process_game_id]
@@ -220,7 +220,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
 
     add_titles(titles, processed_game, count_videos)
     add_empty_message(empty_messages, processed_game, count_videos, message_id)
-    telegram_util.edit_caption(f"{processed_game.full_name}: № {processed_game.count_episode + 1}{f" - {processed_game.count_episode + count_videos}" if count_videos > 1 else ""}", message_id)
+    telegram_utils.edit_caption(f"{processed_game.full_name}: № {processed_game.count_episode + 1}{f" - {processed_game.count_episode + count_videos}" if count_videos > 1 else ""}", message_id)
 
     stat.process_game_id = -1
     stat.process_game_message_id = -1
