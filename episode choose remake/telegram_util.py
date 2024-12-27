@@ -1,15 +1,15 @@
-from requests import post
 from dotenv import load_dotenv
 from pathlib import Path
 import os
 import PATH
-os.chdir(PATH.root_dir)
+os.chdir(PATH.project_dir)
 load_dotenv("gitignore/.env")
 
 bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
 chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
 def send_image(image_path: Path, caption=None):
+    from requests import post
     url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"
     files = {"photo": open(image_path, "rb")}
     params = {"chat_id": chat_id, "caption": caption}
@@ -20,6 +20,7 @@ def send_image(image_path: Path, caption=None):
 
 # pinned info message id = 696
 def edit_message(new_text, message_id=696):
+    from requests import post
     url = f"https://api.telegram.org/bot{bot_token}/editMessageText"
     params = {
         "chat_id": chat_id,
@@ -30,6 +31,7 @@ def edit_message(new_text, message_id=696):
     return response.json()
 
 def edit_caption(new_caption, message_id):
+    from requests import post
     url = f"https://api.telegram.org/bot{bot_token}/editMessageCaption"
     params = {
         "chat_id": chat_id,
@@ -40,6 +42,7 @@ def edit_caption(new_caption, message_id):
     return response.json()
 
 def delete_message(message_id):
+    from requests import post
     url = f"https://api.telegram.org/bot{bot_token}/deleteMessage"
     params = {
         "chat_id": chat_id,

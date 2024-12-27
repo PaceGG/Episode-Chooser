@@ -1,13 +1,31 @@
-from Game import *
+from Game import Game, new_game, chance_calculate, select_game
 from Data import Data
 import PATH
 from info import get_info
 from youTube import EmptyMessage
-import telegram
+import telegram_util
 from youTube import edit_empty_messages
 from os import startfile
+from pathlib import Path
+import json
+from dir_stat import get_duration
+
+def save_data(stat, games, empty_messages, titles):
+    with open(Path.joinpath(Path(__file__).resolve().parent, 'data.json'), 'r', encoding='utf-8') as file:
+        cache = json.load(file)["cache"]
+
+    data = {}
+    data["stat"] = stat.__dict__
+    data["game"] = [item.__dict__() for item in games]
+    data["empty_messages"] = [item.__dict__ for item in empty_messages]
+    data["titles"] = [item.__dict__ for item in titles]
+    data["cache"] = cache
+
+    with open(Path.joinpath(Path(__file__).resolve().parent, 'data.json'), 'w', encoding='utf-8') as file:
+        json.dump(data, file, indent=4, ensure_ascii=False)
 
 class Main:
+        
     def main(self):
         # games initialization
         games = [Game(name=game_name) for game_name in PATH.game_names[:2]]
@@ -17,6 +35,8 @@ class Main:
         empty_messages: list[EmptyMessage] = Data("empty_messages").empty_messages
         titles = Data("titles").titles
 
+        edit_empty_messages(empty_messages, stat)
+
         # if game is new
         new_game(games[:2], stat)
 
@@ -24,7 +44,10 @@ class Main:
         chance_calculate(games)
 
         # select game
-        selected_game, is_select_forced = select_game(games, stat, skip_roulette=True)
+        if stat.process_game_id == -1:
+            selected_game, is_select_forced = select_game(games, stat, skip_roulette=True)
+        else:
+            is_select_forced = False
 
         if sum(1 for game in games if game.is_selected) > 1:
             raise Exception("More than one game is selected")
@@ -37,9 +60,12 @@ class Main:
         print(pc_info)
 
         tg_info = info["tg"]
-        telegram.edit_message(tg_info)
+        telegram_util.edit_message(tg_info)
+
+        save_data(stat, games, empty_messages, titles)
 
         # run random game
+        from Game import run_game, unfinished_process, finished_process, clear_selection
         response = None
         is_last_session = False
         if stat.process_game_id == -1:
@@ -51,20 +77,14 @@ class Main:
         if response is None:
             finished_process(games, stat, empty_messages, titles, is_last_session) # finish processing game
 
-        with open('data.json', 'r', encoding='utf-8') as file:
-            cache = json.load(file)["cache"]
+        save_data(stat, games, empty_messages, titles)
+        clear_selection(games)
+        is_select_forced = select_game(games, stat, skip_roulette=True)[1]
+        info = get_info(games, stat, is_select_forced, titles)
+        tg_info = info["tg"]
+        telegram_util.edit_message(tg_info)
 
-        data = {}
-        data["stat"] = stat.__dict__
-        data["game"] = [item.__dict__() for item in games]
-        data["empty_messages"] = [item.__dict__ for item in empty_messages]
-        data["titles"] = [item.__dict__ for item in titles]
-        data["cache"] = cache
-
-        with open('data.json', 'w', encoding='utf-8') as file:
-            json.dump(data, file, indent=4, ensure_ascii=False)
-
-        startfile(response)
+        # startfile(response)
 
         
 

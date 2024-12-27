@@ -19,7 +19,7 @@ def get_info(games: list[Game], stat: Data, is_select_forced: bool, titles):
     pc_info += chacnes_info["pc"] + "\n"
     tg_info += chacnes_info["tg"] + "\n"
 
-    time_limit_info = get_time_limit_info(games)
+    time_limit_info = get_time_limit_info(games[:2])
     pc_info += time_limit_info + "\n"
 
     content_time_info = get_content_time_info(games)
@@ -28,8 +28,11 @@ def get_info(games: list[Game], stat: Data, is_select_forced: bool, titles):
     tg_time_info = get_tg_time_info(games)
     tg_info += tg_time_info + "\n"
 
-    tg_sr_date_info = f"• SR after {pc_date_format(stat.count_sr_date)}"
+    tg_sr_date_info = f"• SR after {pc_date_format(stat.count_sr_date)}\n"
     tg_info += tg_sr_date_info
+
+    next_update_info = f"• Next update: {pc_date_format(stat.last_update + 12*60*60)}\n"
+    tg_info += next_update_info
 
     return {"pc": pc_info, "tg": tg_info}
 
@@ -43,7 +46,7 @@ def disk_info(games: list[Game], titles: list):
     disk_video = get_disk_video(games)
     info_str += f"Видео на диске: {disk_video}\n"
 
-    info_str += f"Видео к удалению: {disk_video - len(titles)}"
+    info_str += f"Видео к удалению: {disk_video - len(titles)}\n"
     return info_str
 
 def get_snowrunner_info(stat: Data, sr_game: Game):
@@ -94,7 +97,7 @@ def get_time_limit_info(games: list[Game]):
 
     for game in games:
         if game.time_limit != 120:
-            pc_info += f"{game.full_name}: ::({time_format(game.time_limit)})::"
+            pc_info += f"{game.full_name}: ::({time_format(game.time_limit)})::\n"
     
     return pc_info
 
