@@ -82,7 +82,6 @@ class Game:
         self.chance = 1
         self.is_selected = False
 
-        self.caption = f"{self.full_name}..."
         self.header = Path.joinpath(paths.video_dir, "headers", self.safe_name + ".png")
         if not self.header.exists(): header_rename(self.safe_name)
 
@@ -163,8 +162,9 @@ def run_game(games: list[Game], stat: Data):
 
     confirm = input()
 
+    caption = f"{selected_game.full_name} № {selected_game.count_episode + 1}..."
     print(f"{selected_game.full_name}{f" {time_format(selected_game.time_limit)}" if selected_game.time_limit != 120 else ''}")
-    stat.process_game_message_id = telegram_utils.send_image(selected_game.header, selected_game.caption)
+    stat.process_game_message_id = telegram_utils.send_image(selected_game.header, caption)
 
     
     if selected_game.id != 2:
