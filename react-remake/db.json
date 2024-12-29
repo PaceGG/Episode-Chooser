@@ -388,6 +388,12 @@
           "status": "none",
           "time": 0,
           "numberOfEps": 0
+        },
+        {
+          "name": "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -711,16 +717,16 @@
           "numberOfEps": 57
         },
         {
-          "name": "Fallout London",
+          "name": "Fallout: London",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Fallout: New Vegas",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 244080,
+          "numberOfEps": 69
         },
         {
           "name": "Fallout: New California",
@@ -845,25 +851,25 @@
         },
         {
           "name": "Far Cry 3",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 87730,
+          "numberOfEps": 28
         },
         {
           "name": "Far Cry 3: Blood Dragon",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "bad",
+          "time": 5115,
+          "numberOfEps": 2
         },
         {
           "name": "Far Cry 4",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 151459,
+          "numberOfEps": 41
         },
         {
           "name": "Far Cry Primal",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -894,85 +900,85 @@
       "additionalGames": [
         {
           "name": "Call of Duty (2003)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 15085,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty: United Offensive (2004)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 15721,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty 2 (2005)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 20898,
+          "numberOfEps": 8
         },
         {
           "name": "Call of Duty: Modern Warfare Remastered (2007 / 2016)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 16440,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty: World at War (2008)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 14950,
+          "numberOfEps": 5
         },
         {
           "name": "Call of Duty: Modern Warfare 2 Remastered (2009 / 2020)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 15350,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty: Black Ops (2010)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 17318,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty: Modern Warfare 3 (2011)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 19240,
+          "numberOfEps": 8
         },
         {
-          "name": "Call of Duty: Black Ops 2 (2012)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "name": "Call of Duty: Black Ops II (2012)",
+          "status": "complete",
+          "time": 18740,
+          "numberOfEps": 7
         },
         {
           "name": "Call of Duty: Ghosts (2013)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 15525,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty: Advanced Warfare (2014)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 19548,
+          "numberOfEps": 8
         },
         {
           "name": "Call of Duty: Black Ops 3 (2015)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 32867,
+          "numberOfEps": 13
         },
         {
           "name": "Call of Duty: Infinite Warfare (2016)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 21993,
+          "numberOfEps": 8
         },
         {
           "name": "Call of Duty: WWII (2017)",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -983,10 +989,10 @@
           "numberOfEps": 0
         },
         {
-          "name": "Call of Duty: Black Ops – Cold War (2020)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "name": "Call of Duty: Black Ops Cold War (2020)",
+          "status": "complete",
+          "time": 19490,
+          "numberOfEps": 7
         },
         {
           "name": "Call of Duty: Vanguard (2021)",
@@ -996,6 +1002,18 @@
         },
         {
           "name": "Call of Duty: Modern Warfare II (2022)",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Call of Duty: Modern Warfare III (2023)",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Call of Duty: Black Ops 6 (2024)",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
@@ -1040,7 +1058,7 @@
       "additionalGames": [
         {
           "name": "Max Payne",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -1252,17 +1270,18 @@
     {
       "id": "5591",
       "mainName": "VLADiK BRUTAL",
-      "mainTime": 0,
-      "mainNumberOfEps": 0,
+      "mainTime": 22282,
+      "mainNumberOfEps": 9,
       "additionalGames": [],
-      "mainStatus": "inProcess"
+      "mainStatus": "complete"
     },
     {
       "id": "5e20",
       "mainName": "The Callisto Protocol",
-      "mainTime": 0,
-      "mainNumberOfEps": 0,
-      "additionalGames": []
+      "mainTime": 38043,
+      "mainNumberOfEps": 13,
+      "additionalGames": [],
+      "mainStatus": "complete"
     },
     {
       "id": "5739",
@@ -1272,37 +1291,37 @@
       "additionalGames": [
         {
           "name": "Return to Castle Wolfenstein",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 21423,
+          "numberOfEps": 7
         },
         {
           "name": "Wolfenstein (2009)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 31225,
+          "numberOfEps": 11
         },
         {
           "name": "Wolfenstein: The New Order",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Wolfenstein: The Old Blood",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Wolfenstein II: The New Colossus",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Wolfenstein: Youngblood",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         }
@@ -1323,19 +1342,19 @@
       "additionalGames": [
         {
           "name": "BioShock Remastered",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "bad",
+          "time": 27952,
+          "numberOfEps": 10
         },
         {
           "name": "BioShock 2 Remastered",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "BioShock Infinite",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         }
@@ -1366,22 +1385,47 @@
           "numberOfEps": 0
         }
       ]
+    },
+    {
+      "id": "42db",
+      "mainName": "Mad Max",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": []
+    },
+    {
+      "id": "3364",
+      "mainName": "Red Dead Redemption",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "Red Dead Redemption",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Red Dead Redemption 2",
+          "status": "complete",
+          "time": 149643,
+          "numberOfEps": 56
+        }
+      ]
     }
   ],
   "showcase": [
     {
       "id": "0",
-      "name": "Fallout: New Vegas",
-      "shortName": "Fallout",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/22380/library_600x900_2x.jpg?t=1316473416",
-      "color": "#fdb746"
+      "name": "Far Cry Primal",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/371660/library_600x900_2x.jpg?t=1576501678",
+      "color": "#ef8b1b"
     },
     {
       "id": "1",
-      "name": "BioShock Remastered",
-      "shortName": "Dead Space",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/409710/library_600x900_2x.jpg?t=1568739568",
-      "color": "#c4942a"
+      "name": "Max Payne",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/12140/library_600x900_2x.jpg?t=1573772269",
+      "color": "#b40000"
     }
   ],
   "links": [
