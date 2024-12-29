@@ -1,7 +1,7 @@
 from webbrowser import open
 import os
-import PATHS
-react_path = os.path.join(PATHS.repository, "react-remake")
+import paths
+react_path = os.path.join(paths.project_dir, "react-remake")
 os.chdir(react_path)
 
 
