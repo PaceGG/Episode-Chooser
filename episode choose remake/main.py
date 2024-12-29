@@ -72,11 +72,12 @@ class Main:
         if stat.process_game_id == -1:
             response = run_game(games, stat) # no processing game
         else:
-            if get_duration() < games[stat.process_game_id].time_limit: 
-                response, is_last_session = unfinished_process(games, stat) # processing game
+            duration = get_duration()
+            if duration < games[stat.process_game_id].time_limit: 
+                response, is_last_session = unfinished_process(games, stat, duration) # processing game
 
         if response is None:
-            finished_process(games, stat, empty_messages, titles, is_last_session) # finish processing game
+            finished_process(games, stat, empty_messages, titles, is_last_session, duration) # finish processing game
 
         save_data(stat, games, empty_messages, titles)
         clear_selection(games)
@@ -85,7 +86,8 @@ class Main:
         tg_info = info["tg"]
         telegram_utils.edit_message(tg_info)
 
-        startfile(response)
+        if response:
+            startfile(response)
 
         
 

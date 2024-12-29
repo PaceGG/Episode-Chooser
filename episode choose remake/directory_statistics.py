@@ -11,20 +11,26 @@ def get_duration():
 
     updated_cache = {}
 
+    total = 0
+
     for file_path in Path.joinpath(paths.video_dir, "OBS").iterdir():
         if file_path.suffix == ".mp4":
             ctime = str(file_path.stat().st_birthtime)
             if ctime in list(cache.keys()):
                 video_duration = cache[ctime]
             else:
-                with VideoFileClip(str(file_path)) as video: video_duration = video.duration
+                try:
+                    with VideoFileClip(str(file_path)) as video: video_duration = video.duration
+                except:
+                    continue
             updated_cache[ctime] = video_duration
+            total += video_duration
 
     data["cache"]["durations"] = updated_cache
     with open(Path.joinpath(paths.root_dir, 'data.json'), 'w', encoding='utf-8') as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
 
-    return int(sum(updated_cache.values())//60)
+    return int(total//60)
                 
 def get_count_videos(dir=Path.joinpath(paths.video_dir, "OBS")):
     c = 0

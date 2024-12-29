@@ -180,28 +180,28 @@ def run_game(games: list[Game], stat: Data):
     return selected_game.game_path
 
 
-def unfinished_process(games: list[Game], stat: Data):
+def unfinished_process(games: list[Game], stat: Data, duration: int):
     unfinished_game = games[stat.process_game_id]
-    duration = get_duration()
 
     # склонение существительного
-    if duration % 10 == 1 and duration % 100 != 11: form = "минута"
-    elif duration % 10 in {2, 3, 4} and not (duration % 100 in {12, 13, 14}): form = "минуты"
+    time_left = unfinished_game.time_limit - duration
+    if time_left % 10 == 1 and time_left % 100 != 11: form = "минута"
+    elif time_left % 10 in {2, 3, 4} and not (time_left % 100 in {12, 13, 14}): form = "минуты"
     else: form = "минут"
 
-    print(f"Сессия {unfinished_game.name} ещё не завершена, осталось {unfinished_game.time_limit - duration} {form}")
+    print(f"Сессия {unfinished_game.name} ещё не завершена, осталось {time_left} {form}")
     print(f"Запустить {unfinished_game.name}? Введите \"-\" для обозначения финальной сессии")
     confirm = input()
     if confirm == "-": return None, True
     return unfinished_game.game_path, False
 
-def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_last_session): 
+def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_last_session, duration): 
     import telegram_utils
     process_game_id = stat.process_game_id
     message_id = stat.process_game_message_id
     processed_game = games[process_game_id]
 
-    duration = get_duration() if not(is_last_session) else 120
+    if is_last_session: duration = 120
     count_videos = get_count_videos()
 
     print(f"В {processed_game.name} есть видео продолжительностью {duration} минут. Добавить их к сумме?")
@@ -220,14 +220,14 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
 
     add_titles(titles, processed_game, count_videos)
     add_empty_message(empty_messages, processed_game, count_videos, message_id)
-    telegram_utils.edit_caption(f"{processed_game.full_name}: № {processed_game.count_episode + 1}{f" - {processed_game.count_episode + count_videos}" if count_videos > 1 else ""}", message_id)
+    telegram_utils.edit_caption(f"{processed_game.full_name}: № {processed_game.count_episode + 1}{f"-{processed_game.count_episode + count_videos}" if count_videos > 1 else ""}", message_id)
 
     stat.process_game_id = -1
     stat.process_game_message_id = -1
 
     processed_game.count_episode += count_videos
 
-    move_videos(processed_game.video_dir)
+    move_videos(processed_game.video_dir, games)
 
 def equalize_time_limit(games: list[Game], processed_game: Game):
     if processed_game.id != 2:
