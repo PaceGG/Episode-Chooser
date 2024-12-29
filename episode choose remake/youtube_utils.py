@@ -111,7 +111,7 @@ def edit_empty_message(empty_message: EmptyMessage, yt_videos):
         titles += f"• {name}\n"
 
     if names:
-        new_text = f"{empty_message.name}: № {empty_message.ep_range[0] + 1}{f" - {empty_message.ep_range[0] + len(names)-1}" if len(names) > 1 else ""}:\n{titles}"
+        new_text = f"{empty_message.name}: № {empty_message.ep_range[0] + 1}{f"-{empty_message.ep_range[0] + len(names)-1}" if len(names) > 1 else ""}:\n{titles}"
         telegram_utils.edit_caption(new_text, empty_message.message_id)
 
         return True

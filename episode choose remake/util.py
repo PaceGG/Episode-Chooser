@@ -9,10 +9,10 @@ def set_eng_layout():
     result = win32api.SendMessage(window_handle, 0x0050, 0, 0x04090409)
     return(result)
 
-def move_videos(files_dir: Path):
+def move_videos(files_dir: Path, games):
     obs_dir = Path.joinpath(paths.video_dir, "OBS")
     for i, file in enumerate(obs_dir.iterdir()):
-        file.rename(Path.joinpath(files_dir, str(get_disk_video() + i + 1)))
+        file.rename(Path.joinpath(files_dir, str(get_disk_video(games) + i + 1) + ".mp4"))
 
 def create_game_folder(video_dir: Path):
     video_dir.mkdir()
