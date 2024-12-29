@@ -7,6 +7,8 @@ from roulette import spin_roulette
 from util import *
 from youtube_utils import add_titles, add_empty_message
 from directory_statistics import *
+from pyperclip import paste
+import telegram_utils
 
 def get_short_name(name):
     local = {
@@ -126,41 +128,45 @@ def clear_selection(games: list[Game]):
     for game in games:
         game.is_selected = False
 
+def check_force(games: list[Game], stat: Data):
+    if games[0].count_session == games[1].count_session == 0: return True
+    if len(set(stat.games_log)) == 1: return True
+    return False
+
 def select_game(games: list[Game], stat: Data, skip_roulette = False):
     # force new game (not in game list)
     selected_game = next((game for game in games[:2] if game.is_selected), None)
     if selected_game is not None:
-        return selected_game, True
+        return selected_game
 
     # force new game (sessions == 0)
     if games[0].count_session == games[1].count_session == 0:
         selected_game = max(games[:2], key=lambda game: game.video_dir.stat().st_birthtime)
         selected_game.is_selected = True
-        return selected_game, True
+        return selected_game
     
     # force sr
     if stat.count_sr_session <= 0 and stat.count_sr_date <= today():
         games[2].is_selected = True
-        return selected_game, False
+        return selected_game
 
     # force unpopular game (games_log)
     if len(set(stat.games_log)) == 1:
         unpopular_game = next((game for game in games[:2] if game.name in stat.games_log), None)
         if unpopular_game is not None:
             unpopular_game.is_selected = True
-            return unpopular_game, True
+            return unpopular_game
 
     # no force
     selected_game = spin_roulette(games, skip=skip_roulette)
     selected_game.is_selected = True
-    return selected_game, False
+    return selected_game
 
 def run_game(games: list[Game], stat: Data):
-    import telegram_utils
     set_eng_layout()
     selected_game = get_selected_game(games)
 
-    confirm = input()
+    input(f"Нажмите Enter, чтобы запустить {selected_game.full_name}...")
 
     caption = f"{selected_game.full_name} № {selected_game.count_episode + 1}..."
     print(f"{selected_game.full_name}{f" {time_format(selected_game.time_limit)}" if selected_game.time_limit != 120 else ''}")
@@ -198,7 +204,6 @@ def unfinished_process(games: list[Game], stat: Data, duration: int):
     return unfinished_game.game_path, False
 
 def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_last_session, duration): 
-    import telegram_utils
     process_game_id = stat.process_game_id
     message_id = stat.process_game_message_id
     processed_game = games[process_game_id]
@@ -209,14 +214,21 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     print(f"В {processed_game.name} есть видео продолжительностью {duration} минут. Добавить их к сумме?")
     user_time = input(f"Введите время для {processed_game.name}: ")
     if user_time == "": user_time = duration
+    elif ":" in user_time: user_time = sumtime(user_time)
     else: user_time = int(user_time)
     processed_game.user_time = user_time
     equalize_time_limit(games, processed_game)
 
     print("\n"*4)
 
+
+    try:
+        bufer_user_content_time = sumtime(paste().split("\n")[-2].split()[1]) - 40 * get_count_videos()
+        print(f"В буфере обмена есть время контента: {bufer_user_content_time}")
+    except:
+        bufer_user_content_time = 0
     user_content_time = input("Введите продолжительность контента: ")
-    if user_content_time == "": user_content_time = 0
+    if user_content_time == "": user_content_time = bufer_user_content_time
     else: user_content_time = int(user_content_time)
     processed_game.content_time += user_content_time
 

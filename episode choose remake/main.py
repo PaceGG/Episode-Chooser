@@ -1,11 +1,11 @@
-from game import Game, new_game, chance_calculate, select_game
+from game import *
 from data import Data
 import paths
-from database_info import get_info
+from database_info import print_info
 from youtube_utils import EmptyMessage
 import telegram_utils
 from youtube_utils import edit_empty_messages
-from os import startfile, chdir
+from os import startfile, chdir, system
 from pathlib import Path
 import json
 from directory_statistics import get_duration
@@ -44,29 +44,21 @@ class Main:
         # chance calculate
         chance_calculate(games)
 
+        # info
+        print_info(games, stat, titles)
+        force_game_id = input()
+        if force_game_id != "":
+            games[force_game_id].is_selected = True
+
         # select game
         if stat.process_game_id == -1:
-            selected_game, is_select_forced = select_game(games, stat, skip_roulette=True)
-        else:
-            is_select_forced = False
-
+            select_game(games, stat)
         if sum(1 for game in games if game.is_selected) > 1:
             raise Exception("More than one game is selected")
-        
-            
-        # info
-        # info_str = get_info(games, stat, is_select_forced)
-        info = get_info(games, stat, is_select_forced, titles)
-        pc_info = info["pc"]
-        print(pc_info)
-
-        tg_info = info["tg"]
-        telegram_utils.edit_message(tg_info)
 
         save_data(stat, games, empty_messages, titles)
 
         # run random game
-        from game import run_game, unfinished_process, finished_process, clear_selection
         response = None
         is_last_session = False
         if stat.process_game_id == -1:
@@ -81,10 +73,7 @@ class Main:
 
         save_data(stat, games, empty_messages, titles)
         clear_selection(games)
-        is_select_forced = select_game(games, stat)[1]
-        info = get_info(games, stat, is_select_forced, titles)
-        tg_info = info["tg"]
-        telegram_utils.edit_message(tg_info)
+        print_info(games, stat, titles)
 
         if response:
             startfile(response)
