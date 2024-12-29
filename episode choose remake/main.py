@@ -81,7 +81,7 @@ class Main:
 
         save_data(stat, games, empty_messages, titles)
         clear_selection(games)
-        is_select_forced = select_game(games, stat, skip_roulette=True)[1]
+        is_select_forced = select_game(games, stat)[1]
         info = get_info(games, stat, is_select_forced, titles)
         tg_info = info["tg"]
         telegram_utils.edit_message(tg_info)
