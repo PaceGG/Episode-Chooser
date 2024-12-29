@@ -1,8 +1,10 @@
 from webbrowser import open
 import os
-os.chdir(r"D:\Program Files\HTML\Episode-Chooser\react-remake")
+import paths
+react_path = os.path.join(paths.project_dir, "react-remake")
+os.chdir(react_path)
 
 
 if __name__ == "__main__":
-    os.startfile(r"D:\Program Files\HTML\Episode-Chooser\react-remake\runserver.bat")
+    os.startfile(os.path.join(react_path, "runserver.bat"))
     open("http://localhost:5173/")
