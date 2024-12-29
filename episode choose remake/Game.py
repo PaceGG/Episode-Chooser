@@ -104,8 +104,10 @@ class Game:
     
     
 def chance_calculate(games: list[Game]):
-    min(games[:2], key=lambda game: game.count_session).chance += abs(games[0].count_session - games[1].count_session)
+    games[0].chance = 1
+    games[1].chance = 1
     games[2].chance = 0
+    min(games[:2], key=lambda game: game.count_session).chance += abs(games[0].count_session - games[1].count_session)
 
 def new_game(games: list[Game], stat: Data):
     for game in games[:2]:
