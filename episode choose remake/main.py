@@ -46,7 +46,10 @@ class Main:
 
         # info
         print_info(games, stat, titles)
-        force_game_id = input()
+        if stat.process_game_id == -1:
+            force_game_id = input()
+        else:
+            force_game_id = ""
         if force_game_id != "":
             games[force_game_id].is_selected = True
 
