@@ -1,80 +1,62 @@
 {
-    "stat": {
-        "last_update": 1735504812.611289,
-        "count_sr_session": 3,
-        "count_sr_date": 1735586734,
-        "games_log": [
-            "Call of Duty: WWII",
-            "Max Payne",
-            "Far Cry Primal"
-        ],
-        "games_list": [
-            "Far Cry Primal",
-            "Max Payne"
-        ],
-        "process_game_id": -1,
-        "process_game_message_id": -1
+  "stat": {
+    "last_update": 1735638401.4080179,
+    "count_sr_session": 1,
+    "count_sr_date": 1735586734,
+    "games_log": ["Max Payne", "Far Cry Primal", "Max Payne"],
+    "games_list": ["Far Cry Primal", "Max Payne"],
+    "process_game_id": -1,
+    "process_game_message_id": -1
+  },
+  "game": [
+    {
+      "name": "Far Cry Primal",
+      "count_session": 1,
+      "count_episode": 12,
+      "time_limit": 120,
+      "content_time": 6,
+      "user_time": 0
     },
-    "game": [
-        {
-            "name": "Far Cry Primal",
-            "count_session": 1,
-            "count_episode": 12,
-            "time_limit": 62,
-            "content_time": 6,
-            "user_time": 145
-        },
-        {
-            "name": "Max Payne",
-            "count_session": 1,
-            "count_episode": 3,
-            "time_limit": 120,
-            "content_time": 0,
-            "user_time": 143
-        },
-        {
-            "name": "SnowRunner [ng+]",
-            "count_session": 9,
-            "count_episode": 9,
-            "time_limit": 100,
-            "content_time": 0,
-            "user_time": 0
-        }
-    ],
-    "empty_messages": [
-        {
-            "name": "Max Payne",
-            "ep_range": [
-                1,
-                3
-            ],
-            "message_id": 724
-        },
-        {
-            "name": "Far Cry Primal",
-            "ep_range": [
-                11,
-                12
-            ],
-            "message_id": 726
-        }
-    ],
-    "titles": [
-        {
-            "name": "Far Cry Primal",
-            "episode": 11,
-            "is_final": false
-        },
-        {
-            "name": "Far Cry Primal",
-            "episode": 12,
-            "is_final": false
-        }
-    ],
-    "cache": {
-        "durations": {
-            "1735493260.5785067": 4755.25,
-            "1735498605.2445421": 3968.0
-        }
+    {
+      "name": "Max Payne",
+      "count_session": 2,
+      "count_episode": 6,
+      "time_limit": 120,
+      "content_time": 0,
+      "user_time": 0
+    },
+    {
+      "name": "SnowRunner [ng+]",
+      "count_session": 9,
+      "count_episode": 9,
+      "time_limit": 100,
+      "content_time": 0,
+      "user_time": 0
     }
+  ],
+  "empty_messages": [
+    {
+      "name": "Max Payne",
+      "ep_range": [1, 3],
+      "message_id": 724
+    },
+    {
+      "name": "Far Cry Primal",
+      "ep_range": [11, 12],
+      "message_id": 726
+    },
+    {
+      "name": "Max Payne",
+      "ep_range": [4, 6],
+      "message_id": 727
+    }
+  ],
+  "titles": [],
+  "cache": {
+    "durations": {
+      "1735639298.6939895": 2831.68,
+      "1735642142.1436126": 3078.81,
+      "1735649552.6171207": 2281.92
+    }
+  }
 }
