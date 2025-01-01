@@ -214,6 +214,9 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     print(f"В {processed_game.name} есть видео продолжительностью {duration} минут. Добавить их к сумме?")
     user_time = input(f"Введите время для {processed_game.name}: ")
     if user_time == "": user_time = duration
+    elif user_time == "-":
+        user_time = 120
+        is_last_session = True
     elif ":" in user_time: user_time = sumtime(user_time)
     else: user_time = int(user_time)
     processed_game.user_time = user_time
@@ -232,7 +235,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     else: user_content_time = int(user_content_time)
     processed_game.content_time += user_content_time
 
-    add_titles(titles, processed_game, count_videos)
+    add_titles(titles, processed_game, count_videos, is_last_session)
     add_empty_message(empty_messages, processed_game, count_videos, message_id)
     telegram_utils.edit_caption(f"{processed_game.full_name}: № {processed_game.count_episode + 1}{f"-{processed_game.count_episode + count_videos}" if count_videos > 1 else ""}", message_id)
 

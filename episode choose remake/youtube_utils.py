@@ -45,9 +45,9 @@ class Title:
             return f"• № {episode}{f" - Финал" if self.is_final else ""} • {self.name}"
 
 
-def add_titles(titles: list[Title], game, count_videos):
+def add_titles(titles: list[Title], game, count_videos, is_final):
     for episode_num in range(game.count_episode + 1, game.count_episode + count_videos + 1):
-        titles.append(Title(game.full_name, episode_num))
+        titles.append(Title(game.full_name, episode_num, is_final=is_final and episode_num == game.count_episode + count_videos))
 
 def add_empty_message(empty_messages: list[EmptyMessage], game, count_videos, message_id):
     empty_messages.append(EmptyMessage(game.name, [game.count_episode + 1, game.count_episode + count_videos], message_id))
