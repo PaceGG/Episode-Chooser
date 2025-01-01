@@ -217,7 +217,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     elif ":" in user_time: user_time = sumtime(user_time)
     else: user_time = int(user_time)
     processed_game.user_time = user_time
-    equalize_time_limit(games, processed_game)
+    equalize_time_limit(games, stat)
 
     print("\n"*4)
 
@@ -243,12 +243,27 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
 
     move_videos(processed_game.video_dir, games)
 
-def equalize_time_limit(games: list[Game], processed_game: Game):
-    if processed_game.id != 2:
-        processed_game.time_limit -= processed_game.user_time - 120
+def equalize_time_limit(games: list[Game], stat: Data):
+    processed_game = games[stat.process_game_id]
 
+    processed_game.time_limit -= processed_game.user_time - 120
+
+    if processed_game.id != 2:
         difference = 120 - max(games[:2], key=lambda game: game.time_limit).time_limit
 
         for game in games[:2]:
             game.time_limit += difference
-    
+            game.user_time = 0
+
+            if game.time_limit < 0:
+                game.time_limit += 120
+                game.count_session += 1
+                stat.count_sr_session -= 1
+                stat.add_game_log(game.name)
+    else:
+        processed_game.user_time = 0
+        if processed_game.time_limit < 0:
+            processed_game.time_limit += 120
+            processed_game.count_session += 1
+            stat.count_sr_session += 5
+            stat.count_sr_date = today() + 7*24*60*60
