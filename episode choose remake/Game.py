@@ -255,14 +255,14 @@ def equalize_time_limit(games: list[Game], stat: Data):
             game.time_limit += difference
             game.user_time = 0
 
-            if game.time_limit < 0:
+            if game.time_limit <= 0:
                 game.time_limit += 120
                 game.count_session += 1
                 stat.count_sr_session -= 1
                 stat.add_game_log(game.name)
     else:
         processed_game.user_time = 0
-        if processed_game.time_limit < 0:
+        if processed_game.time_limit <= 0:
             processed_game.time_limit += 120
             processed_game.count_session += 1
             stat.count_sr_session += 5
