@@ -5,8 +5,8 @@
     "count_sr_date": 1735586734,
     "games_log": ["Max Payne", "Far Cry Primal", "Max Payne"],
     "games_list": ["Far Cry Primal", "Max Payne"],
-    "process_game_id": 1,
-    "process_game_message_id": 730
+    "process_game_id": -1,
+    "process_game_message_id": -1
   },
   "game": [
     {
@@ -20,7 +20,7 @@
     {
       "name": "Max Payne",
       "count_session": 3,
-      "count_episode": 6,
+      "count_episode": 7,
       "time_limit": 120,
       "content_time": 0,
       "user_time": 0
@@ -54,6 +54,11 @@
       "name": "Far Cry Primal",
       "ep_range": [13, 14],
       "message_id": 729
+    },
+    {
+      "name": "Max Payne",
+      "ep_range": [7, 7],
+      "message_id": 730
     }
   ],
   "titles": [
@@ -66,12 +71,16 @@
       "name": "Far Cry Primal",
       "episode": 14,
       "is_final": false
+    },
+    {
+      "name": "Max Payne",
+      "episode": 7,
+      "is_final": true
     }
   ],
   "cache": {
     "durations": {
-      "1735746945.2557452": 2500.5,
-      "1735749446.7560816": 4785.9
+      "1735754438.3875327": 3214.7
     }
   }
 }
