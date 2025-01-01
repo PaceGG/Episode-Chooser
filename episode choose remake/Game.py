@@ -211,8 +211,11 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     if is_last_session: duration = 120
     count_videos = get_count_videos()
 
-    print(f"В {processed_game.name} есть видео продолжительностью {duration} минут. Добавить их к сумме?")
-    user_time = input(f"Введите время для {processed_game.name}: ")
+    if not is_last_session:
+        print(f"В {processed_game.name} есть видео продолжительностью {duration} минут. Добавить их к сумме?")
+        user_time = input(f"Введите время для {processed_game.name}: ")
+    else:
+        user_time = "-"
     if user_time == "": user_time = duration
     elif user_time == "-":
         user_time = 120
@@ -225,12 +228,15 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     print("\n"*4)
 
 
-    try:
-        bufer_user_content_time = sumtime(paste().split("\n")[-2].split()[1]) - 40 * get_count_videos()
-        print(f"В буфере обмена есть время контента: {bufer_user_content_time}")
-    except:
-        bufer_user_content_time = 0
-    user_content_time = input("Введите продолжительность контента: ")
+    if not is_last_session:
+        try:
+            bufer_user_content_time = sumtime(paste().split("\n")[-2].split()[1]) - 40 * get_count_videos()
+            print(f"В буфере обмена есть время контента: {bufer_user_content_time}")
+        except:
+            bufer_user_content_time = 0
+        user_content_time = input("Введите продолжительность контента: ")
+    else:
+        user_content_time = 0
     if user_content_time == "": user_content_time = bufer_user_content_time
     else: user_content_time = int(user_content_time)
     processed_game.content_time += user_content_time
