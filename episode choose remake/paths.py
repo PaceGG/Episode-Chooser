@@ -5,7 +5,7 @@ project_dir = Path(__file__).resolve().parent.parent
 root_dir = Path(__file__).resolve().parent
 site_db_path = Path("D:\\Program Files\\HTML\\Episode-Chooser\\react-remake\\db.json")
 games_dir = Path("D:\\Games")
-video_dir = Path("D:\\Program Files\\Shadow Play")
+video_dir = Path("D:\\Program Files\\Videos")
 
 extra_names = [
     "", # First game

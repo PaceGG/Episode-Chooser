@@ -1,3 +1,4 @@
+print("Загрузка модуля telegram_utils")
 from requests import post
 from dotenv import load_dotenv
 from pathlib import Path

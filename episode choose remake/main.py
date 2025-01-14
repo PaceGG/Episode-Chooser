@@ -3,9 +3,8 @@ from data import Data
 import paths
 from database_info import print_info
 from youtube_utils import EmptyMessage
-import telegram_utils
 from youtube_utils import edit_empty_messages
-from os import startfile, chdir, system
+from os import startfile, chdir
 from pathlib import Path
 import json
 from directory_statistics import get_duration
@@ -29,9 +28,11 @@ def save_data(stat, games, empty_messages, titles):
 class Main:
     def main(self):
         # games initialization
+        print("Инициализация игр")
         games = [Game(name=game_name) for game_name in paths.game_names[:2]]
         games.append(Game(name="SnowRunner [ng+]", safe_name="SnowRunner"))
 
+        print("Инициализация данных")
         stat = Data("stat")
         empty_messages: list[EmptyMessage] = Data("empty_messages").empty_messages
         titles = Data("titles").titles

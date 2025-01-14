@@ -1,3 +1,4 @@
+print("Загрузка модуля game")
 import paths
 import json
 from pathlib import Path
