@@ -17,7 +17,7 @@ def save_data(stat, games, empty_messages, titles):
 
     data = {}
     data["stat"] = stat.__dict__
-    data["game"] = [item.__dict__() for item in games]
+    data["game"] = [item.as_dict() for item in games]
     data["empty_messages"] = [item.__dict__ for item in empty_messages]
     data["titles"] = [item.__dict__ for item in titles]
     data["cache"] = cache
