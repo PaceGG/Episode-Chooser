@@ -37,7 +37,11 @@ def header_rename(game_name: str):
     headers_dir = Path.joinpath(paths.video_dir, "headers")
     header_default_path = Path.joinpath(headers_dir, "header.png") 
     header_path = Path.joinpath(headers_dir, game_name + ".png")
-    header_default_path.rename(header_path)
+    try:
+        header_default_path.rename(header_path)
+    except:
+        print("Ошибка: header отсутствует")
+        while True: pass
 
 def intc(s):
     n = ""

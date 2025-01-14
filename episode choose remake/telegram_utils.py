@@ -1,5 +1,5 @@
 print("Загрузка модуля telegram_utils")
-from requests import post
+from httpx import post
 from dotenv import load_dotenv
 from pathlib import Path
 import os
@@ -9,6 +9,8 @@ load_dotenv("gitignore/.env")
 
 bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
 chat_id = os.getenv("TELEGRAM_CHAT_ID")
+
+
 
 def send_image(image_path: Path, caption=None):
     url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"

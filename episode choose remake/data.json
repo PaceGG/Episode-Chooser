@@ -1,72 +1,70 @@
 {
-  "stat": {
-    "last_update": 1736776486.566454,
-    "count_sr_session": 3,
-    "count_sr_date": 1735586734,
-    "games_log": [
-      "Max Payne",
-      "Max Payne 2: The Fall of Max Payne",
-      "Far Cry Primal"
+    "stat": {
+        "last_update": 1736867734.7153628,
+        "count_sr_session": 5,
+        "count_sr_date": 1735586734,
+        "games_log": [
+            "Max Payne 2: The Fall of Max Payne",
+            "Far Cry Primal",
+            "Max Payne 2: The Fall of Max Payne"
+        ],
+        "games_list": [
+            "Far Cry Primal",
+            "Max Payne 3"
+        ],
+        "process_game_id": -1,
+        "process_game_message_id": -1
+    },
+    "game": [
+        {
+            "name": "Far Cry Primal",
+            "count_session": 0,
+            "count_episode": 17,
+            "time_limit": 111,
+            "content_time": -1,
+            "user_time": 0
+        },
+        {
+            "name": "Max Payne 3",
+            "count_session": 0,
+            "count_episode": 0,
+            "time_limit": 120,
+            "content_time": 0,
+            "user_time": 0
+        },
+        {
+            "name": "SnowRunner [ng+]",
+            "count_session": 9,
+            "count_episode": 9,
+            "time_limit": 100,
+            "content_time": 0,
+            "user_time": 0
+        }
     ],
-    "games_list": ["Far Cry Primal", "Max Payne 2: The Fall of Max Payne"],
-    "process_game_id": -1,
-    "process_game_message_id": -1
-  },
-  "game": [
-    {
-      "name": "Far Cry Primal",
-      "count_session": 1,
-      "count_episode": 17,
-      "time_limit": 104,
-      "content_time": -1,
-      "user_time": 0
-    },
-    {
-      "name": "Max Payne 2: The Fall of Max Payne",
-      "count_session": 1,
-      "count_episode": 3,
-      "time_limit": 120,
-      "content_time": 0,
-      "user_time": 0
-    },
-    {
-      "name": "SnowRunner [ng+]",
-      "count_session": 9,
-      "count_episode": 9,
-      "time_limit": 100,
-      "content_time": 0,
-      "user_time": 0
+    "empty_messages": [
+        {
+            "name": "Far Cry Primal",
+            "ep_range": [
+                15,
+                17
+            ],
+            "message_id": 733
+        },
+        {
+            "name": "Max Payne 2: The Fall of Max Payne",
+            "ep_range": [
+                4,
+                6
+            ],
+            "message_id": 734
+        }
+    ],
+    "titles": [],
+    "cache": {
+        "durations": {
+            "1736868659.4869514": 2176.02,
+            "1736870836.636131": 2808.04,
+            "1736873645.4865417": 2665.2
+        }
     }
-  ],
-  "empty_messages": [
-    {
-      "name": "Far Cry Primal",
-      "ep_range": [15, 17],
-      "message_id": 733
-    }
-  ],
-  "titles": [
-    {
-      "name": "Far Cry Primal",
-      "episode": 15,
-      "is_final": false
-    },
-    {
-      "name": "Far Cry Primal",
-      "episode": 16,
-      "is_final": false
-    },
-    {
-      "name": "Far Cry Primal",
-      "episode": 17,
-      "is_final": false
-    }
-  ],
-  "cache": {
-    "durations": {
-      "1736776683.0479743": 2705.33,
-      "1736779390.9746578": 2874.18,
-      "1736782280.8915496": 2904.67
-    }
-  }
 }

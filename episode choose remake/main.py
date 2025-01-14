@@ -44,6 +44,8 @@ class Main:
 
         # chance calculate
         chance_calculate(games)
+        
+        save_data(stat, games, empty_messages, titles)
 
         # info
         print_info(games, stat, titles)

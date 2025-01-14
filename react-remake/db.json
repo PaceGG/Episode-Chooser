@@ -1058,9 +1058,9 @@
       "additionalGames": [
         {
           "name": "Max Payne",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 20042,
+          "numberOfEps": 7
         },
         {
           "name": "Max Payne 2: The Fall of Max Payne",
@@ -1070,7 +1070,7 @@
         },
         {
           "name": "Max Payne 3",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         }
@@ -1412,6 +1412,59 @@
           "numberOfEps": 56
         }
       ]
+    },
+    {
+      "id": "9a04",
+      "mainName": "Alan Wake",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "Alan Wake Remastered",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Alan Wake’s American Nightmare",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Alan Wake 2",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        }
+      ]
+    },
+    {
+      "id": "f560",
+      "mainName": "Control",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "Control",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Control 2",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        }
+      ]
+    },
+    {
+      "id": "894d",
+      "mainName": "Quantum Break",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": []
     }
   ],
   "showcase": [
@@ -1423,9 +1476,9 @@
     },
     {
       "id": "1",
-      "name": "Max Payne 2: The Fall of Max Payne",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/12150/library_600x900_2x.jpg?t=1573772353",
-      "color": "#db2027"
+      "name": "Max Payne 3",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/204100/library_600x900_2x.jpg?t=1573772630",
+      "color": "#f5bf26"
     }
   ],
   "links": [
