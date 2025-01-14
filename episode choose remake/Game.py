@@ -42,6 +42,7 @@ def get_short_name(name):
 
 class Game:
     def __init__(self, name: str, **kwargs):
+        print(f"Инициализация {name}")
         try:
             self.id = paths.game_names.index(name)
         except ValueError:
@@ -61,7 +62,7 @@ class Game:
 
         stat = Data("stat")
         with open(Path.joinpath(paths.root_dir, 'data.json'), 'r', encoding='utf-8') as file:
-            if self.name not in stat.games_list and self.id != 2:
+            if (self.name not in stat.games_list and self.id != 2):
                 game_data = {
                     "name": self.name,
                     "count_session": 0,
@@ -82,6 +83,8 @@ class Game:
         self.content_time = game_data["content_time"]
         self.user_time = game_data["user_time"]
 
+        if self.count_session == 0: self.is_game_new = True
+
         self.chance = 1
         self.is_selected = False
 
@@ -94,7 +97,7 @@ class Game:
     def __repr__(self):
         return f"class {self.__class__.__name__}(\n{'\n'.join(f'{k} = {v!r}' for k, v in vars(self).items())})"
     
-    def __dict__(self):
+    def as_dict(self):
         return {
             "name": self.name,
             "count_session": self.count_session,
