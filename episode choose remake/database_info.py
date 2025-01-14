@@ -1,3 +1,4 @@
+print("Загрузка модуля database_info")
 from psutil import disk_usage
 import paths
 from data import Data

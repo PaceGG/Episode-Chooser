@@ -1,3 +1,4 @@
+print("Загрузка модуля youtube_utils")
 import os
 from dotenv import load_dotenv
 from util import intc
@@ -53,6 +54,7 @@ def add_empty_message(empty_messages: list[EmptyMessage], game, count_videos, me
     empty_messages.append(EmptyMessage(game.name, [game.count_episode + 1, game.count_episode + count_videos], message_id))
 
 def get_yt_videos():
+    print("Загрузка видео с Youtube")
     from googleapiclient.discovery import build
 
     api_key = os.getenv("YT_API_KEY")
@@ -122,7 +124,13 @@ def edit_empty_messages(empty_messages, stat):
     if today() - stat.last_update < 12*60*60 and __name__ != "__main__": return
 
     yt_videos = get_yt_videos()
-    for empty_message in empty_messages:
-        edit_empty_message(empty_message, yt_videos)
+    # for empty_message in empty_messages:
+    #     print(f"Обработка {empty_message.name} {empty_message.ep_range} {empty_message.message_id}")
+    #     edit_empty_message(empty_message, yt_videos)
+
+    empty_messages[:] = [
+        empty_message for empty_message in empty_messages
+        if not edit_empty_message(empty_message, yt_videos)
+    ]
 
     stat.last_update = today()
