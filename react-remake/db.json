@@ -1064,9 +1064,9 @@
         },
         {
           "name": "Max Payne 2: The Fall of Max Payne",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 15224,
+          "numberOfEps": 6
         },
         {
           "name": "Max Payne 3",
@@ -1083,7 +1083,7 @@
       "additionalGames": [
         {
           "name": "Manhunt",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -1476,9 +1476,9 @@
     },
     {
       "id": "1",
-      "name": "Max Payne 3",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/204100/library_600x900_2x.jpg?t=1573772630",
-      "color": "#f5bf26"
+      "name": "Manhunt",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/12130/library_600x900_2x.jpg?t=1573772186",
+      "color": "#ef4648"
     }
   ],
   "links": [

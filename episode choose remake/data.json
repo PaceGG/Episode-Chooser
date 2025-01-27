@@ -1,16 +1,16 @@
 {
     "stat": {
-        "last_update": 1736867734.7153628,
+        "last_update": 1737967525.7258675,
         "count_sr_session": 5,
         "count_sr_date": 1735586734,
         "games_log": [
-            "Max Payne 2: The Fall of Max Payne",
             "Far Cry Primal",
-            "Max Payne 2: The Fall of Max Payne"
+            "Max Payne 3",
+            "Max Payne 3"
         ],
         "games_list": [
             "Far Cry Primal",
-            "Max Payne 3"
+            "Manhunt"
         ],
         "process_game_id": -1,
         "process_game_message_id": -1
@@ -19,13 +19,13 @@
         {
             "name": "Far Cry Primal",
             "count_session": 0,
-            "count_episode": 17,
-            "time_limit": 111,
-            "content_time": -1,
+            "count_episode": 22,
+            "time_limit": 120,
+            "content_time": 8,
             "user_time": 0
         },
         {
-            "name": "Max Payne 3",
+            "name": "Manhunt",
             "count_session": 0,
             "count_episode": 0,
             "time_limit": 120,
@@ -45,26 +45,50 @@
         {
             "name": "Far Cry Primal",
             "ep_range": [
-                15,
-                17
+                21,
+                22
             ],
-            "message_id": 733
+            "message_id": 737
         },
         {
-            "name": "Max Payne 2: The Fall of Max Payne",
+            "name": "Max Payne 3",
             "ep_range": [
                 4,
                 6
             ],
-            "message_id": 734
+            "message_id": 738
+        },
+        {
+            "name": "Max Payne 3",
+            "ep_range": [
+                7,
+                9
+            ],
+            "message_id": 739
         }
     ],
-    "titles": [],
+    "titles": [
+        {
+            "name": "Max Payne 3",
+            "episode": 7,
+            "is_final": false
+        },
+        {
+            "name": "Max Payne 3",
+            "episode": 8,
+            "is_final": false
+        },
+        {
+            "name": "Max Payne 3",
+            "episode": 9,
+            "is_final": true
+        }
+    ],
     "cache": {
         "durations": {
-            "1736868659.4869514": 2176.02,
-            "1736870836.636131": 2808.04,
-            "1736873645.4865417": 2665.2
+            "1737920812.8176813": 3399.77,
+            "1737924214.983624": 2049.79,
+            "1737926276.1506693": 2982.08
         }
     }
 }

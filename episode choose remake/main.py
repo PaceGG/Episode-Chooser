@@ -79,10 +79,13 @@ class Main:
 
         save_data(stat, games, empty_messages, titles)
         clear_selection(games)
-        print_info(games, stat, titles)
+        print_info(games, stat, titles, print_flag=False)
 
         if response:
-            startfile(response)
+            try:
+                startfile(response)
+            except:
+                print(f"Ярлык с игрой не найден.")
 
         
 

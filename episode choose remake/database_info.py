@@ -8,11 +8,11 @@ from time_format import today, pc_date_format, short_date_format, time_format
 from os import system
 import telegram_utils
 
-def print_info(games, stat, titles):
+def print_info(games, stat, titles, print_flag=True):
     info = get_info(games, stat, check_force(games, stat), titles)
     pc_info = info["pc"]
     system("cls")
-    print(pc_info)
+    if print_flag: print(pc_info)
 
     tg_info = info["tg"]
     telegram_utils.edit_message(tg_info)

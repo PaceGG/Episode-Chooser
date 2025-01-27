@@ -83,7 +83,7 @@ class Game:
         self.content_time = game_data["content_time"]
         self.user_time = game_data["user_time"]
 
-        if self.count_session == 0: self.is_game_new = True
+        if self.count_episode == 0: self.is_game_new = True
 
         self.chance = 1
         self.is_selected = False
@@ -92,7 +92,8 @@ class Game:
         if not self.header.exists(): header_rename(self.safe_name)
 
     def content_time_format(self):
-        return f"{"+" if self.content_time > 0 else ""}{self.content_time}"
+        content_time_debt = -self.content_time
+        return f"{"+" if content_time_debt > 0 else ""}{content_time_debt}"
 
     def __repr__(self):
         return f"class {self.__class__.__name__}(\n{'\n'.join(f'{k} = {v!r}' for k, v in vars(self).items())})"
@@ -116,7 +117,8 @@ def chance_calculate(games: list[Game]):
 
 def new_game(games: list[Game], stat: Data):
     for game in games[:2]:
-        if game.is_game_new:
+        print(f"{game.name}: {game.is_game_new}")
+        if game.is_game_new and stat.process_game_id == -1:
                 stat.games_list[game.id] = game.name
 
                 games[(not game.id)].count_session = 0
@@ -216,7 +218,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     count_videos = get_count_videos()
 
     if not is_last_session:
-        print(f"В {processed_game.name} есть видео продолжительностью {duration} минут. Добавить их к сумме?")
+        print(f"В {processed_game.name} есть видео продолжительностью {duration} минут. Добавить их к сумме? Введите \"-\" для обозначения финальной сессии")
         user_time = input(f"Введите время для {processed_game.name}: ")
     else:
         user_time = "-"
@@ -242,7 +244,10 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     else:
         user_content_time = 0
     if user_content_time == "": user_content_time = bufer_user_content_time
-    else: user_content_time = int(user_content_time)
+    elif ":" in str(user_content_time):
+        user_content_time = sumtime(user_content_time) - 40 * get_count_videos()
+    else:
+        user_content_time = int(user_content_time)
     processed_game.content_time += user_content_time
 
     add_titles(titles, processed_game, count_videos, is_last_session)
