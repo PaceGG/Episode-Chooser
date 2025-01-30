@@ -222,6 +222,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
         user_time = input(f"Введите время для {processed_game.name}: ")
     else:
         user_time = "-"
+
     if user_time == "": user_time = duration
     elif user_time == "-":
         user_time = 120
@@ -240,12 +241,18 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
             print(f"В буфере обмена есть время контента: {bufer_user_content_time}")
         except:
             bufer_user_content_time = 0
-        user_content_time = input("Введите продолжительность контента: ")
+        user_content_time = input("Введите \"-\" для обозначения финальной сессии. Введите продолжительность контента: ")
     else:
         user_content_time = 0
+
     if user_content_time == "": user_content_time = bufer_user_content_time
     elif ":" in str(user_content_time):
         user_content_time = sumtime(user_content_time) - 40 * get_count_videos()
+    elif " " in str(user_content_time):
+        user_content_time = sum([int(i) for i in user_content_time.split(" ") if i != ""]) - 40 * get_count_videos()
+    elif user_content_time == "-":
+        user_content_time = 0
+        is_last_session = True
     else:
         user_content_time = int(user_content_time)
     processed_game.content_time += user_content_time
