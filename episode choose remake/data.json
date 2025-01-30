@@ -1,12 +1,12 @@
 {
     "stat": {
-        "last_update": 1737967525.7258675,
-        "count_sr_session": 5,
+        "last_update": 1738230997.058105,
+        "count_sr_session": 4,
         "count_sr_date": 1735586734,
         "games_log": [
-            "Far Cry Primal",
             "Max Payne 3",
-            "Max Payne 3"
+            "Max Payne 3",
+            "Manhunt"
         ],
         "games_list": [
             "Far Cry Primal",
@@ -26,10 +26,10 @@
         },
         {
             "name": "Manhunt",
-            "count_session": 0,
-            "count_episode": 0,
-            "time_limit": 120,
-            "content_time": 0,
+            "count_session": 1,
+            "count_episode": 3,
+            "time_limit": 76,
+            "content_time": -5,
             "user_time": 0
         },
         {
@@ -43,52 +43,36 @@
     ],
     "empty_messages": [
         {
-            "name": "Far Cry Primal",
+            "name": "Manhunt",
             "ep_range": [
-                21,
-                22
+                1,
+                3
             ],
-            "message_id": 737
-        },
-        {
-            "name": "Max Payne 3",
-            "ep_range": [
-                4,
-                6
-            ],
-            "message_id": 738
-        },
-        {
-            "name": "Max Payne 3",
-            "ep_range": [
-                7,
-                9
-            ],
-            "message_id": 739
+            "message_id": 740
         }
     ],
     "titles": [
         {
-            "name": "Max Payne 3",
-            "episode": 7,
+            "name": "Manhunt",
+            "episode": 1,
             "is_final": false
         },
         {
-            "name": "Max Payne 3",
-            "episode": 8,
+            "name": "Manhunt",
+            "episode": 2,
             "is_final": false
         },
         {
-            "name": "Max Payne 3",
-            "episode": 9,
-            "is_final": true
+            "name": "Manhunt",
+            "episode": 3,
+            "is_final": false
         }
     ],
     "cache": {
         "durations": {
-            "1737920812.8176813": 3399.77,
-            "1737924214.983624": 2049.79,
-            "1737926276.1506693": 2982.08
+            "1738179001.173644": 2871.15,
+            "1738231066.5128284": 4086.67,
+            "1738235519.0469666": 3118.97
         }
     }
 }
