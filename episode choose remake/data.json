@@ -1,12 +1,12 @@
 {
     "stat": {
-        "last_update": 1738230997.058105,
-        "count_sr_session": 4,
+        "last_update": 1738315707.340941,
+        "count_sr_session": 1,
         "count_sr_date": 1735586734,
         "games_log": [
-            "Max Payne 3",
-            "Max Payne 3",
-            "Manhunt"
+            "Manhunt",
+            "Far Cry Primal",
+            "Far Cry Primal"
         ],
         "games_list": [
             "Far Cry Primal",
@@ -18,18 +18,18 @@
     "game": [
         {
             "name": "Far Cry Primal",
-            "count_session": 0,
-            "count_episode": 22,
-            "time_limit": 120,
-            "content_time": 8,
+            "count_session": 2,
+            "count_episode": 27,
+            "time_limit": 94,
+            "content_time": 1,
             "user_time": 0
         },
         {
             "name": "Manhunt",
-            "count_session": 1,
-            "count_episode": 3,
-            "time_limit": 76,
-            "content_time": -5,
+            "count_session": 2,
+            "count_episode": 5,
+            "time_limit": 120,
+            "content_time": -11,
             "user_time": 0
         },
         {
@@ -49,30 +49,38 @@
                 3
             ],
             "message_id": 740
-        }
-    ],
-    "titles": [
-        {
-            "name": "Manhunt",
-            "episode": 1,
-            "is_final": false
         },
         {
             "name": "Manhunt",
-            "episode": 2,
-            "is_final": false
+            "ep_range": [
+                4,
+                5
+            ],
+            "message_id": 742
         },
         {
-            "name": "Manhunt",
-            "episode": 3,
-            "is_final": false
+            "name": "Far Cry Primal",
+            "ep_range": [
+                23,
+                24
+            ],
+            "message_id": 743
+        },
+        {
+            "name": "Far Cry Primal",
+            "ep_range": [
+                25,
+                27
+            ],
+            "message_id": 745
         }
     ],
+    "titles": [],
     "cache": {
         "durations": {
-            "1738179001.173644": 2871.15,
-            "1738231066.5128284": 4086.67,
-            "1738235519.0469666": 3118.97
+            "1738318566.3816369": 3127.4,
+            "1738321695.5151887": 2865.11,
+            "1738324618.7800832": 3071.53
         }
     }
 }
