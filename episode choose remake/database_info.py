@@ -117,7 +117,7 @@ def get_content_time_info(games: list[Game]):
     pc_info = ""
     for game in games:
         if game.content_time != 0:
-            pc_info += f"{game.full_name}: [{game.content_time_format()}]"
+            pc_info += f"{game.full_name}: [{game.content_time_format()}]\n"
 
     return pc_info
 
