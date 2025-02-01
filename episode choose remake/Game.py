@@ -134,39 +134,40 @@ def clear_selection(games: list[Game]):
     for game in games:
         game.is_selected = False
 
-def check_force(games: list[Game], stat: Data):
-    if games[0].count_session == games[1].count_session == 0: return True
-    if len(set(stat.games_log)) == 1: return True
-    return False
-
-def select_game(games: list[Game], stat: Data, skip_roulette = False):
+def select_game(games: list[Game], stat: Data, skip_roulette = False, make_selection = True):
     # force new game (not in game list)
     selected_game = next((game for game in games[:2] if game.is_selected), None)
     if selected_game is not None:
         return selected_game
 
-    # force new game (sessions == 0)
-    if games[0].count_session == games[1].count_session == 0:
-        selected_game = max(games[:2], key=lambda game: game.video_dir.stat().st_birthtime)
-        selected_game.is_selected = True
-        return selected_game
-    
+    # force new game (episodes == 0)
+    for game in games[:2]:
+        if game.count_episode == 0:
+            game.is_selected = make_selection
+            return game
+        
     # force sr
-    if stat.count_sr_session <= 0 and stat.count_sr_date <= today():
-        games[2].is_selected = True
-        return selected_game
-
+    try:
+        if stat.count_sr_session <= 0 and stat.count_sr_date <= today():
+            games[2].is_selected = make_selection
+            return games[2]
+    except:
+        pass
+    
     # force unpopular game (games_log)
     if len(set(stat.games_log)) == 1:
         unpopular_game = next((game for game in games[:2] if game.name in stat.games_log), None)
         if unpopular_game is not None:
-            unpopular_game.is_selected = True
+            unpopular_game.is_selected = make_selection
             return unpopular_game
 
     # no force
-    selected_game = spin_roulette(games, skip=skip_roulette)
-    selected_game.is_selected = True
-    return selected_game
+    if make_selection:
+        selected_game = spin_roulette(games, skip=skip_roulette)
+        selected_game.is_selected = make_selection
+        return selected_game
+    else:
+        return False
 
 def run_game(games: list[Game], stat: Data):
     set_eng_layout()
@@ -180,7 +181,6 @@ def run_game(games: list[Game], stat: Data):
 
     
     if selected_game.id != 2:
-        stat.add_game_log(selected_game.name)
         stat.count_sr_session -= 1
     else:
         stat.count_sr_session += 5
@@ -231,6 +231,9 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     else: user_time = int(user_time)
     processed_game.user_time = user_time
     equalize_time_limit(games, stat)
+
+    if processed_game.id != 2:
+        stat.add_game_log(processed_game.name)
 
     print("\n"*4)
 
