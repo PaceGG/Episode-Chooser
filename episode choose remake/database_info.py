@@ -2,14 +2,14 @@ print("Загрузка модуля database_info")
 from psutil import disk_usage
 import paths
 from data import Data
-from game import Game, check_force
+from game import Game, select_game
 from directory_statistics import *
 from time_format import today, pc_date_format, short_date_format, time_format
 from os import system
 import telegram_utils
 
 def print_info(games, stat, titles, print_flag=True):
-    info = get_info(games, stat, check_force(games, stat), titles)
+    info = get_info(games, stat, select_game(games, stat, make_selection=False), titles)
     pc_info = info["pc"]
     system("cls")
     if print_flag: print(pc_info)
@@ -17,7 +17,7 @@ def print_info(games, stat, titles, print_flag=True):
     tg_info = info["tg"]
     telegram_utils.edit_message(tg_info)
 
-def get_info(games: list[Game], stat: Data, is_select_forced: bool, titles):
+def get_info(games: list[Game], stat: Data, is_select_forced, titles):
     pc_info = ""
     tg_info = ""
 
@@ -27,7 +27,7 @@ def get_info(games: list[Game], stat: Data, is_select_forced: bool, titles):
     pc_info += sr_info["pc"] + "\n"
     tg_info += sr_info["tg"] + "\n\n"
 
-    chacnes_info = get_chance_info(games[:2], is_select_forced)
+    chacnes_info = get_chance_info(games, stat, is_select_forced)
     pc_info += chacnes_info["pc"] + "\n"
     tg_info += chacnes_info["tg"] + "\n"
 
@@ -82,13 +82,14 @@ def get_snowrunner_info(stat: Data, sr_game: Game):
 
     return {"pc": pc_info, "tg": tg_info}
 
-def get_chance_info(games: list[Game], is_select_forced):
+def get_chance_info(games: list[Game], stat: Data, is_select_forced):
     selected_game = next((game for game in games if game.is_selected), None)
 
     pc_info = ""
     tg_info = ""
 
     if is_select_forced:
+        selected_game = select_game(games[:2], stat, make_selection=False)
         pc_info += f"Force: {selected_game.full_name}\n"
         tg_info += f"• Force: {selected_game.short_name}\n"
     
