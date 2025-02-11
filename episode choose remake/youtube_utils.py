@@ -51,7 +51,7 @@ def add_titles(titles: list[Title], game, count_videos, is_final):
         titles.append(Title(game.full_name, episode_num, is_final=is_final and episode_num == game.count_episode + count_videos))
 
 def add_empty_message(empty_messages: list[EmptyMessage], game, count_videos, message_id):
-    empty_messages.append(EmptyMessage(game.name, [game.count_episode + 1, game.count_episode + count_videos], message_id))
+    empty_messages.append(EmptyMessage(game.full_name, [game.count_episode + 1, game.count_episode + count_videos], message_id))
 
 def get_yt_videos():
     print("Загрузка видео с Youtube")
@@ -133,4 +133,4 @@ def edit_empty_messages(empty_messages, stat):
         if not edit_empty_message(empty_message, yt_videos)
     ]
 
-    stat.last_update = today()
+    stat.last_update = today()    

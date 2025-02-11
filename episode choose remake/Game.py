@@ -156,7 +156,7 @@ def select_game(games: list[Game], stat: Data, skip_roulette = False, make_selec
     
     # force unpopular game (games_log)
     if len(set(stat.games_log)) == 1:
-        unpopular_game = next((game for game in games[:2] if game.name in stat.games_log), None)
+        unpopular_game = next((game for game in games[:2] if game.name not in stat.games_log), None)
         if unpopular_game is not None:
             unpopular_game.is_selected = make_selection
             return unpopular_game
