@@ -3,9 +3,11 @@ from pathlib import Path
 
 project_dir = Path(__file__).resolve().parent.parent
 root_dir = Path(__file__).resolve().parent
-site_db_path = Path("D:\\Program Files\\HTML\\Episode-Chooser\\react-remake\\db.json")
-games_dir = Path("D:\\Games")
-video_dir = Path("D:\\Program Files\\Videos")
+site_db_path = Path.joinpath(project_dir, "react-remake\\db.json")
+
+import local_data
+games_dir = local_data.games_dir
+video_dir = local_data.video_dir
 
 extra_names = [
     "", # First game

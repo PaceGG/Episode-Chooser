@@ -52,7 +52,7 @@ def get_info(games: list[Game], stat: Data, is_select_forced, titles):
 
 def disk_info(games: list[Game], titles: list):
     info_str = ""
-
+    
     free_space = disk_usage(str(paths.video_dir.drive)).free/1024/1024/1024
     info_str += f"Место на диске: {free_space:.2f} GB ~ {int(free_space//15)} видео\n"
 
