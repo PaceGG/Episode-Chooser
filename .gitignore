@@ -2,3 +2,4 @@ gitignore
 test.py
 layout.pyw
 episode choose remake/img
+episode choose remake/local_data.py

@@ -1,6 +1,6 @@
 {
     "stat": {
-        "last_update": 1739267144.5575655,
+        "last_update": 1739289498.7393193,
         "count_sr_session": 10,
         "count_sr_date": 1739871959.2131414,
         "games_log": [
@@ -37,19 +37,11 @@
             "count_session": 12,
             "count_episode": 11,
             "time_limit": 107,
-            "content_time": 80,
+            "content_time": 0,
             "user_time": 0
         }
     ],
     "empty_messages": [
-        {
-            "name": "Far Cry 5",
-            "ep_range": [
-                7,
-                9
-            ],
-            "message_id": 766
-        },
         {
             "name": "Minecraft: Story Mode",
             "ep_range": [
@@ -57,14 +49,6 @@
                 10
             ],
             "message_id": 767
-        },
-        {
-            "name": "Far Cry 5",
-            "ep_range": [
-                10,
-                11
-            ],
-            "message_id": 770
         },
         {
             "name": "SnowRunner [ng+]: Мичиган",
