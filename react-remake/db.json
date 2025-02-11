@@ -869,13 +869,13 @@
         },
         {
           "name": "Far Cry Primal",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 119599,
+          "numberOfEps": 36
         },
         {
           "name": "Far Cry 5",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -978,9 +978,9 @@
         },
         {
           "name": "Call of Duty: WWII (2017)",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 18032,
+          "numberOfEps": 7
         },
         {
           "name": "Call of Duty: Modern Warfare (2019)",
@@ -1058,21 +1058,21 @@
       "additionalGames": [
         {
           "name": "Max Payne",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 20042,
+          "numberOfEps": 7
         },
         {
           "name": "Max Payne 2: The Fall of Max Payne",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 15224,
+          "numberOfEps": 6
         },
         {
           "name": "Max Payne 3",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 23753,
+          "numberOfEps": 9
         }
       ]
     },
@@ -1083,13 +1083,13 @@
       "additionalGames": [
         {
           "name": "Manhunt",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 29364,
+          "numberOfEps": 8
         },
         {
           "name": "Manhunt 2",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         }
@@ -1103,7 +1103,7 @@
       "additionalGames": [
         {
           "name": "Minecraft: Story Mode",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -1123,18 +1123,6 @@
       "additionalGames": [
         {
           "name": "Assassin’s Creed",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
-        },
-        {
-          "name": "Assassin’s Creed: Altaïr’s Chronicles",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
-        },
-        {
-          "name": "Assassin’s Creed: Bloodlines",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
@@ -1170,19 +1158,7 @@
           "numberOfEps": 0
         },
         {
-          "name": "Assassin’s Creed III Assassin’s Creed III: Liberation",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
-        },
-        {
           "name": "Assassin’s Creed IV: Black Flag",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
-        },
-        {
-          "name": "Assassin’s Creed: Pirates",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
@@ -1195,12 +1171,6 @@
         },
         {
           "name": "Assassin’s Creed Unity",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
-        },
-        {
-          "name": "Assassin’s Creed Identity",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
@@ -1243,12 +1213,6 @@
         },
         {
           "name": "Assassin’s Creed Odyssey",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
-        },
-        {
-          "name": "Assassin’s Creed Rebellion",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
@@ -1412,20 +1376,93 @@
           "numberOfEps": 56
         }
       ]
+    },
+    {
+      "id": "9a04",
+      "mainName": "Alan Wake",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "Alan Wake Remastered",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Alan Wake’s American Nightmare",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Alan Wake 2",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        }
+      ]
+    },
+    {
+      "id": "f560",
+      "mainName": "Control",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "Control",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Control 2",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        }
+      ]
+    },
+    {
+      "id": "894d",
+      "mainName": "Quantum Break",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": []
+    },
+    {
+      "id": "09d4",
+      "mainName": "Kingdom Come: Deliverance",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "Kingdom Come: Deliverance",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Kingdom Come: Deliverance II",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        }
+      ]
     }
   ],
   "showcase": [
     {
       "id": "0",
-      "name": "Far Cry Primal",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/371660/library_600x900_2x.jpg?t=1576501678",
-      "color": "#ef8b1b"
+      "name": "Far Cry 5",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/552520/library_600x900_2x.jpg?t=1678905918",
+      "color": "#c02926"
     },
     {
       "id": "1",
-      "name": "Max Payne",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/12140/library_600x900_2x.jpg?t=1573772269",
-      "color": "#b40000"
+      "name": "Minecraft: Story Mode",
+      "coverart": "https://i.playground.ru/e/5kYsswWlUPTiJ2T4F_xq4A.jpeg",
+      "color": "#cfa355"
     }
   ],
   "links": [

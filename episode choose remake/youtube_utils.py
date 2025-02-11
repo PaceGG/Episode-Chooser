@@ -1,3 +1,4 @@
+print("Загрузка модуля youtube_utils")
 import os
 from dotenv import load_dotenv
 from util import intc
@@ -45,14 +46,15 @@ class Title:
             return f"• № {episode}{f" - Финал" if self.is_final else ""} • {self.name}"
 
 
-def add_titles(titles: list[Title], game, count_videos):
+def add_titles(titles: list[Title], game, count_videos, is_final):
     for episode_num in range(game.count_episode + 1, game.count_episode + count_videos + 1):
-        titles.append(Title(game.full_name, episode_num))
+        titles.append(Title(game.full_name, episode_num, is_final=is_final and episode_num == game.count_episode + count_videos))
 
 def add_empty_message(empty_messages: list[EmptyMessage], game, count_videos, message_id):
-    empty_messages.append(EmptyMessage(game.name, [game.count_episode + 1, game.count_episode + count_videos], message_id))
+    empty_messages.append(EmptyMessage(game.full_name, [game.count_episode + 1, game.count_episode + count_videos], message_id))
 
 def get_yt_videos():
+    print("Загрузка видео с Youtube")
     from googleapiclient.discovery import build
 
     api_key = os.getenv("YT_API_KEY")
@@ -111,7 +113,7 @@ def edit_empty_message(empty_message: EmptyMessage, yt_videos):
         titles += f"• {name}\n"
 
     if names:
-        new_text = f"{empty_message.name}: № {empty_message.ep_range[0] + 1}{f"-{empty_message.ep_range[0] + len(names)-1}" if len(names) > 1 else ""}:\n{titles}"
+        new_text = f"{empty_message.name}: № {empty_message.ep_range[0]}{f"-{empty_message.ep_range[0] + len(names)-1}" if len(names) > 1 else ""}:\n{titles}"
         telegram_utils.edit_caption(new_text, empty_message.message_id)
 
         return True
@@ -122,7 +124,13 @@ def edit_empty_messages(empty_messages, stat):
     if today() - stat.last_update < 12*60*60 and __name__ != "__main__": return
 
     yt_videos = get_yt_videos()
-    for empty_message in empty_messages:
-        edit_empty_message(empty_message, yt_videos)
+    # for empty_message in empty_messages:
+    #     print(f"Обработка {empty_message.name} {empty_message.ep_range} {empty_message.message_id}")
+    #     edit_empty_message(empty_message, yt_videos)
 
-    stat.last_update = today()
+    empty_messages[:] = [
+        empty_message for empty_message in empty_messages
+        if not edit_empty_message(empty_message, yt_videos)
+    ]
+
+    stat.last_update = today()    
