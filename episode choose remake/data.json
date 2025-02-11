@@ -1,96 +1,84 @@
 {
     "stat": {
-        "last_update": 1738405392.3458216,
-        "count_sr_session": 0,
-        "count_sr_date": 1735586734,
+        "last_update": 1739267144.5575655,
+        "count_sr_session": 10,
+        "count_sr_date": 1739871959.2131414,
         "games_log": [
-            "Far Cry Primal",
-            "Far Cry Primal",
-            "Far Cry Primal"
+            "Far Cry 5",
+            "Minecraft: Story Mode",
+            "Far Cry 5"
         ],
         "games_list": [
-            "Far Cry Primal",
-            "Manhunt"
+            "Far Cry 5",
+            "Minecraft: Story Mode"
         ],
         "process_game_id": -1,
         "process_game_message_id": -1
     },
     "game": [
         {
-            "name": "Far Cry Primal",
+            "name": "Far Cry 5",
             "count_session": 3,
-            "count_episode": 29,
-            "time_limit": 114,
-            "content_time": 6,
+            "count_episode": 11,
+            "time_limit": 79,
+            "content_time": -1,
             "user_time": 0
         },
         {
-            "name": "Manhunt",
-            "count_session": 2,
-            "count_episode": 5,
+            "name": "Minecraft: Story Mode",
+            "count_session": 3,
+            "count_episode": 10,
             "time_limit": 120,
-            "content_time": -11,
+            "content_time": 1,
             "user_time": 0
         },
         {
             "name": "SnowRunner [ng+]",
-            "count_session": 9,
-            "count_episode": 9,
-            "time_limit": 100,
-            "content_time": 0,
+            "count_session": 12,
+            "count_episode": 11,
+            "time_limit": 107,
+            "content_time": 80,
             "user_time": 0
         }
     ],
     "empty_messages": [
         {
-            "name": "Manhunt",
+            "name": "Far Cry 5",
             "ep_range": [
-                4,
-                5
+                7,
+                9
             ],
-            "message_id": 742
+            "message_id": 766
         },
         {
-            "name": "Far Cry Primal",
+            "name": "Minecraft: Story Mode",
             "ep_range": [
-                23,
-                24
+                8,
+                10
             ],
-            "message_id": 743
+            "message_id": 767
         },
         {
-            "name": "Far Cry Primal",
+            "name": "Far Cry 5",
             "ep_range": [
-                25,
-                27
+                10,
+                11
             ],
-            "message_id": 745
+            "message_id": 770
         },
         {
-            "name": "Far Cry Primal",
+            "name": "SnowRunner [ng+]: Мичиган",
             "ep_range": [
-                28,
-                29
+                11,
+                11
             ],
-            "message_id": 750
+            "message_id": 771
         }
     ],
-    "titles": [
-        {
-            "name": "Far Cry Primal",
-            "episode": 28,
-            "is_final": false
-        },
-        {
-            "name": "Far Cry Primal",
-            "episode": 29,
-            "is_final": false
-        }
-    ],
+    "titles": [],
     "cache": {
         "durations": {
-            "1738356702.004351": 3280.85,
-            "1738405520.3382182": 2753.39
+            "1739256259.5180793": 11798.12
         }
     }
 }

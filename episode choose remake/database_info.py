@@ -9,6 +9,7 @@ from os import system
 import telegram_utils
 
 def print_info(games, stat, titles, print_flag=True):
+    print(select_game(games, stat, make_selection=False))
     info = get_info(games, stat, select_game(games, stat, make_selection=False), titles)
     pc_info = info["pc"]
     system("cls")
@@ -89,7 +90,7 @@ def get_chance_info(games: list[Game], stat: Data, is_select_forced):
     tg_info = ""
 
     if is_select_forced:
-        selected_game = select_game(games[:2], stat, make_selection=False)
+        selected_game = select_game(games, stat, make_selection=False)
         pc_info += f"Force: {selected_game.full_name}\n"
         tg_info += f"• Force: {selected_game.short_name}\n"
     
