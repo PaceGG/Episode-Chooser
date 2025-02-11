@@ -1,3 +1,4 @@
+print("Загрузка модуля directory_statistics")
 import paths
 from pathlib import Path
 import json

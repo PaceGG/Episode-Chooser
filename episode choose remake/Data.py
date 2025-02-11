@@ -1,3 +1,4 @@
+print("Загрузка модуля data")
 from json import load
 from youtube_utils import EmptyMessage
 from youtube_utils import Title

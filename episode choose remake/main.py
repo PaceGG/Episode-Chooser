@@ -1,9 +1,8 @@
-from game import Game, new_game, chance_calculate, select_game
+from game import *
 from data import Data
 import paths
-from database_info import get_info
+from database_info import print_info
 from youtube_utils import EmptyMessage
-import telegram_utils
 from youtube_utils import edit_empty_messages
 from os import startfile, chdir
 from pathlib import Path
@@ -18,7 +17,7 @@ def save_data(stat, games, empty_messages, titles):
 
     data = {}
     data["stat"] = stat.__dict__
-    data["game"] = [item.__dict__() for item in games]
+    data["game"] = [item.as_dict() for item in games]
     data["empty_messages"] = [item.__dict__ for item in empty_messages]
     data["titles"] = [item.__dict__ for item in titles]
     data["cache"] = cache
@@ -29,9 +28,11 @@ def save_data(stat, games, empty_messages, titles):
 class Main:
     def main(self):
         # games initialization
+        print("Инициализация игр")
         games = [Game(name=game_name) for game_name in paths.game_names[:2]]
         games.append(Game(name="SnowRunner [ng+]", safe_name="SnowRunner"))
 
+        print("Инициализация данных")
         stat = Data("stat")
         empty_messages: list[EmptyMessage] = Data("empty_messages").empty_messages
         titles = Data("titles").titles
@@ -43,30 +44,28 @@ class Main:
 
         # chance calculate
         chance_calculate(games)
+        
+        save_data(stat, games, empty_messages, titles)
+
+        # info
+        print_info(games, stat, titles)
+
+        force_game_id = ""
+        if stat.process_game_id == -1:
+            force_game_id = input()
+
+        if force_game_id != "":
+            games[int(force_game_id)].is_selected = True
 
         # select game
         if stat.process_game_id == -1:
-            selected_game, is_select_forced = select_game(games, stat, skip_roulette=True)
-        else:
-            is_select_forced = False
-
+            select_game(games, stat)
         if sum(1 for game in games if game.is_selected) > 1:
             raise Exception("More than one game is selected")
-        
-            
-        # info
-        # info_str = get_info(games, stat, is_select_forced)
-        info = get_info(games, stat, is_select_forced, titles)
-        pc_info = info["pc"]
-        print(pc_info)
-
-        tg_info = info["tg"]
-        telegram_utils.edit_message(tg_info)
 
         save_data(stat, games, empty_messages, titles)
 
         # run random game
-        from game import run_game, unfinished_process, finished_process, clear_selection
         response = None
         is_last_session = False
         if stat.process_game_id == -1:
@@ -81,13 +80,13 @@ class Main:
 
         save_data(stat, games, empty_messages, titles)
         clear_selection(games)
-        is_select_forced = select_game(games, stat, skip_roulette=True)[1]
-        info = get_info(games, stat, is_select_forced, titles)
-        tg_info = info["tg"]
-        telegram_utils.edit_message(tg_info)
+        print_info(games, stat, titles, print_flag=False)
 
         if response:
-            startfile(response)
+            try:
+                startfile(response)
+            except:
+                print(f"Ярлык с игрой не найден.")
 
         
 
