@@ -1089,9 +1089,9 @@
         },
         {
           "name": "Manhunt 2",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 15279,
+          "numberOfEps": 6
         }
       ]
     },
@@ -1105,11 +1105,11 @@
           "name": "Minecraft: Story Mode",
           "status": "inProcess",
           "time": 0,
-          "numberOfEps": 0
+          "numberOfEps": 6
         },
         {
           "name": "Minecraft: Story Mode - Season Two",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         }
@@ -1460,8 +1460,8 @@
     },
     {
       "id": "1",
-      "name": "Minecraft: Story Mode",
-      "coverart": "https://i.playground.ru/e/5kYsswWlUPTiJ2T4F_xq4A.jpeg",
+      "name": "Minecraft: Story Mode - Season Two",
+      "coverart": "https://static.wikia.nocookie.net/minecraftstorymode/images/6/63/Boxt-art-minecraft-story-mode-season-2.jpg",
       "color": "#cfa355"
     }
   ],
