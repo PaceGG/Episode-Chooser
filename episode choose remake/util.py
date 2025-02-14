@@ -52,6 +52,6 @@ def intc(s):
     return n
 
 def sumtime(time: str):
-    if time.count(":") == 1: time = "00:" + time
+    if time.count(":") == 1: time += ":00"
     time_split = time.split(":")
     return int(time_split[-2]) + int(time_split[-3]) * 60
