@@ -1,35 +1,35 @@
 {
     "stat": {
         "last_update": 1739532828.376207,
-        "count_sr_session": 3,
+        "count_sr_session": 4,
         "count_sr_date": 1739871959.2131414,
         "games_log": [
-            "Minecraft: Story Mode",
             "Far Cry 5",
-            "Far Cry 5"
-        ],
-        "games_list": [
             "Far Cry 5",
             "Minecraft: Story Mode"
         ],
+        "games_list": [
+            "Far Cry 5",
+            "Minecraft: Story Mode - Season Two"
+        ],
         "process_game_id": 1,
-        "process_game_message_id": 778
+        "process_game_message_id": 779
     },
     "game": [
         {
             "name": "Far Cry 5",
-            "count_session": 7,
+            "count_session": 0,
             "count_episode": 21,
             "time_limit": 89,
             "content_time": 1,
             "user_time": 0
         },
         {
-            "name": "Minecraft: Story Mode",
-            "count_session": 6,
-            "count_episode": 17,
+            "name": "Minecraft: Story Mode - Season Two",
+            "count_session": 1,
+            "count_episode": 0,
             "time_limit": 120,
-            "content_time": -10,
+            "content_time": 0,
             "user_time": 0
         },
         {
@@ -81,14 +81,26 @@
                 21
             ],
             "message_id": 777
+        },
+        {
+            "name": "Minecraft: Story Mode",
+            "ep_range": [
+                18,
+                18
+            ],
+            "message_id": 778
         }
     ],
-    "titles": [],
+    "titles": [
+        {
+            "name": "Minecraft: Story Mode",
+            "episode": 18,
+            "is_final": true
+        }
+    ],
     "cache": {
         "durations": {
-            "1739454783.1139112": 3237.25,
-            "1739458165.25653": 2645.27,
-            "1739460968.5902727": 2800.68
+            "1739537497.8280082": 3627.48
         }
     }
 }

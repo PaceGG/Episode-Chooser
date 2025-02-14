@@ -25,11 +25,11 @@ game_colors: list[str] = [game["color"] for game in showcase]
 game_colors.append("#FF0000")
 
 
-game_paths = [
-    Path.joinpath(games_dir, game_names[0].replace(':', ''), "game.lnk"),
-    Path.joinpath(games_dir, game_names[1].replace(':', ''), "game.lnk"),
-    Path('C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs').resolve()
-]
+# game_paths = [
+#     Path.joinpath(games_dir, game_names[0].replace(':', ''), "game.lnk"),
+#     Path.joinpath(games_dir, game_names[1].replace(':', ''), "game.lnk"),
+#     Path('C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs').resolve()
+# ]
 
 extra_names = [
     "", # First game
@@ -44,5 +44,5 @@ if __name__ == "__main__":
     print(f"video_dir: {video_dir}")
     print(f"game_names: {game_names}")
     print(f"game_colors: {game_colors}")
-    print(f"game_paths: {game_paths}")
+    # print(f"game_paths: {game_paths}")
     print(f"extra_names: {extra_names}")

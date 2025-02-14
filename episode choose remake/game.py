@@ -56,7 +56,11 @@ class Game:
 
         self.color = paths.game_colors[self.id]
 
-        self.game_path = paths.game_paths[self.id]
+        # self.game_path = paths.game_paths[self.id]
+        if self.id != 2:
+            self.game_path = find_best_match(self.name, paths.games_dir)
+        else:
+            self.game_path = Path('C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs').resolve()
         self.video_dir = Path.joinpath(paths.video_dir, self.safe_name)
         if not self.video_dir.exists(): create_game_folder(self.video_dir)
 
