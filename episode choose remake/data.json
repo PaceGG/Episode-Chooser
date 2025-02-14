@@ -1,35 +1,35 @@
 {
     "stat": {
-        "last_update": 1739289498.7393193,
-        "count_sr_session": 10,
+        "last_update": 1739532828.376207,
+        "count_sr_session": 3,
         "count_sr_date": 1739871959.2131414,
         "games_log": [
-            "Far Cry 5",
             "Minecraft: Story Mode",
+            "Far Cry 5",
             "Far Cry 5"
         ],
         "games_list": [
             "Far Cry 5",
             "Minecraft: Story Mode"
         ],
-        "process_game_id": -1,
-        "process_game_message_id": -1
+        "process_game_id": 1,
+        "process_game_message_id": 778
     },
     "game": [
         {
             "name": "Far Cry 5",
-            "count_session": 3,
-            "count_episode": 11,
-            "time_limit": 79,
-            "content_time": -1,
+            "count_session": 7,
+            "count_episode": 21,
+            "time_limit": 89,
+            "content_time": 1,
             "user_time": 0
         },
         {
             "name": "Minecraft: Story Mode",
-            "count_session": 3,
-            "count_episode": 10,
+            "count_session": 6,
+            "count_episode": 17,
             "time_limit": 120,
-            "content_time": 1,
+            "content_time": -10,
             "user_time": 0
         },
         {
@@ -51,18 +51,44 @@
             "message_id": 767
         },
         {
-            "name": "SnowRunner [ng+]: Мичиган",
+            "name": "Minecraft: Story Mode",
             "ep_range": [
                 11,
-                11
+                14
             ],
-            "message_id": 771
+            "message_id": 772
+        },
+        {
+            "name": "Minecraft: Story Mode",
+            "ep_range": [
+                15,
+                17
+            ],
+            "message_id": 775
+        },
+        {
+            "name": "Far Cry 5",
+            "ep_range": [
+                17,
+                18
+            ],
+            "message_id": 776
+        },
+        {
+            "name": "Far Cry 5",
+            "ep_range": [
+                19,
+                21
+            ],
+            "message_id": 777
         }
     ],
     "titles": [],
     "cache": {
         "durations": {
-            "1739256259.5180793": 11798.12
+            "1739454783.1139112": 3237.25,
+            "1739458165.25653": 2645.27,
+            "1739460968.5902727": 2800.68
         }
     }
 }
