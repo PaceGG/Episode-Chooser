@@ -1,35 +1,35 @@
 {
     "stat": {
-        "last_update": 1739532828.376207,
-        "count_sr_session": 4,
+        "last_update": 1739718388.198469,
+        "count_sr_session": 1,
         "count_sr_date": 1739871959.2131414,
         "games_log": [
             "Far Cry 5",
-            "Far Cry 5",
-            "Minecraft: Story Mode"
+            "Minecraft: Story Mode - Season Two",
+            "Far Cry 5"
         ],
         "games_list": [
             "Far Cry 5",
             "Minecraft: Story Mode - Season Two"
         ],
-        "process_game_id": 1,
-        "process_game_message_id": 779
+        "process_game_id": -1,
+        "process_game_message_id": -1
     },
     "game": [
         {
             "name": "Far Cry 5",
-            "count_session": 0,
-            "count_episode": 21,
-            "time_limit": 89,
-            "content_time": 1,
+            "count_session": 2,
+            "count_episode": 27,
+            "time_limit": 63,
+            "content_time": -1,
             "user_time": 0
         },
         {
             "name": "Minecraft: Story Mode - Season Two",
-            "count_session": 1,
-            "count_episode": 0,
+            "count_session": 2,
+            "count_episode": 7,
             "time_limit": 120,
-            "content_time": 0,
+            "content_time": -7,
             "user_time": 0
         },
         {
@@ -67,40 +67,68 @@
             "message_id": 775
         },
         {
-            "name": "Far Cry 5",
-            "ep_range": [
-                17,
-                18
-            ],
-            "message_id": 776
-        },
-        {
-            "name": "Far Cry 5",
-            "ep_range": [
-                19,
-                21
-            ],
-            "message_id": 777
-        },
-        {
             "name": "Minecraft: Story Mode",
             "ep_range": [
                 18,
                 18
             ],
             "message_id": 778
+        },
+        {
+            "name": "Minecraft: Story Mode - Season Two",
+            "ep_range": [
+                1,
+                4
+            ],
+            "message_id": 779
+        },
+        {
+            "name": "Far Cry 5",
+            "ep_range": [
+                22,
+                24
+            ],
+            "message_id": 780
+        },
+        {
+            "name": "Minecraft: Story Mode - Season Two",
+            "ep_range": [
+                5,
+                7
+            ],
+            "message_id": 781
+        },
+        {
+            "name": "Far Cry 5",
+            "ep_range": [
+                25,
+                27
+            ],
+            "message_id": 782
         }
     ],
     "titles": [
         {
-            "name": "Minecraft: Story Mode",
-            "episode": 18,
-            "is_final": true
+            "name": "Far Cry 5",
+            "episode": 25,
+            "is_final": false
+        },
+        {
+            "name": "Far Cry 5",
+            "episode": 26,
+            "is_final": false
+        },
+        {
+            "name": "Far Cry 5",
+            "episode": 27,
+            "is_final": false
         }
     ],
     "cache": {
         "durations": {
-            "1739537497.8280082": 3627.48
+            "1739718653.5497055": 2801.02,
+            "1739721455.3307402": 3088.32,
+            "1739724567.748346": 3785.0
         }
     }
 }
