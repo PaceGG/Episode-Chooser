@@ -1,8 +1,8 @@
 {
     "stat": {
-        "last_update": 1739718388.198469,
-        "count_sr_session": 1,
-        "count_sr_date": 1739871959.2131414,
+        "last_update": 1739964010.6381578,
+        "count_sr_session": 4,
+        "count_sr_date": 1740568824.3744693,
         "games_log": [
             "Far Cry 5",
             "Minecraft: Story Mode - Season Two",
@@ -18,26 +18,26 @@
     "game": [
         {
             "name": "Far Cry 5",
-            "count_session": 2,
-            "count_episode": 27,
-            "time_limit": 63,
-            "content_time": -1,
+            "count_session": 3,
+            "count_episode": 29,
+            "time_limit": 97,
+            "content_time": 1,
             "user_time": 0
         },
         {
             "name": "Minecraft: Story Mode - Season Two",
-            "count_session": 2,
-            "count_episode": 7,
+            "count_session": 3,
+            "count_episode": 10,
             "time_limit": 120,
-            "content_time": -7,
+            "content_time": -4,
             "user_time": 0
         },
         {
             "name": "SnowRunner [ng+]",
-            "count_session": 12,
-            "count_episode": 11,
-            "time_limit": 107,
-            "content_time": 0,
+            "count_session": 13,
+            "count_episode": 12,
+            "time_limit": 59,
+            "content_time": 8,
             "user_time": 0
         }
     ],
@@ -83,14 +83,6 @@
             "message_id": 779
         },
         {
-            "name": "Far Cry 5",
-            "ep_range": [
-                22,
-                24
-            ],
-            "message_id": 780
-        },
-        {
             "name": "Minecraft: Story Mode - Season Two",
             "ep_range": [
                 5,
@@ -105,30 +97,36 @@
                 27
             ],
             "message_id": 782
-        }
-    ],
-    "titles": [
+        },
         {
-            "name": "Far Cry 5",
-            "episode": 25,
-            "is_final": false
+            "name": "Minecraft: Story Mode - Season Two",
+            "ep_range": [
+                8,
+                10
+            ],
+            "message_id": 783
         },
         {
             "name": "Far Cry 5",
-            "episode": 26,
-            "is_final": false
+            "ep_range": [
+                28,
+                29
+            ],
+            "message_id": 784
         },
         {
-            "name": "Far Cry 5",
-            "episode": 27,
-            "is_final": false
+            "name": "SnowRunner [ng+]: Мичиган",
+            "ep_range": [
+                12,
+                12
+            ],
+            "message_id": 785
         }
     ],
+    "titles": [],
     "cache": {
         "durations": {
-            "1739718653.5497055": 2801.02,
-            "1739721455.3307402": 3088.32,
-            "1739724567.748346": 3785.0
+            "1739964686.3710353": 10087.51
         }
     }
 }
