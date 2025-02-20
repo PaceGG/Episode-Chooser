@@ -200,7 +200,7 @@
         },
         {
           "name": "Minecraft: Beyond Depth",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         }
@@ -1109,9 +1109,9 @@
       "additionalGames": [
         {
           "name": "Minecraft: Story Mode",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 6
+          "status": "complete",
+          "time": 46385,
+          "numberOfEps": 19
         },
         {
           "name": "Minecraft: Story Mode - Season Two",
@@ -1302,7 +1302,8 @@
       "mainName": "Prey",
       "mainTime": 0,
       "mainNumberOfEps": 0,
-      "additionalGames": []
+      "additionalGames": [],
+      "mainStatus": "inProcess"
     },
     {
       "id": "0135",
@@ -1466,9 +1467,9 @@
     },
     {
       "id": "1",
-      "name": "Minecraft: Story Mode - Season Two",
-      "coverart": "https://static.wikia.nocookie.net/minecraftstorymode/images/6/63/Boxt-art-minecraft-story-mode-season-2.jpg",
-      "color": "#cfa355"
+      "name": "Prey",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/480490/library_600x900_2x.jpg?t=1544471885",
+      "color": "#88a8ce"
     }
   ],
   "links": [

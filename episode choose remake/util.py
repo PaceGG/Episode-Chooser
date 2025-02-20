@@ -85,3 +85,6 @@ def find_best_match(game_name: str, games_directory: Path, default_dir = Path(r"
         return best_link
     else:
         return None
+    
+if __name__ == "__main__":
+    print(find_best_match("Prey", Path(r"D:\Games")))
