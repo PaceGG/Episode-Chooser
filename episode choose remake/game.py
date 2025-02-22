@@ -229,7 +229,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
 
     if user_time == "": user_time = duration
     elif user_time == "-":
-        user_time = 120
+        user_time = games[process_game_id].time_limit
         is_last_session = True
     elif ":" in user_time: user_time = sumtime(user_time)
     else: user_time = int(user_time)
