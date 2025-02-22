@@ -8,12 +8,8 @@ site_db_path = Path.joinpath(project_dir, "react-remake\\db.json")
 import local_data
 games_dir = local_data.games_dir
 video_dir = local_data.video_dir
+extra_names = local_data.extra_names
 
-extra_names = [
-    "", # First game
-    "", # Second game
-    "Мичиган", # Extra/third game
-]
 
 with open(site_db_path) as file:
     showcase: list[dict] = json.load(file)["showcase"]
