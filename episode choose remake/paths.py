@@ -27,11 +27,6 @@ game_colors.append("#FF0000")
 #     Path('C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs').resolve()
 # ]
 
-extra_names = [
-    "", # First game
-    "", # Second game
-    "Мичиган", # Extra/third game
-]
 
 if __name__ == "__main__":
     print(f"root_dir: {root_dir}")
