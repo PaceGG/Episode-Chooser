@@ -1362,7 +1362,8 @@
       "mainName": "Mad Max",
       "mainTime": 0,
       "mainNumberOfEps": 0,
-      "additionalGames": []
+      "additionalGames": [],
+      "mainStatus": "inProcess"
     },
     {
       "id": "3364",
@@ -1456,6 +1457,38 @@
           "numberOfEps": 0
         }
       ]
+    },
+    {
+      "id": "9d0b",
+      "mainName": "Just Cause",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "Just Cause",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Just Cause 2",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Just Cause 3",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Just Cause 4",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        }
+      ]
     }
   ],
   "showcase": [
@@ -1467,9 +1500,9 @@
     },
     {
       "id": "1",
-      "name": "Prey",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/480490/library_600x900_2x.jpg?t=1544471885",
-      "color": "#88a8ce"
+      "name": "Mad Max",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/234140/library_600x900_2x.jpg?t=1476984179",
+      "color": "#640406"
     }
   ],
   "links": [
