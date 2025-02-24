@@ -1,7 +1,6 @@
 import win32api
 import win32gui
 import paths
-import local_data
 from pathlib import Path
 from directory_statistics import get_disk_video
 import difflib
@@ -86,6 +85,3 @@ def find_best_match(game_name: str, games_directory: Path, default_dir = Path(r"
         return best_link
     else:
         return None
-    
-if __name__ == "__main__":
-    print(find_best_match(local_data.check_name_best_match, Path(r"D:\Games")))
