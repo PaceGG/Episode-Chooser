@@ -15,7 +15,8 @@ def get_short_name(name):
     local = {
         "Return to Castle Wolfenstein": "Wolfenstein",
         "Far Cry Primal": "Far Cry",
-        "SnowRunner [ng+]": "SR"
+        "SnowRunner [ng+]": "SR",
+        "Far Cry New Dawn": "Far Cry",
     }
 
     if name in local: return local[name]
