@@ -52,7 +52,7 @@ class Main:
 
         force_game_id = ""
         if stat.process_game_id == -1:
-            force_game_id = input()
+            force_game_id = input("Spin roulette or enter game id: ")
 
         if force_game_id != "":
             games[int(force_game_id)].is_selected = True
