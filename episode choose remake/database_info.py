@@ -24,6 +24,9 @@ def get_info(games: list[Game], stat: Data, is_select_forced, titles):
 
     pc_info += disk_info(games, titles) + "\n"
 
+    process_game_info = get_process_game_info(games, stat)
+    tg_info += f"{process_game_info}\n\n"
+
     sr_info = get_snowrunner_info(stat, games[2])
     pc_info += sr_info["pc"] + "\n"
     tg_info += sr_info["tg"] + "\n\n"
@@ -61,6 +64,16 @@ def disk_info(games: list[Game], titles: list):
 
     info_str += f"Видео к удалению: {disk_video - len(titles)}\n"
     return info_str
+
+def get_process_game_info(games: list[Game], stat: Data):
+    if stat.process_game_id == -1:
+        return ""
+
+    process_game: Game = games[stat.process_game_id]
+
+    return f"• {process_game.full_name}... {time_format(process_game.time_limit)} [{process_game.content_time_format()}]"
+
+
 
 def get_snowrunner_info(stat: Data, sr_game: Game):
     count_sr_session = stat.count_sr_session

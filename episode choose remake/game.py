@@ -180,7 +180,7 @@ def run_game(games: list[Game], stat: Data):
 
     input(f"Нажмите Enter, чтобы запустить {selected_game.full_name}...")
 
-    caption = f"{selected_game.full_name} № {selected_game.count_episode + 1}..."
+    caption = f"{selected_game.full_name} № {selected_game.count_episode + 1}... {time_format(selected_game.time_limit)} [{selected_game.content_time_format()}]"
     print(f"{selected_game.full_name}{f" {time_format(selected_game.time_limit)}" if selected_game.time_limit != 120 else ''}")
     stat.process_game_message_id = telegram_utils.send_image(selected_game.header, caption)
 
@@ -207,6 +207,9 @@ def unfinished_process(games: list[Game], stat: Data, duration: int):
     if time_left % 10 == 1 and time_left % 100 != 11: form = "минута"
     elif time_left % 10 in {2, 3, 4} and not (time_left % 100 in {12, 13, 14}): form = "минуты"
     else: form = "минут"
+
+    caption = f"{unfinished_game.full_name} № {unfinished_game.count_episode + 1}... {time_format(time_left)} [{unfinished_game.content_time_format()}]"
+    telegram_utils.edit_caption(caption, stat.process_game_message_id)
 
     print(f"Сессия {unfinished_game.name} ещё не завершена, осталось {time_left} {form}")
     print(f"Запустить {unfinished_game.name}? Введите \"-\" для обозначения финальной сессии")
