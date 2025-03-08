@@ -881,9 +881,9 @@
         },
         {
           "name": "Far Cry 5",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 129190,
+          "numberOfEps": 43
         },
         {
           "name": "Far Cry New Dawn",
@@ -893,7 +893,7 @@
         },
         {
           "name": "Far Cry 6",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         }
@@ -1393,19 +1393,19 @@
       "additionalGames": [
         {
           "name": "Alan Wake Remastered",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Alan Wake’s American Nightmare",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Alan Wake 2",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         }
@@ -1419,13 +1419,13 @@
       "additionalGames": [
         {
           "name": "Control",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Control 2",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         }
@@ -1436,7 +1436,8 @@
       "mainName": "Quantum Break",
       "mainTime": 0,
       "mainNumberOfEps": 0,
-      "additionalGames": []
+      "additionalGames": [],
+      "mainStatus": "bad"
     },
     {
       "id": "09d4",
@@ -1489,20 +1490,28 @@
           "numberOfEps": 0
         }
       ]
+    },
+    {
+      "id": "c3cd",
+      "mainName": "Sleeping Dogs: Definitive Edition",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [],
+      "mainStatus": "inProcess"
     }
   ],
   "showcase": [
     {
       "id": "0",
-      "name": "Far Cry New Dawn",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/939960/library_600x900_2x.jpg?t=1575376608",
-      "color": "#fd2584"
+      "name": "Far Cry 6",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/2369390/library_600x900_2x.jpg?t=1682375822",
+      "color": "#fbaa37"
     },
     {
       "id": "1",
-      "name": "Mad Max",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/234140/library_600x900_2x.jpg?t=1476984179",
-      "color": "#640406"
+      "name": "Sleeping Dogs: Definitive Edition",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/307690/library_600x900_2x.jpg?t=1457602473",
+      "color": "#e21f27"
     }
   ],
   "links": [
