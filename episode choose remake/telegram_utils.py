@@ -11,6 +11,13 @@ bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
 chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
 
+def send_message(text: str):
+    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+    params = {"chat_id": chat_id, "text": text}
+    response = post(url, params=params)
+    response_data: dict = response.json()
+    message_id = response_data.get('result', {}).get('message_id')
+    return message_id
 
 def send_image(image_path: Path, caption=None):
     url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"
