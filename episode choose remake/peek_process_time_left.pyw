@@ -34,6 +34,7 @@ if stat.process_game_id == -1:
     sleep(5)
     delete_message(message_id)
     stat.time_info_message_id = -1
+    save_data(stat)
     exit(0)
 
 games = [Game(name=game_name) for game_name in paths.game_names[:2]]
