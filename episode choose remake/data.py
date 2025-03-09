@@ -16,6 +16,7 @@ class Data:
     empty_messages: list[EmptyMessage]
     titles: list[Title]
     last_update: int
+    time_info_message_id: int
 
     def __init__(self, data_type):
         with open(Path.joinpath(paths.root_dir, 'data.json'), 'r', encoding='utf-8') as file:

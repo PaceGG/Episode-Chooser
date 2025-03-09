@@ -272,6 +272,9 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     add_empty_message(empty_messages, processed_game, count_videos, message_id)
     telegram_utils.edit_caption(f"{processed_game.full_name}: № {processed_game.count_episode + 1}{f"-{processed_game.count_episode + count_videos}" if count_videos > 1 else ""}", message_id)
 
+    telegram_utils.delete_message(stat.time_info_message_id)
+    stat.time_info_message_id = -1
+    
     stat.process_game_id = -1
     stat.process_game_message_id = -1
 
