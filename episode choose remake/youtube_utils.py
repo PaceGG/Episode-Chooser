@@ -133,4 +133,19 @@ def edit_empty_messages(empty_messages, stat):
         if not edit_empty_message(empty_message, yt_videos)
     ]
 
-    stat.last_update = today()    
+    stat.last_update = today()
+
+if __name__ == "__main__":
+    from data import Data
+
+    videos = get_yt_videos()
+    for game in videos.keys():
+        print(f"{game}:")
+        for number, name in videos[game].items():
+            print(f"{number}: {name}")
+        print()
+
+    empty_messages: list[EmptyMessage] = Data("empty_messages").empty_messages
+    stat = Data("stat")
+
+    edit_empty_messages(empty_messages, stat)
