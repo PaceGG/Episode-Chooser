@@ -11,10 +11,10 @@
     {
       "id": "2772",
       "mainName": "Cuphead",
-      "mainTime": 23426,
+      "mainTime": 0,
       "mainNumberOfEps": 11,
       "additionalGames": [],
-      "mainStatus": "bad"
+      "mainStatus": "inProcess"
     },
     {
       "id": "32e2",
@@ -1031,7 +1031,8 @@
       "mainName": "Sleeping Dogs",
       "mainTime": 0,
       "additionalGames": [],
-      "mainNumberOfEps": 0
+      "mainNumberOfEps": 0,
+      "mainStatus": "bad"
     },
     {
       "id": "2660",
@@ -1509,9 +1510,9 @@
     },
     {
       "id": "1",
-      "name": "Sleeping Dogs: Definitive Edition",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/307690/library_600x900_2x.jpg?t=1457602473",
-      "color": "#e21f27"
+      "name": "Cuphead",
+      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/268910/library_600x900_2x.jpg?t=1709068320",
+      "color": "#ffd011"
     }
   ],
   "links": [
@@ -1553,7 +1554,7 @@
   ],
   "filters": {
     "statusComplete": true,
-    "statusBad": true,
+    "statusBad": false,
     "statusWait": true
   }
 }

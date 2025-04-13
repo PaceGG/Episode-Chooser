@@ -1,4 +1,5 @@
 print("Загрузка модуля game")
+from genericpath import getctime
 import paths
 import json
 from pathlib import Path
@@ -88,7 +89,7 @@ class Game:
         self.content_time = game_data["content_time"]
         self.user_time = game_data["user_time"]
 
-        if self.count_episode == 0: self.is_game_new = True
+        if self.count_episode == self.count_session == 0: self.is_game_new = True
 
         self.chance = 1
         self.is_selected = False
@@ -146,10 +147,19 @@ def select_game(games: list[Game], stat: Data, skip_roulette = False, make_selec
         return selected_game
 
     # force new game (episodes == 0)
-    for game in games[:2]:
-        if game.count_episode == 0:
-            game.is_selected = make_selection
-            return game
+    # for game in games[:2]:
+    #     if game.count_episode == 0:
+    #         game.is_selected = make_selection
+    #         return game
+
+    # force new game (sessions == 0 and later game)
+    if games[0].count_session == games[1].count_session == 0:
+        if games[0].video_dir.stat().st_birthtime < games[1].video_dir.stat().st_birthtime:
+            games[1].is_selected = make_selection
+            return games[1]
+        else:
+            games[0].is_selected = make_selection
+            return games[0]
         
     # force sr
     try:
