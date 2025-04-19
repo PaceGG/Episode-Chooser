@@ -11,10 +11,10 @@
     {
       "id": "2772",
       "mainName": "Cuphead",
-      "mainTime": 0,
-      "mainNumberOfEps": 11,
+      "mainTime": 45331,
+      "mainNumberOfEps": 15,
       "additionalGames": [],
-      "mainStatus": "inProcess"
+      "mainStatus": "complete"
     },
     {
       "id": "32e2",
@@ -670,6 +670,12 @@
           "status": "complete",
           "time": 17812,
           "numberOfEps": 5
+        },
+        {
+          "name": "Portal: Revolution",
+          "status": "inProcess",
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -1141,12 +1147,6 @@
           "numberOfEps": 0
         },
         {
-          "name": "Assassin’s Creed II: Discovery",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
-        },
-        {
           "name": "Assassin’s Creed: Brotherhood",
           "status": "none",
           "time": 0,
@@ -1495,10 +1495,60 @@
     {
       "id": "c3cd",
       "mainName": "Sleeping Dogs: Definitive Edition",
+      "mainTime": 85621,
+      "mainNumberOfEps": 28,
+      "additionalGames": [],
+      "mainStatus": "complete"
+    },
+    {
+      "id": "7cde",
+      "mainName": "Battlefield",
       "mainTime": 0,
       "mainNumberOfEps": 0,
-      "additionalGames": [],
-      "mainStatus": "inProcess"
+      "additionalGames": [
+        {
+          "name": "Battlefield 1",
+          "status": "inProcess",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Battlefield V",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Battlefield: Bad Company",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Battlefield: Bad Company 2",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Battlefield 3",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Battlefield Hardline",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Battlefield 4",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        }
+      ]
     }
   ],
   "showcase": [
@@ -1510,9 +1560,9 @@
     },
     {
       "id": "1",
-      "name": "Cuphead",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/268910/library_600x900_2x.jpg?t=1709068320",
-      "color": "#ffd011"
+      "name": "Battlefield 1",
+      "coverart": "https://shared.steamstatic.com/store_item_assets/steam/apps/1238840/library_600x900_2x.jpg?t=1624571179",
+      "color": "#f39116"
     }
   ],
   "links": [
@@ -1554,7 +1604,7 @@
   ],
   "filters": {
     "statusComplete": true,
-    "statusBad": false,
+    "statusBad": true,
     "statusWait": true
   }
 }
