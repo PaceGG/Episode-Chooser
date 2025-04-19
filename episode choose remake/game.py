@@ -124,7 +124,7 @@ def chance_calculate(games: list[Game]):
 def new_game(games: list[Game], stat: Data):
     for game in games[:2]:
         print(f"{game.name}: {game.is_game_new}")
-        if game.is_game_new and stat.process_game_id == -1:
+        if game.is_game_new and stat.process_game_id == -1 and games[game.id].video_dir.stat().st_birthtime > games[not(game.id)].video_dir.stat().st_birthtime:
                 stat.games_list[game.id] = game.name
 
                 games[(not game.id)].count_session = 0
