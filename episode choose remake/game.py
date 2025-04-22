@@ -264,7 +264,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
             bufer_user_content_time = 0
         user_content_time = input("Введите \"-\" для обозначения финальной сессии. Введите продолжительность контента: ")
     else:
-        user_content_time = 0
+        user_content_time = games[process_game_id].content_time
 
     if user_content_time == "": user_content_time = bufer_user_content_time
     elif ":" in str(user_content_time):
