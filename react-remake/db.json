@@ -425,6 +425,12 @@
           "status": "bad",
           "time": 44966,
           "numberOfEps": 13
+        },
+        {
+          "name": "The Elder Scrolls IV: Oblivion Remastered",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -673,9 +679,9 @@
         },
         {
           "name": "Portal: Revolution",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 14781,
+          "numberOfEps": 5
         }
       ]
     },
@@ -1508,25 +1514,19 @@
       "additionalGames": [
         {
           "name": "Battlefield 1",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 17017,
+          "numberOfEps": 7
         },
         {
           "name": "Battlefield V",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
-        },
-        {
-          "name": "Battlefield: Bad Company",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 16467,
+          "numberOfEps": 6
         },
         {
           "name": "Battlefield: Bad Company 2",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -1554,15 +1554,15 @@
   "showcase": [
     {
       "id": "0",
-      "name": "Far Cry 6",
-      "coverart": "https://cdn.cloudflare.steamstatic.com/steam/apps/2369390/library_600x900_2x.jpg?t=1682375822",
-      "color": "#fbaa37"
+      "name": "S.T.A.L.K.E.R.: Ф.О.Т.О.Г.Р.А.Ф.",
+      "coverart": "https://i.ibb.co/cSDN3b0q/fotograf-font-fix.png",
+      "color": "#de9233"
     },
     {
       "id": "1",
-      "name": "Battlefield V",
-      "coverart": "https://shared.steamstatic.com/store_item_assets/steam/apps/1238810/library_600x900_2x.jpg?t=1738593831",
-      "color": "#7391c7"
+      "name": "Battlefield: Bad Company 2",
+      "coverart": "https://cdn2.steamgriddb.com/thumb/d0d486f06c0b0cc28c3cf51bb0df648a.jpg",
+      "color": "#fc6710"
     }
   ],
   "links": [
