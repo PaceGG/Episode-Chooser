@@ -1,5 +1,6 @@
 print("Загрузка модуля game")
 from genericpath import getctime
+from os import error
 import paths
 import json
 from pathlib import Path
@@ -61,6 +62,8 @@ class Game:
         # self.game_path = paths.game_paths[self.id]
         if self.id != 2:
             self.game_path = find_best_match(self.name, paths.games_dir)
+            if self.game_path == None:
+                raise Exception(f"Ошибка инициализации {name}: Не удалось найти путь к ярлыку игры.")
         else:
             self.game_path = Path('C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs').resolve()
         self.video_dir = Path.joinpath(paths.video_dir, self.safe_name)

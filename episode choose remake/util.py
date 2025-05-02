@@ -62,7 +62,7 @@ def find_best_match(game_name: str, games_directory: Path, default_dir = Path(r"
     folders = [folder for folder in games_directory.iterdir() if folder.is_dir()]
     folder_names = [folder.name for folder in folders]
 
-    best_match = difflib.get_close_matches(game_name, folder_names, n=1, cutoff=0.5)
+    best_match = difflib.get_close_matches(game_name, folder_names, n=1, cutoff=0.3)
 
 
     if best_match:
@@ -88,4 +88,4 @@ def find_best_match(game_name: str, games_directory: Path, default_dir = Path(r"
         return None
     
 if __name__ == "__main__":
-    print(find_best_match(local_data.check_name_best_match, Path(r"D:\Games")))
+    print(find_best_match("S.T.A.L.K.E.R. Фотограф", Path(r"D:\Games")))
