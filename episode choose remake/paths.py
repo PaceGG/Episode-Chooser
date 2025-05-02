@@ -11,7 +11,7 @@ video_dir = local_data.video_dir
 extra_names = local_data.extra_names
 
 
-with open(site_db_path) as file:
+with open(site_db_path, encoding="utf-8") as file:
     showcase: list[dict] = json.load(file)["showcase"]
 
 game_names: list[str] = [game["name"] for game in showcase]
