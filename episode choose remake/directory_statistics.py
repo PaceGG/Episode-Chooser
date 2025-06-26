@@ -2,7 +2,8 @@ print("Загрузка модуля directory_statistics")
 import paths
 from pathlib import Path
 import json
-from util import video_formats
+
+video_formats = {".mp4", ".mkv"}
 
 def get_duration():
     from moviepy.video.io.VideoFileClip import VideoFileClip
