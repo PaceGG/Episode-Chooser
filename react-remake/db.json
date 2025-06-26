@@ -349,9 +349,9 @@
         },
         {
           "name": "S.T.A.L.K.E.R.: Ф.О.Т.О.Г.Р.А.Ф.",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "bad",
+          "time": 30803,
+          "numberOfEps": 8
         },
         {
           "name": "S.T.A.L.K.E.R.: Anomaly Redux",
@@ -428,7 +428,7 @@
         },
         {
           "name": "The Elder Scrolls IV: Oblivion Remastered",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         }
@@ -519,9 +519,15 @@
         },
         {
           "name": "DOOM Eternal",
-          "status": "bad",
-          "time": 8324,
+          "status": "none",
+          "time": 0,
           "numberOfEps": 3
+        },
+        {
+          "name": "Doom: The Dark Ages",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
         }
       ]
     },
@@ -700,9 +706,9 @@
       "additionalGames": [
         {
           "name": "Fallout 4: Vault 13 (Fallout 1 Remake)",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "bad",
+          "time": 4802,
+          "numberOfEps": 2
         },
         {
           "name": "Fallout 4: Project Arroyo (Fallout 2 Remake)",
@@ -736,9 +742,9 @@
         },
         {
           "name": "Fallout: London",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "bad",
+          "time": 10205,
+          "numberOfEps": 3
         },
         {
           "name": "Fallout: New Vegas",
@@ -1532,18 +1538,68 @@
         },
         {
           "name": "Battlefield 3",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 16433,
+          "numberOfEps": 6
         },
         {
           "name": "Battlefield Hardline",
+          "status": "complete",
+          "time": 17774,
+          "numberOfEps": 7
+        },
+        {
+          "name": "Battlefield 4",
+          "status": "complete",
+          "time": 15477,
+          "numberOfEps": 6
+        }
+      ]
+    },
+    {
+      "id": "e17c",
+      "mainName": "Silent Hill",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "Silent Hill 2",
           "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
         {
-          "name": "Battlefield 4",
+          "name": "Silent Hill 3",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Silent Hill 4: The Room",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Silent Hill: Origins",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Silent Hill: Homecoming",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Silent Hill: Downpour",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Silent Hill f",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
@@ -1554,15 +1610,15 @@
   "showcase": [
     {
       "id": "0",
-      "name": "S.T.A.L.K.E.R.: Ф.О.Т.О.Г.Р.А.Ф.",
-      "coverart": "https://i.ibb.co/cSDN3b0q/fotograf-font-fix.png",
-      "color": "#de9233"
+      "name": "The Elder Scrolls IV: Oblivion Remastered",
+      "coverart": "https://shared.steamstatic.com/store_item_assets/steam/apps/2623190/b52322f78cbdc7e6c267d873056abba7916f7ff3/library_600x900_2x.jpg?t=1745345463",
+      "color": "#f6980f"
     },
     {
       "id": "1",
-      "name": "Battlefield Hardline",
-      "coverart": "https://shared.steamstatic.com/store_item_assets/steam/apps/1238880/library_600x900_2x.jpg?t=1597704293",
-      "color": "#f19502"
+      "name": "Silent Hill 2",
+      "coverart": "https://shared.steamstatic.com/store_item_assets/steam/apps/2124490/library_600x900_2x.jpg?t=1744248659",
+      "color": "#6a746a"
     }
   ],
   "links": [
