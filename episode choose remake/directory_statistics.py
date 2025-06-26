@@ -2,6 +2,7 @@ print("Загрузка модуля directory_statistics")
 import paths
 from pathlib import Path
 import json
+from util import video_formats
 
 def get_duration():
     from moviepy.video.io.VideoFileClip import VideoFileClip
@@ -15,7 +16,7 @@ def get_duration():
     total = 0
 
     for file_path in Path.joinpath(paths.video_dir, "OBS").iterdir():
-        if file_path.suffix == ".mp4":
+        if file_path.suffix in video_formats:
             ctime = str(file_path.stat().st_birthtime)
             if ctime in list(cache.keys()):
                 video_duration = cache[ctime]
@@ -36,7 +37,7 @@ def get_duration():
 def get_count_videos(dir=Path.joinpath(paths.video_dir, "OBS")):
     c = 0
     for file_path in dir.iterdir():
-        if file_path.suffix == ".mp4":
+        if file_path.suffix in video_formats:
             c += 1
 
     return c

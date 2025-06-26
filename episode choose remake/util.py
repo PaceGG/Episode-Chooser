@@ -6,6 +6,8 @@ from pathlib import Path
 from directory_statistics import get_disk_video
 import difflib
 
+video_formats = [".mp4", ".mkv"]
+
 def set_eng_layout():
     window_handle = win32gui.GetForegroundWindow()
     result = win32api.SendMessage(window_handle, 0x0050, 0, 0x04090409)
@@ -17,8 +19,8 @@ def move_videos(target_dir: Path, games):
 
     for file in obs_dir.iterdir():
         if file.is_file():
-            if file.suffix == ".mp4":
-                new_name = f"{start_index}.mp4"
+            if file.suffix in video_formats:
+                new_name = f"{start_index}{file.suffix}"
                 start_index += 1
             else:
                 new_name = file.name
