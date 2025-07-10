@@ -519,7 +519,7 @@
         },
         {
           "name": "DOOM Eternal",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 3
         },
@@ -1570,36 +1570,50 @@
         },
         {
           "name": "Silent Hill 3",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Silent Hill 4: The Room",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Silent Hill: Origins",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Silent Hill: Homecoming",
-          "status": "none",
-          "time": 0,
-          "numberOfEps": 0
-        },
-        {
-          "name": "Silent Hill: Downpour",
-          "status": "none",
+          "status": "bad",
           "time": 0,
           "numberOfEps": 0
         },
         {
           "name": "Silent Hill f",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        }
+      ]
+    },
+    {
+      "id": "2988",
+      "mainName": "The Last of Us",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "The Last of Us Part I",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "The Last of Us Part II",
           "status": "none",
           "time": 0,
           "numberOfEps": 0
@@ -1616,9 +1630,9 @@
     },
     {
       "id": "1",
-      "name": "Silent Hill 2",
-      "coverart": "https://shared.steamstatic.com/store_item_assets/steam/apps/2124490/library_600x900_2x.jpg?t=1744248659",
-      "color": "#6a746a"
+      "name": "DOOM Eternal",
+      "coverart": "https://shared.steamstatic.com/store_item_assets/steam/apps/782330/library_600x900_2x.jpg?t=1749758028",
+      "color": "#d20f10"
     }
   ],
   "links": [

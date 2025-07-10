@@ -5,3 +5,5 @@ episode choose remake/local_data.py
 episode choose remake/__pycache__
 episode choose remake/data.json
 episode choose remake/tests.py
+*.xlsm
+*.xlsx
