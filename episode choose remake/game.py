@@ -293,7 +293,12 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     stat.process_game_id = -1
     stat.process_game_message_id = -1
 
-    processed_game.count_episode += count_videos
+    if is_last_session:
+        choice = input("Сбросить эпизоды? N для отмены: ")
+        add_count = 0 if choice.lower() != "n" else count_videos
+    else:
+        add_count = count_videos
+    processed_game.count_episode += add_count
 
     move_videos(processed_game.video_dir, games)
 
