@@ -79,7 +79,7 @@ const ContributionGraph = () => {
 
   const weeks = [];
   let week = [];
-  const firstDayOfWeek = days[0].getDay();
+  const firstDayOfWeek = (days[0].getDay() + 6) % 7;
   for (let i = 0; i < firstDayOfWeek; i++) week.push(null);
   days.forEach((day) => {
     week.push(day);
@@ -93,7 +93,7 @@ const ContributionGraph = () => {
     weeks.push(week);
   }
 
-  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   const monthLabels = [];
   const monthPositions = [];
@@ -138,8 +138,22 @@ const ContributionGraph = () => {
         <tbody>
           {weekDays.map((dayName, dayIndex) => (
             <tr key={dayName}>
-              {["Mon", "Wed", "Fri"].includes(dayName) ? (
-                <td style={{ fontSize: 10, color: "#666" }}>{dayName[0]}</td>
+              {weekDays.includes(dayName) ? (
+                <td
+                  style={{
+                    fontSize: 10,
+                    color: ["Mon", "Wed", "Fri", "Sun"].includes(dayName)
+                      ? "#666"
+                      : "transparent",
+                    position: "sticky",
+                    left: 0,
+                    zIndex: 2,
+                    backgroundColor: "#222",
+                    textAlign: "center",
+                  }}
+                >
+                  {dayName[0]}
+                </td>
               ) : (
                 <td />
               )}
