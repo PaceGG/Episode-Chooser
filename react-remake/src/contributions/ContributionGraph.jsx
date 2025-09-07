@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function formatDateLocal(date) {
   const year = date.getFullYear();
@@ -16,6 +16,7 @@ function formatDate(dateStr) {
 const ContributionGraph = () => {
   const [sessions, setSessions] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     fetch("/sessions.json")
@@ -23,6 +24,13 @@ const ContributionGraph = () => {
       .then((data) => setSessions(data))
       .catch((err) => console.error("Failed to load sessions.json", err));
   }, []);
+
+  useEffect(() => {
+    if (sessions && scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft =
+        scrollContainerRef.current.scrollWidth;
+    }
+  }, [sessions]);
 
   if (!sessions) return <div>Loading...</div>;
 
@@ -102,7 +110,10 @@ const ContributionGraph = () => {
   });
 
   return (
-    <div style={{ fontFamily: "sans-serif", overflowX: "auto" }}>
+    <div
+      style={{ fontFamily: "sans-serif", overflowX: "auto" }}
+      ref={scrollContainerRef}
+    >
       <table style={{ borderSpacing: "2px" }}>
         <thead>
           <tr>
