@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 
 function formatDateLocal(date) {
-  // Дата в формате YYYY-MM-DD с учётом локального времени
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
 
+function formatDate(dateStr) {
+  const date = new Date(dateStr);
+  const options = { day: "numeric", month: "long", year: "numeric" };
+  return date.toLocaleDateString("ru-RU", options);
+}
+
 const ContributionGraph = () => {
   const [sessions, setSessions] = useState(null);
+  const [selectedDay, setSelectedDay] = useState(null);
 
   useEffect(() => {
     fetch("/sessions.json")
@@ -20,22 +26,20 @@ const ContributionGraph = () => {
 
   if (!sessions) return <div>Loading...</div>;
 
-  // === Приводим к массиву ===
   const sessionsArray = Object.values(sessions);
 
-  // === Группировка по дням ===
   const sessionsByDay = {};
   sessionsArray.forEach((session) => {
     const date = new Date(session.datetime * 1000);
-    const dateKey = formatDateLocal(date); // ✅ локальная дата
+    const dateKey = formatDateLocal(date);
     if (!sessionsByDay[dateKey]) sessionsByDay[dateKey] = [];
     sessionsByDay[dateKey].push(session);
   });
 
-  // === Определяем диапазон ===
   const allDates = Object.keys(sessionsByDay).sort(
     (a, b) => new Date(a) - new Date(b)
   );
+
   const startDate = new Date(allDates[0]);
   const endDate = new Date(allDates[allDates.length - 1]);
 
@@ -58,7 +62,6 @@ const ContributionGraph = () => {
     }
   };
 
-  // === Генерация массива всех дней ===
   const days = [];
   const current = new Date(startDate);
   while (current <= endDate) {
@@ -66,10 +69,9 @@ const ContributionGraph = () => {
     current.setDate(current.getDate() + 1);
   }
 
-  // === Разбиваем на недели ===
   const weeks = [];
   let week = [];
-  const firstDayOfWeek = days[0].getDay(); // 0 = Sunday
+  const firstDayOfWeek = days[0].getDay();
   for (let i = 0; i < firstDayOfWeek; i++) week.push(null);
   days.forEach((day) => {
     week.push(day);
@@ -85,7 +87,6 @@ const ContributionGraph = () => {
 
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  // === Подписи месяцев (месяц+год) ===
   const monthLabels = [];
   const monthPositions = [];
   weeks.forEach((week, weekIndex) => {
@@ -126,7 +127,6 @@ const ContributionGraph = () => {
         <tbody>
           {weekDays.map((dayName, dayIndex) => (
             <tr key={dayName}>
-              {/* Лейблы слева */}
               {["Mon", "Wed", "Fri"].includes(dayName) ? (
                 <td style={{ fontSize: 10, color: "#666" }}>{dayName[0]}</td>
               ) : (
@@ -137,11 +137,12 @@ const ContributionGraph = () => {
                 if (!day) return <td key={weekIndex} />;
                 const dateKey = formatDateLocal(day);
                 const count = sessionsByDay[dateKey]?.length || 0;
-                const tooltip = `${count} contribution${
-                  count !== 1 ? "s" : ""
-                } on ${day.toDateString()}`;
                 return (
-                  <td key={weekIndex} title={tooltip}>
+                  <td
+                    key={weekIndex}
+                    onClick={() => count > 0 && setSelectedDay(dateKey)}
+                    style={{ cursor: count > 0 ? "pointer" : "default" }}
+                  >
                     <div
                       style={{
                         width: 12,
@@ -157,6 +158,66 @@ const ContributionGraph = () => {
           ))}
         </tbody>
       </table>
+
+      {selectedDay && (
+        <div
+          onClick={() => setSelectedDay(null)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: "#333",
+              padding: 20,
+              borderRadius: 8,
+              minWidth: 300,
+              maxHeight: "80%",
+              overflowY: "auto",
+            }}
+          >
+            <h3>Sessions on {formatDate(selectedDay)}</h3>
+            <ul>
+              {sessionsByDay[selectedDay].map((session, i) => (
+                <li key={i}>
+                  <strong>{session.game}</strong>
+                  <ul>
+                    {session.episodes.map((ep, j) => (
+                      <li key={j} style={{ marginBottom: 8, marker: "none" }}>
+                        <details style={{ cursor: "pointer" }}>
+                          <summary>
+                            {ep.number}.{" "}
+                            {ep.title.split("•")[0].trim() || "(No title)"}
+                          </summary>
+                          <p style={{ whiteSpace: "pre-line", marginLeft: 10 }}>
+                            {ep.description || "(No description)"}
+                          </p>
+                        </details>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={() => setSelectedDay(null)}
+              style={{ marginTop: 10 }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
