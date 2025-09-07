@@ -227,7 +227,14 @@ const ContributionGraph = () => {
                             {ep.number}.{" "}
                             {ep.title.split("•")[0].trim() || "(No title)"}
                           </summary>
-                          <p style={{ whiteSpace: "pre-line", marginLeft: 10 }}>
+                          <p
+                            style={{
+                              whiteSpace: "pre-line",
+                              marginLeft: 40,
+                              marginTop: 0,
+                              marginBottom: 0,
+                            }}
+                          >
                             {ep.description || "(No description)"}
                           </p>
                         </details>
