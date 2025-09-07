@@ -3,6 +3,7 @@ import axios from "axios";
 import GameDetails from "./GameDetails"; // Путь к вашему компоненту GameDetails
 import AddGameModal from "../addGameModal"; // Путь к вашему компоненту AddGameModal
 import style from "./GameList.module.css";
+import ContributionGraph from "../contributions/ContributionGraph";
 
 const GameList = () => {
   const [games, setGames] = useState([]);
@@ -67,6 +68,9 @@ const GameList = () => {
 
   return (
     <div className="game-list-content">
+      <div style={{ display: "flex", maxWidth: "700px" }}>
+        <ContributionGraph />
+      </div>
       <div className="statistic">
         <h2>
           Игр пройдено:{" "}

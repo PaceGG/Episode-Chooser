@@ -7,3 +7,5 @@ episode choose remake/data.json
 episode choose remake/tests.py
 *.xlsm
 *.xlsx
+
+sessions.json
