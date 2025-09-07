@@ -167,6 +167,9 @@ const ContributionGraph = () => {
                     key={weekIndex}
                     onClick={() => count > 0 && setSelectedDay(dateKey)}
                     style={{ cursor: count > 0 ? "pointer" : "default" }}
+                    title={`${count} sessions on ${formatDate(
+                      formatDateLocal(day)
+                    )}`}
                   >
                     <div
                       style={{
