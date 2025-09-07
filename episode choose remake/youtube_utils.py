@@ -14,11 +14,13 @@ class EmptyMessage:
     name: str
     ep_range: list[int]
     message_id: int
+    timestamp: int
 
-    def __init__(self, name, ep_range, message_id):
+    def __init__(self, name, ep_range, message_id, timestamp=None):
         self.name = name
         self.ep_range = ep_range
         self.message_id = message_id
+        self.timestamp = int(time.time()) if timestamp is None else timestamp
 
     def __repr__(self):
         return f"emptyMessage({self.name} {self.ep_range} {self.message_id})"
@@ -127,10 +129,9 @@ def get_yt_videos():
     return videos
 
 
-def add_sessions_entry_with_data(sessions_path: str, game: str, episodes: list[dict], message_id: int):
+def add_sessions_entry_with_data(sessions_path: str, game: str, episodes: list[dict], message_id: int, timestamp: int):
     import json
     import os
-    import time
 
     # читаем существующий файл
     try:
@@ -147,7 +148,7 @@ def add_sessions_entry_with_data(sessions_path: str, game: str, episodes: list[d
     # создаём запись
     sessions[new_id] = {
         "game": game,
-        "datetime": int(time.time()),
+        "datetime": timestamp,  # берём дату сообщения
         "episodes": episodes
     }
 
@@ -158,6 +159,7 @@ def add_sessions_entry_with_data(sessions_path: str, game: str, episodes: list[d
     os.replace(tmp_path, sessions_path)
 
     return new_id
+
 
 def edit_empty_message(empty_message: EmptyMessage, yt_videos):
     import telegram_utils
@@ -192,10 +194,11 @@ def edit_empty_message(empty_message: EmptyMessage, yt_videos):
     # --- добавляем запись в sessions.json ---
     sessions_path = r"D:\Program Files\HTML\Episode-Chooser\react-remake\public\sessions.json"
     try:
-        add_sessions_entry_with_data(sessions_path, empty_message.name, episode_list, empty_message.message_id)
+        add_sessions_entry_with_data(sessions_path, empty_message.name, episode_list, empty_message.message_id, empty_message.timestamp)
         print(f"Добавлена сессия для {empty_message.name} эпизоды {empty_message.ep_range[0]}-{empty_message.ep_range[1]}")
     except Exception as e:
         print(f"Не удалось добавить запись в sessions.json: {e}")
+
 
 
     return True
