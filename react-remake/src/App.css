@@ -124,7 +124,7 @@ button {
   display: flex;
   flex-grow: 1;
   min-width: 570px;
-  height: 700px;
+  height: 559px;
   overflow-y: scroll;
   margin-bottom: 15px;
 }

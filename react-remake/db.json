@@ -1673,8 +1673,8 @@
     }
   ],
   "filters": {
-    "statusComplete": true,
-    "statusBad": true,
-    "statusWait": true
+    "statusComplete": false,
+    "statusBad": false,
+    "statusWait": false
   }
 }
