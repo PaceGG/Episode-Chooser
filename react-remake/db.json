@@ -1032,9 +1032,9 @@
         },
         {
           "name": "Call of Duty: Modern Warfare III (2023)",
-          "status": "inProcess",
-          "time": 0,
-          "numberOfEps": 0
+          "status": "complete",
+          "time": 17589,
+          "numberOfEps": 6
         },
         {
           "name": "Call of Duty: Black Ops 6 (2024)",
@@ -1148,7 +1148,7 @@
       "additionalGames": [
         {
           "name": "Assassin’s Creed",
-          "status": "none",
+          "status": "inProcess",
           "time": 0,
           "numberOfEps": 0
         },
@@ -1619,20 +1619,40 @@
           "numberOfEps": 37
         }
       ]
+    },
+    {
+      "id": "0dd8",
+      "mainName": "Hollow Knight",
+      "mainTime": 0,
+      "mainNumberOfEps": 0,
+      "additionalGames": [
+        {
+          "name": "Hollow Knight",
+          "status": "inProcess",
+          "time": 0,
+          "numberOfEps": 0
+        },
+        {
+          "name": "Hollow Knight: Silksong",
+          "status": "none",
+          "time": 0,
+          "numberOfEps": 0
+        }
+      ]
     }
   ],
   "showcase": [
     {
       "id": "0",
-      "name": "The Elder Scrolls IV: Oblivion Remastered",
-      "coverart": "https://shared.steamstatic.com/store_item_assets/steam/apps/2623190/b52322f78cbdc7e6c267d873056abba7916f7ff3/library_600x900_2x.jpg?t=1745345463",
-      "color": "#f6980f"
+      "name": "Hollow Knight",
+      "coverart": "https://shared.steamstatic.com/store_item_assets/steam/apps/367520/library_600x900_2x.jpg?t=1695270300",
+      "color": "#5ed2e0"
     },
     {
       "id": "1",
-      "name": "Call of Duty: Vanguard",
-      "coverart": "https://shared.steamstatic.com/store_item_assets/steam/apps/1985820/library_600x900_2x.jpg?t=1677107767",
-      "color": "#d6001c"
+      "name": "Assassin’s Creed",
+      "coverart": "https://cdn2.steamgriddb.com/thumb/a5eb02f2e24db13fe5e4826cfd515b84.jpg",
+      "color": "#b41724"
     }
   ],
   "links": [
@@ -1673,8 +1693,8 @@
     }
   ],
   "filters": {
-    "statusComplete": false,
-    "statusBad": false,
-    "statusWait": false
+    "statusComplete": true,
+    "statusBad": true,
+    "statusWait": true
   }
 }
