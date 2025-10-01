@@ -8,4 +8,7 @@ episode choose remake/tests.py
 *.xlsm
 *.xlsx
 
-sessions.json
+*.json
+*.txt
+
+__pycache__
