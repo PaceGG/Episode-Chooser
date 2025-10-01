@@ -65,8 +65,12 @@ const ContributionGraph = () => {
         return "#ee204d";
       case 5:
         return "#ee20ccff";
+      case 6:
+      case 7:
+        return "#eeff00ff";
+
       default:
-        return "green";
+        return "black";
     }
   };
 

@@ -5,32 +5,26 @@ from subprocess import run
 from pyperclip import copy
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-
-
 if __name__ == "__main__":
-    region = "Залив Педро"
+    region = "Болота"
     with open("names.txt", "r", encoding="utf-8") as f:
         names = f.read().splitlines()
     with open("contracts.json", "r", encoding="utf-8") as f:
         contracts = json.load(f)
 
-    result = OrderedDict()
+    lines = []
+    prev_company = None
 
     for name in names:
         company = contracts.get(name, region)
-        if company not in result:
-            result[company] = []
-        result[company].append(name)
+        if company != prev_company:
+            if lines:
+                lines.append("") 
+            lines.append(f"○ {company}")
+            prev_company = company
+        lines.append(f"• {name}")
 
-    # Формируем итоговую строку
-    output = ""
-    for company, contracts_list in result.items():
-        output += f"○ {company}\n"
-        for contract in contracts_list:
-            output += f"• {contract}\n"
-        output += "\n"
-
-    output = output.strip()  # убираем лишний перенос в конце
+    output = "\n".join(lines).strip()
 
     copy(output)
     with open("description.txt", "w", encoding="utf-8") as f:
