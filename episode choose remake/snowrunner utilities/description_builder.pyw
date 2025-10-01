@@ -6,7 +6,8 @@ from pyperclip import copy
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 if __name__ == "__main__":
-    region = "Болота"
+    with open("region_name.txt", "r", encoding="utf-8") as f:
+        region = f.read().strip()
     with open("names.txt", "r", encoding="utf-8") as f:
         names = f.read().splitlines()
     with open("contracts.json", "r", encoding="utf-8") as f:
