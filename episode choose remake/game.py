@@ -300,7 +300,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
         add_count = count_videos
     processed_game.count_episode += add_count
 
-    move_videos(processed_game.video_dir, games)
+    move_files(processed_game.video_dir, games)
 
 def equalize_time_limit(games: list[Game], stat: Data):
     processed_game = games[stat.process_game_id]
