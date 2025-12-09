@@ -20,7 +20,7 @@ def move_files(target_dir: Path, games):
     start_index = get_disk_video(games)
     video_сtime = 0
 
-    for file in obs_dir.iterdir():
+    for file in sorted(obs_dir.iterdir(), key=lambda p: p.stat().st_birthtime):
         if file.is_file():
             if file.suffix in video_formats:
                 start_index += 1
@@ -31,11 +31,13 @@ def move_files(target_dir: Path, games):
                 move_file(file, target_dir)
 
 def move_video(file: Path, target_dir, index):
+    video_ctime = file.stat().st_birthtime
+    
     new_name = f"{index}{file.suffix}"
 
     move_file(file, target_dir, new_name)
 
-    return file.stat().st_birthtime
+    return video_ctime
 
 def move_image(file: Path, target_dir, index, video_ctime):
     image_ctime = file.stat().st_birthtime
