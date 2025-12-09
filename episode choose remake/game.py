@@ -240,7 +240,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     count_videos = get_count_videos()
 
     if not is_last_session:
-        print(f"В {processed_game.name} есть видео продолжительностью {duration} минут. Добавить их к сумме? Введите \"-\" для обозначения финальной сессии")
+        print(f"В {processed_game.name} есть {count_videos} видео продолжительностью {duration} минут. Добавить их к сумме? Введите \"-\" для обозначения финальной сессии")
         user_time = input(f"Введите время для {processed_game.name}: ")
     else:
         user_time = "-"
