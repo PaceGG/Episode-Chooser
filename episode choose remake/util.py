@@ -1,4 +1,3 @@
-from warnings import deprecated
 import win32api
 import win32gui
 import paths
