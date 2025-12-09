@@ -28,6 +28,13 @@ def time_format(minutes):
     # if minutes > 60: return f"{minutes//60:02}:{minutes%60:02} ({minutes})"
     # return f"({ceil(minutes)})"
 
+def seconds_to_hhmmss(seconds):
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    secs = seconds % 60
+    
+    return f"{hours:02d}-{minutes:02d}-{secs:02d}"
+
 def short_date_format(time):
     """ dd.mm.yy HH:MM """
     return strftime("%d.%m.%y %H:%M", localtime(time))

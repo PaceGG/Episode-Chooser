@@ -1,3 +1,4 @@
+from warnings import deprecated
 import win32api
 import win32gui
 import paths
@@ -5,31 +6,55 @@ import local_data
 from pathlib import Path
 from directory_statistics import get_disk_video
 import difflib
+from time_format import seconds_to_hhmmss
 
 video_formats = [".mp4", ".mkv"]
+image_formats = [".png"]
 
 def set_eng_layout():
     window_handle = win32gui.GetForegroundWindow()
     result = win32api.SendMessage(window_handle, 0x0050, 0, 0x04090409)
     return(result)
 
-def move_videos(target_dir: Path, games):
+def move_files(target_dir: Path, games):
     obs_dir = paths.video_dir / "OBS"
-    start_index = get_disk_video(games) + 1
+    start_index = get_disk_video(games)
+    video_сtime = 0
 
     for file in obs_dir.iterdir():
         if file.is_file():
             if file.suffix in video_formats:
-                new_name = f"{start_index}{file.suffix}"
                 start_index += 1
+                video_сtime = move_video(file, target_dir, start_index)
+            elif file.suffix in image_formats and "Screenshot" in file.name:
+                move_image(file, target_dir, start_index, video_сtime)
             else:
-                new_name = file.name
+                move_file(file, target_dir)
 
-            target_path = target_dir / new_name
-            try:
-                file.rename(target_path)
-            except Exception as e:
-                print(f"Ошибка перемещения {file}: {e}")
+def move_video(file: Path, target_dir, index):
+    new_name = f"{index}{file.suffix}"
+
+    move_file(file, target_dir, new_name)
+
+    return file.stat().st_birthtime
+
+def move_image(file: Path, target_dir, index, video_ctime):
+    image_ctime = file.stat().st_birthtime
+    timecode = seconds_to_hhmmss(video_ctime - image_ctime)
+
+    new_name = f"{index} {timecode}{file.suffix}"
+
+    move_file(file, target_dir, new_name)
+
+def move_file(file: Path, target_dir, new_name=None):
+    if new_name is None:
+        new_name = file.name
+
+    target_path = target_dir / new_name
+    try:
+        file.rename(target_path)
+    except Exception as e:
+        print(f"Ошибка перемещения {file}: {e}")
 
 
 def create_game_folder(video_dir: Path):
