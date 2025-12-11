@@ -13,17 +13,19 @@ load_dotenv("gitignore/.env")
 class EmptyMessage:
     name: str
     ep_range: list[int]
+    durations: list[int]
     message_id: int
     timestamp: int
 
-    def __init__(self, name, ep_range, message_id, timestamp=None):
+    def __init__(self, name, ep_range, durations, message_id, timestamp=None):
         self.name = name
         self.ep_range = ep_range
+        self.durations = durations
         self.message_id = message_id
         self.timestamp = int(time.time()) if timestamp is None else timestamp
 
     def __repr__(self):
-        return f"emptyMessage({self.name} {self.ep_range} {self.message_id})"
+        return f"emptyMessage({self.name} {self.ep_range} {self.durations} {self.message_id})"
 
 
 class Title:
@@ -63,11 +65,12 @@ def add_titles(titles: list[Title], game, count_videos, is_final):
         )
 
 
-def add_empty_message(empty_messages: list[EmptyMessage], game, count_videos, message_id):
+def add_empty_message(empty_messages: list[EmptyMessage], game, count_videos, durations, message_id):
     empty_messages.append(
         EmptyMessage(
             game.full_name,
             [game.count_episode + 1, game.count_episode + count_videos],
+            durations,
             message_id
         )
     )
@@ -175,13 +178,16 @@ def edit_empty_message(empty_message: EmptyMessage, yt_videos):
         ep_str = str(episode_number)
         if ep_str in videos:
             ep_data = videos[ep_str]
+            duration_index = episode_number - empty_message.ep_range[0]
+            duration = empty_message.durations[duration_index]
             names.append(ep_data["title"])
             episode_list.append({
                 "number": episode_number,
                 "title": ep_data.get("title", ""),
                 "description": ep_data.get("description", ""),
                 "publishedAt": ep_data.get("publishedAt", ""),
-                "videoId": ep_data.get("videoId", "")
+                "videoId": ep_data.get("videoId", ""),
+                "duration": duration,
             })
 
     if len(names) != empty_message.ep_range[1] - empty_message.ep_range[0] + 1:

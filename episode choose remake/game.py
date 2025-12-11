@@ -231,10 +231,11 @@ def unfinished_process(games: list[Game], stat: Data, duration: int):
     if confirm == "-": return None, True
     return unfinished_game.game_path, False
 
-def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_last_session, duration): 
+def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_last_session, durations): 
     process_game_id = stat.process_game_id
     message_id = stat.process_game_message_id
     processed_game = games[process_game_id]
+    duration = sum(durations) // 60
 
     if is_last_session: duration = 120
     count_videos = get_count_videos()
@@ -284,7 +285,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     processed_game.content_time += user_content_time
 
     add_titles(titles, processed_game, count_videos, is_last_session)
-    add_empty_message(empty_messages, processed_game, count_videos, message_id)
+    add_empty_message(empty_messages, processed_game, count_videos, durations, message_id)
     telegram_utils.edit_caption(f"{processed_game.full_name}: № {processed_game.count_episode + 1}{f"-{processed_game.count_episode + count_videos}" if count_videos > 1 else ""}", message_id)
 
     telegram_utils.delete_message(stat.time_info_message_id)
