@@ -71,7 +71,7 @@ class Main:
         if stat.process_game_id == -1:
             response = run_game(games, stat) # no processing game
         else:
-            duration = get_duration()
+            duration = sum(get_duration()) // 60
             if duration < games[stat.process_game_id].time_limit: 
                 response, is_last_session = unfinished_process(games, stat, duration) # processing game
 
