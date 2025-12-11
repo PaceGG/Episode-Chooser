@@ -37,6 +37,37 @@ def seconds_to_hhmmss(seconds):
     
     return f"{hours:02d}-{minutes:02d}-{secs:02d}"
 
+def yy_mm_to_unix(date_str):
+    """
+    Преобразует строку формата YY-MM в Unix время
+    (первое число указанного месяца)
+    """
+    # Разделяем строку на год и месяц
+    year_str, month_str = date_str.split('-')
+    
+    # Преобразуем год (предполагаем 21 век: 2000-2099)
+    year = 2000 + int(year_str)
+    month = int(month_str)
+    
+    # Создаем struct_time для 1-го числа месяца, 00:00:00
+    # tm_wday и tm_yday игнорируются, tm_isdst = -1 (неопределено)
+    time_tuple = (
+        year,          # tm_year
+        month,         # tm_mon (1-12)
+        1,             # tm_mday (1-е число)
+        0,             # tm_hour (0 часов)
+        0,             # tm_min (0 минут)
+        0,             # tm_sec (0 секунд)
+        0,             # tm_wday (игнорируется)
+        0,             # tm_yday (игнорируется)
+        -1             # tm_isdst (летнее время неопределено)
+    )
+    
+    # Преобразуем в Unix время
+    unix_time = int(mktime(time_tuple))
+    return unix_time
+
+
 def short_date_format(time):
     """ dd.mm.yy HH:MM """
     return strftime("%d.%m.%y %H:%M", localtime(time))
