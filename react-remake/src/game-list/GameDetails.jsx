@@ -32,6 +32,38 @@ const GameDetails = ({
     loadFiltersData();
   }, []);
 
+  // Добавьте эту функцию в компонент GameDetails
+  const loadSessionData = async (gameName) => {
+    try {
+      const response = await fetch("/sessions.json");
+      const sessions = await response.json();
+
+      // Ищем записи для указанной игры
+      const gameEntries = Object.values(sessions).filter((entry) =>
+        entry.game.toLowerCase().includes(gameName.toLowerCase())
+      );
+
+      if (gameEntries.length === 0)
+        return { totalDuration: 0, episodeCount: 0 };
+
+      // Суммируем продолжительность всех эпизодов
+      let totalDuration = 0;
+      let episodeCount = 0;
+
+      gameEntries.forEach((entry) => {
+        entry.episodes.forEach((episode) => {
+          totalDuration += episode.duration;
+          episodeCount++;
+        });
+      });
+
+      return { totalDuration, episodeCount };
+    } catch (error) {
+      console.error("Error loading session data:", error);
+      return { totalDuration: 0, episodeCount: 0 };
+    }
+  };
+
   const loadFiltersData = async () => {
     try {
       const response = await axios.get("http://localhost:3000/filters"); // URL вашего json-server
@@ -194,13 +226,34 @@ const GameDetails = ({
       );
       const game = response.data;
 
+      let timeToSave = convertTimeStringToSeconds(selectedTime);
+      let epsToSave = parseInt(selectedEps);
+
+      if (
+        selectedStatus === "complete" &&
+        (!selectedTime || selectedTime == 0)
+      ) {
+        // Загружаем данные из sessions.json для этой игры
+        const sessionData = await loadSessionData(selectedGameName);
+
+        // Используем данные из sessions.json только если они есть
+        if (sessionData.totalDuration > 0) {
+          timeToSave = sessionData.totalDuration;
+          epsToSave = sessionData.episodeCount;
+
+          // Обновляем локальное состояние для отображения в UI
+          setSelectedTime(timeToSave);
+          setSelectedEps(sessionData.episodeCount);
+        }
+      }
+
       const updateAdditionalGames = game.additionalGames.map((game) =>
         game.name === selectedGameName
           ? {
               ...game,
               status: selectedStatus,
-              time: convertTimeStringToSeconds(selectedTime),
-              numberOfEps: parseInt(selectedEps),
+              time: timeToSave,
+              numberOfEps: epsToSave,
             }
           : game
       );
@@ -214,8 +267,8 @@ const GameDetails = ({
         await axios.put(`http://localhost:3000/games/${selectedGameID}`, {
           ...game,
           mainStatus: selectedStatus,
-          mainTime: convertTimeStringToSeconds(selectedTime),
-          mainNumberOfEps: parseInt(selectedEps),
+          mainTime: timeToSave,
+          mainNumberOfEps: epsToSave,
         });
       }
     } catch (error) {
