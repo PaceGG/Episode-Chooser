@@ -156,7 +156,7 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           ${alpha(theme.palette.background.default, 0.7)} 100%
         )`,
         backdropFilter: "blur(10px)",
-        width: 415,
+        width: 420,
       }}
       role="region"
       aria-label="Информация о дисковом пространстве"
@@ -306,26 +306,27 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
         </Typography>
       </Box>
 
-      <Stack
-        direction={"row"}
-        alignItems={"center"}
-        justifyContent={"space-between"}
-        mt={2}
-      >
-        <Box>
-          <VideoLibrary
-            sx={{ color: theme.palette.primary.main, fontSize: 28, mr: 1 }}
-          />
-          {videoOnDisk} видео на диске
-        </Box>
-        <Box>
-          из них к удалению
-          {videoToDel}
-          <DeleteOutline
-            sx={{ color: theme.palette.error.main, fontSize: 28, ml: 1 }}
-          />
-        </Box>
-      </Stack>
+      {(videoToDel > 0 || videoOnDisk > 0) && (
+        <Stack
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          mt={2}
+        >
+          <Box>
+            <VideoLibrary
+              sx={{ color: theme.palette.primary.main, fontSize: 28, mr: 1 }}
+            />
+            {videoOnDisk} видео на диске
+          </Box>
+          <Box>
+            из них к удалению {videoToDel}
+            <DeleteOutline
+              sx={{ color: theme.palette.error.main, fontSize: 28, ml: 1 }}
+            />
+          </Box>
+        </Stack>
+      )}
     </CardContainer>
   );
 };

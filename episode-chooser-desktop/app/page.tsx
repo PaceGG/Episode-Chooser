@@ -38,7 +38,7 @@ export default function Home() {
       justifyContent={"center"}
       maxWidth={800}
     >
-      <DiskSpace use={33} total={977} videoOnDisk={4} videoToDel={3} />
+      <DiskSpace use={33} total={977} videoOnDisk={0} videoToDel={0} />
       <GameCard game={snowRunner} />
       <GameCard game={asc} />
       <GameCard game={silksong} />
