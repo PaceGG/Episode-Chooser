@@ -9,7 +9,11 @@ const snowRunner: Game = {
   title: "SnowRunner",
   time: 119,
   limit: 40,
-  quote: 4,
+  quote: 0,
+  srInfo: {
+    days: 3,
+    date: new Date(1797402548 * 1000),
+  },
 };
 
 const asc: Game = {
@@ -17,7 +21,7 @@ const asc: Game = {
   title: "Assassin’s Creed Revelations",
   time: 84,
   limit: 5,
-  quote: 5,
+  quote: 1,
   // forced: true,
 };
 
@@ -38,7 +42,7 @@ export default function Home() {
       justifyContent={"center"}
       maxWidth={800}
     >
-      <DiskSpace use={33} total={977} videoOnDisk={0} videoToDel={0} />
+      <DiskSpace use={33} total={977} videoOnDisk={1} videoToDel={1} />
       <GameCard game={snowRunner} />
       <GameCard game={asc} />
       <GameCard game={silksong} />

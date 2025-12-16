@@ -9,6 +9,7 @@ import {
   alpha,
   keyframes,
   Fade,
+  LinearProgress,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import {
@@ -18,10 +19,16 @@ import {
   Remove,
   ArrowUpward,
   ArrowDownward,
+  CalendarMonth,
 } from "@mui/icons-material";
 import Image from "next/image";
 
 // Типы
+export interface SRInfo {
+  days: number;
+  date: Date;
+}
+
 export interface Game {
   color: string;
   title: string;
@@ -29,6 +36,7 @@ export interface Game {
   limit: number;
   quote: number;
   forced?: boolean;
+  srInfo?: SRInfo;
 }
 
 interface GameCardProps {
@@ -219,6 +227,47 @@ function formatTitle(title: string) {
   return title.replace(/:/g, "");
 }
 
+function formatDate(date: Date): string {
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
+  const day = date.getDate();
+
+  const months = [
+    "января",
+    "февраля",
+    "марта",
+    "апреля",
+    "мая",
+    "июня",
+    "июля",
+    "августа",
+    "сентября",
+    "октября",
+    "ноября",
+    "декабря",
+  ];
+  const month = months[date.getMonth()];
+
+  const weekdays = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+  const weekday = weekdays[date.getDay()];
+
+  return `${hours}:${minutes}, ${day} ${month} ${weekday}`;
+}
+
+function formatDays(days: number): string {
+  if (days % 10 === 1 && days % 100 !== 11) {
+    return `${days} день`;
+  } else if (
+    [2, 3, 4].includes(days % 10) &&
+    ![12, 13, 14].includes(days % 100)
+  ) {
+    return `${days} дня`;
+  } else {
+    return `${days} дней`;
+  }
+}
+
 function getQuoteIcon(quote: number) {
   if (quote > 0) return <ArrowUpward color="success" />;
   if (quote < 0) return <ArrowDownward color="error" />;
@@ -237,83 +286,107 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
   const headerSrc = `/headers/${formattedTitle}.png`;
 
   return (
-    <Fade in timeout={800}>
-      <CardContainer
-        elevation={4}
-        role="article"
-        aria-label={`Статистика игры ${game.title}`}
-        forced={game.forced}
-      >
-        <HeaderSection accentColor={game.color}>
-          <Box sx={{ width: "100" }}>
-            {!error ? (
-              <Image
-                src={headerSrc}
-                alt={game.title}
-                width={600}
-                height={100}
-                style={{
-                  width: "100%",
-                }}
-                onError={() => setError(true)}
-              />
-            ) : (
-              <Box
-                height={100}
+    <CardContainer
+      elevation={4}
+      role="article"
+      aria-label={`Статистика игры ${game.title}`}
+      forced={game.forced}
+    >
+      <HeaderSection accentColor={game.color}>
+        <Box sx={{ width: "100" }}>
+          {!error ? (
+            <Image
+              src={headerSrc}
+              alt={game.title}
+              width={600}
+              height={100}
+              style={{
+                width: "100%",
+              }}
+              onError={() => setError(true)}
+            />
+          ) : (
+            <Box
+              height={100}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Typography align="center" variant="h5" color={game.color}>
+                {game.title}
+              </Typography>
+            </Box>
+          )}
+        </Box>
+      </HeaderSection>
+
+      {/* Блок времени */}
+      {(game.time !== 120 || game.limit !== 0 || game.quote > 1) && (
+        <InfoSection>
+          {(game.time !== 120 || game.limit !== 0) && (
+            <TimeContainer>
+              <TimerOutlined
                 sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  fontSize: "1.5rem",
                 }}
-              >
-                <Typography align="center" variant="h5" color={game.color}>
-                  {game.title}
-                </Typography>
-              </Box>
-            )}
-          </Box>
-        </HeaderSection>
+                aria-hidden="true"
+              />
+              {game.time !== 120 && (
+                <>
+                  <TimeText
+                    variant="h2"
+                    isNegative={isTimeNegative}
+                    aria-label={`Отформатированное время: ${formattedTime}`}
+                  >
+                    {formattedTime}
+                  </TimeText>
 
-        {/* Блок времени */}
-        {(game.time !== 120 || game.limit !== 0 || game.quote > 1) && (
-          <InfoSection>
-            {(game.time !== 120 || game.limit !== 0) && (
-              <TimeContainer>
-                <TimerOutlined
-                  sx={{
-                    fontSize: "1.5rem",
-                  }}
-                  aria-hidden="true"
-                />
-                {game.time !== 120 && (
-                  <>
-                    <TimeText
-                      variant="h2"
-                      isNegative={isTimeNegative}
-                      aria-label={`Отформатированное время: ${formattedTime}`}
-                    >
-                      {formattedTime}
-                    </TimeText>
+                  <StatsBadge label={`${Math.abs(game.time)} мин`} />
+                </>
+              )}
+              {game.limit !== 0 && (
+                <StatsBadge label={formattedLimit} value={game.limit} />
+              )}
+            </TimeContainer>
+          )}
 
-                    <StatsBadge label={`${Math.abs(game.time)} мин`} />
-                  </>
-                )}
-                {game.limit !== 0 && (
-                  <StatsBadge label={formattedLimit} value={game.limit} />
-                )}
-              </TimeContainer>
-            )}
+          {/* Блок цитаты */}
+          {game.quote > 1 && (
+            <QuoteContainer value={game.quote} role="status">
+              <QuoteText sx={{ color: "inherit" }}>x{game.quote}</QuoteText>
+            </QuoteContainer>
+          )}
+        </InfoSection>
+      )}
 
-            {/* Блок цитаты */}
-            {game.quote > 1 && (
-              <QuoteContainer value={game.quote} role="status">
-                <QuoteText sx={{ color: "inherit" }}>x{game.quote}</QuoteText>
-              </QuoteContainer>
-            )}
-          </InfoSection>
-        )}
-      </CardContainer>
-    </Fade>
+      {game.srInfo && (
+        <InfoSection
+          sx={{
+            gap: 1,
+          }}
+        >
+          {game.srInfo.date > new Date() || game.srInfo.days > 0 ? (
+            <>
+              {game.srInfo.date > new Date() && (
+                <QuoteContainer value={Number(game.srInfo.days < 0)}>
+                  <CalendarMonth color="primary" />
+                  {formatDate(game.srInfo.date)}
+                </QuoteContainer>
+              )}
+              {game.srInfo.days > 0 && (
+                <QuoteContainer value={1}>
+                  {formatDays(game.srInfo.days)}
+                </QuoteContainer>
+              )}
+            </>
+          ) : (
+            <QuoteContainer value={1}>Сегодня</QuoteContainer>
+          )}
+        </InfoSection>
+      )}
+    </CardContainer>
   );
 };
 
