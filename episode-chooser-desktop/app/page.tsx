@@ -4,7 +4,7 @@ import DiskSpace from "./components/DiskSpace";
 export default function Home() {
   return (
     <Box>
-      <DiskSpace use={900} total={977} />
+      <DiskSpace use={970} total={977} />
     </Box>
   );
 }
