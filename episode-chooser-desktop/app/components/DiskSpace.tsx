@@ -11,6 +11,7 @@ import {
   alpha,
   keyframes,
   Stack,
+  Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import {
@@ -57,8 +58,6 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 
 const ProgressContainer = styled(Box)(({ theme }) => ({
   position: "relative",
-  marginTop: theme.spacing(2),
-  marginBottom: theme.spacing(2),
 }));
 
 const ProgressLabel = styled(Typography)(({ theme }) => ({
@@ -150,7 +149,13 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
   return (
     <CardContainer
       sx={{
-        p: { xs: 2, sm: 3 },
+        p: {
+          xs: 2,
+          sm: 3,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        },
         background: `linear-gradient(135deg, 
           ${alpha(theme.palette.background.paper, 0.9)} 0%, 
           ${alpha(theme.palette.background.default, 0.7)} 100%
@@ -158,8 +163,6 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
         backdropFilter: "blur(10px)",
         width: 420,
       }}
-      role="region"
-      aria-label="Информация о дисковом пространстве"
     >
       {/* Заголовок */}
       <Box
@@ -167,7 +170,6 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          mb: 2,
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -247,7 +249,6 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           justifyContent: "space-between",
           alignItems: { xs: "flex-start", sm: "center" },
           gap: 2,
-          mt: 3,
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -311,7 +312,6 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           direction={"row"}
           alignItems={"center"}
           justifyContent={"space-between"}
-          mt={2}
         >
           <Box>
             <VideoLibrary
@@ -327,6 +327,17 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           </Box>
         </Stack>
       )}
+
+      <Box
+        display={"flex"}
+        width={"100%"}
+        justifyContent={"center"}
+        sx={{ animation: `${pulse} 2s ease-in-out infinite` }}
+      >
+        <Button variant="contained" sx={{ width: "70%" }}>
+          Начать
+        </Button>
+      </Box>
     </CardContainer>
   );
 };
