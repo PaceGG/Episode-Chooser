@@ -26,6 +26,7 @@ export interface Game {
   color: string;
   title: string;
   time: number;
+  limit: number;
   quote: number;
   forced?: boolean;
 }
@@ -176,13 +177,26 @@ const QuoteIcon = styled(Box)(({ theme }) => ({
   },
 }));
 
-const StatsBadge = styled(Chip)(({ theme }) => ({
-  fontWeight: 600,
-  height: 24,
-  "& .MuiChip-label": {
-    padding: theme.spacing(0, 1),
-  },
-}));
+const StatsBadge = styled(Chip)<{ value?: number }>(({ value }) => {
+  let bgColor;
+  let borderRadius = 20;
+
+  if (value != null) {
+    if (value > 0) {
+      bgColor = "red";
+    } else if (value < 0) {
+      bgColor = "error.main";
+    }
+    borderRadius = 1;
+  }
+
+  return {
+    fontWeight: 600,
+    height: 24,
+    borderRadius: borderRadius,
+    backgroundColor: bgColor,
+  };
+});
 
 // Вспомогательные функции
 function formatTime(minutes: number): string {
@@ -209,9 +223,8 @@ function getQuoteIcon(quote: number) {
 
 // Основной компонент
 const GameCard: React.FC<GameCardProps> = ({ game }) => {
-  const formattedTime = useMemo(() => formatTime(game.time), [game.time]);
-  const formattedQuote = useMemo(() => formatQuote(game.quote), [game.quote]);
-  const quoteIcon = useMemo(() => getQuoteIcon(game.quote), [game.quote]);
+  const formattedTime = formatTime(game.time);
+  const formattedLimit = formatQuote(game.limit);
   const isTimeNegative = game.time < 0;
 
   const [error, setError] = useState(false);
@@ -272,11 +285,8 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
             >
               {formattedTime}
             </TimeText>
-            <StatsBadge
-              label={`${Math.abs(game.time)} мин`}
-              size="small"
-              aria-label={`Общее время: ${Math.abs(game.time)} минут`}
-            />
+            <StatsBadge label={`${Math.abs(game.time)} мин`} />
+            <StatsBadge label={formattedLimit} value={game.limit} />
           </TimeContainer>
 
           {/* Блок цитаты */}
