@@ -280,14 +280,11 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
           </TimeContainer>
 
           {/* Блок цитаты */}
-          <QuoteContainer
-            value={game.quote}
-            role="status"
-            aria-label={`Изменение: ${formattedQuote}`}
-          >
-            <QuoteIcon>{quoteIcon}</QuoteIcon>
-            <QuoteText sx={{ color: "inherit" }}>{formattedQuote}</QuoteText>
-          </QuoteContainer>
+          {game.quote > 1 && (
+            <QuoteContainer value={game.quote} role="status">
+              <QuoteText sx={{ color: "inherit" }}>x{game.quote}</QuoteText>
+            </QuoteContainer>
+          )}
         </InfoSection>
       </CardContainer>
     </Fade>
