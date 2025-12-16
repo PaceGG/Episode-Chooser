@@ -5,7 +5,7 @@ import VideoInfo from "./components/VideoInfo";
 export default function Home() {
   return (
     <Box>
-      {/* <DiskSpace use={970} total={977} /> */}
+      <DiskSpace use={970} total={977} />
       <VideoInfo onDisk={4} toDelete={3} />
     </Box>
   );
