@@ -27,6 +27,7 @@ export interface Game {
   title: string;
   time: number;
   quote: number;
+  forced?: boolean;
 }
 
 interface GameCardProps {
@@ -46,18 +47,47 @@ const slideIn = keyframes`
 `;
 
 // Стилизованные компоненты
-const CardContainer = styled(Paper)(({ theme }) => ({
+const CardContainer = styled(Paper, {
+  shouldForwardProp: (prop) => prop !== "forced",
+})<{ forced?: boolean }>(({ theme, forced }) => ({
   position: "relative",
   overflow: "hidden",
   width: 320,
   borderRadius: 12,
-  background: `linear-gradient(145deg, 
-    ${theme.palette.background.paper} 0%, 
+
+  background: `linear-gradient(145deg,
+    ${theme.palette.background.paper} 0%,
     ${alpha(theme.palette.background.default, 0.7)} 100%)`,
-  border: `1px solid ${alpha(theme.palette.divider, 0.2)}`,
-  boxShadow: theme.shadows[4],
-  transition: theme.transitions.create(["transform", "box-shadow"], {
+
+  border: forced
+    ? `1.5px solid ${alpha(theme.palette.error.main, 0.8)}`
+    : `1px solid ${alpha(theme.palette.divider, 0.2)}`,
+
+  boxShadow: forced
+    ? `
+      0 0 0 1px ${alpha(theme.palette.error.main, 0.4)},
+      0 8px 24px ${alpha(theme.palette.error.main, 0.35)}
+    `
+    : theme.shadows[4],
+
+  transition: theme.transitions.create(["transform", "box-shadow", "border"], {
     duration: theme.transitions.duration.standard,
+  }),
+
+  // внутренняя подсветка
+  ...(forced && {
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      inset: 0,
+      borderRadius: 12,
+      pointerEvents: "none",
+      background: `linear-gradient(
+        180deg,
+        ${alpha(theme.palette.error.main, 0.12)} 0%,
+        transparent 40%
+      )`,
+    },
   }),
 }));
 
@@ -194,6 +224,7 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
         elevation={4}
         role="article"
         aria-label={`Статистика игры ${game.title}`}
+        forced={game.forced}
       >
         <HeaderSection accentColor={game.color}>
           <Box sx={{ width: "100" }}>

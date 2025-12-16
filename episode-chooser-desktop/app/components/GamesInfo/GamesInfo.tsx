@@ -14,6 +14,7 @@ export default function GamesInfo() {
     title: "Assassin’s Creed Revelations",
     time: 84,
     quote: 5,
+    // forced: true,
   };
 
   const silksong: Game = {
