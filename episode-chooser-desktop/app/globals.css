@@ -26,5 +26,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+
+  --scale: 2;
+  height: calc(100vh / var(--scale));
+  zoom: calc(100% * var(--scale));
 }
