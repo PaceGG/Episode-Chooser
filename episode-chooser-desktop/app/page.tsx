@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <Box>
       <DiskSpace use={970} total={977} />
-      <VideoInfo onDisk={4} toDelete={3} />
+      {/* <VideoInfo onDisk={4} toDelete={3} /> */}
       <GamesInfo />
     </Box>
   );
