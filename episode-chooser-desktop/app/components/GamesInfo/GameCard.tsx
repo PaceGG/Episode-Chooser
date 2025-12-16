@@ -215,6 +215,10 @@ function formatQuote(minutes: number): string {
   return `${minutes > 0 ? "+" : ""}${minutes}`;
 }
 
+function formatTitle(title: string) {
+  return title.replace(/:/g, "");
+}
+
 function getQuoteIcon(quote: number) {
   if (quote > 0) return <ArrowUpward color="success" />;
   if (quote < 0) return <ArrowDownward color="error" />;
@@ -225,11 +229,12 @@ function getQuoteIcon(quote: number) {
 const GameCard: React.FC<GameCardProps> = ({ game }) => {
   const formattedTime = formatTime(game.time);
   const formattedLimit = formatQuote(game.limit);
+  const formattedTitle = formatTitle(game.title);
   const isTimeNegative = game.time < 0;
 
   const [error, setError] = useState(false);
 
-  const headerSrc = `/headers/${game.title}.png`;
+  const headerSrc = `/headers/${formattedTitle}.png`;
 
   return (
     <Fade in timeout={800}>
