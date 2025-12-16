@@ -7,9 +7,9 @@ import recap from "./recap/recaps/25-11.json";
 const App = () => {
   return (
     <>
-      {/* <HomePage /> */}
+      <HomePage />
       {/* <MonthlyStats data={recap} /> */}
-      <Recap data={recap} />
+      {/* <Recap data={recap} /> */}
     </>
   );
 };
