@@ -5,7 +5,6 @@ import {
   Typography,
   LinearProgress,
   Box,
-  Tooltip,
   IconButton,
   Skeleton,
   useTheme,
@@ -92,7 +91,6 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
   onDetailsClick,
 }) => {
   const theme = useTheme();
-  const isMobile = false;
 
   // Мемоизированные вычисления
   const { value, remaining, videoCount, status, isCritical } = useMemo(() => {
@@ -190,36 +188,32 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           {isCritical && (
-            <Tooltip title="Критически мало свободного места">
-              <WarningAmberRounded
-                sx={{
-                  color: theme.palette.error.main,
-                  fontSize: { xs: 18, sm: 20 },
-                  animation: `${pulse} 1s ease-in-out infinite`,
-                }}
-                aria-label="Предупреждение"
-              />
-            </Tooltip>
+            <WarningAmberRounded
+              sx={{
+                color: theme.palette.error.main,
+                fontSize: { xs: 18, sm: 20 },
+                animation: `${pulse} 1s ease-in-out infinite`,
+              }}
+              aria-label="Предупреждение"
+            />
           )}
           {onDetailsClick && (
-            <Tooltip title="Подробная информация">
-              <IconButton
-                size="small"
-                onClick={onDetailsClick}
-                aria-label="Подробная информация о дисковом пространстве"
-                sx={{
-                  "&:focus-visible": {
-                    outline: `2px solid ${theme.palette.primary.main}`,
-                  },
-                  transition: theme.transitions.create([
-                    "transform",
-                    "background-color",
-                  ]),
-                }}
-              >
-                <InfoOutlined fontSize="small" />
-              </IconButton>
-            </Tooltip>
+            <IconButton
+              size="small"
+              onClick={onDetailsClick}
+              aria-label="Подробная информация о дисковом пространстве"
+              sx={{
+                "&:focus-visible": {
+                  outline: `2px solid ${theme.palette.primary.main}`,
+                },
+                transition: theme.transitions.create([
+                  "transform",
+                  "background-color",
+                ]),
+              }}
+            >
+              <InfoOutlined fontSize="small" />
+            </IconButton>
           )}
         </Box>
       </Box>
@@ -288,34 +282,29 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           </Typography>
         </Box>
 
-        <Tooltip
-          title={`На основе среднего размера видео ${averageVideoSize}GB`}
-          placement={isMobile ? "bottom" : "left"}
+        <Typography
+          variant="body2"
+          sx={{
+            textAlign: { xs: "left", sm: "right" },
+            color: theme.palette.text.secondary,
+            bgcolor: alpha(theme.palette.primary.main, 0.08),
+            px: 2,
+            py: 1,
+            borderRadius: theme.shape.borderRadius,
+            transition: theme.transitions.create("background-color"),
+          }}
         >
-          <Typography
-            variant="body2"
-            sx={{
-              textAlign: { xs: "left", sm: "right" },
-              color: theme.palette.text.secondary,
-              bgcolor: alpha(theme.palette.primary.main, 0.08),
-              px: 2,
-              py: 1,
-              borderRadius: theme.shape.borderRadius,
-              transition: theme.transitions.create("background-color"),
-            }}
-          >
-            ~{" "}
-            <Box component="span" sx={{ fontWeight: 700 }}>
-              {videoCount}
-            </Box>{" "}
-            {videoCount === 1
-              ? "видео"
-              : videoCount >= 2 && videoCount <= 4
-              ? "видео"
-              : "видео"}{" "}
-            поместится
-          </Typography>
-        </Tooltip>
+          ~{" "}
+          <Box component="span" sx={{ fontWeight: 700 }}>
+            {videoCount}
+          </Box>{" "}
+          {videoCount === 1
+            ? "видео"
+            : videoCount >= 2 && videoCount <= 4
+            ? "видео"
+            : "видео"}{" "}
+          поместится
+        </Typography>
       </Box>
     </StyledPaper>
   );
