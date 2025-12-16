@@ -6,7 +6,7 @@ import GamesInfo from "./components/GamesInfo/GamesInfo";
 export default function Home() {
   return (
     <Stack>
-      <DiskSpace use={970} total={977} />
+      <DiskSpace use={33} total={977} videoOnDisk={4} videoToDel={3} />
       {/* <VideoInfo onDisk={4} toDelete={3} /> */}
       <GamesInfo />
     </Stack>

@@ -10,12 +10,15 @@ import {
   useTheme,
   alpha,
   keyframes,
+  Stack,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import {
+  DeleteOutline,
   InfoOutlined,
   StorageOutlined,
   VideocamOutlined,
+  VideoLibrary,
   WarningAmberRounded,
 } from "@mui/icons-material";
 import React, { useMemo } from "react";
@@ -25,6 +28,8 @@ import { CardContainer } from "./GamesInfo/GameCard";
 interface DiskSpaceProps {
   use: number;
   total: number;
+  videoOnDisk: number;
+  videoToDel: number;
   averageVideoSize?: number;
   isLoading?: boolean;
   onDetailsClick?: () => void;
@@ -87,6 +92,8 @@ const StatusIndicator = styled(Box, {
 const DiskSpace: React.FC<DiskSpaceProps> = ({
   use,
   total,
+  videoOnDisk,
+  videoToDel,
   averageVideoSize = 40,
   isLoading = false,
   onDetailsClick,
@@ -148,6 +155,7 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           ${alpha(theme.palette.background.default, 0.7)} 100%
         )`,
         backdropFilter: "blur(10px)",
+        width: 415,
       }}
       role="region"
       aria-label="Информация о дисковом пространстве"
@@ -304,6 +312,27 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
             : "видео"}{" "}
         </Typography>
       </Box>
+
+      <Stack
+        direction={"row"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        mt={2}
+      >
+        <Box>
+          <VideoLibrary
+            sx={{ color: theme.palette.primary.main, fontSize: 28, mr: 1 }}
+          />
+          {videoOnDisk} видео на диске
+        </Box>
+        <Box>
+          из них к удалению
+          {videoToDel}
+          <DeleteOutline
+            sx={{ color: theme.palette.error.main, fontSize: 28, ml: 1 }}
+          />
+        </Box>
+      </Stack>
     </CardContainer>
   );
 };
