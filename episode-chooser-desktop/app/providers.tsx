@@ -9,7 +9,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const theme = prefersDarkMode ? darkTheme : lightTheme;
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={lightTheme}>
       <CssBaseline />
       {children}
     </ThemeProvider>

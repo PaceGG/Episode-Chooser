@@ -19,6 +19,7 @@ import {
   WarningAmberRounded,
 } from "@mui/icons-material";
 import React, { useMemo } from "react";
+import { CardContainer } from "./GamesInfo/GameCard";
 
 // Типы
 interface DiskSpaceProps {
@@ -139,16 +140,15 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
   }
 
   return (
-    <StyledPaper
-      elevation={4}
+    <CardContainer
       sx={{
         p: { xs: 2, sm: 3 },
-        borderRadius: 8,
         background: `linear-gradient(135deg, 
           ${alpha(theme.palette.background.paper, 0.9)} 0%, 
           ${alpha(theme.palette.background.default, 0.7)} 100%
         )`,
         backdropFilter: "blur(10px)",
+        width: 400,
       }}
       role="region"
       aria-label="Информация о дисковом пространстве"
@@ -181,7 +181,7 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
               mr: 0.5,
             }}
           >
-            Дисковое пространство
+            Место на диске
           </Typography>
           <StatusIndicator status={status} aria-label={`Статус: ${status}`} />
         </Box>
@@ -306,7 +306,7 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           поместится
         </Typography>
       </Box>
-    </StyledPaper>
+    </CardContainer>
   );
 };
 
