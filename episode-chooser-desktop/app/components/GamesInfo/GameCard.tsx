@@ -48,7 +48,7 @@ const slideIn = keyframes`
 `;
 
 // Стилизованные компоненты
-const CardContainer = styled(Paper, {
+export const CardContainer = styled(Paper, {
   shouldForwardProp: (prop) => prop !== "forced",
 })<{ forced?: boolean }>(({ theme, forced }) => ({
   position: "relative",
