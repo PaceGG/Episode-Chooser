@@ -28,7 +28,7 @@ export default function GamesInfo() {
   };
 
   return (
-    <Stack direction={"row"} sx={{ p: 3 }} gap={2}>
+    <Stack direction={"row"} gap={2}>
       <GameCard game={snowRunner} />
       <GameCard game={asc} />
       <GameCard game={silksong} />

@@ -148,7 +148,6 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           ${alpha(theme.palette.background.default, 0.7)} 100%
         )`,
         backdropFilter: "blur(10px)",
-        width: 400,
       }}
       role="region"
       aria-label="Информация о дисковом пространстве"
@@ -303,7 +302,6 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
             : videoCount >= 2 && videoCount <= 4
             ? "видео"
             : "видео"}{" "}
-          поместится
         </Typography>
       </Box>
     </CardContainer>
