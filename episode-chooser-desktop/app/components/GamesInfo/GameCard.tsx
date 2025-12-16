@@ -177,15 +177,15 @@ const QuoteIcon = styled(Box)(({ theme }) => ({
   },
 }));
 
-const StatsBadge = styled(Chip)<{ value?: number }>(({ value }) => {
+const StatsBadge = styled(Chip)<{ value?: number }>(({ theme, value }) => {
   let bgColor;
   let borderRadius = 20;
 
   if (value != null) {
     if (value > 0) {
-      bgColor = "red";
+      bgColor = theme.palette.success.main;
     } else if (value < 0) {
-      bgColor = "error.main";
+      bgColor = theme.palette.error.main;
     }
     borderRadius = 1;
   }
