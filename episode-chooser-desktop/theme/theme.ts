@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { ThemeOptions } from "@mui/material/styles";
 
 const basePalette = {
   primary: {
@@ -6,7 +7,7 @@ const basePalette = {
   },
 };
 
-const baseTheme = {
+const baseTheme: ThemeOptions = {
   cssVariables: true,
   typography: {
     fontFamily: `var(--font-chalet), "Helvetica", "Arial", sans-serif`,
@@ -23,6 +24,9 @@ export const lightTheme = createTheme({
   palette: {
     ...basePalette,
     mode: "light",
+    text: {
+      primary: "#151515",
+    },
   },
 });
 

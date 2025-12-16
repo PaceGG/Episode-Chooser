@@ -161,7 +161,7 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           ${alpha(theme.palette.background.default, 0.7)} 100%
         )`,
         backdropFilter: "blur(10px)",
-        width: 420,
+        width: 320,
       }}
     >
       {/* Заголовок */}
@@ -287,7 +287,6 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           variant="body2"
           sx={{
             textAlign: { xs: "left", sm: "right" },
-            color: theme.palette.text.secondary,
             bgcolor: alpha(theme.palette.primary.main, 0.08),
             px: 2,
             py: 1,
@@ -313,18 +312,41 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           alignItems={"center"}
           justifyContent={"space-between"}
         >
-          <Box>
+          <Typography
+            variant="body2"
+            sx={{ fontSize: { xs: "1rem", sm: "1.1rem" } }}
+          >
             <VideoLibrary
               sx={{ color: theme.palette.primary.main, fontSize: 28, mr: 1 }}
             />
-            {videoOnDisk} видео на диске
-          </Box>
-          <Box>
-            из них к удалению {videoToDel}
+            <Box component={"span"} color={theme.palette.primary.main}>
+              {videoOnDisk}
+            </Box>{" "}
+            <Box
+              component={"span"}
+              sx={{ color: "text.secondary", fontSize: "0.875rem" }}
+            >
+              видео
+            </Box>
+          </Typography>
+
+          <Typography
+            variant="body2"
+            sx={{ fontSize: { xs: "1rem", sm: "1.1rem" } }}
+          >
+            <Box
+              component={"span"}
+              sx={{ color: "text.secondary", fontSize: "0.875rem" }}
+            >
+              к удалению
+            </Box>{" "}
+            <Box component={"span"} color={theme.palette.error.main}>
+              {videoToDel}
+            </Box>
             <DeleteOutline
               sx={{ color: theme.palette.error.main, fontSize: 28, ml: 1 }}
             />
-          </Box>
+          </Typography>
         </Stack>
       )}
 
