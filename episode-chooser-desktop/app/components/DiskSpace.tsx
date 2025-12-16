@@ -1,32 +1,325 @@
-import { LinearProgress, Paper, Typography } from "@mui/material";
+"use client";
 
+import {
+  Paper,
+  Typography,
+  LinearProgress,
+  Box,
+  Tooltip,
+  IconButton,
+  Skeleton,
+  useTheme,
+  alpha,
+  keyframes,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import {
+  InfoOutlined,
+  StorageOutlined,
+  VideocamOutlined,
+  WarningAmberRounded,
+} from "@mui/icons-material";
+import React, { useMemo } from "react";
+
+// Типы
 interface DiskSpaceProps {
   use: number;
   total: number;
   averageVideoSize?: number;
+  isLoading?: boolean;
+  onDetailsClick?: () => void;
 }
 
-export default function DiskSpace({
+// Анимации
+const pulse = keyframes`
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+`;
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  position: "relative",
+  overflow: "hidden",
+  transition: theme.transitions.create(["transform", "box-shadow"], {
+    duration: theme.transitions.duration.standard,
+  }),
+
+  "&:focus-within": {
+    outline: `2px solid ${alpha(theme.palette.primary.main, 0.5)}`,
+    outlineOffset: 2,
+  },
+}));
+
+const ProgressContainer = styled(Box)(({ theme }) => ({
+  position: "relative",
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(2),
+}));
+
+const ProgressLabel = styled(Typography)(({ theme }) => ({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  color: theme.palette.getContrastText(theme.palette.primary.main),
+  fontWeight: 700,
+  textShadow: "0 1px 2px rgba(0,0,0,0.3)",
+  fontSize: theme.typography.pxToRem(12),
+}));
+
+const StatusIndicator = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "status",
+})<{ status: "normal" | "warning" | "critical" }>(({ theme, status }) => ({
+  width: 8,
+  height: 8,
+  borderRadius: "50%",
+  backgroundColor:
+    status === "normal"
+      ? theme.palette.success.main
+      : status === "warning"
+      ? theme.palette.warning.main
+      : theme.palette.error.main,
+  animation: `${pulse} 2s ease-in-out infinite`,
+  marginRight: theme.spacing(1),
+}));
+
+// Компонент
+const DiskSpace: React.FC<DiskSpaceProps> = ({
   use,
   total,
   averageVideoSize = 40,
-}: DiskSpaceProps) {
-  const value = (use / total) * 100;
-  const remaining = total - use;
-  const videoCount = Math.floor(remaining / averageVideoSize);
+  isLoading = false,
+  onDetailsClick,
+}) => {
+  const theme = useTheme();
+  const isMobile = false;
+
+  // Мемоизированные вычисления
+  const { value, remaining, videoCount, status, isCritical } = useMemo(() => {
+    const computedValue = (use / total) * 100;
+    const computedRemaining = total - use;
+    const computedVideoCount = Math.floor(computedRemaining / averageVideoSize);
+
+    let computedStatus: "normal" | "warning" | "critical" = "normal";
+    if (computedRemaining < 90) computedStatus = "critical";
+    else if (computedRemaining < 140) computedStatus = "warning";
+
+    return {
+      value: computedValue,
+      remaining: computedRemaining,
+      videoCount: computedVideoCount,
+      status: computedStatus,
+      isCritical: computedRemaining < 90,
+    };
+  }, [use, total, averageVideoSize]);
+
+  // Цвет прогресс-бара в зависимости от статуса
+  const progressColor = useMemo(() => {
+    if (isCritical) return "error";
+    if (status === "warning") return "warning";
+    return "primary";
+  }, [status, isCritical]);
+
+  // Форматирование чисел
+  const formatGB = (gb: number) => {
+    if (gb >= 1000) return `${(gb / 1000).toFixed(1)} TB`;
+    return `${gb.toFixed(1)} GB`;
+  };
+
+  if (isLoading) {
+    return (
+      <StyledPaper elevation={2} sx={{ p: { xs: 2, sm: 3 } }}>
+        <Skeleton variant="text" width="60%" height={28} />
+        <Skeleton
+          variant="rectangular"
+          height={8}
+          sx={{ my: 2, borderRadius: 1 }}
+        />
+        <Skeleton variant="text" width="40%" height={24} sx={{ ml: "auto" }} />
+      </StyledPaper>
+    );
+  }
 
   return (
-    <Paper sx={{ p: 1 }}>
-      <Typography>Место на диске: {remaining} GB</Typography>
-      <LinearProgress
-        variant="determinate"
-        color={remaining > 100 ? "primary" : "error"}
-        value={value}
+    <StyledPaper
+      elevation={4}
+      sx={{
+        p: { xs: 2, sm: 3 },
+        borderRadius: 8,
+        background: `linear-gradient(135deg, 
+          ${alpha(theme.palette.background.paper, 0.9)} 0%, 
+          ${alpha(theme.palette.background.default, 0.7)} 100%
+        )`,
+        backdropFilter: "blur(10px)",
+      }}
+      role="region"
+      aria-label="Информация о дисковом пространстве"
+    >
+      {/* Заголовок */}
+      <Box
         sx={{
-          borderRadius: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          mb: 2,
         }}
-      />
-      <Typography sx={{ textAlign: "right" }}>~ {videoCount} видео</Typography>
-    </Paper>
+      >
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <StorageOutlined
+            sx={{
+              color: theme.palette.primary.main,
+              mr: 1.5,
+              fontSize: { xs: 20, sm: 24 },
+            }}
+            aria-hidden="true"
+          />
+          <Typography
+            variant="h6"
+            component="h2"
+            sx={{
+              fontWeight: 600,
+              fontSize: { xs: "1rem", sm: "1.25rem" },
+              color: theme.palette.text.primary,
+              mr: 0.5,
+            }}
+          >
+            Дисковое пространство
+          </Typography>
+          <StatusIndicator status={status} aria-label={`Статус: ${status}`} />
+        </Box>
+
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          {isCritical && (
+            <Tooltip title="Критически мало свободного места">
+              <WarningAmberRounded
+                sx={{
+                  color: theme.palette.error.main,
+                  fontSize: { xs: 18, sm: 20 },
+                  animation: `${pulse} 1s ease-in-out infinite`,
+                }}
+                aria-label="Предупреждение"
+              />
+            </Tooltip>
+          )}
+          {onDetailsClick && (
+            <Tooltip title="Подробная информация">
+              <IconButton
+                size="small"
+                onClick={onDetailsClick}
+                aria-label="Подробная информация о дисковом пространстве"
+                sx={{
+                  "&:focus-visible": {
+                    outline: `2px solid ${theme.palette.primary.main}`,
+                  },
+                  transition: theme.transitions.create([
+                    "transform",
+                    "background-color",
+                  ]),
+                }}
+              >
+                <InfoOutlined fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          )}
+        </Box>
+      </Box>
+
+      {/* Прогресс бар */}
+      <ProgressContainer>
+        <LinearProgress
+          variant="determinate"
+          color={progressColor}
+          value={value}
+          sx={{
+            height: 16,
+            borderRadius: 12,
+            backgroundColor: alpha(theme.palette.grey[300], 0.5),
+            "& .MuiLinearProgress-bar": {
+              borderRadius: 12,
+            },
+          }}
+          aria-label={`Использовано ${value.toFixed(
+            1
+          )}% дискового пространства`}
+        />
+        <ProgressLabel variant="caption">{value.toFixed(1)}%</ProgressLabel>
+      </ProgressContainer>
+
+      {/* Информация о свободном месте */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-start", sm: "center" },
+          gap: 2,
+          mt: 3,
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <VideocamOutlined
+            sx={{
+              color: theme.palette.secondary.main,
+              mr: 1,
+              fontSize: { xs: 18, sm: 20 },
+            }}
+            aria-hidden="true"
+          />
+          <Typography
+            variant="body2"
+            sx={{
+              color: theme.palette.text.secondary,
+              fontWeight: 500,
+            }}
+          >
+            <Box
+              component="span"
+              sx={{
+                color: isCritical
+                  ? theme.palette.error.main
+                  : theme.palette.success.main,
+                fontWeight: 700,
+                fontSize: { xs: "1rem", sm: "1.1rem" },
+              }}
+            >
+              {formatGB(remaining)}
+            </Box>{" "}
+            свободно
+          </Typography>
+        </Box>
+
+        <Tooltip
+          title={`На основе среднего размера видео ${averageVideoSize}GB`}
+          placement={isMobile ? "bottom" : "left"}
+        >
+          <Typography
+            variant="body2"
+            sx={{
+              textAlign: { xs: "left", sm: "right" },
+              color: theme.palette.text.secondary,
+              bgcolor: alpha(theme.palette.primary.main, 0.08),
+              px: 2,
+              py: 1,
+              borderRadius: theme.shape.borderRadius,
+              transition: theme.transitions.create("background-color"),
+            }}
+          >
+            ~{" "}
+            <Box component="span" sx={{ fontWeight: 700 }}>
+              {videoCount}
+            </Box>{" "}
+            {videoCount === 1
+              ? "видео"
+              : videoCount >= 2 && videoCount <= 4
+              ? "видео"
+              : "видео"}{" "}
+            поместится
+          </Typography>
+        </Tooltip>
+      </Box>
+    </StyledPaper>
   );
-}
+};
+
+// Оптимизация ререндеров
+export default React.memo(DiskSpace);
