@@ -72,20 +72,21 @@ const ProgressLabel = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.pxToRem(12),
 }));
 
-const StatusIndicator = styled(Box, {
+const StorageIcon = styled(StorageOutlined, {
   shouldForwardProp: (prop) => prop !== "status",
 })<{ status: "normal" | "warning" | "critical" }>(({ theme, status }) => ({
-  width: 8,
-  height: 8,
-  borderRadius: "50%",
-  backgroundColor:
+  color:
     status === "normal"
       ? theme.palette.success.main
       : status === "warning"
       ? theme.palette.warning.main
       : theme.palette.error.main,
+  marginRight: theme.spacing(1.5),
   animation: `${pulse} 2s ease-in-out infinite`,
-  marginRight: theme.spacing(1),
+  fontSize: 20,
+  [theme.breakpoints.up("sm")]: {
+    fontSize: 24,
+  },
 }));
 
 // Компонент
@@ -170,14 +171,7 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <StorageOutlined
-            sx={{
-              color: theme.palette.primary.main,
-              mr: 1.5,
-              fontSize: { xs: 20, sm: 24 },
-            }}
-            aria-hidden="true"
-          />
+          <StorageIcon status={status} />
           <Typography
             variant="h6"
             component="h2"
@@ -190,7 +184,6 @@ const DiskSpace: React.FC<DiskSpaceProps> = ({
           >
             Место на диске
           </Typography>
-          <StatusIndicator status={status} aria-label={`Статус: ${status}`} />
         </Box>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
