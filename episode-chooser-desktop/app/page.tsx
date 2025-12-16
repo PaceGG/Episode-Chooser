@@ -11,7 +11,7 @@ const snowRunner: Game = {
   limit: 40,
   quote: 0,
   srInfo: {
-    days: 3,
+    days: 0,
     date: new Date(1797402548 * 1000),
   },
 };
