@@ -7,9 +7,9 @@ import GameCard, { Game } from "./components/GamesInfo/GameCard";
 const snowRunner: Game = {
   color: "#fff000",
   title: "SnowRunner",
-  time: 120,
-  limit: 0,
-  quote: 0,
+  time: 119,
+  limit: 40,
+  quote: 4,
 };
 
 const asc: Game = {

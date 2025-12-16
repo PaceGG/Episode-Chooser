@@ -106,7 +106,7 @@ const InfoSection = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  // height: "calc(100% - 80px)",
+  height: 60,
   background: `linear-gradient(to bottom, 
     transparent 0%, 
     ${alpha(theme.palette.background.paper, 0.8)} 100%)`,
@@ -274,33 +274,44 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
           </Box>
         </HeaderSection>
 
-        <InfoSection>
-          {/* Блок времени */}
-          <TimeContainer>
-            <TimerOutlined
-              sx={{
-                fontSize: "1.5rem",
-              }}
-              aria-hidden="true"
-            />
-            <TimeText
-              variant="h2"
-              isNegative={isTimeNegative}
-              aria-label={`Отформатированное время: ${formattedTime}`}
-            >
-              {formattedTime}
-            </TimeText>
-            <StatsBadge label={`${Math.abs(game.time)} мин`} />
-            <StatsBadge label={formattedLimit} value={game.limit} />
-          </TimeContainer>
+        {/* Блок времени */}
+        {(game.time !== 120 || game.limit !== 0 || game.quote > 1) && (
+          <InfoSection>
+            {(game.time !== 120 || game.limit !== 0) && (
+              <TimeContainer>
+                <TimerOutlined
+                  sx={{
+                    fontSize: "1.5rem",
+                  }}
+                  aria-hidden="true"
+                />
+                {game.time !== 120 && (
+                  <>
+                    <TimeText
+                      variant="h2"
+                      isNegative={isTimeNegative}
+                      aria-label={`Отформатированное время: ${formattedTime}`}
+                    >
+                      {formattedTime}
+                    </TimeText>
 
-          {/* Блок цитаты */}
-          {game.quote > 1 && (
-            <QuoteContainer value={game.quote} role="status">
-              <QuoteText sx={{ color: "inherit" }}>x{game.quote}</QuoteText>
-            </QuoteContainer>
-          )}
-        </InfoSection>
+                    <StatsBadge label={`${Math.abs(game.time)} мин`} />
+                  </>
+                )}
+                {game.limit !== 0 && (
+                  <StatsBadge label={formattedLimit} value={game.limit} />
+                )}
+              </TimeContainer>
+            )}
+
+            {/* Блок цитаты */}
+            {game.quote > 1 && (
+              <QuoteContainer value={game.quote} role="status">
+                <QuoteText sx={{ color: "inherit" }}>x{game.quote}</QuoteText>
+              </QuoteContainer>
+            )}
+          </InfoSection>
+        )}
       </CardContainer>
     </Fade>
   );
