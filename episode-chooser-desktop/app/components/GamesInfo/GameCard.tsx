@@ -257,14 +257,14 @@ function formatDate(date: Date): string {
 
 function formatDays(days: number): string {
   if (days % 10 === 1 && days % 100 !== 11) {
-    return `${days} день`;
+    return `${days} игра`;
   } else if (
     [2, 3, 4].includes(days % 10) &&
     ![12, 13, 14].includes(days % 100)
   ) {
-    return `${days} дня`;
+    return `${days} игры`;
   } else {
-    return `${days} дней`;
+    return `${days} игр`;
   }
 }
 
@@ -370,7 +370,7 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
           {game.srInfo.date > new Date() || game.srInfo.days > 0 ? (
             <>
               {game.srInfo.date > new Date() && (
-                <QuoteContainer value={Number(game.srInfo.days < 0)}>
+                <QuoteContainer value={Number(game.srInfo.days <= 0)}>
                   <CalendarMonth color="primary" />
                   {formatDate(game.srInfo.date)}
                 </QuoteContainer>
