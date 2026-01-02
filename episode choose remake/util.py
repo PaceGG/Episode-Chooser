@@ -41,7 +41,7 @@ def move_video(file: Path, target_dir, index):
 
 def move_image(file: Path, target_dir, index, video_ctime):
     image_ctime = file.stat().st_birthtime
-    timecode = seconds_to_hhmmss(video_ctime - image_ctime)
+    timecode = seconds_to_hhmmss(image_ctime - video_ctime)
 
     new_name = f"{index} {timecode}{file.suffix}"
 
