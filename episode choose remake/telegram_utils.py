@@ -32,8 +32,8 @@ def send_image(image_path: Path, caption=None):
     message_id = response_data.get('result', {}).get('message_id')
     return message_id
 
-# pinned info message id = 696
-def edit_message(new_text, message_id=696):
+# pinned info message id = 1208
+def edit_message(new_text, message_id=1208):
     url = f"https://api.telegram.org/bot{bot_token}/editMessageText"
     params = {
         "chat_id": chat_id,
