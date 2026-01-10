@@ -6,7 +6,7 @@ export default function GamesInfo() {
     color: "#fff000",
     title: "SnowRunner",
     time: 120,
-    limit: 0,
+    limit: 3,
     quote: 0,
   };
 
@@ -15,7 +15,7 @@ export default function GamesInfo() {
     title: "Assassin’s Creed Revelations",
     time: 84,
     limit: 5,
-    quote: 5,
+    quote: 345,
     // forced: true,
   };
 
@@ -23,8 +23,8 @@ export default function GamesInfo() {
     color: "#00f",
     title: "Hollow Knight: Silksong",
     time: 120,
-    limit: -5,
-    quote: 0,
+    limit: -53,
+    quote: 123,
   };
 
   return (

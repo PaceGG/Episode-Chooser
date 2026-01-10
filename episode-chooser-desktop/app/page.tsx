@@ -30,7 +30,7 @@ const silksong: Game = {
   title: "Hollow Knight: Silksong",
   time: 120,
   limit: -5,
-  quote: 0,
+  quote: 4,
 };
 
 export default function Home() {
