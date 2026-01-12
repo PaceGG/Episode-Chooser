@@ -149,7 +149,7 @@ def find_best_match(
     folders = [folder for folder in games_directory.iterdir() if folder.is_dir()]
     folder_names = [folder.name for folder in folders]
 
-    best_match = difflib.get_close_matches(game_name, folder_names, n=1, cutoff=0.3)
+    best_match = difflib.get_close_matches(game_name, folder_names, n=1, cutoff=0.8)
     if not best_match:
         return None
 
@@ -188,4 +188,4 @@ def find_best_match(
     return game_directory
     
 if __name__ == "__main__":
-    print(find_best_match("S.T.A.L.K.E.R. Фотограф", Path(r"D:\Games")))
+    print(find_best_match("Assassin’s Creed IV Black Flag", Path(r"D:\Games")))
