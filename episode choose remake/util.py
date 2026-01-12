@@ -1,3 +1,6 @@
+from io import BytesIO
+from PIL import Image
+import requests
 import win32api
 import win32gui
 import paths
@@ -6,9 +9,11 @@ from pathlib import Path
 from directory_statistics import get_disk_video
 import difflib
 from time_format import seconds_to_hhmmss
+from steam_utils import select_header_by_game_name
 
 video_formats = [".mp4", ".mkv"]
 image_formats = [".png"]
+header_formats = [".png", ".jpg"]
 
 def set_eng_layout():
     window_handle = win32gui.GetForegroundWindow()
@@ -65,13 +70,63 @@ def create_game_folder(video_dir: Path):
 
 def header_rename(game_name: str):
     headers_dir = Path.joinpath(paths.video_dir, "headers")
-    header_default_path = Path.joinpath(headers_dir, "header.png") 
-    header_path = Path.joinpath(headers_dir, game_name + ".png")
+    header_path = Path.joinpath(headers_dir, game_name)
+
+    found = False
+    for ext in header_formats:
+        default_file = Path.joinpath(headers_dir, f"header.{ext}")
+        if default_file.exists():
+            try:
+                default_file.rename(header_path.with_suffix(f".{ext}"))
+                found = True
+                break
+            except Exception as e:
+                print(f"Ошибка при переименовании: {e}")
+                while True:
+                    pass
+
+    if not found:
+        print()
+        print(f"Ошибка: {game_name}\nheader отсутствует")
+        print("Установить из Steam?")
+        input()
+
+        print("Загрузка headers...")
+        steam_header = select_header_by_game_name(game_name)
+        if save_image_from_url(steam_header, header_path):
+            steam_logo = steam_header.replace("header.jpg", "logo.png")
+            obs_dir = paths.video_dir / game_name / "logo"
+            save_image_from_url(steam_logo, obs_dir)
+            return
+
+        while True:
+            pass
+
+def save_image_from_url(url: str, save_path: Path) -> bool:
+    """
+    Скачивает изображение по URL и сохраняет его в файл.
+
+    Параметры:
+    - url: str — URL изображения
+    - save_path: Path — путь и имя файла для сохранения (например, Path("image.png"))
+
+    Возвращает:
+    - True, если изображение успешно сохранено
+    - False, если произошла ошибка
+    """
+    ext = url.split('.')[-1]
+    save_path = save_path.with_suffix(f".{ext}")
     try:
-        header_default_path.rename(header_path)
-    except:
-        print("Ошибка: header отсутствует")
-        while True: pass
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        img = Image.open(BytesIO(response.content))
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        img.save(save_path)
+        print(f"Изображение сохранено: {save_path}")
+        return True
+    except Exception as e:
+        print(f"Ошибка при сохранении изображения: {e}")
+        return False
 
 def intc(s):
     n = ""
