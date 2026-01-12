@@ -47,7 +47,7 @@ def spin_wheel(pattern):
     start_step += pattern[0] - SCREEN_SIZE//2
     for step in range(start_step, start_step + pattern[1]):
         print_screen(step)
-        sleep_time = 0.5
+        sleep_time = max_sleep_time
         time.sleep(sleep_time)
 
     start_step += pattern[1]
@@ -57,7 +57,7 @@ def spin_wheel(pattern):
             print("Final chance!")
             time.sleep(5)
         else: 
-            time.sleep(1)
+            time.sleep(max_sleep_time*2)
 
     start_step += pattern[2]
     for step in range(start_step, start_step + pattern[3]):
@@ -70,7 +70,7 @@ def spin_roulette(games, skip=False, winner=None):
     if skip: return winner
 
     global SCREEN_SIZE, initial_sleep_time, max_sleep_time, roulette
-    total_lines = 10
+    total_lines = 20
     SCREEN_SIZE = total_lines + (total_lines % 2 == 0)
 
     pattern = [random.randint(30,50), random.randint(5,10), random.randint(3,5), random.randint(0,1)]

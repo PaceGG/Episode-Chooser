@@ -1,6 +1,7 @@
 print("Загрузка модуля game")
 from genericpath import getctime
 from os import error
+import os
 import paths
 import json
 from pathlib import Path
@@ -192,10 +193,12 @@ def run_game(games: list[Game], stat: Data):
     set_eng_layout()
     selected_game = get_selected_game(games)
 
-    input(f"Нажмите Enter, чтобы запустить {selected_game.full_name}...")
+    print(f"Нажмите Enter, чтобы запустить...")
+    print(f"{selected_game.full_name}")
+    print(f"::({time_format(selected_game.time_limit)}):: [{selected_game.content_time_format()}]\n")
+    input()
 
     caption = f"{selected_game.full_name} № {selected_game.count_episode + 1}... {time_format(selected_game.time_limit)} [{selected_game.content_time_format()}]"
-    print(f"{selected_game.full_name}{f" {time_format(selected_game.time_limit)}" if selected_game.time_limit != 120 else ''}")
     stat.process_game_message_id = telegram_utils.send_image(selected_game.header, caption)
 
     
@@ -225,8 +228,8 @@ def unfinished_process(games: list[Game], stat: Data, duration: int):
     caption = f"{unfinished_game.full_name} № {unfinished_game.count_episode + 1}... {time_format(time_left)} [{unfinished_game.content_time_format()}]"
     telegram_utils.edit_caption(caption, stat.process_game_message_id)
 
-    print(f"Сессия {unfinished_game.name} ещё не завершена, осталось {time_left} {form}")
-    print(f"Запустить {unfinished_game.name}? Введите \"-\" для обозначения финальной сессии")
+    print(f"Сессия {unfinished_game.name}\nещё не завершенаосталось {int(time_left)} {form}")
+    print(f"Запустить {unfinished_game.name}?\nВведите \"-\" для обозначения финальной сессии")
     confirm = input()
     if confirm == "-": return None, True
     return unfinished_game.game_path, False
@@ -241,8 +244,8 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     count_videos = get_count_videos()
 
     if not is_last_session:
-        print(f"В {processed_game.name} есть {count_videos} видео продолжительностью {int(duration)} минут. Добавить их к сумме? Введите \"-\" для обозначения финальной сессии")
-        user_time = input(f"Введите время для {processed_game.name}: ")
+        print(f"В {processed_game.name}\nесть {count_videos} видео продолжительностью {int(duration)} минут.\nДобавить их к сумме? (Нажмите enter)\nВведите \"-\" для обозначения финальной сессии")
+        user_time = input(f"Введите время: ")
     else:
         user_time = "-"
 
@@ -267,7 +270,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
             print(f"В буфере обмена есть время контента: {bufer_user_content_time}")
         except:
             bufer_user_content_time = 0
-        user_content_time = input("Введите \"-\" для обозначения финальной сессии. Введите продолжительность контента: ")
+        user_content_time = input("Введите \"-\" для обозначения финальной сессии.\nВведите продолжительность контента: ")
     else:
         user_content_time = 0
 
@@ -295,8 +298,8 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     stat.process_game_message_id = -1
 
     if is_last_session:
-        choice = input("Сбросить эпизоды? N для отмены: ")
-        add_count = 0 if choice.lower() != "n" else count_videos
+        choice = input("Сбросить эпизоды? Y для подтверждения: ")
+        add_count = 0 if choice.lower() != "y" else count_videos
     else:
         add_count = count_videos
     processed_game.count_episode += add_count
