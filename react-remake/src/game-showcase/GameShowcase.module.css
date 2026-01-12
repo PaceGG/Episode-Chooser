@@ -84,6 +84,12 @@
   width: 100%;
   text-align: center;
 }
+
+.colorContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
 .colorInput {
   display: block;
   border: none;
@@ -92,4 +98,11 @@
   padding: 0;
   width: 100%;
   cursor: pointer;
+}
+.colorSwitcher {
+  display: flex;
+}
+.colorButton {
+  width: 20px;
+  height: 20px;
 }

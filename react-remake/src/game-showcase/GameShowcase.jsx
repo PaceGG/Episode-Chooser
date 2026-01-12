@@ -2,6 +2,27 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "./GameShowcase.module.css";
 import steamApi from "./steamApi";
+import { getMainColors } from "./getMainColors";
+
+function toHex(color) {
+  // Если уже hex — возвращаем как есть
+  if (typeof color === "string" && color.startsWith("#")) {
+    return color;
+  }
+
+  // Если rgb(...) — конвертируем
+  if (typeof color === "string" && color.startsWith("rgb")) {
+    const parts = color.replace(/^rgb\(|\s+|\)$/g, "").split(",");
+    const r = parseInt(parts[0], 10);
+    const g = parseInt(parts[1], 10);
+    const b = parseInt(parts[2], 10);
+    const toHex = (n) => n.toString(16).padStart(2, "0");
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+  }
+
+  // Если формат неизвестный — возвращаем null
+  return null;
+}
 
 const GameShowcase = () => {
   const [games, setGames] = useState([]);
@@ -15,11 +36,12 @@ const GameShowcase = () => {
   const fetchGames = async () => {
     try {
       const response = await axios.get("http://localhost:3000/showcase");
-      // Добавляем поля для Steam
       const enrichedGames = response.data.map((game) => ({
         ...game,
         steamApps: [],
         currentAppIndex: 0,
+        appColors: [], // массив цветов для текущего steamApp
+        selectedColorIndex: 0, // выбранный цвет из массива
       }));
       setGames(enrichedGames);
       setInitialGames(enrichedGames);
@@ -33,29 +55,30 @@ const GameShowcase = () => {
       const apps = await steamApi.getAppsByName(name);
       if (!apps.length) return;
 
-      // Сохраняем все приложения для игры
+      const firstAppId = apps[0].id;
+      const steamImages = steamApi.getSteamImages(firstAppId);
+      const colors = await getMainColors(steamImages.logo);
+
       setGames((prev) =>
         prev.map((game) =>
           game.id === gameId
             ? {
                 ...game,
                 steamApps: apps,
-                currentAppIndex: 0, // первый app по умолчанию
+                currentAppIndex: 0,
+                coverart: steamImages.library600x900_2x,
+                appColors: colors,
+                selectedColorIndex: 0,
               }
             : game
         )
       );
-
-      // Загружаем изображение первого app
-      const steamImages = steamApi.getSteamImages(apps[0].id);
-      handleInputChange(gameId, "coverart", steamImages.library600x900_2x);
     } catch (error) {
       console.error("Steam API error:", error);
     }
   };
 
   const handleAppSwitch = async (gameId, direction) => {
-    // Используем map с async/await
     const updatedGames = await Promise.all(
       games.map(async (game) => {
         if (game.id !== gameId || !game.steamApps?.length) return game;
@@ -66,15 +89,17 @@ const GameShowcase = () => {
 
         const newAppId = game.steamApps[newIndex].id;
         const steamImages = await steamApi.getSteamImages(newAppId);
+        const colors = await getMainColors(steamImages.logo);
 
         return {
           ...game,
           currentAppIndex: newIndex,
           coverart: steamImages.library600x900_2x,
+          appColors: colors,
+          selectedColorIndex: 0,
         };
       })
     );
-
     setGames(updatedGames);
   };
 
@@ -82,6 +107,20 @@ const GameShowcase = () => {
     setGames((prevData) =>
       prevData.map((item) =>
         item.id === id ? { ...item, [field]: value } : item
+      )
+    );
+  };
+
+  const handleColorSelect = (gameId, colorIndex) => {
+    setGames((prev) =>
+      prev.map((game) =>
+        game.id === gameId
+          ? {
+              ...game,
+              selectedColorIndex: colorIndex,
+              color: game.appColors[colorIndex],
+            }
+          : game
       )
     );
   };
@@ -153,13 +192,37 @@ const GameShowcase = () => {
             </button>
           )}
         </div>
-        <input
-          type="color"
-          id={`color${index}`}
-          value={game.color}
-          onChange={(e) => handleInputChange(game.id, "color", e.target.value)}
-          className={style.colorInput}
-        />
+
+        <div className={style.colorContainer}>
+          <input
+            type="color"
+            id={`color${index}`}
+            value={toHex(game.color)}
+            onChange={(e) =>
+              handleInputChange(game.id, "color", e.target.value)
+            }
+            className={style.colorInput}
+          />
+          {game.appColors?.length > 0 && (
+            <div className={style.colorSwitcher}>
+              {game.appColors.map((col, i) => (
+                <button
+                  key={i}
+                  className={style.colorButton}
+                  style={{
+                    backgroundColor: col,
+                    border:
+                      i === game.selectedColorIndex
+                        ? "2px solid #0b79d0"
+                        : "1px solid #888",
+                  }}
+                  onClick={() => handleColorSelect(game.id, i)}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
         <textarea
           id={`textarea${index}`}
           onChange={(e) => handleInputChange(game.id, "name", e.target.value)}
