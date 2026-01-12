@@ -4,26 +4,6 @@ import style from "./GameShowcase.module.css";
 import steamApi from "./steamApi";
 import { getMainColors } from "./getMainColors";
 
-function toHex(color) {
-  // Если уже hex — возвращаем как есть
-  if (typeof color === "string" && color.startsWith("#")) {
-    return color;
-  }
-
-  // Если rgb(...) — конвертируем
-  if (typeof color === "string" && color.startsWith("rgb")) {
-    const parts = color.replace(/^rgb\(|\s+|\)$/g, "").split(",");
-    const r = parseInt(parts[0], 10);
-    const g = parseInt(parts[1], 10);
-    const b = parseInt(parts[2], 10);
-    const toHex = (n) => n.toString(16).padStart(2, "0");
-    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-  }
-
-  // Если формат неизвестный — возвращаем null
-  return null;
-}
-
 const GameShowcase = () => {
   const [games, setGames] = useState([]);
   const [initialGames, setInitialGames] = useState([]);
@@ -128,9 +108,16 @@ const GameShowcase = () => {
   const handleConfirm = async () => {
     try {
       await Promise.all(
-        games.map((game) =>
-          axios.put(`http://localhost:3000/showcase/${game.id}`, game)
-        )
+        games.map((game) => {
+          const {
+            steamApps,
+            currentAppIndex,
+            appColors,
+            selectedColorIndex,
+            ...gameToSend
+          } = game;
+          axios.put(`http://localhost:3000/showcase/${game.id}`, gameToSend);
+        })
       );
       setIsModalOpen(false);
     } catch (error) {
@@ -197,7 +184,7 @@ const GameShowcase = () => {
           <input
             type="color"
             id={`color${index}`}
-            value={toHex(game.color)}
+            value={game.color}
             onChange={(e) =>
               handleInputChange(game.id, "color", e.target.value)
             }
