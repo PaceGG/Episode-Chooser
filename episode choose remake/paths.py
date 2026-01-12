@@ -18,7 +18,7 @@ game_names: list[str] = [game["name"] for game in showcase]
 game_names.append("SnowRunner [ng+]")
 
 game_colors: list[str] = [game["color"] for game in showcase]
-game_colors.append("#FF0000")
+game_colors.append("#fd8106")
 
 
 # game_paths = [
