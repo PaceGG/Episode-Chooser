@@ -99,8 +99,16 @@ class Game:
         self.chance = 1
         self.is_selected = False
 
-        self.header = Path.joinpath(paths.video_dir, "headers", self.safe_name + ".png")
-        if not self.header.exists(): header_rename(self.safe_name)
+        header_dir = paths.video_dir / "headers"
+        header_extensions = [".jpg", ".png"]
+
+        for ext in header_extensions:
+            candidate = header_dir / f"{self.safe_name}{ext}"
+            if candidate.exists():
+                self.header = candidate
+                break
+        else:
+            header_rename(self.safe_name)
 
     def content_time_format(self):
         content_time_debt = -self.content_time
