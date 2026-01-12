@@ -9,24 +9,73 @@ const GameShowcase = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    fetchGames(); // Изначальная загрузка данных при монтировании компонента
+    fetchGames();
   }, []);
 
   const fetchGames = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/showcase"); // URL вашего json-server
-      setGames(response.data);
-      setInitialGames(response.data);
+      const response = await axios.get("http://localhost:3000/showcase");
+      // Добавляем поля для Steam
+      const enrichedGames = response.data.map((game) => ({
+        ...game,
+        steamApps: [],
+        currentAppIndex: 0,
+      }));
+      setGames(enrichedGames);
+      setInitialGames(enrichedGames);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   const handleSteamLinkButton = async (gameId, name) => {
-    const apps = await steamApi.getAppsByName(name);
-    const steamImages = steamApi.getSteamImages(apps[0].id);
-    console.log(steamImages.library600x900_2x);
-    handleInputChange(gameId, "coverart", steamImages.library600x900_2x);
+    try {
+      const apps = await steamApi.getAppsByName(name);
+      if (!apps.length) return;
+
+      // Сохраняем все приложения для игры
+      setGames((prev) =>
+        prev.map((game) =>
+          game.id === gameId
+            ? {
+                ...game,
+                steamApps: apps,
+                currentAppIndex: 0, // первый app по умолчанию
+              }
+            : game
+        )
+      );
+
+      // Загружаем изображение первого app
+      const steamImages = steamApi.getSteamImages(apps[0].id);
+      handleInputChange(gameId, "coverart", steamImages.library600x900_2x);
+    } catch (error) {
+      console.error("Steam API error:", error);
+    }
+  };
+
+  const handleAppSwitch = async (gameId, direction) => {
+    // Используем map с async/await
+    const updatedGames = await Promise.all(
+      games.map(async (game) => {
+        if (game.id !== gameId || !game.steamApps?.length) return game;
+
+        let newIndex = game.currentAppIndex + direction;
+        if (newIndex < 0) newIndex = game.steamApps.length - 1;
+        if (newIndex >= game.steamApps.length) newIndex = 0;
+
+        const newAppId = game.steamApps[newIndex].id;
+        const steamImages = await steamApi.getSteamImages(newAppId);
+
+        return {
+          ...game,
+          currentAppIndex: newIndex,
+          coverart: steamImages.library600x900_2x,
+        };
+      })
+    );
+
+    setGames(updatedGames);
   };
 
   const handleInputChange = (id, field, value) => {
@@ -44,7 +93,7 @@ const GameShowcase = () => {
           axios.put(`http://localhost:3000/showcase/${game.id}`, game)
         )
       );
-      setIsModalOpen(false); // Закрываем модальное окно после подтверждения
+      setIsModalOpen(false);
     } catch (error) {
       console.error("Error saving data:", error);
     }
@@ -54,28 +103,6 @@ const GameShowcase = () => {
     setIsModalOpen(false);
     setGames(initialGames);
   };
-
-  const renderShowcase = () =>
-    games.map((game) => (
-      <div
-        key={game.id}
-        className={style.game__card}
-        style={{ borderColor: game.color }}
-      >
-        <img
-          src={game.coverart}
-          alt={game.name}
-          className={style.coverart}
-          style={{
-            borderTop: `5px solid ${game.color}`,
-            borderBottom: `5px solid ${game.color}`,
-          }}
-        />
-        <h2 className={style.game__name} style={{ color: game.color }}>
-          {game.name}
-        </h2>
-      </div>
-    ));
 
   const renderEditor = () =>
     games.map((game, index) => (
@@ -97,18 +124,34 @@ const GameShowcase = () => {
           <input
             type="url"
             className={style.h2Input}
-            id="`url${index}"
+            id={`url${index}`}
             placeholder={game.coverart}
             onChange={(e) =>
               handleInputChange(game.id, "coverart", e.target.value)
             }
           />
+          {game.steamApps?.length > 1 && (
+            <button
+              className={style.steam_button}
+              onClick={() => handleAppSwitch(game.id, -1)}
+            >
+              ◀
+            </button>
+          )}
           <button
             className={style.steam_button}
             onClick={() => handleSteamLinkButton(game.id, game.name)}
           >
-            steam link
+            Steam link
           </button>
+          {game.steamApps?.length > 1 && (
+            <button
+              className={style.steam_button}
+              onClick={() => handleAppSwitch(game.id, 1)}
+            >
+              ▶
+            </button>
+          )}
         </div>
         <input
           type="color"
@@ -124,6 +167,28 @@ const GameShowcase = () => {
           style={{ color: game.color }}
           placeholder={game.name}
         />
+      </div>
+    ));
+
+  const renderShowcase = () =>
+    games.map((game) => (
+      <div
+        key={game.id}
+        className={style.game__card}
+        style={{ borderColor: game.color }}
+      >
+        <img
+          src={game.coverart}
+          alt={game.name}
+          className={style.coverart}
+          style={{
+            borderTop: `5px solid ${game.color}`,
+            borderBottom: `5px solid ${game.color}`,
+          }}
+        />
+        <h2 className={style.game__name} style={{ color: game.color }}>
+          {game.name}
+        </h2>
       </div>
     ));
 
