@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "./GameShowcase.module.css";
+import steamApi from "./steamApi";
 
 const GameShowcase = () => {
   const [games, setGames] = useState([]);
@@ -19,6 +20,13 @@ const GameShowcase = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  };
+
+  const handleSteamLinkButton = async (gameId, name) => {
+    const apps = await steamApi.getAppsByName(name);
+    const steamImages = steamApi.getSteamImages(apps[0].id);
+    console.log(steamImages.library600x900_2x);
+    handleInputChange(gameId, "coverart", steamImages.library600x900_2x);
   };
 
   const handleInputChange = (id, field, value) => {
@@ -85,15 +93,23 @@ const GameShowcase = () => {
             borderBottom: `5px solid ${game.color}`,
           }}
         />
-        <input
-          type="url"
-          className={style.h2Input}
-          id="`url${index}"
-          placeholder={game.coverart}
-          onChange={(e) =>
-            handleInputChange(game.id, "coverart", e.target.value)
-          }
-        />
+        <div className={style.coverart_input}>
+          <input
+            type="url"
+            className={style.h2Input}
+            id="`url${index}"
+            placeholder={game.coverart}
+            onChange={(e) =>
+              handleInputChange(game.id, "coverart", e.target.value)
+            }
+          />
+          <button
+            className={style.steam_button}
+            onClick={() => handleSteamLinkButton(game.id, game.name)}
+          >
+            steam link
+          </button>
+        </div>
         <input
           type="color"
           id={`color${index}`}
@@ -124,7 +140,7 @@ const GameShowcase = () => {
             <button className={style.confirm} onClick={handleConfirm}>
               Confirm
             </button>
-            <button className={style.confirm} onClick={handleCancel}>
+            <button className={style.addInput__button} onClick={handleCancel}>
               Cancel
             </button>
           </>

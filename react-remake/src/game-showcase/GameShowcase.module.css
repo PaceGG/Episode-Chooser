@@ -59,6 +59,22 @@
   margin: 10px 0;
 }
 
+.coverart_input {
+  display: flex;
+  width: 100%;
+}
+.steam_button {
+  border-radius: 15px;
+  background-color: #555;
+  padding: 10px;
+  font-size: 16px;
+  margin: 5px;
+  white-space: nowrap;
+  &:hover {
+    background-color: #00adee;
+  }
+}
+
 .h2Input {
   background-color: transparent;
   outline: none;
