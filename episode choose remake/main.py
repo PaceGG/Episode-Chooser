@@ -55,10 +55,13 @@ chdir(paths.project_dir)
 
 def save_data(stat, games, empty_messages, titles):
     with open(Path.joinpath(paths.root_dir, 'data.json'), 'r', encoding='utf-8') as file:
-        cache = json.load(file)["cache"]
+        file = json.load(file)
+        cache = file["cache"]
+        stat_backup = file["stat_backup"]
 
     data = {}
     data["stat"] = stat.__dict__
+    data["stat_backup"] = stat_backup
     data["game"] = [item.as_dict() for item in games]
     data["empty_messages"] = [item.__dict__ for item in empty_messages]
     data["titles"] = [item.__dict__ for item in titles]
@@ -125,7 +128,7 @@ class Main:
         clear_selection(games)
         print_info(games, stat, titles, print_flag=False)
 
-        if response:
+        if response != "redo":
             try:
                 startfile(response)
             except:
