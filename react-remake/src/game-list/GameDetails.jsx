@@ -206,7 +206,7 @@ const GameDetails = ({
   const convertTime = (selectedTime) => {
     const hours = Math.floor(selectedTime / 3600);
     const minutes = Math.floor((selectedTime % 3600) / 60);
-    const seconds = selectedTime % 60;
+    const seconds = Math.floor(selectedTime % 60);
 
     const formatedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
     return formatedTime;
