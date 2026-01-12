@@ -210,7 +210,9 @@ def run_game(games: list[Game], stat: Data):
         stat.count_sr_session += 5
         stat.count_sr_date = today() + 7*24*60*60
 
-    selected_game.count_session += 1
+    if selected_game.id != 2:
+        stat.add_game_log(selected_game.name)
+
     chance_calculate(games)
 
     stat.process_game_id = selected_game.id
@@ -264,8 +266,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     processed_game.user_time = user_time
     equalize_time_limit(games, stat)
 
-    if processed_game.id != 2:
-        stat.add_game_log(processed_game.name)
+    processed_game.count_session += 1
 
     print("\n"*4)
 
