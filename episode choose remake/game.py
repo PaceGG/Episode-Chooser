@@ -198,6 +198,8 @@ def run_game(games: list[Game], stat: Data):
     print(f"::({time_format(selected_game.time_limit)}):: [{selected_game.content_time_format()}]\n")
     input()
 
+    stat.make_backup()
+
     caption = f"{selected_game.full_name} № {selected_game.count_episode + 1}... {time_format(selected_game.time_limit)} [{selected_game.content_time_format()}]"
     stat.process_game_message_id = telegram_utils.send_image(selected_game.header, caption)
 
@@ -229,9 +231,13 @@ def unfinished_process(games: list[Game], stat: Data, duration: int):
     telegram_utils.edit_caption(caption, stat.process_game_message_id)
 
     print(f"Сессия {unfinished_game.name}\nещё не завершенаосталось {int(time_left)} {form}")
-    print(f"Запустить {unfinished_game.name}?\nВведите \"-\" для обозначения финальной сессии")
+    print(f"Запустить {unfinished_game.name}?\nВведите \"-\" для обозначения финальной сессии\nВведите \"--\" для отката")
     confirm = input()
     if confirm == "-": return None, True
+    if confirm == "--":
+        stat.restore_backup()
+        return "redo", False
+
     return unfinished_game.game_path, False
 
 def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_last_session, durations): 
