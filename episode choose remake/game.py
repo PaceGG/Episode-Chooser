@@ -2,6 +2,7 @@ print("Загрузка модуля game")
 from genericpath import getctime
 from os import error
 import os
+from turtle import color
 import paths
 import json
 from pathlib import Path
@@ -13,6 +14,7 @@ from youtube_utils import add_titles, add_empty_message
 from directory_statistics import *
 from pyperclip import paste
 import telegram_utils
+from console_output import hr
 
 def get_short_name(name):
     local = {
@@ -65,7 +67,10 @@ class Game:
         if self.id != 2:
             self.game_path = find_best_match(self.name, paths.games_dir)
             if self.game_path == None:
-                raise Exception(f"Ошибка инициализации {name}: Не удалось найти путь к ярлыку игры.")
+                print()
+                print(hr("Ошибка инициализации", color="#ff0000"))
+                print(f"{name}\nНе удалось найти путь к ярлыку игры.")
+                while True: ...
         else:
             self.game_path = Path('C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs').resolve()
         self.video_dir = Path.joinpath(paths.video_dir, self.safe_name)
