@@ -1,4 +1,5 @@
 from io import BytesIO
+import shutil
 from PIL import Image
 import requests
 import win32api
@@ -144,7 +145,7 @@ def sumtime(time: str):
 def find_best_match(
     game_name: str,
     games_directory: Path,
-    default_dir: Path = Path(r"D:\Program Files\Desktop")
+    default_dir: Path = Path(r"C:\Users\Public\Desktop")
 ) -> Path | None:
     folders = [folder for folder in games_directory.iterdir() if folder.is_dir()]
     folder_names = [folder.name for folder in folders]
@@ -156,6 +157,10 @@ def find_best_match(
     game_directory = next(folder for folder in folders if folder.name.lower() == best_match[0].lower())
 
     game_links = [link for link in game_directory.iterdir() if link.suffix.lower() in [".lnk", ".url"]]
+
+    game_lnk = game_directory / f"game.lnk"
+    if game_lnk.exists():
+        return game_lnk
 
     # ищем лучший ярлык в папке игры
     best_links = difflib.get_close_matches(
@@ -181,11 +186,10 @@ def find_best_match(
         best_link = next(link for link in default_links if link.name.lower() == best_default[0].lower())
         # переносим и называем game.lnk (или .url)
         new_link = game_directory / f"game{best_link.suffix.lower()}"
-        best_link.rename(new_link)
+        shutil.move(str(best_link), str(new_link))
         return new_link
 
-    # если вообще нет ярлыков — вернуть папку
-    return game_directory
+    return None
     
 if __name__ == "__main__":
     print(find_best_match("Assassin’s Creed IV Black Flag", Path(r"D:\Games")))
