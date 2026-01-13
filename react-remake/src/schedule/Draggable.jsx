@@ -335,7 +335,13 @@ function Draggable({ children, wrapperProps = {} }) {
         const cid = child?.props?.id || `col-${idx}`;
         const title = child?.props?.title || `List ${idx + 1}`;
         const placeholder = child?.props?.placeholder;
+        const acceptTypes = child?.props?.acceptTypes;
+        const placeholderProps = child?.props?.placeholderProps;
         const insertIndicatorProps = child?.props?.insertIndicatorProps;
+        const columnProps = child?.props?.columnProps;
+        const listProps = child?.props?.listProps;
+        const titleProps = child?.props?.titleProps;
+
         const items = containers[cid] || [];
 
         const childrenForContainer = items.map((it) =>
@@ -348,7 +354,12 @@ function Draggable({ children, wrapperProps = {} }) {
             id={cid}
             title={title}
             placeholder={placeholder}
+            acceptTypes={acceptTypes}
+            placeholderProps={placeholderProps}
             insertIndicatorProps={insertIndicatorProps}
+            columnProps={columnProps}
+            listProps={listProps}
+            titleProps={titleProps}
             onDrop={handleDrop}
             onReorder={handleReorder(cid)}
           >
@@ -376,6 +387,7 @@ export default function DragAndDropDemo() {
             borderRadius: "2px",
           },
         }}
+        placeholderProps={{ sx: { bgcolor: "red", color: "blue" } }}
       >
         <Chip id="fix-42" label="Fix bug #42" />
         <Chip id="write-tests" label="Write tests" />
