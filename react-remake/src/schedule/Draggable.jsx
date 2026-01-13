@@ -13,7 +13,7 @@
 */
 
 import React, { useState, useRef, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 /* ================= Styled components ================= */
 const ContainerRow = styled.div`
