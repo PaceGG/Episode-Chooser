@@ -1,24 +1,10 @@
-/*
-  React Drag & Drop components (single-file demo)
-  - DraggableItem: wraps any content and makes it draggable
-  - DroppableContainer: accepts draggables, supports reorder within list and transfer between lists
-  - Uses HTML5 Drag and Drop API (with a simple keyboard mode)
-  - Uses MUI Chip components for demo
-
-  Notes:
-  - Install: npm install styled-components @mui/material @mui/icons-material @emotion/react @emotion/styled
-  - This file exports default component DragAndDropDemo which demonstrates usage.
-*/
-
+/*   React Drag & Drop components (single-file demo)   - DraggableItem: wraps any content and makes it draggable   - DroppableContainer: accepts draggables, supports reorder within list and transfer between lists   - Uses HTML5 Drag and Drop API (with a simple keyboard mode)   - Uses MUI Chip components for demo    Notes:   - Install: npm install styled-components @mui/material @mui/icons-material @emotion/react @emotion/styled   - This file exports default component DragAndDropDemo which demonstrates usage.*/
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import Chip from "@mui/material/Chip";
-import Avatar from "@mui/material/Avatar";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import WarningIcon from "@mui/icons-material/Warning";
+import { Box } from "@mui/material";
 
-/* ================= Styled components ================= */
 const ContainerRow = styled.div`
   display: flex;
   gap: 24px;
@@ -60,10 +46,7 @@ const List = styled.div`
 
 const ItemBox = styled.div`
   user-select: none;
-  padding: 12px;
   border-radius: 8px;
-  background: white;
-  border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -440,214 +423,118 @@ function DroppableContainer({
   );
 }
 
-/* ================= MUI Chip Components ================= */
-const CustomChip = ({
-  id,
-  label,
-  color,
-  variant = "filled",
-  onDelete,
-  icon,
-  avatar,
-}) => (
-  <Chip
-    id={id}
-    label={label}
-    color={color}
-    variant={variant}
-    onDelete={onDelete}
-    icon={icon}
-    avatar={avatar}
-    sx={{
-      "& .MuiChip-label": {
-        paddingLeft: avatar ? "8px" : "12px",
-        paddingRight: onDelete ? "8px" : "12px",
-      },
-    }}
-  />
-);
+function Draggable({ children }) {
+  const childArray = React.Children.toArray(children).filter(Boolean);
 
-/* ================= Demo usage ================= */
-export default function DragAndDropDemo() {
-  // Вместо списка объектов теперь список компонентов Chip
-  const [listA, setListA] = useState([
-    <CustomChip
-      key="a1"
-      id="a1"
-      label="Design System"
-      color="primary"
-      avatar={<Avatar>DS</Avatar>}
-    />,
-    <CustomChip
-      key="a2"
-      id="a2"
-      label="In Progress"
-      color="warning"
-      variant="outlined"
-      icon={<WarningIcon />}
-    />,
-    <CustomChip
-      key="a3"
-      id="a3"
-      label="Completed"
-      color="success"
-      icon={<CheckCircleIcon />}
-    />,
-    <CustomChip
-      key="a4"
-      id="a4"
-      label="Frontend Team"
-      color="info"
-      onDelete={() => console.log("delete")}
-    />,
-  ]);
-
-  const [listB, setListB] = useState([
-    <CustomChip
-      key="b1"
-      id="b1"
-      label="Backend API"
-      color="secondary"
-      avatar={<Avatar>API</Avatar>}
-    />,
-    <CustomChip
-      key="b2"
-      id="b2"
-      label="High Priority"
-      color="error"
-      onDelete={() => console.log("delete")}
-    />,
-    <CustomChip
-      key="b3"
-      id="b3"
-      label="Documentation"
-      color="default"
-      variant="outlined"
-    />,
-  ]);
-
-  const [listC, setListC] = useState([
-    <CustomChip
-      key="c1"
-      id="c1"
-      label="Bug Fix"
-      color="error"
-      variant="outlined"
-    />,
-    <CustomChip
-      key="c2"
-      id="c2"
-      label="Feature Request"
-      color="info"
-      variant="outlined"
-    />,
-  ]);
-
-  const handleDrop = ({ id, targetId, index }) => {
-    let movedComponent = null;
-    let sourceSetter = null;
-
-    const findComponent = (list, setter) => {
-      const component = list.find((comp) => comp.props.id === id);
-      if (component) {
-        movedComponent = component;
-        sourceSetter = setter;
-      }
-    };
-
-    findComponent(listA, setListA, "A");
-    findComponent(listB, setListB, "B");
-    findComponent(listC, setListC, "C");
-
-    if (!movedComponent) return null;
-
-    sourceSetter((prev) => prev.filter((comp) => comp.props.id !== id));
-
-    const targetSetters = {
-      "list-1": setListA,
-      "list-2": setListB,
-      "list-3": setListC,
-    };
-
-    const setTargetList = targetSetters[targetId];
-    if (setTargetList) {
-      setTargetList((prev) => {
-        const newList = [...prev];
-        newList.splice(index, 0, movedComponent);
-        return newList;
+  const [containers, setContainers] = useState(() => {
+    const map = {};
+    childArray.forEach((child, idx) => {
+      const cid = child?.props?.id || `col-${idx}`;
+      const childElems = React.Children.toArray(child?.props?.children || []);
+      map[cid] = childElems.map((el, j) => {
+        const id = el?.props?.id || `${cid}-item-${j}`;
+        return { id, element: el };
       });
-      return movedComponent;
-    }
+    });
+    return map;
+  });
 
-    return null;
+  // Найти и удалить элемент из текущего состояния, вернуть найденный и новый map
+  const findAndRemove = (id) => {
+    let found = null;
+    const newMap = {};
+    Object.entries(containers).forEach(([cid, items]) => {
+      const idx = items.findIndex((it) => it.id === id);
+      if (idx !== -1) {
+        found = items[idx];
+        newMap[cid] = [...items.slice(0, idx), ...items.slice(idx + 1)];
+      } else {
+        newMap[cid] = items;
+      }
+    });
+    return [found, newMap];
   };
 
-  const handleReorder = (listName, newOrder) => {
-    const setters = {
-      A: setListA,
-      B: setListB,
-      C: setListC,
-    };
-    setters[listName]?.(newOrder);
+  const handleDrop = ({ id, type, targetId, index }) => {
+    // Удаляем из предыдущего контейнера и вставляем в target
+    const [found, without] = findAndRemove(id);
+    if (!found) return null;
+
+    const targetItems = [...(without[targetId] || [])];
+    const insertAt = Math.max(0, Math.min(index, targetItems.length));
+    targetItems.splice(insertAt, 0, found);
+    const newMap = { ...without, [targetId]: targetItems };
+    setContainers(newMap);
+
+    // Возвращаем React элемент с корректным props.id — DroppableContainer вставит его
+    return React.cloneElement(found.element, {
+      id: found.id,
+      data: found.data,
+      type: "item",
+    });
+  };
+
+  const handleReorder = (containerId) => (newChildren) => {
+    const ids = newChildren
+      .map((ch) => ch.props && ch.props.id)
+      .filter(Boolean);
+    setContainers((prev) => {
+      const items = prev[containerId] || [];
+      const lookup = items.reduce((acc, it) => {
+        acc[it.id] = it;
+        return acc;
+      }, {});
+      return {
+        ...prev,
+        [containerId]: ids.map(
+          (id) => lookup[id] || { id, element: <div id={id}>{id}</div> }
+        ),
+      };
+    });
   };
 
   return (
-    <div style={{ padding: "24px", maxWidth: "1200px", margin: "0 auto" }}>
-      <h1 style={{ color: "#1e293b", marginBottom: "8px" }}>
-        MUI Chip Drag & Drop
-      </h1>
-      <p style={{ color: "#64748b", marginBottom: "32px" }}>
-        Drag chips between columns or reorder within a column
-      </p>
+    <ContainerRow>
+      {childArray.map((child, idx) => {
+        const cid = child?.props?.id || `col-${idx}`;
+        const title = child?.props?.title || `List ${idx + 1}`;
+        const items = containers[cid] || [];
+        const childrenForContainer = items.map((it) =>
+          React.cloneElement(it.element, { id: it.id, key: it.id })
+        );
 
-      <ContainerRow>
-        <DroppableContainer
-          id="list-1"
-          children={listA}
-          acceptTypes={["item"]}
-          onDrop={handleDrop}
-          onReorder={(newOrder) => handleReorder("A", newOrder)}
-          title="Active Chips"
-          placeholder="Drop chips here"
-        />
+        return (
+          <DroppableContainer
+            key={cid}
+            id={cid}
+            title={title}
+            onDrop={handleDrop}
+            onReorder={handleReorder(cid)}
+          >
+            {childrenForContainer}
+          </DroppableContainer>
+        );
+      })}
+    </ContainerRow>
+  );
+}
 
-        <DroppableContainer
-          id="list-2"
-          children={listB}
-          acceptTypes={["item"]}
-          onDrop={handleDrop}
-          onReorder={(newOrder) => handleReorder("B", newOrder)}
-          title="In Review"
-          placeholder="Drop chips here"
-        />
+// Пример использования: просто пишем несколько <DroppableContainer> внутри <Draggable>
+export default function DragAndDropDemo() {
+  return (
+    <Draggable>
+      <DroppableContainer title="To do">
+        <Box sx={{ bgcolor: "red" }}>Box item</Box>
+        <Chip label="Fix bug #42" />
+      </DroppableContainer>
 
-        <DroppableContainer
-          id="list-3"
-          children={listC}
-          acceptTypes={["item"]}
-          onDrop={handleDrop}
-          onReorder={(newOrder) => handleReorder("C", newOrder)}
-          title="Backlog"
-          placeholder="Drop chips here"
-        />
-      </ContainerRow>
+      <DroppableContainer title="In progress">
+        <Chip label="Loading UI" />
+      </DroppableContainer>
 
-      <div
-        style={{
-          marginTop: "32px",
-          padding: "16px",
-          background: "#f8fafc",
-          borderRadius: "8px",
-        }}
-      >
-        <h4 style={{ marginTop: 0, color: "#475569" }}>How to use:</h4>
-        <ul style={{ color: "#64748b", margin: 0, paddingLeft: "20px" }}>
-          <li>Drag chips between columns to move them</li>
-          <li>Drag within a column to reorder</li>
-          <li>Chips with delete icons can be deleted (click the X)</li>
-          <li>Visual indicators show drop positions</li>
-        </ul>
-      </div>
-    </div>
+      <DroppableContainer title="Done">
+        <Chip label="Ship v1.0" />
+      </DroppableContainer>
+    </Draggable>
   );
 }
