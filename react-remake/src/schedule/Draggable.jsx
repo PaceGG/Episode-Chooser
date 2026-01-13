@@ -303,7 +303,6 @@ function Draggable({ children, wrapperProps = {} }) {
     const newMap = { ...without, [targetId]: targetItems };
     setContainers(newMap);
 
-    // вернуть React-элемент для вставки в DroppableContainer
     return React.cloneElement(found.element, {
       id: found.id,
       data: found.data,
@@ -335,15 +334,21 @@ function Draggable({ children, wrapperProps = {} }) {
       {childArray.map((child, idx) => {
         const cid = child?.props?.id || `col-${idx}`;
         const title = child?.props?.title || `List ${idx + 1}`;
+        const placeholder = child?.props?.placeholder;
+        const insertIndicatorProps = child?.props?.insertIndicatorProps;
         const items = containers[cid] || [];
+
         const childrenForContainer = items.map((it) =>
           React.cloneElement(it.element, { id: it.id, key: it.id })
         );
+
         return (
           <DroppableContainer
             key={cid}
             id={cid}
             title={title}
+            placeholder={placeholder}
+            insertIndicatorProps={insertIndicatorProps}
             onDrop={handleDrop}
             onReorder={handleReorder(cid)}
           >
@@ -363,7 +368,13 @@ export default function DragAndDropDemo() {
         title="To do"
         placeholder="No tasks"
         insertIndicatorProps={{
-          sx: { bgcolor: "red", height: "2px", width: "100%" },
+          sx: {
+            bgcolor: "red",
+            height: "4px",
+            width: "100%",
+            my: 1,
+            borderRadius: "2px",
+          },
         }}
       >
         <Chip id="fix-42" label="Fix bug #42" />
@@ -375,7 +386,13 @@ export default function DragAndDropDemo() {
         title="In progress"
         placeholder="Nothing here"
         insertIndicatorProps={{
-          sx: { bgcolor: "red", height: "2px", width: "100%" },
+          sx: {
+            bgcolor: "red",
+            height: "4px",
+            width: "100%",
+            my: 1,
+            borderRadius: "2px",
+          },
         }}
       >
         <Chip id="loading-ui" label="Loading UI" />
@@ -386,7 +403,13 @@ export default function DragAndDropDemo() {
         title="Done"
         placeholder="Empty"
         insertIndicatorProps={{
-          sx: { bgcolor: "red", height: "2px", width: "100%" },
+          sx: {
+            bgcolor: "red",
+            height: "4px",
+            width: "100%",
+            my: 1,
+            borderRadius: "2px",
+          },
         }}
       >
         <Chip id="ship-v1" label="Ship v1.0" />
