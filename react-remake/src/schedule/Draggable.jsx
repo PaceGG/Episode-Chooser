@@ -14,7 +14,6 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import Chip from "@mui/material/Chip";
 import Avatar from "@mui/material/Avatar";
-import DeleteIcon from "@mui/icons-material/Delete";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WarningIcon from "@mui/icons-material/Warning";
@@ -144,18 +143,6 @@ const Placeholder = styled.div`
   margin: 4px;
 `;
 
-const StatusBadge = styled.div`
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-  background: ${(props) => (props.type === "success" ? "#dcfce7" : "#fef3c7")};
-  color: ${(props) => (props.type === "success" ? "#166534" : "#92400e")};
-`;
-
 const DragHandle = styled.div`
   display: flex;
   align-items: center;
@@ -266,7 +253,6 @@ function DroppableContainer({
 }) {
   const containerRef = useRef(null);
   const [internalChildren, setInternalChildren] = useState(children);
-  const [dragging, setDragging] = useState(null);
   const [over, setOver] = useState(false);
   const [insertIndex, setInsertIndex] = useState(null);
   const liveRef = useRef(null);
@@ -380,37 +366,31 @@ function DroppableContainer({
   };
 
   const handleDragStartLocal = (info) => {
-    setDragging(info);
     if (onDragStart) onDragStart(info);
   };
 
   const handleDragEndLocal = (info) => {
-    setDragging(null);
     setInsertIndex(null);
     if (onDragEnd) onDragEnd(info);
   };
 
-  const renderedChildren = React.Children.map(
-    internalChildren,
-    (child, idx) => {
-      // Обернем каждый дочерний элемент в DraggableItem
-      if (child && child.props && child.props.id) {
-        return (
-          <DraggableItem
-            key={child.props.id}
-            id={child.props.id}
-            data={child.props.data}
-            type={child.props.type || "item"}
-            onDragStart={handleDragStartLocal}
-            onDragEnd={handleDragEndLocal}
-          >
-            {child}
-          </DraggableItem>
-        );
-      }
-      return child;
+  const renderedChildren = React.Children.map(internalChildren, (child) => {
+    if (child && child.props && child.props.id) {
+      return (
+        <DraggableItem
+          key={child.props.id}
+          id={child.props.id}
+          data={child.props.data}
+          type={child.props.type || "item"}
+          onDragStart={handleDragStartLocal}
+          onDragEnd={handleDragEndLocal}
+        >
+          {child}
+        </DraggableItem>
+      );
     }
-  );
+    return child;
+  });
 
   const childElements = React.Children.toArray(renderedChildren).map(
     (child, idx) => {
@@ -564,16 +544,13 @@ export default function DragAndDropDemo() {
   ]);
 
   const handleDrop = ({ id, targetId, index }) => {
-    // Ищем компонент во всех списках
     let movedComponent = null;
-    let sourceList = null;
     let sourceSetter = null;
 
-    const findComponent = (list, setter, listName) => {
+    const findComponent = (list, setter) => {
       const component = list.find((comp) => comp.props.id === id);
       if (component) {
         movedComponent = component;
-        sourceList = list;
         sourceSetter = setter;
       }
     };
@@ -584,10 +561,8 @@ export default function DragAndDropDemo() {
 
     if (!movedComponent) return null;
 
-    // Удаляем из исходного списка
     sourceSetter((prev) => prev.filter((comp) => comp.props.id !== id));
 
-    // Добавляем в целевой список
     const targetSetters = {
       "list-1": setListA,
       "list-2": setListB,
