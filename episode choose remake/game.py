@@ -216,13 +216,6 @@ def run_game(games: list[Game], stat: Data):
     caption = f"{selected_game.full_name} № {selected_game.count_episode + 1}... {time_format(selected_game.time_limit)} [{selected_game.content_time_format()}]"
     stat.process_game_message_id = telegram_utils.send_image(selected_game.header, caption)
 
-    
-    if selected_game.id != 2:
-        stat.count_sr_session -= 1
-    else:
-        stat.count_sr_session += 5
-        stat.count_sr_date = today() + 7*24*60*60
-
     if selected_game.id != 2:
         stat.add_game_log(selected_game.name)
 
@@ -280,6 +273,12 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     equalize_time_limit(games, stat)
 
     processed_game.count_session += 1
+
+    if processed_game.id != 2:
+        stat.count_sr_session -= 1
+    else:
+        stat.count_sr_session += 5
+        stat.count_sr_date = today() + 7*24*60*60
 
     print("\n"*4)
 
