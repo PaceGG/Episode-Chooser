@@ -3,64 +3,91 @@
   - DraggableItem: wraps any content and makes it draggable
   - DroppableContainer: accepts draggables, supports reorder within list and transfer between lists
   - Uses HTML5 Drag and Drop API (with a simple keyboard mode)
-  - Styling via styled-components
+  - Uses MUI Chip components for demo
 
   Notes:
-  - Install: npm install styled-components
+  - Install: npm install styled-components @mui/material @mui/icons-material @emotion/react @emotion/styled
   - This file exports default component DragAndDropDemo which demonstrates usage.
-
-  This is JavaScript (not TypeScript) and uses React hooks.
 */
 
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+import Chip from "@mui/material/Chip";
+import Avatar from "@mui/material/Avatar";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import WarningIcon from "@mui/icons-material/Warning";
 
 /* ================= Styled components ================= */
 const ContainerRow = styled.div`
   display: flex;
-  gap: 16px;
-  padding: 16px;
+  gap: 24px;
+  padding: 24px;
   align-items: flex-start;
+  background: #f8fafc;
+  min-height: 100vh;
 `;
 
 const Column = styled.div`
-  width: 320px;
-  min-height: 120px;
-  background: #f6f7fb;
-  border-radius: 8px;
-  padding: 12px;
-  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+  width: 350px;
+  min-height: 200px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
 `;
 
 const Title = styled.h3`
-  margin: 0 0 8px 0;
-  font-size: 14px;
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 
 const List = styled.div`
   background: transparent;
-  min-height: 80px;
+  min-height: 120px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  padding: 4px;
 `;
 
 const ItemBox = styled.div`
   user-select: none;
-  padding: 10px 12px;
-  border-radius: 6px;
+  padding: 12px;
+  border-radius: 8px;
   background: white;
-  box-shadow: 0 1px 0 rgba(16, 24, 40, 0.04);
+  border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: grab;
-  transition: transform 160ms ease, box-shadow 160ms ease;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #94a3b8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
   &[aria-grabbed="true"] {
-    opacity: 0.6;
+    opacity: 0.7;
     cursor: grabbing;
-    transform: scale(0.98);
-    box-shadow: 0 8px 20px rgba(16, 24, 40, 0.12);
+    transform: scale(0.99) rotate(1deg);
+    border-color: #6366f1;
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+    background: #f8fafc;
+  }
+
+  &.dragging-over {
+    border-color: #6366f1;
+    background: #f0f9ff;
   }
 `;
 
@@ -70,18 +97,31 @@ const DropHighlight = styled.div`
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: 8px;
+    border-radius: 12px;
     pointer-events: none;
-    box-shadow: inset 0 0 0 3px rgba(99, 102, 241, 0.08);
+    box-shadow: inset 0 0 0 2px rgba(99, 102, 241, 0.3);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &.over::after {
+    opacity: 1;
   }
 `;
 
 const InsertIndicator = styled.div`
-  height: 2px;
-  background: rgba(99, 102, 241, 0.9);
-  margin: 2px 0;
-  border-radius: 2px;
-  transition: opacity 120ms ease;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  margin: 4px 8px;
+  border-radius: 3px;
+  opacity: 0;
+  transform: scaleY(0);
+  transition: all 0.2s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 `;
 
 const LiveRegion = styled.div`
@@ -93,19 +133,49 @@ const LiveRegion = styled.div`
   white-space: nowrap;
 `;
 
-/* get insertion index within list based on mouse position and children bounding boxes */
-function getIndexFromPosition(containerEl, clientY) {
-  const children = Array.from(containerEl.children).filter(
-    (c) => c.dataset && c.dataset.dnd !== "placeholder"
-  );
-  if (!children.length) return 0;
-  for (let i = 0; i < children.length; i++) {
-    const rect = children[i].getBoundingClientRect();
-    const mid = rect.top + rect.height / 2;
-    if (clientY < mid) return i;
+const Placeholder = styled.div`
+  text-align: center;
+  padding: 32px 16px;
+  color: #94a3b8;
+  font-size: 14px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 2px dashed #cbd5e1;
+  margin: 4px;
+`;
+
+const StatusBadge = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  background: ${(props) => (props.type === "success" ? "#dcfce7" : "#fef3c7")};
+  color: ${(props) => (props.type === "success" ? "#166534" : "#92400e")};
+`;
+
+const DragHandle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: #94a3b8;
+  cursor: grab;
+  border-radius: 4px;
+
+  &:hover {
+    background: #f1f5f9;
+    color: #64748b;
   }
-  return children.length; // append
-}
+
+  & > svg {
+    width: 18px;
+    height: 18px;
+  }
+`;
 
 /* ================= DraggableItem ================= */
 function DraggableItem({
@@ -117,7 +187,6 @@ function DraggableItem({
   onDragEnd,
   children,
 }) {
-  /* We expose both mouse drag (HTML5) and keyboard dragging via aria */
   const ref = useRef(null);
 
   const handleDragStart = (e) => {
@@ -125,29 +194,31 @@ function DraggableItem({
       e.preventDefault();
       return;
     }
-    // set plain text payload so other browsers can read
+
     try {
       e.dataTransfer.setData("application/json", JSON.stringify({ id, type }));
     } catch (err) {
       e.dataTransfer.setData("text/plain", id);
     }
-    e.dataTransfer.effectAllowed = "move"; // or copy/link based on props if extended
+
+    e.dataTransfer.effectAllowed = "move";
     if (onDragStart) onDragStart({ id, data, type });
-    // small visual trick: setDragImage to a cloned node gives better preview
+
     const node = ref.current;
     if (node) {
       const clone = node.cloneNode(true);
-      clone.style.boxShadow = "0 8px 20px rgba(16,24,40,0.12)";
-      clone.style.padding = "10px 12px";
+      clone.style.boxShadow = "0 12px 32px rgba(0, 0, 0, 0.15)";
+      clone.style.padding = "12px";
       clone.style.background = "white";
-      clone.style.borderRadius = "6px";
+      clone.style.borderRadius = "8px";
+      clone.style.width = `${node.offsetWidth}px`;
+      clone.style.opacity = "0.9";
       document.body.appendChild(clone);
       e.dataTransfer.setDragImage(
         clone,
         clone.offsetWidth / 2,
         clone.offsetHeight / 2
       );
-      // remove clone after a tick
       setTimeout(() => document.body.removeChild(clone), 0);
     }
   };
@@ -156,7 +227,6 @@ function DraggableItem({
     if (onDragEnd) onDragEnd({ id, data, type });
   };
 
-  // Keyboard: pressing Space/Enter will "pick up" the item - this requires container to manage.
   return (
     <ItemBox
       ref={ref}
@@ -170,9 +240,13 @@ function DraggableItem({
       onDragEnd={handleDragEndLocal}
       data-dnd="item"
     >
-      <div style={{ flex: 1 }}>{children}</div>
-      <div aria-hidden style={{ marginLeft: 10, opacity: 0.6 }}>
-        ≡
+      <div
+        style={{ flex: 1, display: "flex", alignItems: "center", gap: "12px" }}
+      >
+        <DragHandle>
+          <DragIndicatorIcon />
+        </DragHandle>
+        <div style={{ flex: 1 }}>{children}</div>
       </div>
     </ItemBox>
   );
@@ -181,33 +255,38 @@ function DraggableItem({
 /* ================= DroppableContainer ================= */
 function DroppableContainer({
   id,
-  items = [],
-  children,
+  children = [], // теперь принимаем массив компонентов
   acceptTypes = ["item"],
   onReorder,
   onDrop,
   onDragStart,
   onDragEnd,
   placeholder = "Drop items here",
+  title,
 }) {
   const containerRef = useRef(null);
-  const [internalItems, setInternalItems] = useState(items);
-  const [dragging, setDragging] = useState(null); // {id, type, sourceId}
+  const [internalChildren, setInternalChildren] = useState(children);
+  const [dragging, setDragging] = useState(null);
   const [over, setOver] = useState(false);
   const [insertIndex, setInsertIndex] = useState(null);
   const liveRef = useRef(null);
 
-  useEffect(() => setInternalItems(items), [items]);
+  useEffect(() => setInternalChildren(children), [children]);
 
-  useEffect(() => {
-    if (insertIndex === null) return;
-    // announce for screen reader
-    if (liveRef.current) {
-      liveRef.current.textContent = `Insert position ${insertIndex + 1} of ${
-        internalItems.length + (dragging ? 1 : 0)
-      }`;
+  const getIndexFromPosition = (clientY) => {
+    const containerEl = containerRef.current;
+    const children = Array.from(containerEl.children).filter(
+      (c) => c.dataset && c.dataset.dnd !== "placeholder"
+    );
+    if (!children.length) return 0;
+
+    for (let i = 0; i < children.length; i++) {
+      const rect = children[i].getBoundingClientRect();
+      const mid = rect.top + rect.height / 2;
+      if (clientY < mid) return i;
     }
-  }, [insertIndex, internalItems.length, dragging]);
+    return children.length;
+  };
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -215,19 +294,20 @@ function DroppableContainer({
   };
 
   const handleDragOver = (e) => {
-    e.preventDefault(); // allow drop
+    e.preventDefault();
     const dt = e.dataTransfer;
-    // compute index
-    const idx = getIndexFromPosition(containerRef.current, e.clientY);
+    const idx = getIndexFromPosition(e.clientY);
     setInsertIndex(idx);
-    // set correct dropEffect
     if (dt) dt.dropEffect = "move";
   };
 
   const handleDragLeave = (e) => {
-    // if leaving to child, ignore
     const current = containerRef.current;
-    if (!current) return setOver(false);
+    if (!current) {
+      setOver(false);
+      return;
+    }
+
     const rect = current.getBoundingClientRect();
     if (
       e.clientX < rect.left ||
@@ -243,38 +323,42 @@ function DroppableContainer({
   const handleDrop = (e) => {
     e.preventDefault();
     setOver(false);
+
     let payload = null;
     try {
       payload = JSON.parse(e.dataTransfer.getData("application/json"));
     } catch (err) {
       payload = { id: e.dataTransfer.getData("text/plain") };
     }
-    const droppedId = payload && payload.id;
-    const droppedType = payload && payload.type;
-    if (!droppedId) return;
-    if (!acceptTypes.includes(droppedType)) return; // ignoring incompatible type
 
-    // If item is already inside same container, reorder
-    const existingIndex = internalItems.findIndex((it) => it.id === droppedId);
+    const droppedId = payload?.id;
+    const droppedType = payload?.type;
 
-    // If reorder within same list
+    if (!droppedId || !acceptTypes.includes(droppedType)) {
+      setInsertIndex(null);
+      return;
+    }
+
+    // Получаем индекс элемента среди draggable детей
+    const childArray = React.Children.toArray(internalChildren);
+    const existingIndex = childArray.findIndex(
+      (child) => child.props && child.props.id === droppedId
+    );
+
+    const newIndex = insertIndex === null ? childArray.length : insertIndex;
+
     if (existingIndex !== -1) {
-      const newIndex =
-        insertIndex === null ? internalItems.length : insertIndex;
+      // Reorder within same container
       if (newIndex !== existingIndex && newIndex !== existingIndex + 1) {
-        const arr = [...internalItems];
-        const [removed] = arr.splice(existingIndex, 1);
+        const newChildren = [...childArray];
+        const [removed] = newChildren.splice(existingIndex, 1);
         const insertAt = newIndex > existingIndex ? newIndex - 1 : newIndex;
-        arr.splice(insertAt, 0, removed);
-        setInternalItems(arr);
-        if (onReorder) onReorder(arr);
+        newChildren.splice(insertAt, 0, removed);
+        setInternalChildren(newChildren);
+        if (onReorder) onReorder(newChildren);
       }
     } else {
-      // item from another list: in a real app you would receive the full data object; here we emit onDrop so parent can handle
-      const newIndex =
-        insertIndex === null ? internalItems.length : insertIndex;
-      const arr = [...internalItems];
-      // ask parent to provide item data by calling onDrop
+      // Item from another container
       if (onDrop) {
         const provided = onDrop({
           id: droppedId,
@@ -282,14 +366,16 @@ function DroppableContainer({
           targetId: id,
           index: newIndex,
         });
-        // if onDrop returns a data object synchronously we insert it
-        if (provided && provided.id) {
-          arr.splice(newIndex, 0, provided);
-          setInternalItems(arr);
-          if (onReorder) onReorder(arr);
+
+        if (provided) {
+          const newChildren = [...childArray];
+          newChildren.splice(newIndex, 0, provided);
+          setInternalChildren(newChildren);
+          if (onReorder) onReorder(newChildren);
         }
       }
     }
+
     setInsertIndex(null);
   };
 
@@ -304,43 +390,49 @@ function DroppableContainer({
     if (onDragEnd) onDragEnd(info);
   };
 
-  const renderedChildren =
-    children ||
-    internalItems.map((it) => (
-      <DraggableItem
-        key={it.id}
-        id={it.id}
-        data={it}
-        type={it.type || "item"}
-        onDragStart={handleDragStartLocal}
-        onDragEnd={handleDragEndLocal}
-      >
-        {it.content}
-      </DraggableItem>
-    ));
+  const renderedChildren = React.Children.map(
+    internalChildren,
+    (child, idx) => {
+      // Обернем каждый дочерний элемент в DraggableItem
+      if (child && child.props && child.props.id) {
+        return (
+          <DraggableItem
+            key={child.props.id}
+            id={child.props.id}
+            data={child.props.data}
+            type={child.props.type || "item"}
+            onDragStart={handleDragStartLocal}
+            onDragEnd={handleDragEndLocal}
+          >
+            {child}
+          </DraggableItem>
+        );
+      }
+      return child;
+    }
+  );
 
-  // render list of children with an insert indicator
   const childElements = React.Children.toArray(renderedChildren).map(
     (child, idx) => {
-      // we wrap each child to be able to detect bounding box etc.
       const showBefore = insertIndex === idx && over;
       return (
-        <div key={child.key} data-dnd="wrapper">
-          {showBefore && <InsertIndicator />}
+        <div key={child.key || idx} data-dnd="wrapper">
+          {showBefore && <InsertIndicator className="visible" />}
           {child}
         </div>
       );
     }
   );
 
-  // if insertIndex === internalItems.length
   const appendIndicator =
-    insertIndex === internalItems.length && over ? <InsertIndicator /> : null;
+    insertIndex === React.Children.count(internalChildren) && over ? (
+      <InsertIndicator className="visible" />
+    ) : null;
 
   return (
     <Column>
-      <Title>List — {id}</Title>
-      <DropHighlight>
+      {title && <Title>{title}</Title>}
+      <DropHighlight className={over ? "over" : ""}>
         <List
           ref={containerRef}
           role="list"
@@ -350,11 +442,11 @@ function DroppableContainer({
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           tabIndex={0}
-          style={over ? { outline: "2px solid rgba(99,102,241,0.12)" } : {}}
+          style={over ? { backgroundColor: "rgba(99, 102, 241, 0.02)" } : {}}
           data-dnd="container"
         >
-          {internalItems.length === 0 ? (
-            <div data-dnd="placeholder">{placeholder}</div>
+          {React.Children.count(internalChildren) === 0 ? (
+            <Placeholder data-dnd="placeholder">{placeholder}</Placeholder>
           ) : (
             <>
               {childElements}
@@ -368,82 +460,219 @@ function DroppableContainer({
   );
 }
 
-/* ================= Demo usage (default export) ================= */
+/* ================= MUI Chip Components ================= */
+const CustomChip = ({
+  id,
+  label,
+  color,
+  variant = "filled",
+  onDelete,
+  icon,
+  avatar,
+}) => (
+  <Chip
+    id={id}
+    label={label}
+    color={color}
+    variant={variant}
+    onDelete={onDelete}
+    icon={icon}
+    avatar={avatar}
+    sx={{
+      "& .MuiChip-label": {
+        paddingLeft: avatar ? "8px" : "12px",
+        paddingRight: onDelete ? "8px" : "12px",
+      },
+    }}
+  />
+);
+
+/* ================= Demo usage ================= */
 export default function DragAndDropDemo() {
-  const initialA = [
-    { id: "a1", content: "Card A1" },
-    { id: "a2", content: "Card A2" },
-    { id: "a3", content: "Card A3" },
-  ];
-  const initialB = [
-    { id: "b1", content: "Card B1" },
-    { id: "b2", content: "Card B2" },
-  ];
+  // Вместо списка объектов теперь список компонентов Chip
+  const [listA, setListA] = useState([
+    <CustomChip
+      key="a1"
+      id="a1"
+      label="Design System"
+      color="primary"
+      avatar={<Avatar>DS</Avatar>}
+    />,
+    <CustomChip
+      key="a2"
+      id="a2"
+      label="In Progress"
+      color="warning"
+      variant="outlined"
+      icon={<WarningIcon />}
+    />,
+    <CustomChip
+      key="a3"
+      id="a3"
+      label="Completed"
+      color="success"
+      icon={<CheckCircleIcon />}
+    />,
+    <CustomChip
+      key="a4"
+      id="a4"
+      label="Frontend Team"
+      color="info"
+      onDelete={() => console.log("delete")}
+    />,
+  ]);
 
-  const [listA, setListA] = useState(initialA);
-  const [listB, setListB] = useState(initialB);
+  const [listB, setListB] = useState([
+    <CustomChip
+      key="b1"
+      id="b1"
+      label="Backend API"
+      color="secondary"
+      avatar={<Avatar>API</Avatar>}
+    />,
+    <CustomChip
+      key="b2"
+      id="b2"
+      label="High Priority"
+      color="error"
+      onDelete={() => console.log("delete")}
+    />,
+    <CustomChip
+      key="b3"
+      id="b3"
+      label="Documentation"
+      color="default"
+      variant="outlined"
+    />,
+  ]);
 
-  // top-level handlers
-  const handleDrop = ({ id, type, targetId, index }) => {
-    let moved = null;
-    if (listA.find((x) => x.id === id)) {
-      moved = listA.find((x) => x.id === id);
-      setListA((s) => s.filter((x) => x.id !== id));
-    }
-    if (!moved && listB.find((x) => x.id === id)) {
-      moved = listB.find((x) => x.id === id);
-      setListB((s) => s.filter((x) => x.id !== id));
-    }
-    if (!moved) return null;
-    // insert into target list state synchronously
-    if (targetId === "list-1") {
-      setListA((prev) => {
-        const copy = [...prev];
-        copy.splice(index, 0, moved);
-        return copy;
+  const [listC, setListC] = useState([
+    <CustomChip
+      key="c1"
+      id="c1"
+      label="Bug Fix"
+      color="error"
+      variant="outlined"
+    />,
+    <CustomChip
+      key="c2"
+      id="c2"
+      label="Feature Request"
+      color="info"
+      variant="outlined"
+    />,
+  ]);
+
+  const handleDrop = ({ id, targetId, index }) => {
+    // Ищем компонент во всех списках
+    let movedComponent = null;
+    let sourceList = null;
+    let sourceSetter = null;
+
+    const findComponent = (list, setter, listName) => {
+      const component = list.find((comp) => comp.props.id === id);
+      if (component) {
+        movedComponent = component;
+        sourceList = list;
+        sourceSetter = setter;
+      }
+    };
+
+    findComponent(listA, setListA, "A");
+    findComponent(listB, setListB, "B");
+    findComponent(listC, setListC, "C");
+
+    if (!movedComponent) return null;
+
+    // Удаляем из исходного списка
+    sourceSetter((prev) => prev.filter((comp) => comp.props.id !== id));
+
+    // Добавляем в целевой список
+    const targetSetters = {
+      "list-1": setListA,
+      "list-2": setListB,
+      "list-3": setListC,
+    };
+
+    const setTargetList = targetSetters[targetId];
+    if (setTargetList) {
+      setTargetList((prev) => {
+        const newList = [...prev];
+        newList.splice(index, 0, movedComponent);
+        return newList;
       });
-      return moved;
-    } else if (targetId === "list-2") {
-      setListB((prev) => {
-        const copy = [...prev];
-        copy.splice(index, 0, moved);
-        return copy;
-      });
-      return moved;
+      return movedComponent;
     }
+
     return null;
   };
 
-  const handleReorderA = (newOrder) => setListA(newOrder);
-  const handleReorderB = (newOrder) => setListB(newOrder);
-
-  const onDragStart = (info) => console.log("drag start", info);
-  const onDragEnd = (info) => console.log("drag end", info);
+  const handleReorder = (listName, newOrder) => {
+    const setters = {
+      A: setListA,
+      B: setListB,
+      C: setListC,
+    };
+    setters[listName]?.(newOrder);
+  };
 
   return (
-    <div>
+    <div style={{ padding: "24px", maxWidth: "1200px", margin: "0 auto" }}>
+      <h1 style={{ color: "#1e293b", marginBottom: "8px" }}>
+        MUI Chip Drag & Drop
+      </h1>
+      <p style={{ color: "#64748b", marginBottom: "32px" }}>
+        Drag chips between columns or reorder within a column
+      </p>
+
       <ContainerRow>
         <DroppableContainer
           id="list-1"
-          items={listA}
+          children={listA}
           acceptTypes={["item"]}
           onDrop={handleDrop}
-          onReorder={handleReorderA}
-          onDragStart={onDragStart}
-          onDragEnd={onDragEnd}
-          persistence={false}
+          onReorder={(newOrder) => handleReorder("A", newOrder)}
+          title="Active Chips"
+          placeholder="Drop chips here"
         />
+
         <DroppableContainer
           id="list-2"
-          items={listB}
+          children={listB}
           acceptTypes={["item"]}
           onDrop={handleDrop}
-          onReorder={handleReorderB}
-          onDragStart={onDragStart}
-          onDragEnd={onDragEnd}
-          persistence={false}
+          onReorder={(newOrder) => handleReorder("B", newOrder)}
+          title="In Review"
+          placeholder="Drop chips here"
+        />
+
+        <DroppableContainer
+          id="list-3"
+          children={listC}
+          acceptTypes={["item"]}
+          onDrop={handleDrop}
+          onReorder={(newOrder) => handleReorder("C", newOrder)}
+          title="Backlog"
+          placeholder="Drop chips here"
         />
       </ContainerRow>
+
+      <div
+        style={{
+          marginTop: "32px",
+          padding: "16px",
+          background: "#f8fafc",
+          borderRadius: "8px",
+        }}
+      >
+        <h4 style={{ marginTop: 0, color: "#475569" }}>How to use:</h4>
+        <ul style={{ color: "#64748b", margin: 0, paddingLeft: "20px" }}>
+          <li>Drag chips between columns to move them</li>
+          <li>Drag within a column to reorder</li>
+          <li>Chips with delete icons can be deleted (click the X)</li>
+          <li>Visual indicators show drop positions</li>
+        </ul>
+      </div>
     </div>
   );
 }
