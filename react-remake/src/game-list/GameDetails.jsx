@@ -39,12 +39,35 @@ const GameDetails = ({
       const sessions = await response.json();
 
       // Ищем записи для указанной игры
-      const gameEntries = Object.values(sessions).filter((entry) =>
-        entry.game.toLowerCase().includes(gameName.toLowerCase())
+      const gameEntries = Object.values(sessions).filter(
+        (entry) => entry.gameGroup === gameName,
       );
 
-      if (gameEntries.length === 0)
-        return { totalDuration: 0, episodeCount: 0 };
+      if (gameEntries.length === 0) {
+        console.log(
+          `Поиск по gameGroup не дал результатов, ищем по game: "${gameName}"`,
+        );
+        const fallbackEntries = Object.values(sessions).filter(
+          (entry) => entry.game === gameName,
+        );
+
+        if (fallbackEntries.length === 0) {
+          return { totalDuration: 0, episodeCount: 0 };
+        }
+
+        // Используем fallbackEntries
+        let totalDuration = 0;
+        let episodeCount = 0;
+
+        fallbackEntries.forEach((entry) => {
+          entry.episodes.forEach((episode) => {
+            totalDuration += episode.duration;
+            episodeCount++;
+          });
+        });
+
+        return { totalDuration, episodeCount };
+      }
 
       // Суммируем продолжительность всех эпизодов
       let totalDuration = 0;
@@ -82,7 +105,7 @@ const GameDetails = ({
       setSelectedStatus(gameData.mainStatus);
     } else {
       setSelectedStatus(
-        gameData.additionalGames.find((game) => game.name === gameName).status
+        gameData.additionalGames.find((game) => game.name === gameName).status,
       );
     }
     setModalVisible(true);
@@ -222,7 +245,7 @@ const GameDetails = ({
   const handleSaveChanges = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/games/${selectedGameID}`
+        `http://localhost:3000/games/${selectedGameID}`,
       );
       const game = response.data;
 
@@ -255,7 +278,7 @@ const GameDetails = ({
               time: timeToSave,
               numberOfEps: epsToSave,
             }
-          : game
+          : game,
       );
 
       if (updateAdditionalGames.length !== 0) {
@@ -292,7 +315,7 @@ const GameDetails = ({
           gameData.mainName,
           gameData.id,
           gameData.mainTime,
-          gameData.mainNumberOfEps
+          gameData.mainNumberOfEps,
         )
       }
       className={
@@ -388,7 +411,7 @@ const GameDetails = ({
             convertTime(
               additionalGames
                 .map((game) => game.time)
-                .reduce((a, b) => a + b, 0)
+                .reduce((a, b) => a + b, 0),
             ) +
             ")"}
       </summary>
@@ -402,7 +425,7 @@ const GameDetails = ({
                 game.name,
                 gameData.id,
                 game.time,
-                game.numberOfEps
+                game.numberOfEps,
               )
             }
             className={
