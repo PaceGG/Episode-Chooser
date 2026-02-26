@@ -1,7 +1,7 @@
 import db from "./db.json";
 
 export const paths = {
-  getNames() {
+  getGames() {
     const names = db.showcase.map((game) => ({
       name: game.name,
       extraName: game.extraName,
