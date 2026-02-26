@@ -6,6 +6,7 @@ export const paths = {
       name: game.name,
       extraName: game.extraName,
       shortName: game.shortName,
+      color: game.color,
     }));
 
     return names;

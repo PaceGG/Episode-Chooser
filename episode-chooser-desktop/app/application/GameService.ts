@@ -6,11 +6,13 @@ export default class GameSerivce {
   readonly shortName: string;
   readonly extraName: string | null;
   readonly fullName: string;
+  readonly color: string;
 
   constructor(
     name: string,
     extraName: string | null,
     shortName: string | null,
+    color: string,
     kwargs: Record<string, any> = {},
   ) {
     this.name = name;
@@ -18,6 +20,8 @@ export default class GameSerivce {
     this.shortName = shortName || this.getShortName();
     this.extraName = extraName;
     this.fullName = `${name}${this.extraName ? `: ${extraName}` : ""}`;
+
+    this.color = color;
   }
 
   private getShortName(): string {
