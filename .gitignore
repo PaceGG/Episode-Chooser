@@ -12,3 +12,5 @@ episode choose remake/tests.py
 *.txt
 
 __pycache__
+
+node_modules
