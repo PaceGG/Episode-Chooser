@@ -56,7 +56,7 @@ function DraggableItem({
   );
 }
 
-function DroppableContainer({
+export function DroppableContainer({
   id,
   children = [],
   acceptTypes = ["item"],
@@ -263,7 +263,7 @@ function DroppableContainer({
   );
 }
 
-function Draggable({ children, wrapperProps = {} }) {
+export function Draggable({ children, wrapperProps = {} }) {
   const childArray = React.Children.toArray(children).filter(Boolean);
 
   const [containers, setContainers] = useState(() => {

@@ -6,21 +6,27 @@ import time
 from dotenv import load_dotenv
 from util import intc
 from time_format import today, get_time
+import paths
 
 load_dotenv("gitignore/.env")
 
 
 class EmptyMessage:
     name: str
+    game_group: str
     ep_range: list[int]
     durations: list[int]
     message_id: int
     timestamp: int
 
-    def __init__(self, name, ep_range, durations, message_id, timestamp=None):
+    def __init__(self, name, game_group=None, ep_range=None, durations=None, message_id=None, timestamp=None, **kwargs):
+        if game_group is None or game_group == "":
+            game_group = name
+            
         self.name = name
-        self.ep_range = ep_range
-        self.durations = durations
+        self.game_group = game_group
+        self.ep_range = ep_range if ep_range is not None else []
+        self.durations = durations if durations is not None else []
         self.message_id = message_id
         self.timestamp = int(time.time()) if timestamp is None else timestamp
 
@@ -69,6 +75,7 @@ def add_empty_message(empty_messages: list[EmptyMessage], game, count_videos, du
     empty_messages.append(
         EmptyMessage(
             game.full_name,
+            game.name,
             [game.count_episode + 1, game.count_episode + count_videos],
             durations,
             message_id
@@ -132,7 +139,7 @@ def get_yt_videos():
     return videos
 
 
-def add_sessions_entry_with_data(sessions_path: str, game: str, episodes: list[dict], message_id: int, timestamp: int):
+def add_sessions_entry_with_data(sessions_path: str, game: str, game_group: str, episodes: list[dict], message_id: int, timestamp: int):
     import json
     import os
 
@@ -151,6 +158,7 @@ def add_sessions_entry_with_data(sessions_path: str, game: str, episodes: list[d
     # создаём запись
     sessions[new_id] = {
         "game": game,
+        "gameGroup": game_group,
         "datetime": timestamp,  # берём дату сообщения
         "episodes": episodes
     }
@@ -198,9 +206,9 @@ def edit_empty_message(empty_message: EmptyMessage, yt_videos):
     telegram_utils.edit_caption(new_text, empty_message.message_id)
 
     # --- добавляем запись в sessions.json ---
-    sessions_path = r"D:\Program Files\HTML\Episode-Chooser\react-remake\public\sessions.json"
+    sessions_path = paths.project_dir / "react-remake/public/sessions.json"
     try:
-        add_sessions_entry_with_data(sessions_path, empty_message.name, episode_list, empty_message.message_id, empty_message.timestamp)
+        add_sessions_entry_with_data(sessions_path, empty_message.name, empty_message.game_group, episode_list, empty_message.message_id, empty_message.timestamp)
         print(f"Добавлена сессия для {empty_message.name} эпизоды {empty_message.ep_range[0]}-{empty_message.ep_range[1]}")
     except Exception as e:
         print(f"Не удалось добавить запись в sessions.json: {e}")
@@ -225,15 +233,16 @@ def edit_empty_messages(empty_messages, stat):
 
 
 if __name__ == "__main__":
-    from data import Data
+    # from data import Data
 
-    videos = get_yt_videos()
-    for game in videos.keys():
-        print(f"{game}:")
-        for number, info in videos[game].items():
-            print(f"{number}: {info['title']} ({info['videoId']})")
-        print()
+    # videos = get_yt_videos()
+    # for game in videos.keys():
+    #     print(f"{game}:")
+    #     for number, info in videos[game].items():
+    #         print(f"{number}: {info['title']} ({info['videoId']})")
+    #     print()
 
-    empty_messages: list[EmptyMessage] = Data("empty_messages").empty_messages
-    stat = Data("stat")
-    edit_empty_messages(empty_messages, stat)
+    # empty_messages: list[EmptyMessage] = Data("empty_messages").empty_messages
+    # stat = Data("stat")
+    # edit_empty_messages(empty_messages, stat)
+    ...

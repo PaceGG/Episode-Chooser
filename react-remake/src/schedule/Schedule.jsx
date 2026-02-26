@@ -1,6 +1,7 @@
 import { Box, Chip, Divider, Stack, styled } from "@mui/material";
 import { useEffect, useState } from "react";
 import gamesApi from "../api/gamesApi";
+import { Draggable, DroppableContainer } from "./Draggable";
 
 function SplitText({ text, T = 3 }) {
   const words = text.split(" ");
@@ -89,24 +90,65 @@ function GameChip({ gameName, ivi, duration }) {
 }
 
 export default function Schedule() {
-  const [games, setGames] = useState();
+  const [games, setGames] = useState([]);
+  const [isDraggableReady, setIsDraggableReady] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
-      const games = await gamesApi.getByStatus("none");
-      if (games) {
-        setGames(games);
-        console.log(games);
+      const gamesData = await gamesApi.getByStatus("none");
+      if (gamesData) {
+        setGames(gamesData);
+        console.log(gamesData);
       }
     }
 
     fetchData();
   }, []);
 
+  // Если games пустой, показываем загрузку
+  if (games.length === 0) {
+    return <div>Loading games...</div>;
+  }
+
   return (
-    <Stack flexDirection={"row"} flexWrap={"wrap"}>
-      {games &&
-        games.map((game) => <GameChip key={game.id} gameName={game.name} />)}
-    </Stack>
+    <Draggable>
+      <DroppableContainer
+        id="games-column"
+        title="Available Games"
+        placeholder="Drop games here"
+        acceptTypes={["item"]}
+        columnProps={{
+          sx: {
+            border: "1px solid #ccc",
+            borderRadius: 1,
+            minWidth: 300,
+            backgroundColor: "#f5f5f5",
+          },
+        }}
+        listProps={{
+          sx: {
+            minHeight: 200,
+            p: 1,
+          },
+        }}
+        insertIndicatorProps={{
+          sx: { bgcolor: "red", width: "100%", height: 2 },
+        }}
+      >
+        {games.map((game) => (
+          <Box key={game.id} id={`game-${game.id}`} type="item">
+            <GameChip gameName={game.name} />
+          </Box>
+        ))}
+      </DroppableContainer>
+      <DroppableContainer
+        id="scheduled-column"
+        title="Scheduled Games"
+        placeholder="Drag games here to schedule"
+        insertIndicatorProps={{
+          sx: { bgcolor: "red", width: "100%", height: 2 },
+        }}
+      />
+    </Draggable>
   );
 }
