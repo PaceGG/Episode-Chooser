@@ -5,6 +5,7 @@ export default class GameSerivce {
   readonly safeName: string;
   readonly shortName: string;
   readonly extraName: string | null;
+  readonly fullName: string;
 
   constructor(
     name: string,
@@ -16,6 +17,7 @@ export default class GameSerivce {
     this.safeName = kwargs.safeName || name.replace(":", "");
     this.shortName = shortName || this.getShortName();
     this.extraName = extraName;
+    this.fullName = `${name}${this.extraName ? `: ${extraName}` : ""}`;
   }
 
   private getShortName(): string {
