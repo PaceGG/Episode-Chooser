@@ -8,7 +8,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 if __name__ == "__main__":
     with open("region_name.txt", "r", encoding="utf-8") as f:
         region = f.read().strip()
-    with open("names.txt", "r", encoding="utf-8") as f:
+    with open("3-names.txt", "r", encoding="utf-8") as f:
         names = f.read().splitlines()
     with open("contracts.json", "r", encoding="utf-8") as f:
         contracts = json.load(f)
@@ -28,8 +28,11 @@ if __name__ == "__main__":
     output = "\n".join(lines).strip()
 
     copy(output)
-    with open("description.txt", "w", encoding="utf-8") as f:
+
+    description_file_name = "4-description.txt"
+
+    with open(description_file_name, "w", encoding="utf-8") as f:
         f.write(output)
     
-    subl = r"D:\Program Files\Sublime Text\sublime_text.exe"
-    run([subl, "description.txt"])
+    subl = r"D:\Files\Sublime Text\sublime_text.exe"
+    run([subl, description_file_name])
