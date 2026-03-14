@@ -64,15 +64,12 @@ class Game:
         self.color = paths.game_colors[self.id]
 
         # self.game_path = paths.game_paths[self.id]
-        if self.id != 2:
-            self.game_path = find_best_match(self.name, paths.games_dir)
-            if self.game_path == None:
-                print()
-                print(hr("Ошибка инициализации", color="#ff0000"))
-                print(f"{name}\nНе удалось найти путь к ярлыку игры.")
-                while True: ...
-        else:
-            self.game_path = Path('C:\\ProgramData\\TileIconify\\SnowRunner\\SnowRunner.vbs').resolve()
+        self.game_path = find_best_match(self.name, paths.games_dir)
+        if self.game_path == None:
+            print()
+            print(hr("Ошибка инициализации", color="#ff0000"))
+            print(f"{name}\nНе удалось найти путь к ярлыку игры.")
+            while True: ...
         self.video_dir = Path.joinpath(paths.video_dir, self.safe_name)
         if not self.video_dir.exists(): create_game_folder(self.video_dir)
 
@@ -344,7 +341,7 @@ def equalize_time_limit(games: list[Game], stat: Data):
                 stat.add_game_log(game.name)
     else:
         processed_game.user_time = 0
-        if processed_game.time_limit <= 0:
+        while processed_game.time_limit <= 0:
             processed_game.time_limit += 120
             processed_game.count_session += 1
             stat.count_sr_session += 5
