@@ -2,6 +2,7 @@ import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 from pathlib import Path
 from PIL import Image
+from subprocess import run
 import pytesseract
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
@@ -42,6 +43,10 @@ def get_names(folder_path: str) -> list[str]:
     return names
 
 if __name__ == "__main__":
-    names = get_names(r"D:\Program Files\Videos\SnowRunner")
-    with open("names.txt", "w", encoding="utf-8") as f:
+    names = get_names(r"D:\Files\Videos\SnowRunner")
+    text_doc_name = "3-names.txt"
+    with open(text_doc_name, "w", encoding="utf-8") as f:
         f.write("\n".join(names))
+
+    subl = r"D:\Files\Sublime Text\sublime_text.exe"
+    run([subl, text_doc_name])
