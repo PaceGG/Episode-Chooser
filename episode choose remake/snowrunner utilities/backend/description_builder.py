@@ -5,11 +5,10 @@ from subprocess import run
 from pyperclip import copy
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-if __name__ == "__main__":
-    with open("region_name.txt", "r", encoding="utf-8") as f:
-        region = f.read().strip()
-    with open("3-names.txt", "r", encoding="utf-8") as f:
-        names = f.read().splitlines()
+def convert_names(names, region=None):
+    if region == None:
+        with open("region_name.txt", "r", encoding="utf-8") as f:
+            region = f.read().strip()
     with open("contracts.json", "r", encoding="utf-8") as f:
         contracts = json.load(f)
 
@@ -24,6 +23,14 @@ if __name__ == "__main__":
             lines.append(f"○ {company}")
             prev_company = company
         lines.append(f"• {name}")
+
+    return lines
+
+if __name__ == "__main__":
+    with open("3-names.txt", "r", encoding="utf-8") as f:
+        names = f.read().splitlines()
+
+    lines = convert_names(names)
 
     output = "\n".join(lines).strip()
 

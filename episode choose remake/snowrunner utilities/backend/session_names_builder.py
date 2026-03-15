@@ -33,7 +33,7 @@ def get_name(image_path: str) -> str:
         return f"Error: {error_text}"
     return name
 
-def get_names(folder_path: str) -> list[str]:
+def get_names(folder_path: str = r"D:\Files\Videos\SnowRunner") -> list[str]:
     names = []
     folder_path: Path = Path(folder_path)
     for image_path in folder_path.iterdir():

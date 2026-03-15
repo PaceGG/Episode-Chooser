@@ -1,0 +1,16 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.yourcompany.app
+files:
+  - filter:
+      - main.js
+      - preload.js
+      - backend/**/*
+      - frontend/dist/**/*
+extraResources:
+  - from: backend
+    to: backend
+    filter:
+      - '**/*'
+electronVersion: 27.3.11
