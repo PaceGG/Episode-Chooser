@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from util import intc
 from time_format import today, get_time
 import paths
+from pathlib import Path
 
 load_dotenv("gitignore/.env")
 
@@ -139,7 +140,7 @@ def get_yt_videos():
     return videos
 
 
-def add_sessions_entry_with_data(sessions_path: str, game: str, game_group: str, episodes: list[dict], message_id: int, timestamp: int):
+def add_sessions_entry_with_data(sessions_path: Path, game: str, game_group: str, episodes: list[dict], message_id: int, timestamp: int):
     import json
     import os
 
@@ -164,7 +165,7 @@ def add_sessions_entry_with_data(sessions_path: str, game: str, game_group: str,
     }
 
     # атомарная запись
-    tmp_path = sessions_path + ".tmp"
+    tmp_path = sessions_path.with_suffix(".json.tmp")
     with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(sessions, f, ensure_ascii=False, indent=4)
     os.replace(tmp_path, sessions_path)
@@ -212,6 +213,7 @@ def edit_empty_message(empty_message: EmptyMessage, yt_videos):
         print(f"Добавлена сессия для {empty_message.name} эпизоды {empty_message.ep_range[0]}-{empty_message.ep_range[1]}")
     except Exception as e:
         print(f"Не удалось добавить запись в sessions.json: {e}")
+        while True: ...
 
 
 
