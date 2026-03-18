@@ -22,8 +22,8 @@ const AddGameModal = ({ setModalVisible, updateGameData }) => {
   const handleInputChange = (id, newValue) => {
     setInput((prevInputs) =>
       prevInputs.map((input) =>
-        input.id === id ? { ...input, value: newValue } : input
-      )
+        input.id === id ? { ...input, value: newValue } : input,
+      ),
     );
   };
 

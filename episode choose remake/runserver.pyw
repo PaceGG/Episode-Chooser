@@ -7,4 +7,4 @@ os.chdir(react_path)
 
 if __name__ == "__main__":
     os.startfile(os.path.join(react_path, "runserver.bat"))
-    open("http://localhost:5173/")
+    open("http://127.0.0.1:5173/")
