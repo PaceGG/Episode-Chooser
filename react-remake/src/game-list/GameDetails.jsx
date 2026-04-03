@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./GameDetais.css";
 import SetGameModal from "../set-game-modal/SetGameModal";
+import useFilterStore from "../store/filterStore";
 
 const GameDetails = ({
   mainGameName,
@@ -22,15 +23,8 @@ const GameDetails = ({
   const [selectedTime, setSelectedTime] = useState(0);
   const [selectedEps, setSelectedEps] = useState(0);
 
-  const [filter, setFilter] = useState({
-    statusComplete: false,
-    statusBad: false,
-    statusWait: false,
-  });
-
-  useEffect(() => {
-    loadFiltersData();
-  }, []);
+  const { statusComplete, statusBad, statusWait, toggleFilter } =
+    useFilterStore();
 
   // Добавьте эту функцию в компонент GameDetails
   const loadSessionData = async (gameName) => {
@@ -84,15 +78,6 @@ const GameDetails = ({
     } catch (error) {
       console.error("Error loading session data:", error);
       return { totalDuration: 0, episodeCount: 0 };
-    }
-  };
-
-  const loadFiltersData = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/filters"); // URL вашего json-server
-      setFilter(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
     }
   };
 
@@ -324,9 +309,9 @@ const GameDetails = ({
           : gameData.mainStatus
       }
       style={
-        (gameData.mainStatus === "bad" && filter.statusBad) ||
-        (gameData.mainStatus === "complete" && filter.statusComplete) ||
-        (gameData.mainStatus === "wait" && filter.statusWait)
+        (gameData.mainStatus === "bad" && statusBad) ||
+        (gameData.mainStatus === "complete" && statusComplete) ||
+        (gameData.mainStatus === "wait" && statusWait)
           ? { display: "none" }
           : null
       }
@@ -384,11 +369,10 @@ const GameDetails = ({
   const renderAdditionalGames = () => (
     <details
       style={
-        (selectStatus(gameData.additionalGames) === "bad" &&
-          filter.statusBad) ||
+        (selectStatus(gameData.additionalGames) === "bad" && statusBad) ||
         (selectStatus(gameData.additionalGames) === "complete" &&
-          filter.statusComplete) ||
-        (selectStatus(gameData.additionalGames) === "wait" && filter.statusWait)
+          statusComplete) ||
+        (selectStatus(gameData.additionalGames) === "wait" && statusWait)
           ? { display: "none" }
           : null
       }
@@ -434,11 +418,9 @@ const GameDetails = ({
                 : game.status
             }
             style={
-              (game.status === "bad" && filter.statusBad && game.time > 0) ||
-              (game.status === "complete" &&
-                filter.statusComplete &&
-                game.time > 0) ||
-              (game.status === "wait" && filter.statusWait)
+              (game.status === "bad" && statusBad && game.time > 0) ||
+              (game.status === "complete" && statusComplete && game.time > 0) ||
+              (game.status === "wait" && statusWait)
                 ? { display: "none" }
                 : null
             }
