@@ -38,4 +38,4 @@ def set_window_pos(icon_path, title, x, y, width, height):
 
 
 set_window_pos(r"..\Visual Elements\icon-square.ico", "Episode Chooser", 472, 276, 374, 444)
-os.system('mode con: cols=50 lines=28')
+os.system('mode con: cols=60 lines=35')

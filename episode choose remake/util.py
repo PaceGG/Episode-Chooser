@@ -145,7 +145,7 @@ def sumtime(time: str):
 def find_best_match(
     game_name: str,
     games_directory: Path,
-    default_dir: Path = Path(r"C:\Users\Public\Desktop")
+    default_dir: Path = Path(r"D:\Files\Desktop")
 ) -> Path | None:
     folders = [folder for folder in games_directory.iterdir() if folder.is_dir()]
     folder_names = [folder.name for folder in folders]

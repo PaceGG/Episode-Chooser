@@ -35,7 +35,7 @@ def extract_text_from_image_file(image_path):
 
 if __name__ == "__main__":
     contracts_txt = ""
-    main_folder = Path(r"D:\Program Files\Desktop")
+    main_folder = Path(r"D:\Files\Desktop")
 
     for file in main_folder.iterdir():
         if file.is_file() and file.suffix == ".png" and "Screenshot_" in file.name:

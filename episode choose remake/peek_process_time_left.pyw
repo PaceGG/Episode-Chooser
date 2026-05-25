@@ -45,8 +45,8 @@ time_limit = process_game.time_limit
 user_time = sum(get_duration()) // 60
 time_left = time_limit - user_time
 
-if time_left >= 0: message = f"{process_game.full_name}... {time_format(time_left)} [{process_game.content_time_format()}]"
-else: message = f"{process_game.full_name}... Complete!"
+if time_left >= 0: message = f"{process_game.short_name}... {time_format(time_left)} [{process_game.content_time_format()}]"
+else: message = f"{process_game.short_name}... Complete!"
 message_id = send_message(message)
 stat.time_info_message_id = message_id
 

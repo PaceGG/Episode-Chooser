@@ -41,6 +41,9 @@ def get_info(games: list[Game], stat: Data, is_select_forced, titles):
 
     content_time_info = get_content_time_info(games)
     pc_info += content_time_info + "\n"
+        
+    game_ids_info = get_games_id_info(games)
+    pc_info += game_ids_info + "\n"
 
     tg_time_info = get_tg_time_info(games)
     tg_info += tg_time_info + "\n"
@@ -166,6 +169,17 @@ def get_content_time_info(games: list[Game]):
     for game in games:
         if game.content_time != 0:
             pc_info += f"{game.full_name}: [{game.content_time_format()}]\n"
+
+    pc_info = borders(pc_info, border_text="ВРЕМЯ КОНТЕНТА", color="#0377fc")
+
+    return pc_info
+
+def get_games_id_info(games: list[Game]):
+    pc_info = ""
+    for game in games[:-1]:
+        pc_info += f"[{game.id}] {game.full_name}\n"
+
+    pc_info = borders(pc_info, border_text="ID", color="#0377fc")
 
     return pc_info
 

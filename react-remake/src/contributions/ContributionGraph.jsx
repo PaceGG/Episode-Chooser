@@ -36,16 +36,31 @@ const ContributionGraph = () => {
 
   const sessionsArray = Object.values(sessions);
 
+  const stats = {
+    totalSessions: 0,
+    totalEpisodes: 0,
+    totalTime: 0,
+  };
+
   const sessionsByDay = {};
   sessionsArray.forEach((session) => {
     const date = new Date(session.datetime * 1000);
     const dateKey = formatDateLocal(date);
     if (!sessionsByDay[dateKey]) sessionsByDay[dateKey] = [];
     sessionsByDay[dateKey].push(session);
+
+    stats.totalSessions++;
+    stats.totalEpisodes += session.episodes.length;
+
+    session.episodes.forEach((episode) => {
+      if (episode.duration) stats.totalTime += episode.duration;
+    });
   });
 
+  console.log(stats);
+
   const allDates = Object.keys(sessionsByDay).sort(
-    (a, b) => new Date(a) - new Date(b)
+    (a, b) => new Date(a) - new Date(b),
   );
 
   const startDate = new Date(allDates[0]);
@@ -172,7 +187,7 @@ const ContributionGraph = () => {
                     onClick={() => count > 0 && setSelectedDay(dateKey)}
                     style={{ cursor: count > 0 ? "pointer" : "default" }}
                     title={`${count} sessions on ${formatDate(
-                      formatDateLocal(day)
+                      formatDateLocal(day),
                     )}`}
                   >
                     <div
@@ -190,7 +205,6 @@ const ContributionGraph = () => {
           ))}
         </tbody>
       </table>
-
       {selectedDay && (
         <div
           onClick={() => setSelectedDay(null)}
