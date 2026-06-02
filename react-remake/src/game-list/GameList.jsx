@@ -66,6 +66,34 @@ const GameList = () => {
     return count;
   };
 
+  const countTime = (data) => {
+    let time = 0;
+
+    data.forEach((game) => {
+      time += game.mainTime;
+      game.additionalGames.forEach((additionalGame) => {
+        time += additionalGame.time;
+      });
+    });
+
+    return Math.round(time / 60 / 60);
+  };
+
+  const countEpisodes = (data) => {
+    let count = 0;
+
+    data.forEach((game) => {
+      if (game.mainNumberOfEps !== undefined) {
+        count += Number(game.mainNumberOfEps);
+      }
+      game.additionalGames.forEach((additionalGame) => {
+        count += additionalGame.numberOfEps;
+      });
+    });
+
+    return count;
+  };
+
   return (
     <div className="game-list-content">
       <div style={{ display: "flex", maxWidth: "700px" }}>
@@ -73,11 +101,17 @@ const GameList = () => {
       </div>
       <div className="statistic">
         <h2>
-          Игр пройдено:{" "}
+          <span style={{ color: "#11c46f" }}>Пройдено</span>:{" "}
+          {countCompleteGames(games)} •{" "}
+          <span style={{ color: "#ee204d" }}>Дропнуто</span>:{" "}
+          {countBadGames(games)}
+          <br />
+          Часов: {countTime(games)} • Серий: {countEpisodes(games)}
+          {/* Игр пройдено:{" "}
           <span style={{ color: "white" }}>{countCompleteGames(games)}</span>
           <br />
           <span style={{ color: "#ee204d" }}>Игр брошено:&nbsp;&nbsp; </span>
-          <span style={{ color: "#white" }}>{countBadGames(games)}</span>
+          <span style={{ color: "#white" }}>{countBadGames(games)}</span> */}
         </h2>
         <button
           onClick={() => setModalVisible(true)}
