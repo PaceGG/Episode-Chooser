@@ -96,7 +96,12 @@ const GameList = () => {
 
   return (
     <div className="game-list-content">
-      <div style={{ display: "flex", maxWidth: "700px" }}>
+      <div
+        style={{
+          display: "flex",
+          maxWidth: "800px",
+        }}
+      >
         <ContributionGraph />
       </div>
       <div className="statistic">

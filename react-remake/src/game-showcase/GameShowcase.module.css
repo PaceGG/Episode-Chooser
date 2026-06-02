@@ -2,7 +2,8 @@
   padding: 20px 0;
   /* min-width: 300px; */
   display: flex;
-  flex-grow: 1;
+  /* flex-grow: 1; */
+  flex: 1;
   justify-content: space-evenly;
   /* flex-wrap: wrap; */
   border-top: 2px solid #333;
