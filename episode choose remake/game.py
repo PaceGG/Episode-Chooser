@@ -36,7 +36,7 @@ def get_short_name(name):
     name = s.strip()
 
     l = []
-    break_words = ["Remastered"]
+    break_words = ["Remastered", "II"]
     for s in name.split(" "):
         if s in break_words: break
         l.append(s)
@@ -210,7 +210,7 @@ def run_game(games: list[Game], stat: Data):
 
     stat.make_backup()
 
-    caption = f"{selected_game.full_name} № {selected_game.count_episode + 1}... {time_format(selected_game.time_limit)} [{selected_game.content_time_format()}]"
+    caption = f"{selected_game.short_name} № {selected_game.count_episode + 1}... {time_format(selected_game.time_limit)} [{selected_game.content_time_format()}]"
     stat.process_game_message_id = telegram_utils.send_image(selected_game.header, caption)
 
     if selected_game.id != 2:

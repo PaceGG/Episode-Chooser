@@ -127,14 +127,15 @@ button {
   overflow-y: scroll;
   margin-bottom: 15px;
 }
-.game-list::-webkit-scrollbar {
+::-webkit-scrollbar {
   background-color: #222;
   width: 5px;
+  height: 5px;
 }
-.game-list::-webkit-scrollbar-button {
+::-webkit-scrollbar-button {
   display: none;
 }
-.game-list::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: #333;
 }
 

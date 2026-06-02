@@ -94,7 +94,7 @@ def get_process_game_info(games: list[Game], stat: Data):
 
     process_game: Game = games[stat.process_game_id]
 
-    return f"• {process_game.full_name}... {time_format(process_game.time_limit)} [{process_game.content_time_format()}]"
+    return f"• {process_game.short_name}... {time_format(process_game.time_limit)} [{process_game.content_time_format()}]"
 
 
 
@@ -113,10 +113,10 @@ def get_snowrunner_info(stat: Data, sr_game: Game):
     else:
         if count_sr_session > 0:
             pc_info += f"До SnowRunner'а ещё {count_sr_session} сесси{suffix}\n"
-            tg_info += f"• SR: {count_sr_session}"
+            tg_info += f"• SR: {count_sr_session}\n"
         if count_sr_date > today():
             pc_info += f"SnowRunner после {pc_date_format(count_sr_date)}\n"
-            tg_info += f"• SR: {short_date_format(count_sr_date)}\n"
+            tg_info += f"• SR: {short_date_format(count_sr_date)}"
 
     pc_info = borders(pc_info, "SnowRunner", sr_game.color)
 
