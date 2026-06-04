@@ -10,7 +10,7 @@ import telegram_utils
 from console_output import borders, get_chance_color, get_strings_width, get_time__limit_color, hr
 
 def print_info(games, stat, titles, print_flag=True):
-    print(select_game(games, stat, make_selection=False))
+    # print(select_game(games, stat, make_selection=False))
     info = get_info(games, stat, select_game(games, stat, make_selection=False), titles)
     pc_info = info["pc"]
     system("cls")

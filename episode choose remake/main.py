@@ -88,11 +88,11 @@ class Main:
         clear_selection(games)
         print_info(games, stat, titles, print_flag=False)
 
-        if response != "redo":
+        if response not in ["redo", "skip-run"]:
             try:
                 startfile(response)
             except:
-                print(f"Ярлык с игрой не найден.")
+                pass
 
         
 

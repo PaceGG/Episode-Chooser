@@ -205,7 +205,6 @@ def run_game(games: list[Game], stat: Data):
     print(f"Нажмите Enter, чтобы запустить...")
     print(f"{selected_game.full_name}")
     print(f"::({time_format(selected_game.time_limit)}):: [{selected_game.content_time_format()}]\n")
-    input()
 
     stat.make_backup()
 
@@ -219,7 +218,9 @@ def run_game(games: list[Game], stat: Data):
 
     stat.process_game_id = selected_game.id
 
-    return selected_game.game_path
+    response = input('Введите "-", что бы пропустить запуск игры: ')
+
+    return selected_game.game_path if response != "-" else "skip-run"
 
 
 def unfinished_process(games: list[Game], stat: Data, duration: int):
