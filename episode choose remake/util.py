@@ -38,8 +38,11 @@ def move_files(target_dir: Path, games):
 
 def move_video(file: Path, target_dir, index):
     video_ctime = file.stat().st_birthtime
-    
-    new_name = f"{index}{file.suffix}"
+
+    if file.stem.isdigit():
+        new_name = file.name
+    else:
+        new_name = f"{index}{file.suffix}"
 
     move_file(file, target_dir, new_name)
 
