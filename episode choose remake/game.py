@@ -200,7 +200,6 @@ def select_game(games: list[Game], stat: Data, skip_roulette = False, make_selec
         return False
 
 def run_game(games: list[Game], stat: Data):
-    set_eng_layout()
     selected_game = get_selected_game(games)
 
     print(f"Нажмите Enter, чтобы запустить...")

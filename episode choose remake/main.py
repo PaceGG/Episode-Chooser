@@ -50,6 +50,7 @@ class Main:
         chance_calculate(games)
         
         save_data(stat, games, empty_messages, titles)
+        set_eng_layout()
 
         # info
         print_info(games, stat, titles)
