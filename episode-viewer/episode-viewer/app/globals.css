@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+*::-webkit-scrollbar {
+  background-color: #222;
+  width: 5px;
+  height: 5px;
+  border-radius: 5000;
+}
+*::-webkit-scrollbar-button {
+  display: none;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 5000;
+}
+
+/* games list */
+li {
+  list-style-type: disc;
+}
+details {
+  margin: 0 23px;
+}
+summary {
+  margin: 0 -40px;
+  cursor: pointer;
+}
+
+.shown {
+  display: list-item !important;
+}
+
+.complete {
+  color: #11c46f;
+}
+.complete::after {
+  /* content: url("../img/complete.png"); */
+  margin-left: 5px;
+}
+
+.inProcess {
+  color: #0b79d0;
+  font-weight: 800;
+}
+.inProcess::after {
+  /* content: url("../img/inProcess.png"); */
+  margin-left: 5px;
+}
+
+.bad {
+  color: #ee204d;
+  text-decoration: line-through;
+}
+
+.wait {
+  color: rgb(235, 235, 99);
+}
+
+/* filters */
+.filter {
+  cursor: pointer;
+  font-size: 18px;
+}
+.complete-checkbox {
+  color: #11c46f;
+}
+
+.complete-checkbox::before {
+  /* content: url("../img/complete.png"); */
+  margin-right: 3px;
+  margin-left: 2px;
+}
+.bad-checkbox {
+  color: #ee204d;
+}
+.bad-checkbox::before {
+  /* content: url("../img/bad.png"); */
+  margin-right: 3px;
+  margin-left: 2px;
+}
+.wait-checkbox {
+  color: rgb(235, 235, 99);
+}
+.wait-checkbox::before {
+  /* content: url("../img/wait.png"); */
+  margin-right: 3px;
+  margin-left: 2px;
+}
+.checkbox-text {
+  margin-left: 30px;
+}
+
+.filter {
+  position: relative;
+}
+.filter input {
+  display: none;
+}
+.checkmark {
+  position: absolute;
+  top: 2px;
+  width: 22px;
+  height: 22px;
+  /* background-image: url("../img/hidden.png"); */
+  content: url("@/public/icons/visible.png");
+  background-color: #333;
+  border: 3px solid #333;
+  border-radius: 50%;
+}
+.filter input:checked + .checkmark {
+  /* background-image: url("../img/visible.png"); */
+  content: url("@/public/icons/hidden.png");
+}
