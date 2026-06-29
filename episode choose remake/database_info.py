@@ -180,8 +180,10 @@ def get_content_time_info(games: list[Game]):
     return pc_info
 
 def get_games_id_info(games: list[Game]):
+    if (paths.is_sr_enabled): games.pop()
+
     pc_info = ""
-    for game in games[:-1]:
+    for game in games:
         pc_info += f"[{game.id}] {game.full_name}\n"
 
     pc_info = borders(pc_info, border_text="ID", color="#0377fc")
