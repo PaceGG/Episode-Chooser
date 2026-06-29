@@ -20,11 +20,11 @@ const GameShowcase = () => {
         ...game,
         steamApps: [],
         currentAppIndex: 0,
-        appColors: [], // массив цветов для текущего steamApp
-        selectedColorIndex: 0, // выбранный цвет из массива
+        appColors: [],
+        selectedColorIndex: 0,
       }));
       setGames(enrichedGames);
-      setInitialGames(enrichedGames);
+      setInitialGames(JSON.parse(JSON.stringify(enrichedGames)));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -124,9 +124,14 @@ const GameShowcase = () => {
             selectedColorIndex,
             ...gameToSend
           } = game;
-          axios.put(`http://localhost:3000/showcase/${game.id}`, gameToSend);
+          return axios.put(
+            `http://localhost:3000/showcase/${game.id}`,
+            gameToSend,
+          );
         }),
       );
+
+      setInitialGames(JSON.parse(JSON.stringify(games)));
       setIsModalOpen(false);
     } catch (error) {
       console.error("Error saving data:", error);
@@ -135,7 +140,7 @@ const GameShowcase = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
-    setGames(initialGames);
+    setGames(JSON.parse(JSON.stringify(initialGames)));
   };
 
   const renderEditor = () =>
@@ -158,7 +163,7 @@ const GameShowcase = () => {
             className={style.h2Input}
             id={`url${index}`}
             placeholder={game.coverart}
-            value={game.coverart}
+            value={game.coverart || ""}
             onChange={(e) =>
               handleInputChange(game.id, "coverart", e.target.value)
             }
@@ -191,7 +196,7 @@ const GameShowcase = () => {
           <input
             type="color"
             id={`color${index}`}
-            value={game.color}
+            value={game.color || "#000000"}
             onChange={(e) =>
               handleInputChange(game.id, "color", e.target.value)
             }
@@ -224,7 +229,7 @@ const GameShowcase = () => {
               name="sr_disable"
               id="sr_disable"
               style={{ cursor: "pointer" }}
-              checked={game.disabled}
+              checked={!!game.disabled}
               onChange={(e) =>
                 handleInputChange(game.id, "disabled", e.target.checked)
               }
@@ -237,6 +242,7 @@ const GameShowcase = () => {
 
         <textarea
           id={`textarea${index}`}
+          value={game.name || ""}
           onChange={(e) => handleInputChange(game.id, "name", e.target.value)}
           className={style.h2Input + " " + style.game__name}
           style={{ color: game.color, height: 144 }}
@@ -250,7 +256,7 @@ const GameShowcase = () => {
           }
           className={style.h2Input + " " + style.game__name}
           style={{ color: game.color, height: 144 }}
-          value={game.extraName}
+          value={game.extraName || ""}
         />
       </div>
     ));
@@ -329,16 +335,16 @@ const GameShowcase = () => {
             >
               <svg
                 viewBox="0 0 1024 1024"
-                class="icon"
+                className="icon"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#000000"
                 stroke="#000000"
               >
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g
                   id="SVGRepo_tracerCarrier"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></g>
                 <g id="SVGRepo_iconCarrier">
                   <path
