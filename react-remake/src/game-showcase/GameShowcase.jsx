@@ -148,6 +148,7 @@ const GameShowcase = () => {
           style={{
             borderTop: `5px solid ${game.color}`,
             borderBottom: `5px solid ${game.color}`,
+            filter: `grayscale(${game.disabled ? 100 : 0}%)`,
             width: 200,
           }}
         />
@@ -216,6 +217,24 @@ const GameShowcase = () => {
           )}
         </div>
 
+        {game.id === "2" && (
+          <div style={{ userSelect: "none" }}>
+            <input
+              type="checkbox"
+              name="sr_disable"
+              id="sr_disable"
+              style={{ cursor: "pointer" }}
+              checked={game.disabled}
+              onChange={(e) =>
+                handleInputChange(game.id, "disabled", e.target.checked)
+              }
+            />
+            <label htmlFor="sr_disable" style={{ cursor: "pointer" }}>
+              Отключить
+            </label>
+          </div>
+        )}
+
         <textarea
           id={`textarea${index}`}
           onChange={(e) => handleInputChange(game.id, "name", e.target.value)}
@@ -241,7 +260,10 @@ const GameShowcase = () => {
       <div
         key={game.id}
         className={style.game__card}
-        style={{ borderColor: game.color }}
+        style={{
+          borderColor: game.color,
+          filter: `grayscale(${game.disabled ? 100 : 0}%)`,
+        }}
       >
         <img
           src={game.coverart}
