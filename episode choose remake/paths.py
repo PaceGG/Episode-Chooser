@@ -16,6 +16,10 @@ with open(site_db_path, encoding="utf-8") as file:
 game_names: list[str] = [game["name"] for game in showcase]
 extra_names: list[str] = [game["extraName"] for game in showcase]
 game_colors: list[str] = [game["color"] for game in showcase]
+game_disables: list[bool] = [game["disabled"] for game in showcase]
+
+is_sr_disabled = game_disables[2]
+is_sr_enabled = not is_sr_disabled
 
 
 # game_paths = [
@@ -34,3 +38,5 @@ if __name__ == "__main__":
     print(f"game_colors: {game_colors}")
     # print(f"game_paths: {game_paths}")
     print(f"extra_names: {extra_names}")
+    print(f"game_disables: {game_disables}")
+    print(f"is_sr_disabled: {is_sr_disabled}")

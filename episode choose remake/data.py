@@ -26,6 +26,8 @@ class Data:
         if type(data) == dict:
             for key, value in data.items():
                 setattr(self, key, value)
+
+            if (paths.is_sr_disabled): self.count_sr_session = 4242
         if type(data) == list and data_type == "empty_messages":
             empty_messages = []
             for item in data:

@@ -28,9 +28,10 @@ def get_info(games: list[Game], stat: Data, is_select_forced, titles):
     process_game_info = get_process_game_info(games, stat)
     tg_info += f"{process_game_info}\n\n"
 
-    sr_info = get_snowrunner_info(stat, games[2])
-    pc_info += sr_info["pc"] + "\n"
-    tg_info += sr_info["tg"] + "\n\n"
+    if (paths.is_sr_enabled):
+        sr_info = get_snowrunner_info(stat, games[2])
+        pc_info += sr_info["pc"] + "\n"
+        tg_info += sr_info["tg"] + "\n\n"
 
     chacnes_info = get_chance_info(games, stat, is_select_forced)
     pc_info += chacnes_info["pc"] + "\n"
@@ -48,8 +49,9 @@ def get_info(games: list[Game], stat: Data, is_select_forced, titles):
     tg_time_info = get_tg_time_info(games)
     tg_info += tg_time_info + "\n"
 
-    tg_sr_date_info = f"• SR after {pc_date_format(stat.count_sr_date)}\n"
-    tg_info += tg_sr_date_info
+    if (paths.is_sr_enabled):
+        tg_sr_date_info = f"• SR after {pc_date_format(stat.count_sr_date)}\n"
+        tg_info += tg_sr_date_info
 
     next_update_info = f"• Next update: {pc_date_format(stat.last_update + 12*60*60)}\n"
     tg_info += next_update_info
@@ -165,6 +167,9 @@ def get_time_limit_info(games: list[Game]):
     return pc_info
 
 def get_content_time_info(games: list[Game]):
+    if (paths.is_sr_disabled):
+        games.pop()
+
     pc_info = ""
     for game in games:
         if game.content_time != 0:
