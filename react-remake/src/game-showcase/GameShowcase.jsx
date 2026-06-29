@@ -242,7 +242,6 @@ const GameShowcase = () => {
 
         <textarea
           id={`textarea${index}`}
-          value={game.name || ""}
           onChange={(e) => handleInputChange(game.id, "name", e.target.value)}
           className={style.h2Input + " " + style.game__name}
           style={{ color: game.color, height: 144 }}
