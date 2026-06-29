@@ -30,6 +30,7 @@ export interface SRInfo {
 }
 
 export interface Game {
+  id: number;
   color: string;
   title: string;
   time: number;
