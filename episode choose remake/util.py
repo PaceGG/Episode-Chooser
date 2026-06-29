@@ -148,51 +148,91 @@ def sumtime(time: str):
 def find_best_match(
     game_name: str,
     games_directory: Path,
-    default_dir: Path = Path(r"D:\Files\Desktop")
+    default_dirs: list[Path] = [
+        Path(r"D:\Files\Desktop"),
+        Path(r"C:\Users\yura3\Desktop"),
+        Path(r"C:\Users\Public\Desktop"),
+
+        ],
 ) -> Path | None:
     folders = [folder for folder in games_directory.iterdir() if folder.is_dir()]
     folder_names = [folder.name for folder in folders]
 
-    best_match = difflib.get_close_matches(game_name, folder_names, n=1, cutoff=0.8)
+    # Ищем лучшую папку для игры
+    best_match = difflib.get_close_matches(
+        game_name, folder_names, n=1, cutoff=0.8
+    )
     if not best_match:
         return None
 
-    game_directory = next(folder for folder in folders if folder.name.lower() == best_match[0].lower())
+    # Достаем найденную папку игры (оригинальный регистр из списка совпадений)
+    game_directory = next(
+        folder for folder in folders if folder.name == best_match[0]
+    )
 
-    game_links = [link for link in game_directory.iterdir() if link.suffix.lower() in [".lnk", ".url"]]
+    # Проверяем, есть ли уже готовый ярлык game.lnk или game.url
+    for suffix in [".lnk", ".url"]:
+        game_lnk = game_directory / f"game{suffix}"
+        if game_lnk.exists():
+            return game_lnk
 
-    game_lnk = game_directory / f"game.lnk"
-    if game_lnk.exists():
-        return game_lnk
-
-    # ищем лучший ярлык в папке игры
+    # Ищем лучший ярлык внутри самой папки игры
+    game_links = [
+        link
+        for link in game_directory.iterdir()
+        if link.suffix.lower() in [".lnk", ".url"]
+    ]
     best_links = difflib.get_close_matches(
-        game_name,
-        [link.name for link in game_links],
-        n=1,
-        cutoff=0.5
+        game_name, [link.name for link in game_links], n=1, cutoff=0.5
     )
 
     if best_links:
-        return next(link for link in game_links if link.name.lower() == best_links[0].lower())
+        return next(link for link in game_links if link.name == best_links[0])
 
-    # если нет ярлыков — пробуем взять из default_dir
-    default_links = [link for link in default_dir.iterdir() if link.suffix.lower() in [".lnk", ".url"]]
-    best_default = difflib.get_close_matches(
-        game_name,
-        [link.name for link in default_links],
-        n=1,
-        cutoff=0.5
-    )
+    for default_dir in default_dirs:
+        if not default_dir.exists():
+            continue
 
-    if best_default:
-        best_link = next(link for link in default_links if link.name.lower() == best_default[0].lower())
-        # переносим и называем game.lnk (или .url)
-        new_link = game_directory / f"game{best_link.suffix.lower()}"
-        shutil.move(str(best_link), str(new_link))
-        return new_link
+        default_links = [
+            link
+            for link in default_dir.iterdir()
+            if link.suffix.lower() in [".lnk", ".url"]
+        ]
+        best_default = difflib.get_close_matches(
+            game_name, [link.name for link in default_links], n=1, cutoff=0.5
+        )
+
+        if best_default:
+            best_link = next(
+                link for link in default_links if link.name == best_default[0]
+            )
+            # Переносим и переименовываем в папку игры
+            new_link = game_directory / f"game{best_link.suffix.lower()}"
+            shutil.move(str(best_link), str(new_link))
+            return new_link
 
     return None
     
 if __name__ == "__main__":
-    print(find_best_match("Assassin’s Creed IV Black Flag", Path(r"D:\Games")))
+    # default_dirs: list[Path] = [
+    #     Path(r"D:\Files\Desktop"),
+    #     Path(r"C:\Users\yura3\Desktop"),
+    #     Path(r"C:\Users\Public\Desktop"),]
+    # game_name = "REANIMAL"
+    # for default_dir in default_dirs:
+    #     if not default_dir.exists():
+    #         continue
+
+    #     default_links = [
+    #         link
+    #         for link in default_dir.iterdir()
+    #         if link.suffix.lower() in [".lnk", ".url"]
+    #     ]
+    #     best_default = difflib.get_close_matches(
+    #         game_name, [link.name for link in default_links], n=1, cutoff=0.5
+    #     )
+
+    #     print(default_links)
+    #     print(best_default)
+
+    print(find_best_match("Reanimal", Path(r"D:\Games")))
