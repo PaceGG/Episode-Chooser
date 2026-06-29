@@ -167,11 +167,10 @@ def get_time_limit_info(games: list[Game]):
     return pc_info
 
 def get_content_time_info(games: list[Game]):
-    if (paths.is_sr_disabled):
-        games.pop()
+    strip = slice(None, -1) if paths.is_sr_disabled else slice(None)
 
     pc_info = ""
-    for game in games:
+    for game in games[strip]:
         if game.content_time != 0:
             pc_info += f"{game.full_name}: [{game.content_time_format()}]\n"
 
@@ -180,10 +179,10 @@ def get_content_time_info(games: list[Game]):
     return pc_info
 
 def get_games_id_info(games: list[Game]):
-    if (paths.is_sr_enabled): games.pop()
+    strip = slice(None, -1) if paths.is_sr_disabled else slice(None)
 
     pc_info = ""
-    for game in games:
+    for game in games[strip]:
         pc_info += f"[{game.id}] {game.full_name}\n"
 
     pc_info = borders(pc_info, border_text="ID", color="#0377fc")
