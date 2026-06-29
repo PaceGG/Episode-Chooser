@@ -38,6 +38,13 @@ button {
   margin: 0;
   padding: 0;
   cursor: pointer;
+  transition: transform 0.3s;
+  &:hover {
+    transform: scale(0.99);
+  }
+  &:active {
+    transform: scale(0.97);
+  }
 }
 
 .main-content {
