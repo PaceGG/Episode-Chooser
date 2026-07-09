@@ -15,6 +15,7 @@ from steam_utils import select_header_by_game_name
 video_formats = [".mp4", ".mkv"]
 image_formats = [".png"]
 header_formats = [".png", ".jpg"]
+thumbnal_formats = [".png", ".jpg"]
 
 def set_eng_layout():
     window_handle = win32gui.GetForegroundWindow()
@@ -66,6 +67,21 @@ def move_file(file: Path, target_dir, new_name=None):
     except Exception as e:
         print(f"Ошибка перемещения {file}: {e}")
 
+def move_thumbnails(dir: Path, target_dir_name = ""):
+    if not target_dir_name:
+        target_dir_name = "main"
+    else:
+        target_dir_name = target_dir_name.replace(":", "")
+
+    target_dir = dir / target_dir_name
+
+    target_dir.mkdir(exist_ok=True)
+
+    for file in dir.iterdir():
+        if file.is_dir(): continue
+        if file.suffix in thumbnal_formats:
+            move_file(file, target_dir)
+            
 
 def create_game_folder(video_dir: Path):
     video_dir.mkdir()
@@ -235,4 +251,6 @@ if __name__ == "__main__":
     #     print(default_links)
     #     print(best_default)
 
-    print(find_best_match("Reanimal", Path(r"D:\Games")))
+    # print(find_best_match("Reanimal", Path(r"D:\Games")))
+
+    move_thumbnails(Path(r'D:\Files\Videos\Teardown\previews'), "Art: Vandals")
