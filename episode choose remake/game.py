@@ -71,7 +71,7 @@ class Game:
             print(f"{name}\nНе удалось найти путь к ярлыку игры.")
             while True: ...
         self.video_dir = Path.joinpath(paths.video_dir, self.safe_name)
-        if not self.video_dir.exists(): create_game_folder(self.video_dir)
+        create_game_folder(self.video_dir, self.extra_name)
 
         stat = Data("stat")
         with open(Path.joinpath(paths.root_dir, 'data.json'), 'r', encoding='utf-8') as file:
