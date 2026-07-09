@@ -3,6 +3,7 @@ import axios from "axios";
 import "./GameDetais.css";
 import SetGameModal from "../set-game-modal/SetGameModal";
 import useFilterStore from "../store/filterStore";
+import ytApi from "../api/youtube";
 
 const GameDetails = ({
   mainGameName,
@@ -249,6 +250,87 @@ const GameDetails = ({
           timeToSave = sessionData.totalDuration;
           epsToSave = sessionData.episodeCount;
 
+          let plInfo = null; // Объявляем переменную здесь, вне блока try
+          try {
+            plInfo = await ytApi.getPlaylistInfo(selectedGameName);
+          } catch (e) {
+            console.error("Ошибка при получении информации о плейлисте: ", e);
+            cancelChanges();
+            return;
+          }
+
+          // Проверяем несоответствия
+          let shouldProceed = true;
+          let userConfirmed = false;
+
+          // Проверка 0: наличие приватных видео
+          if (plInfo.hasPrivate) {
+            userConfirmed = window.confirm(
+              `⚠️ Плейлист содержит приватные виждео\n` + `Продолжить?`,
+            );
+
+            if (!userConfirmed) {
+              shouldProceed = false;
+            }
+          }
+
+          // Проверка 1: lastEpisodeNumber vs sessionData.episodeCount
+          if (
+            shouldProceed &&
+            plInfo.lastEpisodeNumber !== sessionData.episodeCount
+          ) {
+            userConfirmed = window.confirm(
+              `⚠️ Несоответствие количества эпизодов:\n` +
+                `YouTube плейлист: ${plInfo.lastEpisodeNumber} эпизодов\n` +
+                `Данные сессии: ${sessionData.episodeCount} эпизодов\n\n` +
+                `Вы согласны сохранить значение из сессии (${sessionData.episodeCount})?`,
+            );
+
+            if (!userConfirmed) {
+              shouldProceed = false;
+            }
+          }
+
+          // Проверка 2: videosAmount vs sessionData.episodeCount (если первая проверка пройдена)
+          if (
+            shouldProceed &&
+            plInfo.videosAmount !== sessionData.episodeCount
+          ) {
+            userConfirmed = window.confirm(
+              `⚠️ Несоответствие количества видео:\n` +
+                `YouTube плейлист: ${plInfo.videosAmount} видео\n` +
+                `Данные сессии: ${sessionData.episodeCount} эпизодов\n\n` +
+                `Вы согласны сохранить значение из сессии (${sessionData.episodeCount})?`,
+            );
+
+            if (!userConfirmed) {
+              shouldProceed = false;
+            }
+          }
+
+          // Проверка 3: lastEpisodeNumber vs videosAmount (если предыдущие проверки пройдены)
+          if (
+            shouldProceed &&
+            plInfo.lastEpisodeNumber !== plInfo.videosAmount
+          ) {
+            userConfirmed = window.confirm(
+              `⚠️ Несоответствие данных YouTube:\n` +
+                `Последний эпизод: ${plInfo.lastEpisodeNumber}\n` +
+                `Всего видео: ${plInfo.videosAmount}\n\n` +
+                `Вы согласны продолжить сохранение с данными сессии (${sessionData.episodeCount} эпизодов)?`,
+            );
+
+            if (!userConfirmed) {
+              shouldProceed = false;
+            }
+          }
+
+          // Если пользователь отказался от любого подтверждения - прерываем выполнение
+          if (!shouldProceed) {
+            cancelChanges();
+            return;
+          }
+
           // Обновляем локальное состояние для отображения в UI
           setSelectedTime(timeToSave);
           setSelectedEps(sessionData.episodeCount);
@@ -281,6 +363,8 @@ const GameDetails = ({
       }
     } catch (error) {
       console.error("Ошибка при обновлении статуса игры: ", error);
+      setModalVisible(false);
+      return;
     }
 
     updateGameData();
