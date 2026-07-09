@@ -69,7 +69,7 @@ def move_file(file: Path, target_dir, new_name=None):
 
 def move_thumbnails(dir: Path, target_dir_name = ""):
     if not target_dir_name:
-        target_dir_name = "main"
+        target_dir_name = "!main"
     else:
         target_dir_name = target_dir_name.replace(":", "")
 
