@@ -502,7 +502,7 @@ const GameDetails = ({
                 : game.status
             }
             style={
-              (game.status === "bad" && statusBad && game.time > 0) ||
+              (game.status === "bad" && statusBad) ||
               (game.status === "complete" && statusComplete && game.time > 0) ||
               (game.status === "wait" && statusWait)
                 ? { display: "none" }
