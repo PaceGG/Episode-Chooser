@@ -290,6 +290,12 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
         user_content_time = "-"
 
     if user_content_time == "": user_content_time = bufer_user_content_time
+    elif str(user_content_time).isdigit():
+        val = int(user_content_time)
+        if val >= 30:
+            user_content_time = val - 40 * get_count_videos()
+        else:
+            user_content_time = val
     elif ":" in str(user_content_time):
         user_content_time = sumtime(user_content_time) - 40 * get_count_videos()
     elif " " in str(user_content_time):
