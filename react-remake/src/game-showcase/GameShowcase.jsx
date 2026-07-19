@@ -281,6 +281,8 @@ const GameShowcase = () => {
         />
         <h2 className={style.game__name} style={{ color: game.color }}>
           {game.name}
+          {game.extraName && ": "}
+          {game.extraName}
         </h2>
       </div>
     ));
