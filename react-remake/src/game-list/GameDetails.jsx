@@ -253,6 +253,7 @@ const GameDetails = ({
           let plInfo = null; // Объявляем переменную здесь, вне блока try
           try {
             plInfo = await ytApi.getPlaylistInfo(selectedGameName);
+            console.log(plInfo);
           } catch (e) {
             console.error("Ошибка при получении информации о плейлисте: ", e);
             cancelChanges();
@@ -263,10 +264,10 @@ const GameDetails = ({
           let shouldProceed = true;
           let userConfirmed = false;
 
-          // Проверка 0: наличие приватных видео
-          if (plInfo.hasPrivate) {
+          // наличие приватных видео
+          if (plInfo.warnings.hasPrivate) {
             userConfirmed = window.confirm(
-              `⚠️ Плейлист содержит приватные виждео\n` + `Продолжить?`,
+              `⚠️ Плейлист содержит приватные видео\n` + `Продолжить?`,
             );
 
             if (!userConfirmed) {
@@ -274,7 +275,7 @@ const GameDetails = ({
             }
           }
 
-          // Проверка 1: lastEpisodeNumber vs sessionData.episodeCount
+          // lastEpisodeNumber vs sessionData.episodeCount
           if (
             shouldProceed &&
             plInfo.lastEpisodeNumber !== sessionData.episodeCount
@@ -291,7 +292,22 @@ const GameDetails = ({
             }
           }
 
-          // Проверка 2: videosAmount vs sessionData.episodeCount (если первая проверка пройдена)
+          // лишние видео
+          if (shouldProceed && plInfo.warnings.wrongGame) {
+            shouldProceed = window.confirm(
+              `⚠️ Плейлист содержит лишние видео из другой игры\n` +
+                `Продолжить?`,
+            );
+          }
+
+          // Неверный порядок
+          if (shouldProceed && plInfo.warnings.wrongOrder) {
+            shouldProceed = window.confirm(
+              `⚠️ В плейлисте неверный порядок видео\n` + `Продолжить?`,
+            );
+          }
+
+          // videosAmount vs sessionData.episodeCount
           if (
             shouldProceed &&
             plInfo.videosAmount !== sessionData.episodeCount
@@ -308,7 +324,7 @@ const GameDetails = ({
             }
           }
 
-          // Проверка 3: lastEpisodeNumber vs videosAmount (если предыдущие проверки пройдены)
+          // lastEpisodeNumber vs videosAmount (если предыдущие проверки пройдены)
           if (
             shouldProceed &&
             plInfo.lastEpisodeNumber !== plInfo.videosAmount
