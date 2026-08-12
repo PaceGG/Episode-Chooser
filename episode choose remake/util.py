@@ -12,10 +12,10 @@ import difflib
 from time_format import seconds_to_hhmmss
 from steam_utils import select_header_by_game_name
 
-video_formats = [".mp4", ".mkv"]
-image_formats = [".png"]
-header_formats = [".png", ".jpg"]
-thumbnal_formats = [".png", ".jpg"]
+video_formats = {".mp4", ".mkv"}
+image_formats = {".png"}
+header_formats = {".png", ".jpg"}
+thumbnal_formats = {".png", ".jpg"}
 
 def set_eng_layout():
     window_handle = win32gui.GetForegroundWindow()
