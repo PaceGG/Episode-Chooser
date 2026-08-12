@@ -22,28 +22,32 @@ def set_eng_layout():
     result = win32api.SendMessage(window_handle, 0x0050, 0, 0x04090409)
     return(result)
 
-def move_files(target_dir: Path, games):
+def move_files(target_dir: Path, games, game_name, initial_episode_number):
     obs_dir = paths.video_dir / "OBS"
     start_index = get_disk_video(games)
     video_сtime = 0
+    episode_number = initial_episode_number
 
     for file in sorted(obs_dir.iterdir(), key=lambda p: p.stat().st_birthtime):
         if file.is_file():
             if file.suffix in video_formats:
                 start_index += 1
-                video_сtime = move_video(file, target_dir, start_index)
+                video_сtime = move_video(file, target_dir, start_index, game_name, episode_number)
+                episode_number += 1
             elif file.suffix in image_formats and "Screenshot" in file.name:
                 move_image(file, target_dir, start_index, video_сtime)
             else:
                 move_file(file, target_dir)
 
-def move_video(file: Path, target_dir, index):
+def move_video(file: Path, target_dir, index, game_name, episode_number):
     video_ctime = file.stat().st_birthtime
 
     if file.stem.isdigit():
-        new_name = file.name
+        new_name = file.stem
     else:
-        new_name = f"{index}{file.suffix}"
+        new_name = f"{index}"
+
+    new_name += f"__{game_name}-{episode_number}{file.suffix}"
 
     move_file(file, target_dir, new_name)
 

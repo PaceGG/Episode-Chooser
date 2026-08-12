@@ -318,6 +318,8 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     stat.process_game_id = -1
     stat.process_game_message_id = -1
 
+    move_files(processed_game.video_dir, games, game_name=processed_game.short_name, initial_episode_number=processed_game.count_episode + 1)
+    
     if is_last_session:
         choice = input("Сбросить эпизоды? Y для подтверждения: ")
         if choice.lower() == "y": processed_game.count_episode = 0
@@ -325,7 +327,6 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     else:
         processed_game.count_episode += count_videos
 
-    move_files(processed_game.video_dir, games)
 
 def equalize_time_limit(games: list[Game], stat: Data):
     processed_game = games[stat.process_game_id]
