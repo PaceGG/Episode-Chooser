@@ -45,10 +45,10 @@ class Title:
         self.episode = episode
         self.is_final = is_final
 
-    def __repr__(self):
+    def get_title(self, time = None):
         if self.episode == -1:
             self.episode = -2
-            return f"{get_time()}"
+            return f"{get_time(time)}"
         elif self.episode == 0:
             self.episode = -1
             return f"{self.name}"
@@ -59,6 +59,9 @@ class Title:
             episode = self.episode
             self.episode = -1
             return f"• № {episode}{f' - Финал' if self.is_final else ''} • {self.name}"
+
+    def __repr__(self):
+        return self.get_title()
 
 
 def add_titles(titles: list[Title], game, count_videos, is_final):

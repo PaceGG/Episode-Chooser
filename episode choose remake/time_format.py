@@ -120,8 +120,12 @@ def get_month(unix_timestamp=time()):
 def get_year(unix_timestamp=time()):
     return int(strftime("%Y", localtime(unix_timestamp)))
 
-def get_time(unix_timestamp=time()):
+def get_time(unix_timestamp=None):
+    if unix_timestamp is None: unix_timestamp = time()
     return strftime("%H:%M", localtime(unix_timestamp))
+
+def get_minute(unix_timestamp=time()):
+    return int(strftime("%M", localtime(unix_timestamp)))
 
 def last_day(unix_timestamp=time()):
     month = get_month(unix_timestamp)

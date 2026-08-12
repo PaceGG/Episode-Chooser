@@ -17,6 +17,7 @@ class Data:
     empty_messages: list[EmptyMessage]
     titles: list[Title]
     last_update: int
+    last_title_time: int
     time_info_message_id: int
 
     def __init__(self, data_type):
