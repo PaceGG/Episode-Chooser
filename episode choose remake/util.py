@@ -172,6 +172,21 @@ def sumtime(time: str):
     time_split = time.split(":")
     return int(time_split[-2]) + int(time_split[-3]) * 60
 
+def count_extra_videos(durations: list[int], limit: int):
+    total = 0
+    count = 0
+
+    for duration in durations:
+        duration //= 60
+        if total < limit:
+            total += duration
+            count += 1
+        else:
+            break
+
+    return len(durations) - count
+        
+
 def find_best_match(
     game_name: str,
     games_directory: Path,
@@ -239,6 +254,25 @@ def find_best_match(
             return new_link
 
     return None
+
+def exit(text: str = ""):
+    print(text)
+    while True: ...
+
+def plural(word: str, count):
+    plural_map = {
+        "лишнее": ["лишнее", "лишних"],
+        "его": ["его", "их"]
+    }
+
+    if word not in plural_map.keys():
+        return word
+
+    if count == 1: index = 0
+    else: index = 1
+
+    return plural_map[word][index]
+
     
 if __name__ == "__main__":
     # default_dirs: list[Path] = [

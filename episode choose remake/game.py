@@ -15,6 +15,7 @@ from directory_statistics import *
 from pyperclip import paste
 import telegram_utils
 from console_output import hr
+from console_output import warning_color
 
 def get_short_name(name):
     local = {
@@ -249,12 +250,20 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     message_id = stat.process_game_message_id
     processed_game = games[process_game_id]
     duration = sum(durations) // 60
+    extra_videos = count_extra_videos(durations, processed_game.time_limit)
 
     if is_last_session: duration = 120
     count_videos = get_count_videos()
 
     if not is_last_session:
-        print(f"В {processed_game.name}\nесть {count_videos} видео продолжительностью {int(duration)} минут.\nДобавить их к сумме? (Нажмите enter)\nВведите \"-\" для обозначения финальной сессии")
+        print(f"В {processed_game.name}")
+        print(f"есть {count_videos} видео продолжительностью {int(duration)} минут.")
+        if extra_videos > 0:
+            print(warning_color(f"{extra_videos} {plural("лишнее", extra_videos)} видео. Переместите {plural("его", extra_videos)}"))
+            # TODO: автоматическое перемещение лишних видео
+            exit()
+        print("Добавить их к сумме? (Нажмите enter)")
+        print("Введите \"-\" для обозначения финальной сессии")
         user_time = input(f"Введите время: ")
     else:
         user_time = "-"

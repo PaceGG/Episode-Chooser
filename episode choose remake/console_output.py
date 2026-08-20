@@ -8,6 +8,9 @@ def color_hex(text: str, hex_color: str) -> str:
     r, g, b = hex_to_rgb(hex_color)
     return f"\033[38;2;{r};{g};{b}m{text}\033[0m"
 
+def warning_color(text):
+    return color_hex(text, "#FFD000")
+
 
 def hr(text: str = '', width: int = 42, char: str = '=', color: str = '#ffffff') -> str:
     if visible_length(text) > width:
