@@ -222,7 +222,7 @@ def edit_empty_message(empty_message: EmptyMessage, yt_videos):
 
     return True
 
-
+# TODO: DEL
 def edit_empty_messages(empty_messages, stat):
     if today() - stat.last_update < 12*60*60 and __name__ != "__main__":
         return

@@ -9,22 +9,18 @@ from pathlib import Path
 import json
 from directory_statistics import get_duration
 from launcher import Launcher
+from ec_collections.games import GamesCollection
+from ec_collections.data import DataCollection
 
 chdir(paths.project_dir)
 
 class Main:
     def __init__(self):
         # games initialization
-        print("Инициализация игр")
-        self.games = [Game(name=game_name) for game_name in paths.game_names[:2]]
-        self.games.append(Game(name="SnowRunner [ng+]", safe_name="SnowRunner"))
+        self.games = GamesCollection()
+        self.data = DataCollection()
 
-        print("Инициализация данных")
-        self.stat = Data("stat")
-        self.empty_messages: list[EmptyMessage] = Data("empty_messages").empty_messages
-        self.titles = Data("titles").titles
-
-        edit_empty_messages(self.empty_messages, self.stat)
+        self.data.edit_empty_messages()
 
         # if game is new
         new_game(self.games[:2], self.stat)
