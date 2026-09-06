@@ -2,100 +2,58 @@ import console_setup
 from game import *
 from data import Data
 import paths
-from database_info import print_info
 from youtube_utils import EmptyMessage
 from youtube_utils import edit_empty_messages
 from os import startfile, chdir
 from pathlib import Path
 import json
 from directory_statistics import get_duration
+from launcher import Launcher
 
 chdir(paths.project_dir)
 
-def save_data(stat, games, empty_messages, titles):
-    with open(Path.joinpath(paths.root_dir, 'data.json'), 'r', encoding='utf-8') as file:
-        file = json.load(file)
-        cache = file["cache"]
-        stat_backup = file["stat_backup"]
-
-    data = {}
-    data["stat"] = stat.__dict__
-    data["stat_backup"] = stat_backup
-    data["game"] = [item.as_dict() for item in games]
-    data["empty_messages"] = [item.__dict__ for item in empty_messages]
-    data["titles"] = [item.__dict__ for item in titles]
-    data["cache"] = cache
-
-    with open(Path.joinpath(paths.root_dir, 'data.json'), 'w', encoding='utf-8') as file:
-        json.dump(data, file, indent=4, ensure_ascii=False)
-
 class Main:
-    def main(self):
+    def __init__(self):
         # games initialization
         print("Инициализация игр")
-        games = [Game(name=game_name) for game_name in paths.game_names[:2]]
-        games.append(Game(name="SnowRunner [ng+]", safe_name="SnowRunner"))
+        self.games = [Game(name=game_name) for game_name in paths.game_names[:2]]
+        self.games.append(Game(name="SnowRunner [ng+]", safe_name="SnowRunner"))
 
         print("Инициализация данных")
-        stat = Data("stat")
-        empty_messages: list[EmptyMessage] = Data("empty_messages").empty_messages
-        titles = Data("titles").titles
+        self.stat = Data("stat")
+        self.empty_messages: list[EmptyMessage] = Data("empty_messages").empty_messages
+        self.titles = Data("titles").titles
 
-        edit_empty_messages(empty_messages, stat)
+        edit_empty_messages(self.empty_messages, self.stat)
 
         # if game is new
-        new_game(games[:2], stat)
+        new_game(self.games[:2], self.stat)
 
         # chance calculate
-        chance_calculate(games)
-        
-        save_data(stat, games, empty_messages, titles)
+        chance_calculate(self.games)
+
+        self.save_data()
         set_eng_layout()
 
-        # info
-        print_info(games, stat, titles)
-
-        force_game_id = ""
-        if stat.process_game_id == -1 and not select_game(games, stat, make_selection=False):
-            force_game_id = input("Spin roulette or enter game id: ")
-
-        if force_game_id != "":
-            games[int(force_game_id)].is_selected = True
-
-        # select game
-        if stat.process_game_id == -1:
-            select_game(games, stat)
-        if sum(1 for game in games if game.is_selected) > 1:
-            raise Exception("More than one game is selected")
-
-        save_data(stat, games, empty_messages, titles)
-
-        # run random game
-        response = None
-        is_last_session = False
-        if stat.process_game_id == -1:
-            response = run_game(games, stat) # no processing game
-        else:
-            durations = get_duration()
-            duration = sum(durations) // 60
-            if duration < games[stat.process_game_id].time_limit: 
-                response, is_last_session = unfinished_process(games, stat, duration) # processing game
-
-        if response is None:
-            finished_process(games, stat, empty_messages, titles, is_last_session, durations) # finish processing game
-
-        save_data(stat, games, empty_messages, titles)
-        clear_selection(games)
-        print_info(games, stat, titles, print_flag=False)
-
-        if response not in ["redo", "skip-run"]:
-            try:
-                startfile(response)
-            except:
-                pass
-
+    def save_data(self):
+        with open(Path.joinpath(paths.root_dir, 'data.json'), 'r', encoding='utf-8') as file:
+            file = json.load(file)
+            cache = file["cache"]
+            stat_backup = file["stat_backup"]
+    
+        data = {}
+        data["stat"] = self.stat.__dict__
+        data["stat_backup"] = stat_backup
+        data["game"] = [item.as_dict() for item in self.games]
+        data["empty_messages"] = [item.__dict__ for item in self.empty_messages]
+        data["titles"] = [item.__dict__ for item in self.titles]
+        data["cache"] = cache
+    
+        with open(Path.joinpath(paths.root_dir, 'data.json'), 'w', encoding='utf-8') as file:
+            json.dump(data, file, indent=4, ensure_ascii=False)
         
 
 if __name__ == "__main__":
     main = Main()
-    main.main()
+    launcher = Launcher(main)
+    launcher.launch()
