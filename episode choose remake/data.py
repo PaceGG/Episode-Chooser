@@ -19,6 +19,7 @@ class Data:
     last_update: int
     last_title_time: int
     time_info_message_id: int
+    queue: list[int]
 
     def __init__(self, data_type):
         with open(Path.joinpath(paths.root_dir, 'data.json'), 'r', encoding='utf-8') as file:

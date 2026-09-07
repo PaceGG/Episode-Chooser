@@ -273,6 +273,8 @@ def plural(word: str, count):
 
     return plural_map[word][index]
 
+def debug(s, debug_on = True):
+    if debug_on: print(s)
     
 if __name__ == "__main__":
     # default_dirs: list[Path] = [

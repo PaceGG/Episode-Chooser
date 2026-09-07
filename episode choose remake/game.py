@@ -131,17 +131,26 @@ class Game:
         }
     
     
-def chance_calculate(games: list[Game]):
+def chance_calculate(games: list[Game], process_game_id: int = -1, queue: list[int] = []):
     games[0].chance = 1
     games[1].chance = 1
     games[2].chance = 0
-    min(games[:2], key=lambda game: game.count_session).chance += abs(games[0].count_session - games[1].count_session)
+
+    count_session = [game.count_session for game in games[:2]]
+    if process_game_id != -1:
+        count_session[process_game_id] += 1
+
+    for i in range(2):
+        count_session[i] += queue.count(i)
+
+    min(games[:2], key=lambda game: game.count_session).chance += abs(count_session[0] - count_session[1])
 
 def new_game(games: list[Game], stat: Data):
     for game in games[:2]:
         print(f"{game.name}: {game.is_game_new}")
         if game.is_game_new and stat.process_game_id == -1 and games[game.id].video_dir.stat().st_birthtime > games[not(game.id)].video_dir.stat().st_birthtime:
                 stat.games_list[game.id] = game.name
+                stat.queue = []
 
                 games[(not game.id)].count_session = 0
                 if stat.count_sr_session < 5: stat.count_sr_session = 5
@@ -156,11 +165,17 @@ def clear_selection(games: list[Game]):
     for game in games:
         game.is_selected = False
 
-def select_game(games: list[Game], stat: Data, skip_roulette = False, make_selection = True):
+def select_game(games: list[Game], stat: Data, skip_roulette = False, make_selection = True, allow_queue = True):
     # force new game (not in game list)
     selected_game = next((game for game in games[:2] if game.is_selected), None)
     if selected_game is not None:
         return selected_game
+
+    # force from queue
+    if len(stat.queue) > 0 and allow_queue:
+        queue_game_id = stat.queue[0]
+        games[queue_game_id].is_selected = make_selection
+        return games[queue_game_id]
 
     # force new game (episodes == 0)
     # for game in games[:2]:
@@ -236,12 +251,17 @@ def unfinished_process(games: list[Game], stat: Data, duration: int):
     telegram_utils.edit_caption(caption, stat.process_game_message_id)
 
     print(f"Сессия {unfinished_game.name}\nещё не завершенаосталось {int(time_left)} {form}")
-    print(f"Запустить {unfinished_game.name}?\nВведите \"-\" для обозначения финальной сессии\nВведите \"--\" для отката")
+    print(f"Запустить {unfinished_game.name}?")
+    print('Введите "-" для обозначения финальной сессии')
+    print('Введите "--" для отката')
+    print('Введите "l" для добавления игры в очередь')
     confirm = input()
     if confirm == "-": return None, True
     if confirm == "--":
         stat.restore_backup()
         return "redo", False
+    if confirm in {'l', 'L', 'д', 'Д'}:
+        return "queue", False
 
     return unfinished_game.game_path, False
 

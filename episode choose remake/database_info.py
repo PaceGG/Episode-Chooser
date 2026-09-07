@@ -13,8 +13,9 @@ def print_info(games, stat, titles, print_flag=True):
     # print(select_game(games, stat, make_selection=False))
     info = get_info(games, stat, select_game(games, stat, make_selection=False), titles)
     pc_info = info["pc"]
-    system("cls")
-    if print_flag: print(pc_info)
+    if print_flag:
+        system("cls")
+        print(pc_info)
 
     tg_info = info["tg"]
     telegram_utils.edit_message(tg_info)
@@ -36,6 +37,11 @@ def get_info(games: list[Game], stat: Data, is_select_forced, titles):
     chacnes_info = get_chance_info(games, stat, is_select_forced)
     pc_info += chacnes_info["pc"] + "\n"
     tg_info += chacnes_info["tg"] + "\n"
+
+    if stat.queue:
+        queue_info = get_queue_info(games, stat.queue)
+        pc_info += queue_info["pc"] + "\n"
+        tg_info += queue_info["tg"] + "\n"
 
     time_limit_info = get_time_limit_info(games[:2])
     pc_info += time_limit_info + "\n"
@@ -152,6 +158,18 @@ def get_chance_info(games: list[Game], stat: Data, is_select_forced):
         border_color = get_chance_color(games)
         border_text = "ШАНС"
     pc_info = borders(pc_info, border_text=border_text, color=border_color)
+
+    return {"pc": pc_info, "tg": tg_info}
+
+def get_queue_info(games: list[Game], queue: list[int]):
+    pc_info = ""
+    tg_info = ""
+
+    for queue_id in queue:
+        pc_info += games[queue_id].full_name + "\n"
+        tg_info += f"• {games[queue_id].short_name}" + "\n"
+
+    pc_info = borders(pc_info, border_text="ОЧЕРЕДЬ", color="#0078D7")
 
     return {"pc": pc_info, "tg": tg_info}
 
