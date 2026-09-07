@@ -129,6 +129,17 @@ class Game:
             "content_time": self.content_time,
             "user_time": self.user_time
         }
+
+class GamesManager:
+    games: list[Game]
+    
+    def __init__(self):
+        print("Инициализация игр")
+        self.games = [Game(name=game_name) for game_name in paths.game_names[:2]]
+        self.games.append(Game(name="SnowRunner [ng+]", safe_name="SnowRunner"))
+
+    def __repr__(self):
+        return self.games
     
     
 def chance_calculate(games: list[Game]):

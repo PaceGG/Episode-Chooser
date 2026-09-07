@@ -34,6 +34,12 @@ class EmptyMessage:
     def __repr__(self):
         return f"emptyMessage({self.name} {self.ep_range} {self.durations} {self.message_id})"
 
+class EmptyMessagesCollection:
+    empty_messages: list[EmptyMessage]
+
+    def __init__(self, empty_messages):
+        self.empty_messages = empty_messages
+
 
 class Title:
     name: str
@@ -222,19 +228,13 @@ def edit_empty_message(empty_message: EmptyMessage, yt_videos):
 
     return True
 
-# TODO: DEL
-def edit_empty_messages(empty_messages, stat):
-    if today() - stat.last_update < 12*60*60 and __name__ != "__main__":
-        return
-
+def edit_empty_messages(empty_messages):
     yt_videos = get_yt_videos()
 
     empty_messages[:] = [
         empty_message for empty_message in empty_messages
         if not edit_empty_message(empty_message, yt_videos)
     ]
-
-    stat.last_update = today()
 
 
 if __name__ == "__main__":

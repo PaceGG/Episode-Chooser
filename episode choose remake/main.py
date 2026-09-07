@@ -9,16 +9,16 @@ from pathlib import Path
 import json
 from directory_statistics import get_duration
 from launcher import Launcher
-from ec_collections.games import GamesCollection
-from ec_collections.data import DataCollection
+from game import GamesManager
+from ec_collections.data_collection import DataManager
 
 chdir(paths.project_dir)
 
 class Main:
     def __init__(self):
         # games initialization
-        self.games = GamesCollection()
-        self.data = DataCollection()
+        self.games = GamesManager()
+        self.data = DataManager()
 
         self.data.edit_empty_messages()
 

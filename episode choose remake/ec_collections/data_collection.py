@@ -1,8 +1,9 @@
 from data import Data
 import youtube_utils as yt
+from time_format import today
 
 
-class DataCollection:
+class DataManager:
     stat: Data
     empty_messages: list[yt.EmptyMessage]
     titles: list[yt.Title]
@@ -14,4 +15,11 @@ class DataCollection:
         self.titles = Data("titles").titles
 
     def edit_empty_messages(self):
-        yt.edit_empty_messages(self.empty_messages, self.stat)
+        date_now = today()
+
+        if date_now - self.stat.last_update < 12*60*60:
+                return
+
+        yt.edit_empty_messages(self.empty_messages)
+
+        self.stat.last_update = date_now
