@@ -43,8 +43,9 @@ def get_info(games: list[Game], stat: Data, is_select_forced, titles):
         pc_info += queue_info["pc"] + "\n"
         tg_info += queue_info["tg"] + "\n"
 
-    time_limit_info = get_time_limit_info(games[:2])
-    pc_info += time_limit_info + "\n"
+    if not (games[0].time_limit == games[1].time_limit == 120):
+        time_limit_info = get_time_limit_info(games[:2])
+        pc_info += time_limit_info + "\n"
 
     content_time_info = get_content_time_info(games)
     pc_info += content_time_info + "\n"

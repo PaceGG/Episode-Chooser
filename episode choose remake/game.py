@@ -24,6 +24,7 @@ def get_short_name(name):
         "SnowRunner [ng+]": "SR",
         "Far Cry New Dawn": "Far Cry",
         "Battlefield Hardline": "Battlefield",
+        "The Dark Pictures Anthology: Man of Medan": "Man of Medan"
     }
 
     if name in local: return local[name]
