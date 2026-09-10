@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 import os
 import paths
-import threading
+from thread_utils import in_thread
 
 os.chdir(paths.project_dir)
 load_dotenv("gitignore/.env")
@@ -13,7 +13,7 @@ load_dotenv("gitignore/.env")
 bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
 chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
-TIMEOUT = 30  # секунд
+TIMEOUT = 3  # секунд
 
 def send_message(text: str):
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
@@ -33,8 +33,9 @@ def send_image(image_path: Path, caption=None):
     message_id = response_data.get('result', {}).get('message_id')
     return message_id
 
+@in_thread
 # pinned info message id = 1208
-def _edit_message(new_text, message_id=1208):
+def edit_message(new_text, message_id=1208):
     url = f"https://api.telegram.org/bot{bot_token}/editMessageText"
     params = {
         "chat_id": chat_id,
@@ -44,10 +45,8 @@ def _edit_message(new_text, message_id=1208):
     response = requests.post(url, params=params, timeout=TIMEOUT)
     return response.json()
 
-def edit_message(new_text, message_id=1208):
-    threading.Thread(target=_edit_message, args=(new_text,message_id,), daemon=True).start()
-
-def _edit_caption(new_caption, message_id):
+@in_thread
+def edit_caption(new_caption, message_id):
     url = f"https://api.telegram.org/bot{bot_token}/editMessageCaption"
     params = {
         "chat_id": chat_id,
@@ -56,9 +55,6 @@ def _edit_caption(new_caption, message_id):
     }
     response = requests.post(url, params=params, timeout=TIMEOUT)
     return response.json()
-
-def edit_caption(new_caption, message_id):
-    threading.Thread(target=_edit_caption, args=(new_caption,message_id,), daemon=True).start()
 
 def delete_message(message_id):
     url = f"https://api.telegram.org/bot{bot_token}/deleteMessage"
