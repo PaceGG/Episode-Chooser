@@ -15,7 +15,7 @@ from directory_statistics import *
 from pyperclip import paste
 import telegram_utils
 from console_output import hr
-from console_output import warning_color
+from console_output import warning_color, color_hex
 
 def get_short_name(name):
     local = {
@@ -116,7 +116,7 @@ class Game:
 
     def content_time_format(self):
         content_time_debt = -self.content_time
-        return f"{"+" if content_time_debt > 0 else ""}{content_time_debt}"
+        return f'{"+" if content_time_debt > 0 else ""}{content_time_debt}'
 
     def __repr__(self):
         return f"class {self.__class__.__name__}(\n{'\n'.join(f'{k} = {v!r}' for k, v in vars(self).items())})"

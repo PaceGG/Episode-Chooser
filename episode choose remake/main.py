@@ -95,13 +95,16 @@ class Main:
         print("Добавление игры в очередь")
 
         queue_game_id = ""
-        if not select_game(self.games, self.stat, make_selection=False, allow_queue=False):
+        if not select_game(self.games, self.stat, make_selection=False, allow_queue=False, allow_new_game=False):
             queue_game_id = input("Spin roulette or enter game id: ")
 
         if queue_game_id == "":
             queue_game = select_game(self.games, self.stat, allow_queue=False)
         else:
             queue_game = self.games[int(queue_game_id)]
+            print(f"{color_hex(queue_game.name, queue_game.color)}")
+            print("Будет добавлена в очередь, продолжить?")
+            input()
 
         self.stat.queue.append(queue_game.id)
         self.stat.add_game_log(queue_game.name)
