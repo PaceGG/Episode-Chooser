@@ -26,6 +26,8 @@ def get_info(games: list[Game], stat: Data, is_select_forced, titles):
 
     pc_info += disk_info(games, titles) + "\n"
 
+    pc_info += get_extra_videos_info(games)
+
     process_game_info = get_process_game_info(games, stat)
     tg_info += f"{process_game_info}\n\n"
 
@@ -96,6 +98,25 @@ def disk_info(games: list[Game], titles: list):
         info_str += hr("ЗАГРУЗИТЕ ВИДЕО", width=width, color="#0078D7")
 
     return info_str
+
+def get_extra_videos_info(games: list[Game]):
+    extra_videos = [0] * 3
+    pc_info = ""
+
+    for game in games:
+        extra_videos_count = get_count_videos(game.video_dir / "extra")
+        extra_videos[game.id] = extra_videos_count
+
+    for id, extra_video in enumerate(extra_videos):
+        game = games[id]
+        if extra_video > 0:
+            pc_info += f"{game.full_name} :: {extra_video}\n"
+
+    if pc_info:
+        pc_info = borders(pc_info, "EXTRA VIDEOS", "#ff0000") + "\n"
+
+    return pc_info
+
 
 def get_process_game_info(games: list[Game], stat: Data):
     if stat.process_game_id == -1:
