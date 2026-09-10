@@ -167,7 +167,7 @@ def clear_selection(games: list[Game]):
     for game in games:
         game.is_selected = False
 
-def select_game(games: list[Game], stat: Data, skip_roulette = False, make_selection = True, allow_queue = True):
+def select_game(games: list[Game], stat: Data, skip_roulette = False, make_selection = True, allow_queue = True, allow_new_game = True):
     # force new game (not in game list)
     selected_game = next((game for game in games[:2] if game.is_selected), None)
     if selected_game is not None:
@@ -186,7 +186,7 @@ def select_game(games: list[Game], stat: Data, skip_roulette = False, make_selec
     #         return game
 
     # force new game (sessions == 0 and later game)
-    if games[0].count_session == games[1].count_session == 0:
+    if games[0].count_session == games[1].count_session == 0 and allow_new_game:
         if games[0].video_dir.stat().st_birthtime < games[1].video_dir.stat().st_birthtime:
             games[1].is_selected = make_selection
             return games[1]

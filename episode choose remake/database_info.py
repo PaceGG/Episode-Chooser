@@ -11,7 +11,7 @@ from console_output import borders, get_chance_color, get_strings_width, get_tim
 
 def print_info(games, stat, titles, print_flag=True):
     # print(select_game(games, stat, make_selection=False))
-    info = get_info(games, stat, select_game(games, stat, make_selection=False), titles)
+    info = get_info(games, stat, select_game(games, stat, make_selection=False, allow_new_game=False), titles)
     pc_info = info["pc"]
     if print_flag:
         system("cls")
