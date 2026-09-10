@@ -68,12 +68,21 @@ def move_file(file: Path, target_dir: Path, new_name=None):
     target_path = target_dir / new_name
 
     if target_path.exists():
-        exit(f"Файл {target_path} уже существует, перемещение отменено.")
+        stem = target_path.stem
+        suffix = target_path.suffix
+        counter = 1
+
+        while target_path.exists():
+            target_path = target_dir / f"{stem}({counter}){suffix}"
+            counter += 1
 
     try:
-        file.rename(target_path)
+        shutil.move(str(file), str(target_path))
+        print(f"Файл успешно перемещен в: {target_path}")
+        return target_path
     except Exception as e:
         print(f"Ошибка перемещения {file}: {e}")
+        return None
 
 def move_thumbnails(dir: Path, target_dir_name = ""):
     if not target_dir_name:
