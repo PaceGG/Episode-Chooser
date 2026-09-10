@@ -30,6 +30,6 @@ def in_thread(func):
                     _active_threads -= 1
                 _update_title()
 
-        threading.Thread(target=runner, daemon=True).start()
+        threading.Thread(target=runner, daemon=False).start()
 
     return wrapper

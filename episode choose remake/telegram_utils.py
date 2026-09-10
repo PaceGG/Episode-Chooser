@@ -6,6 +6,7 @@ from pathlib import Path
 import os
 import paths
 from thread_utils import in_thread
+import time
 
 os.chdir(paths.project_dir)
 load_dotenv("gitignore/.env")
@@ -13,7 +14,7 @@ load_dotenv("gitignore/.env")
 bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
 chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
-TIMEOUT = 3  # секунд
+TIMEOUT = 30  # секунд
 
 def send_message(text: str):
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
