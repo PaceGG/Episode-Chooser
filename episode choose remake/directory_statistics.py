@@ -5,9 +5,18 @@ import json
 
 video_formats = {".mp4", ".mkv"}
 
-def get_duration():
-    from moviepy.video.io.VideoFileClip import VideoFileClip
+def _get_duration(file_path):
+    from subprocess import run
+    result = run(
+        ["ffprobe", "-v", "error",
+         "-show_entries", "format=duration",
+         "-of", "default=noprint_wrappers=1:nokey=1",
+         str(file_path)],
+        capture_output=True, text=True, check=True
+    )
+    return float(result.stdout)
 
+def get_duration():
     with open(Path.joinpath(paths.root_dir, 'data.json'), 'r', encoding='utf-8') as file:
         data = json.load(file)
     cache = data["cache"]["durations"]
@@ -23,7 +32,7 @@ def get_duration():
                 video_duration = cache[ctime]
             else:
                 try:
-                    with VideoFileClip(str(file_path)) as video: video_duration = video.duration
+                    video_duration = _get_duration(file_path)
                 except:
                     continue
             updated_cache[ctime] = video_duration
