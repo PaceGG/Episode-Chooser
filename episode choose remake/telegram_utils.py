@@ -6,6 +6,7 @@ from pathlib import Path
 import os
 import paths
 from thread_utils import in_thread
+from telegram_delay import telegram_delay
 import time
 
 os.chdir(paths.project_dir)
@@ -14,8 +15,9 @@ load_dotenv("gitignore/.env")
 bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
 chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
-TIMEOUT = 30  # секунд
+TIMEOUT = 2  # секунд
 
+@telegram_delay
 def send_message(text: str):
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     params = {"chat_id": chat_id, "text": text}
@@ -24,6 +26,7 @@ def send_message(text: str):
     message_id = response_data.get('result', {}).get('message_id')
     return message_id
 
+@telegram_delay
 def send_image(image_path: Path, caption=None):
     url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"
     with open(image_path, "rb") as f:
@@ -35,6 +38,7 @@ def send_image(image_path: Path, caption=None):
     return message_id
 
 @in_thread
+@telegram_delay
 # pinned info message id = 1208
 def edit_message(new_text, message_id=1208):
     url = f"https://api.telegram.org/bot{bot_token}/editMessageText"
@@ -47,6 +51,7 @@ def edit_message(new_text, message_id=1208):
     return response.json()
 
 @in_thread
+@telegram_delay
 def edit_caption(new_caption, message_id):
     url = f"https://api.telegram.org/bot{bot_token}/editMessageCaption"
     params = {
@@ -57,6 +62,7 @@ def edit_caption(new_caption, message_id):
     response = requests.post(url, params=params, timeout=TIMEOUT)
     return response.json()
 
+@telegram_delay
 def delete_message(message_id):
     url = f"https://api.telegram.org/bot{bot_token}/deleteMessage"
     params = {
