@@ -99,7 +99,7 @@ class Main:
             queue_game_id = input("Spin roulette or enter game id: ")
 
         if queue_game_id == "":
-            queue_game = select_game(self.games, self.stat, allow_queue=False)
+            queue_game = select_game(self.games, self.stat, allow_queue=False, allow_new_game=False)
         else:
             queue_game = self.games[int(queue_game_id)]
             print(f"{color_hex(queue_game.name, queue_game.color)}")
