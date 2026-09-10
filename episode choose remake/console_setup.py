@@ -34,8 +34,13 @@ def set_window_pos(icon_path, title, x, y, width, height):
     # Для панели задач
     user32.SendMessageW(hwnd, WM_SETICON, ICON_BIG, hicon)
 
+def set_title(title="Episode Chooser"):
+    user32 = ctypes.windll.user32
+    kernel32 = ctypes.windll.kernel32
+    hwnd = kernel32.GetConsoleWindow()
+    user32.SetWindowTextW(hwnd, title)
 
 
-
-set_window_pos(r"..\Visual Elements\icon-square.ico", "Episode Chooser", 472, 276, 374, 444)
-os.system('mode con: cols=60 lines=35')
+def main():
+    set_window_pos(r"..\Visual Elements\icon-square.ico", "Episode Chooser", 472, 276, 374, 444)
+    os.system('mode con: cols=60 lines=35')

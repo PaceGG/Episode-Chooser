@@ -1,4 +1,5 @@
-import console_setup as _
+import console_setup
+console_setup.main()
 from game import *
 from data import Data
 import paths
