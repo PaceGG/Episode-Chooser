@@ -144,7 +144,8 @@ def chance_calculate(games: list[Game], process_game_id: int = -1, queue: list[i
     for i in range(2):
         count_session[i] += queue.count(i)
 
-    min(games[:2], key=lambda game: game.count_session).chance += abs(count_session[0] - count_session[1])
+    min_index = 0 if count_session[0] <= count_session[1] else 1
+    games[min_index].chance += abs(count_session[0] - count_session[1])
 
 def new_game(games: list[Game], stat: Data):
     for game in games[:2]:
