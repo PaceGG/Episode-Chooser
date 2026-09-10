@@ -61,11 +61,15 @@ def move_image(file: Path, target_dir, index, video_ctime):
 
     move_file(file, target_dir, new_name)
 
-def move_file(file: Path, target_dir, new_name=None):
+def move_file(file: Path, target_dir: Path, new_name=None):
     if new_name is None:
         new_name = file.name
 
     target_path = target_dir / new_name
+
+    if target_path.exists():
+        exit(f"Файл {target_path} уже существует, перемещение отменено.")
+
     try:
         file.rename(target_path)
     except Exception as e:
