@@ -174,11 +174,10 @@ def get_chance_info(games: list[Game], stat: Data, is_select_forced):
             tg_info += f"• {game.short_name}: {game.chance}\n"
 
     if is_select_forced:
-        border_color = "#ff0000"
         border_text = "FORCE"
     else:
-        border_color = get_chance_color(games)
         border_text = "ШАНС"
+    border_color = get_chance_color(games)
     pc_info = borders(pc_info, border_text=border_text, color=border_color)
 
     return {"pc": pc_info, "tg": tg_info}
