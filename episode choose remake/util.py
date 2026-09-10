@@ -89,8 +89,11 @@ def move_thumbnails(dir: Path, target_dir_name = ""):
 
 def create_game_folder(video_dir: Path, extra_name = ""):
     video_dir.mkdir(exist_ok=True)
-    previews_dir = Path.joinpath(video_dir, "previews")
+    previews_dir = video_dir / "previews"
     previews_dir.mkdir(exist_ok=True)
+
+    temp_dir = video_dir / "temp"
+    temp_dir.mkdir(exist_ok=True)
 
     if extra_name == "": extra_name = "main"
     else: extra_name = extra_name.replace(":", "")
