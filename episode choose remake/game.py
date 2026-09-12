@@ -232,7 +232,8 @@ def run_game(games: list[Game], stat: Data):
 
     if selected_game.id != 2:
         stat.add_game_log(selected_game.name)
-
+        stat.queue.pop(0)
+        
     chance_calculate(games)
 
     stat.process_game_id = selected_game.id
