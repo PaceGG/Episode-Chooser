@@ -65,6 +65,7 @@ class Game:
         self.full_name = f"{self.name}{f": {self.extra_name}" if self.extra_name else ''}"
 
         self.color = paths.game_colors[self.id]
+        self.colored_name = color_hex(self.name, self.color)
 
         # self.game_path = paths.game_paths[self.id]
         self.game_path = find_best_match(self.name, paths.games_dir)
@@ -254,8 +255,8 @@ def unfinished_process(games: list[Game], stat: Data, duration: int):
     caption = f"{unfinished_game.full_name} № {unfinished_game.count_episode + 1}... {time_format(time_left)} [{unfinished_game.content_time_format()}]"
     telegram_utils.edit_caption(caption, stat.process_game_message_id)
 
-    print(f"Сессия {unfinished_game.name}\nещё не завершенаосталось {int(time_left)} {form}")
-    print(f"Запустить {unfinished_game.name}?")
+    print(f"Сессия {unfinished_game.colored_name} ещё не завершена\nосталось {int(time_left)} {form}")
+    print("Запустить?")
 
     confirm = controls.get_controls()
     if confirm == "-": return None, True
@@ -280,7 +281,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     count_videos = get_count_videos()
 
     if not is_last_session:
-        print(f"В {processed_game.name}")
+        print(f"В {processed_game.colored_name}")
         print(f"есть {count_videos} видео продолжительностью {int(duration)} минут.")
         if extra_videos > 0:
             print(warning_color(f"{extra_videos} {plural("лишнее", extra_videos)} видео. Переместите {plural("его", extra_videos)}"))
