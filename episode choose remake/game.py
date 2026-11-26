@@ -16,6 +16,7 @@ from pyperclip import paste
 import telegram_utils
 from console_output import hr
 from console_output import warning_color, color_hex
+import controls
 
 def get_short_name(name):
     local = {
@@ -149,7 +150,7 @@ def chance_calculate(games: list[Game], process_game_id: int = -1, queue: list[i
 
 def new_game(games: list[Game], stat: Data):
     for game in games[:2]:
-        print(f"{game.name}: {game.is_game_new}")
+        debug(f"{game.name}: {game.is_game_new}")
         if game.is_game_new and stat.process_game_id == -1 and games[game.id].video_dir.stat().st_birthtime > games[not(game.id)].video_dir.stat().st_birthtime:
                 stat.games_list[game.id] = game.name
                 stat.queue = []
@@ -255,16 +256,16 @@ def unfinished_process(games: list[Game], stat: Data, duration: int):
 
     print(f"Сессия {unfinished_game.name}\nещё не завершенаосталось {int(time_left)} {form}")
     print(f"Запустить {unfinished_game.name}?")
-    print('Введите "-" для обозначения финальной сессии')
-    print('Введите "--" для отката')
-    print('Введите "l" для добавления игры в очередь')
-    confirm = input()
+
+    confirm = controls.get_controls()
     if confirm == "-": return None, True
     if confirm == "--":
         stat.restore_backup()
         return "redo", False
-    if confirm in {'l', 'L', 'д', 'Д'}:
+    if confirm == "q":
         return "queue", False
+    if confirm == "r":
+        return "restart", False
 
     return unfinished_game.game_path, False
 
@@ -287,6 +288,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
             exit()
         print("Добавить их к сумме? (Нажмите enter)")
         print("Введите \"-\" для обозначения финальной сессии")
+        print("Введите \"W\" для запуска игры")
         user_time = input(f"Введите время: ")
     else:
         user_time = "-"
@@ -296,6 +298,7 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
         user_time = games[process_game_id].time_limit
         is_last_session = True
     elif ":" in user_time: user_time = sumtime(user_time)
+    elif user_time in {"W", "w"}: return processed_game.game_path
     else: user_time = int(user_time)
     processed_game.user_time = user_time
     equalize_time_limit(games, stat)

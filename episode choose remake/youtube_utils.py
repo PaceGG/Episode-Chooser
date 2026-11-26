@@ -8,6 +8,8 @@ from util import intc
 from time_format import today, get_time
 import paths
 from pathlib import Path
+from thread_utils import in_thread
+from util import debug
 
 load_dotenv("gitignore/.env")
 
@@ -213,7 +215,7 @@ def edit_empty_message(empty_message: EmptyMessage, yt_videos):
     sessions_path = paths.project_dir / "react-remake/public/sessions.json"
     try:
         add_sessions_entry_with_data(sessions_path, empty_message.name, empty_message.game_group, episode_list, empty_message.message_id, empty_message.timestamp)
-        print(f"Добавлена сессия для {empty_message.name} эпизоды {empty_message.ep_range[0]}-{empty_message.ep_range[1]}")
+        debug(f"Добавлена сессия для {empty_message.name} эпизоды {empty_message.ep_range[0]}-{empty_message.ep_range[1]}")
     except Exception as e:
         print(f"Не удалось добавить запись в sessions.json: {e}")
         while True: ...
@@ -222,7 +224,7 @@ def edit_empty_message(empty_message: EmptyMessage, yt_videos):
 
     return True
 
-
+@in_thread
 def edit_empty_messages(empty_messages, stat):
     if today() - stat.last_update < 12*60*60 and __name__ != "__main__":
         return

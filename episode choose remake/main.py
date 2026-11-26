@@ -17,6 +17,8 @@ from console_output import color_hex
 chdir(paths.project_dir)
 
 class Main:
+    is_launched = False
+
     def __init__(self):
         # games initialization
         print("Инициализация игр")
@@ -71,7 +73,7 @@ class Main:
                 response, is_last_session = unfinished_process(self.games, self.stat, duration) # processing game
 
         if response is None:
-            finished_process(self.games, self.stat, self.empty_messages, self.titles, is_last_session, durations) # finish processing game
+            response = finished_process(self.games, self.stat, self.empty_messages, self.titles, is_last_session, durations) # finish processing game
 
         self.save_data()
         clear_selection(self.games)
@@ -79,12 +81,15 @@ class Main:
 
         if isinstance(response, Path):
             try:
+                self.is_launched = True
                 startfile(response)
             except:
                 pass
 
         if response == "queue":
             self.launch_queue()
+        elif response == "restart":
+            return
 
     def launch_queue(self):
         self.print_info()
@@ -144,4 +149,6 @@ class Main:
 if __name__ == "__main__":
     main = Main()
     # main.launch_queue()
-    main.launch()
+    while not main.is_launched:
+        main.launch()
+        main.print_info()

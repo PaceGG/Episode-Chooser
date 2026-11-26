@@ -78,7 +78,7 @@ def move_file(file: Path, target_dir: Path, new_name=None):
 
     try:
         shutil.move(str(file), str(target_path))
-        print(f"Файл успешно перемещен в: {target_path}")
+        debug(f"Файл успешно перемещен в: {target_path}")
         return target_path
     except Exception as e:
         print(f"Ошибка перемещения {file}: {e}")
@@ -289,8 +289,10 @@ def plural(word: str, count):
 
     return plural_map[word][index]
 
-def debug(s, debug_on = True):
+def debug(s, debug_on = False):
     if debug_on: print(s)
+
+
     
 if __name__ == "__main__":
     # default_dirs: list[Path] = [
