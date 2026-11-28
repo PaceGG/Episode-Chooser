@@ -338,7 +338,6 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
         user_content_time = sum([int(i) for i in user_content_time.split(" ") if i != ""]) - 40 * get_count_videos()
     elif user_content_time == "-":
         user_content_time = 0
-        processed_game.content_time = 0
         is_last_session = True
     else:
         user_content_time = int(user_content_time)
@@ -358,7 +357,9 @@ def finished_process(games: list[Game], stat: Data, empty_messages, titles, is_l
     
     if is_last_session:
         choice = input("Сбросить эпизоды? Y для подтверждения: ")
-        if choice.lower() == "y": processed_game.count_episode = 0
+        if choice.lower() == "y":
+            processed_game.count_episode = 0
+            processed_game.content_time = 0
         else: processed_game.count_episode += count_videos
     else:
         processed_game.count_episode += count_videos
