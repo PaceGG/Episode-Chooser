@@ -1,15 +1,23 @@
-ALLOWED_CONTROLS = {"-", "--", "q", "r", ""}
+# ALLOWED_CONTROLS = {"-", "--", "q", "r", ""}
 
-def print_controls():
-    print("[-] Финальная сессия")
-    print("[--] Откат")
-    print("[Q] Добавить игру в очередь")
-    print("[R] Рестарт")
+CONTROLS_LABELS = {
+    "-": "Финальная сессия",
+    "--": "Откат",
+    "Q": "Добавить игру в очередь",
+    "R": "Рестарт приложения",
+    "W": "Запуск игры"
+}
 
-def get_controls():
-    control = "asdadasds"
-    while control not in ALLOWED_CONTROLS:
-        print_controls()
-        control = input()
-        control = control.lower()
-    return control
+def print_controls(controls, labels: dict[str, str] | None = None):
+    if labels is None: labels = CONTROLS_LABELS
+    for control in controls:
+        label = labels.get(control)
+        if label is None: continue
+        print(f"[{control}] {label}")
+
+def get_controls(allowed_controls):
+    while True:
+        print_controls(allowed_controls)
+        control = input().lower()
+        if control in allowed_controls:
+            return control

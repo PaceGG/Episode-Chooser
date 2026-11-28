@@ -258,7 +258,8 @@ def unfinished_process(games: list[Game], stat: Data, duration: int):
     print(f"Сессия {unfinished_game.colored_name} ещё не завершена\nосталось {int(time_left)} {form}")
     print("Запустить?")
 
-    confirm = controls.get_controls()
+    allowed_controls = {"-", "--", "q", "r", ""}
+    confirm = controls.get_controls(allowed_controls)
     if confirm == "-": return None, True
     if confirm == "--":
         stat.restore_backup()
